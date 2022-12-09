@@ -4,6 +4,6 @@ from wtforms.validators import DataRequired
 from app.models import channel_message
 
 
-class channelMessageForm(FlaskForm):
+class ChannelMessageForm(FlaskForm):
     content = TextField('message', validators=[DataRequired()])
     submit = SubmitField('send')
