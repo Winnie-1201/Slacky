@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: a8fce108e39a
+Revision ID: f290256754dd
 Revises: 
-Create Date: 2022-12-09 13:31:00.606454
+Create Date: 2022-12-09 17:52:37.099367
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'a8fce108e39a'
+revision = 'f290256754dd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,8 +31,8 @@ def upgrade():
     sa.Column('image_url', sa.String(length=255), nullable=True),
     sa.Column('is_active', sa.Boolean(), nullable=True),
     sa.Column('status', sa.String(length=255), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -87,15 +84,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'channel_id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users_channels SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE channel_messages SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE user_groups SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE group_messages SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE channels SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
