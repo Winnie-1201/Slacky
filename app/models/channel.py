@@ -34,7 +34,9 @@ class Channel(db.Model):
         timezone=True), nullable=False, server_default=func.current_timestamp())
 
     organizer = db.relationship('User', back_populates='channels')
-    channel_messages = db.relationship('ChannelMessage', back_populates='channel', cascade="all, delete")
+    
+    channel_messages = db.relationship(
+        'ChannelMessage', back_populates='channel', cascade="all, delete")
 
     channel_members = db.relationship(
         'User',
