@@ -3,6 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+from .channels import user_channels
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -23,6 +25,16 @@ class User(db.Model, UserMixin):
     # channelMessages = db.realtionship('channelMessages',back_populate='user',cascade='all,delete')
     # groupMessages = db.realtionship('groupMessages',back_pupulate ='user',cascade='all,delete')
 
+    channels = db.relationship(
+        'Channel', back_populates='organizer', cascade='all, delete')
+
+    user_channels = db.relationship(
+        'Channel',
+        secondary=user_channels,
+        back_populates='channel_members',
+        cascade='all, delete'
+    )
+    
     @property
     def password(self):
         return self.hashed_password
