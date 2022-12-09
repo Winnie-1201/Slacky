@@ -14,6 +14,10 @@ Create Date: 2022-12-09 14:39:28.178182
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
 <<<<<<<< HEAD:migrations/versions/20221209_175237_.py
@@ -94,6 +98,15 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'channel_id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users_channels SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE channel_messages SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE user_groups SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE group_messages SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE channels SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
