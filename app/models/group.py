@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA
-from .user_groups import user_groups
+from .user_group import user_groups
 
 class Group(db.Model):
     __tablename__ = "groups"
