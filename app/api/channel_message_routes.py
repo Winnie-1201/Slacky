@@ -10,7 +10,6 @@ channel_message_routes = Blueprint('channel_messages', __name__)
 
 @channel_message_routes.route('/<int:channel_id>')
 @login_required
-@current_user
 def get_channel_message(channel_id):
     channel = Channel.query.get(channel_id)
     if current_user in channel.channel_members:
@@ -26,7 +25,6 @@ def get_channel_message(channel_id):
 
 @channel_message_routes.route('/<int:channel_id>')
 @login_required
-@current_user
 def create_channel_message(channel_id):
     channel = Channel.query.get(channel_id)
     if current_user in channel.channel_members:
@@ -40,12 +38,10 @@ def create_channel_message(channel_id):
 
 @channel_message_routes.route('/<int:id>')
 @login_required
-@current_user
 def edit_channel_message(channel_id):
     pass
 
 @channel_message_routes.route('/<int:id>')
 @login_required
-@current_user
 def delete_channel_message(channel_id):
     pass
