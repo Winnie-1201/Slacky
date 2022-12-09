@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-from .channels import user_channels
+from .channel import user_channels
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     updatedAt = db.Column(db.DateTime)
 
     # channels = db.relationship('channels',back_populates='user',cascade='all,delete')
-    # channelMessages = db.realtionship('channelMessages',back_populate='user',cascade='all,delete')
+    channel_messages = db.realtionship('ChannelMessage',back_populate='user',cascade='all,delete')
     # groupMessages = db.realtionship('groupMessages',back_pupulate ='user',cascade='all,delete')
 
     channels = db.relationship(
@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
         back_populates='channel_members',
         cascade='all, delete'
     )
-    
+
     @property
     def password(self):
         return self.hashed_password

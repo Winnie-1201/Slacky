@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
 
 
-class channelMessage(db.Model):
+class ChannelMessage(db.Model):
     __tablename__ = 'channel_messages'
 
     if environment == "production":
@@ -17,6 +17,9 @@ class channelMessage(db.Model):
         timezone=True), nullable=False, server_default=func.current_timestamp())
     updated_at = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.current_timestamp())
+
+    user = db.relationship('User', back_populates="channel_messages")
+    channel = db.relationship('Channel', back_populates="channel_messages")
 
     def to_dict(self):
         return {
