@@ -18,17 +18,8 @@ class User(db.Model, UserMixin):
     image_url = db.Column(db.String(255))
     is_active = db.Column(db.Boolean)
     status = db.Column(db.String(255))
-<<<<<<< HEAD
-    createdAt = db.Column(db.DateTime)
-    updatedAt = db.Column(db.DateTime)
-
-    # channels = db.relationship('channels',back_populates='user',cascade='all,delete')
-    channel_messages = db.relationship('ChannelMessage',back_populates='user',cascade='all,delete')
-    # groupMessages = db.relationship('groupMessages',back_pupulate ='user',cascade='all,delete')
-=======
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
->>>>>>> 1786f136e93766d2bc5e20ac55ad529379d90d58
 
     channel_messages = db.relationship('ChannelMessage', back_populates='user',cascade='all, delete')
     group_messages = db.relationship('GroupMessage', back_populates ='user',cascade='all, delete')
