@@ -22,8 +22,8 @@ class User(db.Model, UserMixin):
     updatedAt = db.Column(db.DateTime)
 
     # channels = db.relationship('channels',back_populates='user',cascade='all,delete')
-    channel_messages = db.realtionship('ChannelMessage',back_populate='user',cascade='all,delete')
-    # groupMessages = db.realtionship('groupMessages',back_pupulate ='user',cascade='all,delete')
+    channel_messages = db.relationship('ChannelMessage',back_populates='user',cascade='all,delete')
+    # groupMessages = db.relationship('groupMessages',back_pupulate ='user',cascade='all,delete')
 
     channels = db.relationship(
         'Channel', back_populates='organizer', cascade='all, delete')
