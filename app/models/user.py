@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.sql import func
 
 from .user_group import user_groups
 from .channel import user_channels
@@ -18,8 +19,10 @@ class User(db.Model, UserMixin):
     image_url = db.Column(db.String(255))
     is_active = db.Column(db.Boolean)
     status = db.Column(db.String(255))
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime(
+        timezone=True), nullable=False, server_default=func.current_timestamp())
+    updated_at = db.Column(db.DateTime(
+        timezone=True), nullable=False, server_default=func.current_timestamp())
 
     channel_messages = db.relationship('ChannelMessage', back_populates='user',cascade='all, delete')
     group_messages = db.relationship('GroupMessage', back_populates ='user',cascade='all, delete')
@@ -54,9 +57,9 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'imageUrl': self.imageUrl,
+            'image_url': self.image_url,
             'is_active': self.is_active,
             'status': self.status,
-            'createdAt': self.createdAt,
-            'updatedAt': self.updatedAt
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }
