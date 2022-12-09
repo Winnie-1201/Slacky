@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: a8fce108e39a
+Revision ID: 7453d15a6f03
 Revises: 
-Create Date: 2022-12-09 13:31:00.606454
+Create Date: 2022-12-09 14:42:25.837027
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'a8fce108e39a'
+revision = '7453d15a6f03'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,8 +34,8 @@ def upgrade():
     sa.Column('image_url', sa.String(length=255), nullable=True),
     sa.Column('is_active', sa.Boolean(), nullable=True),
     sa.Column('status', sa.String(length=255), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')

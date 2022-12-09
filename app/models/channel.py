@@ -41,8 +41,7 @@ class Channel(db.Model):
     channel_members = db.relationship(
         'User',
         secondary=user_channels,
-        back_populates='user_channels',
-        cascade='all, delete'
+        back_populates='user_channels'
     )
 
     def to_dict(self):

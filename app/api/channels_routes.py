@@ -81,13 +81,13 @@ def add_channel():
 @channel_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_channel(id):
-    print('create edit route')
+    # print('create edit route')
 
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        print('****** edit submitting ******')
+        # print('****** edit submitting ******')
         print(form.data)
 
         channel = Channel.query.get(id)
@@ -106,3 +106,22 @@ def edit_channel(id):
         # return '1'
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@channel_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def delete_channel(id):
+    # print('create delete route')
+
+    channel = Channel.query.get(id)
+    # print('********************', channel)
+
+    if current_user.id != channel.organizer_id:
+        return {'errors': ['Unauthorized']}
+
+    if channel:
+        db.session.delete(channel)
+        db.session.commit()
+        return {"message": "Channel successfully deleted."}
+
+    return {'errors': 'This channel is not found.'}, 404
