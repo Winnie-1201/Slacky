@@ -106,4 +106,3 @@ def edit_channel(id):
         # return '1'
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
