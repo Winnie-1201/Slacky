@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectMultipleField, SelectField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+# from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Channel, User
 
@@ -22,7 +22,7 @@ def name_exists(form, field):
 def description_length(form, field):
     # Checking if description is less than or equal to 250 chars
     description = field.data
-    
+
     if description and len(description) > 250:
         raise ValidationError("This field can’t be more than 250 characters.")
 
