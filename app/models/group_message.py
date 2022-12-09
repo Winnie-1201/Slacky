@@ -12,7 +12,7 @@ class GroupMessage(db.Model):
     groupId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("groups.id")), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
-    user_msg = db.relationship("User", back_populates="msg_user")
+    user = db.relationship("User", back_populates="group_messages")
 
     def to_dict(self):
         return {
