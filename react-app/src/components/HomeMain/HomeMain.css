@@ -1,0 +1,22 @@
+.home-main-div {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.home-main-div > img {
+    width: 60%;
+}
+
+.home-main-div > button {
+    cursor: pointer;
+    width: 20%;
+    padding: 12px;
+    border: 1px solid white;
+    border-radius: 4px;
+    font-size: 18px;
+    background: white;
+    box-sizing: border-box;
+}
