@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template
 from sqlalchemy import or_, and_
 
-from app.models import db, ChannelMessage, User, Channel, user_channels
+from app.models import db, ChannelMessage, User, Channel, users_channels
 from app.forms import ChannelMessageForm
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
