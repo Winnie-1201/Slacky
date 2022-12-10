@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 from .user_group import user_groups
-from .channel import user_channels
+from .channel import users_channels
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
 
     user_channels = db.relationship(
         'Channel',
-        secondary=user_channels,
+        secondary=users_channels,
         back_populates='channel_members',
         cascade='all, delete'
     )

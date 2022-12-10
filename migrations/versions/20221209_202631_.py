@@ -11,7 +11,6 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
 # revision identifiers, used by Alembic.
 revision = '9495bb877bcd'
 down_revision = None
@@ -87,7 +86,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'channel_id')
     )
-    # ### end Alembic commands ###
+
     if environment == "production":
         op.execute(f"ALTER TABLE users_channels SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE channel_messages SET SCHEMA {SCHEMA};")

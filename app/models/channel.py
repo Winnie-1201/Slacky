@@ -2,17 +2,17 @@ from .db import db, environment, SCHEMA
 from sqlalchemy.sql import func
 
 
-user_channels = db.Table(
+users_channels = db.Table(
     'users_channels',
     db.Model.metadata,
     db.Column('user_id', db.Integer, db.ForeignKey(
-        'users.id'), primary_key=True),
+        'users.id', ondelete='cascade'), primary_key=True),
     db.Column('channel_id', db.Integer, db.ForeignKey(
-        'channels.id'), primary_key=True)
+        'channels.id', ondelete='cascade'), primary_key=True)
 )
 
 if environment == "production":
-    user_channels.schema = SCHEMA
+    users_channels.schema = SCHEMA
 
 
 class Channel(db.Model):
@@ -40,9 +40,8 @@ class Channel(db.Model):
 
     channel_members = db.relationship(
         'User',
-        secondary=user_channels,
-        back_populates='user_channels',
-        cascade='all, delete'
+        secondary=users_channels,
+        back_populates='user_channels'
     )
 
     def to_dict(self):
