@@ -1,6 +1,6 @@
-/* TODO Add site wide styles */
 body {
-    background-color: #4a154b;
     font-family: "Noto Sans";
     margin: 0;
+    position: relative;
 }
+
