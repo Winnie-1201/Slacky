@@ -49,7 +49,7 @@ class Channel(db.Model):
             'id': self.id,
             'organizer_id': self.organizer_id,
             'name': self.name
-        }        
+        }
 
     def to_dict(self):
         return {
