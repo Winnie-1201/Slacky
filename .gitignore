@@ -5,3 +5,6 @@ __pycache__/
 .DS_Store
 .vscode/
 dev.db
+Pipfile
+Pipfile.lock
+requirements.txt
