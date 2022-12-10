@@ -10,6 +10,7 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(250))
 
+    group_messages = db.relationship("GroupMessage", back_populates="group", cascade="all, delete")
     # user_group = db.relationship("User", back_populates="groups_user")
     group_user_groups = db.relationship(
         "User",
