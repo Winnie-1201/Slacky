@@ -1,14 +1,11 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
 
 import './NavBar.css';
 
-const NavBar = ({user}) => {
-  console.log('is user', user)
+const NavBar = () => {
   return (
-    <nav>
+    <nav className='log-in-navbar'>
       <div>
         <NavLink to='/' exact={true} activeClassName='active'>
           <svg height='25px' width="100px" viewBox='0 0 240 60'>
@@ -22,6 +19,7 @@ const NavBar = ({user}) => {
           </svg>
         </NavLink>
       </div>
+
       <div className='nav-links-div'>
         <div>
           <NavLink to='/login' exact={true} activeClassName='active' className='nav-links'>
@@ -34,16 +32,6 @@ const NavBar = ({user}) => {
           </NavLink>
         </div>
       </div>
-        {/* <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li> */}
-        {user && 
-          <div>
-            <LogoutButton />
-          </div>
-        }
     </nav>
   );
 }

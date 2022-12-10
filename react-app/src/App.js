@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import SocketTest from "./components/SocketTest";
+import LandingLoggedIn from './components/LandingLoggedIn';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +29,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar user={user} />
+      {!user &&
+        <>
+          <NavBar/>
+          <Route path="/" exact={true}>
+            <div style={{'color':'white'}}>TO DISCUSS WHAT SHOULD BE HERE</div>
+          </Route>
+        </>
+      }
+      {user &&
+        <LandingLoggedIn user={user}></LandingLoggedIn>
+      }
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -44,9 +55,6 @@ function App() {
         </ProtectedRoute>
         <Route path="/chat">
           <SocketTest />
-        </Route>
-        <Route path="/" exact={true}>
-          <LoginForm />
         </Route>
       </Switch>
     </BrowserRouter>
