@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
+import './LoginLogout.css'
+
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
@@ -43,13 +45,13 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form onSubmit={onSignUp} className='signup-form'>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
+      <div className='signup-form-inputs-div'>
         <label>User Name</label>
         <input
           type='text'
@@ -58,7 +60,7 @@ const SignUpForm = () => {
           value={username}
         ></input>
       </div>
-      <div>
+      <div className='signup-form-inputs-div'>
         <label>Email</label>
         <input
           type='text'
@@ -67,7 +69,7 @@ const SignUpForm = () => {
           value={email}
         ></input>
       </div>
-      <div>
+      <div className='signup-form-inputs-div'>
         <label>Password</label>
         <input
           type='password'
@@ -76,7 +78,7 @@ const SignUpForm = () => {
           value={password}
         ></input>
       </div>
-      <div>
+      <div className='signup-form-inputs-div'>
         <label>Repeat Password</label>
         <input
           type='password'
@@ -86,7 +88,9 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <div className='singup-form-button-div'>
+        <button type='submit'>Sign Up</button>
+      </div>
     </form>
   );
 };
