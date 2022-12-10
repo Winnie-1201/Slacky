@@ -1,0 +1,31 @@
+form {
+    padding: 0px 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 64px;
+}
+
+.login-form-inputs-div,
+.login-form-button-div {
+    width: 400px;
+    height: 64px;
+}
+
+.login-form-inputs-div > input,
+.login-form-button-div > button {
+    width: 100%;
+    padding: 11px 40px 13px 12px;
+    border: 1px solid white;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 18px;
+    background: white;
+    box-sizing: border-box;
+}
+
+.login-form-button-div > button {
+    cursor: pointer;
+}
