@@ -35,6 +35,7 @@ class User(db.Model, UserMixin):
         cascade='all, delete'
     )
 
+    # groups_user = db.relationship("Group", back_populates="user_group", cascade="all, delete")
     user_user_groups = db.relationship(
         "Group",
         secondary=user_groups,
