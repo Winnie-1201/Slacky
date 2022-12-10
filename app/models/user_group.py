@@ -5,6 +5,8 @@ user_groups = db.Table(
     db.Model.metadata,
     db.Column("groups_id", db.Integer, db.ForeignKey(add_prefix_for_prod("groups.id")), primary_key=True),
     db.Column("users_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), primary_key=True)
+    # db.Column("groups_id", db.Integer, db.ForeignKey(add_prefix_for_prod("groups.id"), ondelete='CASCADE'), primary_key=True),
+    # db.Column("users_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='CASCADE'), primary_key=True)
 )
 
 if environment == "production":

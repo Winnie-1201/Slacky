@@ -42,5 +42,6 @@ def undo_channels():
             f"TRUNCATE table {SCHEMA}.channels RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM channels")
+        db.session.execute("DELETE FROM users_channels")
 
     db.session.commit()

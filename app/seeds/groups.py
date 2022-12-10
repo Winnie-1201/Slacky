@@ -6,15 +6,15 @@ def seed_groups():
     user3 = User.query.get(3)
 
     group_1 = Group(
-
+        group_user_groups=[user1, user2]
     )
 
     group_2 = Group(
-
+        group_user_groups=[user1, user3]
     )
 
     group_3 = Group(
-
+        group_user_groups=[user2, user3]
     )
 
     db.session.add(group_1)

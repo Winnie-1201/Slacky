@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .channels import seed_channels, undo_channels
 from .groups import seed_groups, undo_groups
 from .dms import seed_dms, undo_dms
+from .channel_messages import seed_channel_messages, undo_seed_channel_messages
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,11 +22,15 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_users()
         undo_channels()
+        seed_groups()
+        seed_dms()
+        seed_channel_messages()
 
     seed_users()
     seed_channels()
     seed_groups()
     seed_dms()
+    seed_channel_messages()
     # Add other seed functions here
 
 
@@ -36,4 +41,5 @@ def undo():
     undo_channels()
     undo_groups()
     undo_dms()
+    undo_seed_channel_messages()
     # Add other undo functions here
