@@ -63,5 +63,7 @@ class User(db.Model, UserMixin):
             'is_active': self.is_active,
             'status': self.status,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            "channels": [c.to_dict_name_only() for c in self.channels],
+            "groups": [g.to_dict() for g in self.user_user_groups]
         }

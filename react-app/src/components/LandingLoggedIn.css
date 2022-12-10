@@ -19,6 +19,7 @@
 
 .grid-sidebar {
     grid-area: 'grid-sidebar';
+    background-color: #350d36;
 }
 
 .grid-main-view {

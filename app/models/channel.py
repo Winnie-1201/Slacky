@@ -44,6 +44,13 @@ class Channel(db.Model):
         back_populates='user_channels'
     )
 
+    def to_dict_name_only(self):
+        return {
+            'id': self.id,
+            'organizer_id': self.organizer_id,
+            'name': self.name
+        }        
+
     def to_dict(self):
         return {
             'id': self.id,
