@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    background-color: #4a154b;
 }
 
 .slack-logo {

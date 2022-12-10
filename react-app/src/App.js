@@ -11,6 +11,7 @@ import { authenticate } from "./store/session";
 import SocketTest from "./components/SocketTest";
 import LandingLoggedIn from './components/LandingLoggedIn';
 import HomeMain from './components/HomeMain/HomeMain';
+import Footer from './components/Footer/Footer'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,6 +40,7 @@ function App() {
       {user &&
         <LandingLoggedIn user={user}></LandingLoggedIn>
       }
+      
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -56,6 +58,7 @@ function App() {
           <SocketTest />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }
