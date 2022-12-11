@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchChannelMessages } from "../../store/channelMessage";
 
 const ChannelMessagePage = () => {
-  const channelId = useParams();
+  const { channelId } = useParams();
   console.log("**************** channelId in ChannelMessagePage", channelId);
   const dispatch = useDispatch();
   const channelMessages = useSelector((state) => state.channelMessages);

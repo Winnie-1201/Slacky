@@ -1,0 +1,28 @@
+.home-main-div {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #4a154b;
+}
+
+.home-main-div > img {
+    width: auto;
+    max-height: 500px;
+}
+
+.home-main-div>a {
+    cursor: pointer;
+    width: 20%;
+}
+
+.home-main-div > a > button {
+    cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid white;
+    border-radius: 4px;
+    font-size: 18px;
+    background: white;
+    box-sizing: border-box;
+}

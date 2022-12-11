@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBarLoggedIn from "./NavBarLoggedIn";
+import SideBar from './SideBar/SideBar';
 import './LandingLoggedIn.css'
 
 export default function LandingLoggedIn({user}) {
@@ -11,7 +12,7 @@ export default function LandingLoggedIn({user}) {
             <NavBarLoggedIn user={user} />
         </div>
         <div className='grid-sidebar'>
-
+          <SideBar user={user}/>
         </div>
         <div className='grid-main-view'>
 
