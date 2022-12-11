@@ -41,7 +41,7 @@ app.register_blueprint(group_routes, url_prefix="/api/groups")
 app.register_blueprint(search_routes, url_prefix="/api/search")
 db.init_app(app)
 Migrate(app, db)
-
+socketio.init_app(app)
 # Application Security
 CORS(app)
 

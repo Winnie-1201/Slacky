@@ -9,14 +9,15 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import SocketTest from "./components/SocketTest";
-import LandingLoggedIn from './components/LandingLoggedIn';
-import HomeMain from './components/HomeMain/HomeMain';
-import Footer from './components/Footer/Footer'
+import LandingLoggedIn from "./components/LandingLoggedIn";
+import HomeMain from "./components/HomeMain/HomeMain";
+import Footer from "./components/Footer/Footer";
+import DirectMessage from "./components/DerectMessage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     (async () => {
@@ -31,16 +32,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      {!user &&
+      {!user && (
         <Route path="/" exact={true}>
-          <NavBar/>
+          <NavBar />
           <HomeMain></HomeMain>
         </Route>
-      }
-      {user &&
-        <LandingLoggedIn user={user}></LandingLoggedIn>
-      }
-      
+      )}
+      {user && <LandingLoggedIn user={user}></LandingLoggedIn>}
+
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -54,8 +53,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/chat">
-          <SocketTest />
+        <Route path="/dm/:groupId">
+          <DirectMessage />
+          {/* <SocketTest /> */}
         </Route>
       </Switch>
       <Footer />
