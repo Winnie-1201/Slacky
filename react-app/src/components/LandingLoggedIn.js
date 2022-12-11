@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBarLoggedIn from "./NavBarLoggedIn";
 import SideBar from './SideBar/SideBar';
+import ChannelBanner from './Channels/ChannelBanner';
 import './LandingLoggedIn.css'
 
 export default function LandingLoggedIn({user}) {
@@ -15,7 +16,7 @@ export default function LandingLoggedIn({user}) {
           <SideBar user={user}/>
         </div>
         <div className='grid-main-view'>
-
+          <ChannelBanner user={user} />
         </div>
           
     </div>

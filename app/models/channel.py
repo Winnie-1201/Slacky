@@ -53,7 +53,9 @@ class Channel(db.Model):
             'topic': self.topic,
             'is_public': self.is_public,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'number_of_members': len(self.channel_members),
+            'channel_members': [user.to_dict_basics() for user in self.channel_members]
         }
 
     def to_dict(self):

@@ -1,0 +1,108 @@
+.channel-banner-div {
+    padding: 0px 16px 0px 20px;
+    column-gap: 16px;
+    height: 50px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+
+.channel-name {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.33;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 fit-content;
+}
+
+.channel-topic {
+    cursor: pointer;
+    font-size: 13px;
+    color: rgb(29, 28, 29);
+    font-weight: 400;
+    flex: 1 1 auto; 
+}
+
+.channel-members {
+    flex: 0 0 fit-content;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(29, 28, 29);
+    height: 31px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.channel-members-add {
+    cursor: pointer;
+    width: 30px;
+    height: 31px;
+    border-left: 1px solid rgb(221, 221, 221);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.channel-members-pics {
+    cursor: pointer;
+    padding: 4px 0px 4px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.member-pics-div-outer {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: -4px;
+}
+
+.member-pics-div-outer.position-0 {
+    z-index: 3;
+}
+
+.member-pics-div-outer.position-1 {
+    z-index: 2;
+}
+
+.member-pics-div-outer.position-2 {
+    z-index: 1;
+}
+
+.member-pics-div {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    overflow: hidden;
+    
+}
+
+.member-pics-div > img {
+    object-fit: cover;
+    width: 22px;
+    height: 22px;
+}
+
+.member-total {
+    margin-left: 4px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: rgba(29, 28, 29, 0.7);   
+}
