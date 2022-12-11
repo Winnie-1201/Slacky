@@ -39,7 +39,7 @@ app.register_blueprint(dm_routes, url_prefix="/api/messages/groups")
 app.register_blueprint(group_routes, url_prefix="/api/groups")
 db.init_app(app)
 Migrate(app, db)
-
+socketio.init_app(app)
 # Application Security
 CORS(app)
 
