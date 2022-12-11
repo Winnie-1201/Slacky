@@ -23,7 +23,7 @@ class UserProfileForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
     # email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password')
+    # password = StringField('password')
     image_url = StringField('image_url')
     is_active = BooleanField('is_active')
     status = StringField('status')
