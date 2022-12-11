@@ -4,3 +4,5 @@ from .channel_form import ChannelForm
 from .channel_message_form import ChannelMessageForm
 from .dm_form import DirectMessageForm
 from .group_form import GroupForm
+from .userProfile_form import UserProfileForm
+
