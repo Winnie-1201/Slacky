@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9495bb877bcd
+Revision ID: 8d6a47ddb09f
 Revises: 
-Create Date: 2022-12-09 20:26:31.633194
+Create Date: 2022-12-11 09:30:12.967527
 
 """
 from alembic import op
@@ -12,7 +12,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '9495bb877bcd'
+revision = '8d6a47ddb09f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -55,6 +55,8 @@ def upgrade():
     op.create_table('group_messages',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('content', sa.Text(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.Column('groupId', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['groupId'], ['groups.id'], ),
@@ -82,11 +84,11 @@ def upgrade():
     op.create_table('users_channels',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('channel_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['channel_id'], ['channels.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['channel_id'], ['channels.id'], ondelete='cascade'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='cascade'),
     sa.PrimaryKeyConstraint('user_id', 'channel_id')
     )
-
+    # ### end Alembic commands ###
     if environment == "production":
         op.execute(f"ALTER TABLE users_channels SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE channel_messages SET SCHEMA {SCHEMA};")
