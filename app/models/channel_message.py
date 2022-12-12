@@ -10,8 +10,8 @@ class ChannelMessage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
-        "users.id"), nullable=False)
-    channel_id = db.Column(db.Integer,db.ForeignKey("channels.id"), nullable=False)
+        add_prefix_for_prod("users.id")), nullable=False)
+    channel_id = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod("channels.id")), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.current_timestamp())
