@@ -54,6 +54,25 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def user_channels_dict(self, user_channels):
+        dict = {}
+        for c in user_channels:
+            dict[c.id] = c.to_dict_name_only()
+
+        return dict
+
+    def to_dict_basics(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'image_url': self.image_url,
+            'is_active': self.is_active,
+            'status': self.status,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+        }        
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -66,5 +85,6 @@ class User(db.Model, UserMixin):
             'updated_at': self.updated_at,
             "organizor_channels": [c.to_dict_name_only() for c in self.channels],
             "user_channels": [c.to_dict_name_only() for c in self.user_channels],
+            "user_channels_dict": self.user_channels_dict(self.user_channels),
             "groups": [g.to_dict() for g in self.user_user_groups]
         }

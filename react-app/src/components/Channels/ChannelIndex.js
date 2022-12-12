@@ -14,7 +14,7 @@ export default function ChannelIndex({user}) {
             return (
                 <div key={c.name} className='sidebar-wrapper'>
                     <div className='sidebar-icon-span'>#</div>
-                    <span className='sidebar-text'><NavLink key={c.name} to={`/${c.id}`}>{c.name}</NavLink></span>
+                    <span className='sidebar-text'><NavLink key={c.name} to={`/channels/${c.id}`}>{c.name}</NavLink></span>
                 </div>
             )
         })}

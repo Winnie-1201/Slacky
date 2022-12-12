@@ -44,11 +44,24 @@ class Channel(db.Model):
         back_populates='user_channels'
     )
 
+    def sort_by_name(self):
+        arr = [user.to_dict_basics() for user in self.channel_members]
+        sortedArr = sorted(arr, key=lambda user: user['username'].lower())
+        return sortedArr
+
     def to_dict_name_only(self):
         return {
             'id': self.id,
             'organizer_id': self.organizer_id,
-            'name': self.name
+            'name': self.name,
+            'description': self.description,
+            'topic': self.topic,
+            'is_public': self.is_public,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'number_of_members': len(self.channel_members),
+            'channel_members': self.sort_by_name(),
+            'organizer': self.organizer.to_dict_basics()
         }
 
     def to_dict(self):
@@ -60,7 +73,7 @@ class Channel(db.Model):
             'topic': self.topic,
             'is_public': self.is_public,
             'organizer': self.organizer.to_dict(),
-            'channel_members': [user.to_dict() for user in self.channel_members],
+            'channel_members': self.sort_by_name(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
