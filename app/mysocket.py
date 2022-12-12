@@ -12,7 +12,7 @@ else:
     
 # create the SocketIO instance
 socketio = SocketIO(
-    cors_allowed_origins=origins
+    cors_allowed_origins="*"
 )
 
 

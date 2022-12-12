@@ -40,11 +40,11 @@ def edit_userProfile(id):
 
         if form.validate_on_submit():
             # user_profile.content = form.data['content']
-            user_profile.username = form.data['username']
-            # user_profile.password = form.data['password']
-            user_profile.image_url = form.data['image_url']
-            user_profile.is_active = form.data['is_active']
-            user_profile.status = form.data['status']
+            user_profile.username = form.data['username'] if form.data['username'] else user_profile.username
+            user_profile.password = form.data['password'] if form.data['password'] else user_profile.password
+            user_profile.image_url = form.data['image_url'] if form.data["image_url"] else user_profile.image_url
+            user_profile.is_active = form.data['is_active'] if form.data['is_active'] else user_profile.is_active
+            user_profile.status = form.data['status'] if form.data['status'] else user_profile.status
 
             db.session.commit()
             print("-----------------",user_profile)
