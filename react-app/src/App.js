@@ -56,8 +56,8 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path="/dm/:groupId">
-          <LandingLoggedIn user={user} />
-          {/* <DirectMessage /> */}
+          {/* <LandingLoggedIn user={user} /> */}
+          <DirectMessage />
           {/* <SocketTest /> */}
         </Route>
         <ProtectedRoute path="/channels/:channelId">
