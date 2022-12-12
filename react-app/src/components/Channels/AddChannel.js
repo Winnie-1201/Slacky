@@ -16,6 +16,7 @@ export default function AddChannel({ setShowModal }) {
 
     const createChannel = async (e) => {
         e.preventDefault();
+        setOnSubmit(true)
 
         // const data = await dispatch(signUp(username, email, password));
         // if (data) {
@@ -25,10 +26,27 @@ export default function AddChannel({ setShowModal }) {
     };
 
     useEffect(() => {
-    
-      if (name.length > 80) {
-
+      if (name.length <= 0) {
+        setDisabled(true)
+        errors.name = "Don’t forget to name your channel."
+      } else if (name.length > 80) {
+        setDisabled(true)
+        errors.name = "Channel names can’t be longer than 80 characters."
+      } else {
+        delete errors.name
       }
+
+        if (description.length <= 0) {
+            setDisabled(true)
+            errors.description = "This field can’t be more than 250 characters."
+        } else {
+            delete errors.description
+        }
+    
+        if (Object.keys(errors).length === 0) {
+            setDisabled(false)
+        }
+
     }, [name, description])
     
 
@@ -44,7 +62,7 @@ export default function AddChannel({ setShowModal }) {
             <div className='create-channel-inputs-div'>
                 <div>
                     <label>Name</label>
-                    {errors.name && <span>{errors.name}</span>}
+                    {onSubmit && errors.name && <span>{errors.name}</span>}
                 </div>
                 <input
                     type='text'
@@ -56,7 +74,7 @@ export default function AddChannel({ setShowModal }) {
             <div className='create-channel-inputs-div'>
                 <div>
                     <label>Description</label>
-                    {errors.description && <span>{errors.description}</span>}
+                    {onSubmit && errors.description && <span>{errors.description}</span>}
                 </div>
                 <input
                     type='text'
