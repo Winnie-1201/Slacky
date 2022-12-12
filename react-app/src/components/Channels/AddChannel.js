@@ -15,8 +15,6 @@ export default function AddChannel({ setShowModal }) {
     const [disabled, setDisabled] = useState(true);
     const [errors, setErrors] = useState({});
 
-    console.log(errors)
-
     const createChannel = async (e) => {
         e.preventDefault();
         setOnSubmit(true)
@@ -40,6 +38,8 @@ export default function AddChannel({ setShowModal }) {
         }
 
     };
+
+    console.log('error:', errors)
 
     useEffect(() => {
       if (name.length <= 0) {
@@ -80,9 +80,7 @@ export default function AddChannel({ setShowModal }) {
             setDisabled(false)
         }
         console.log('&&&&&&&&&', disabled)
-
-    }, [name, description, is_public, disabled, errors])
-    
+    }, [name, description])
 
   return (
     <div className='channel-create-div'>
