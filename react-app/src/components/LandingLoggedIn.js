@@ -17,9 +17,8 @@ export default function LandingLoggedIn({ user }) {
       </div>
       <div className="grid-main-view">
         <ChannelBanner user={user} />
-        <DirectMessage />
+        {/* <DirectMessage /> */}
       </div>
-      {/* <div className="grid-main-view"></div> */}
     </div>
   );
 }
