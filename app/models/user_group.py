@@ -10,4 +10,4 @@ user_groups = db.Table(
 )
 
 if environment == "production":
-    __table_args__ = {'schema': SCHEMA}
+    user_groups.schema = SCHEMA
