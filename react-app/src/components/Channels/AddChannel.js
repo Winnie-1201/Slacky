@@ -40,16 +40,15 @@ export default function AddChannel({ setShowModal }) {
     };
 
     console.log('error:', errors)
+    console.log('name', name)
 
     useEffect(() => {
       if (name.length <= 0) {
-        setDisabled(true)
         setErrors(errors => {
             errors.name = "Don’t forget to name your channel."
             return errors
         })
       } else if (name.length > 80) {
-        setDisabled(true)
         setErrors(errors => {
             errors.name = "Channel names can’t be longer than 80 characters."
             return errors
@@ -61,18 +60,17 @@ export default function AddChannel({ setShowModal }) {
         })
       }
 
-        if (description.length > 250) {
-            setDisabled(true)
-            setErrors(errors => {
-                errors.description = "This field can’t be more than 250 characters."
-                return errors
-            })      
-        } else {
-            setErrors(errors => {
-                delete errors.description
-                return errors
-            })
-        }
+        // if (description.length > 250) {
+        //     setErrors(errors => {
+        //         errors.description = "This field can’t be more than 250 characters."
+        //         return errors
+        //     })      
+        // } else {
+        //     setErrors(errors => {
+        //         delete errors.description
+        //         return errors
+        //     })
+        // }
     
         console.log(Object.keys(errors).length, errors)
         if (!Object.keys(errors).length) {
