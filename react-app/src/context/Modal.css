@@ -20,10 +20,8 @@
 }
 
 #modal-content {
-    /* outline: 1px solid yellow; */
     position: absolute;
     width: 100%;
-    /* background-color: white; */
     display: flex;
     justify-content: center;
 }

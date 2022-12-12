@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import './AddChannel.css';
+import { createChannel } from '../../store/channel';
 
 export default function AddChannel({ setShowModal }) {
     const user = useSelector((state) => state.session.user);
@@ -17,33 +18,61 @@ export default function AddChannel({ setShowModal }) {
     const createChannel = async (e) => {
         e.preventDefault();
         setOnSubmit(true)
+        if (Object.keys(errors).length) {
+            console.log('has errors', errors)
+            return
+        }
 
-        // const data = await dispatch(signUp(username, email, password));
-        // if (data) {
-        //     setErrors(data)
-        // }
+        const data = await dispatch(createChannel({
+            name,
+            description,
+            is_public,
+            organizer: user
+        }));
+
+        if (data) {
+            setErrors(errors => {
+                errors.backend = data
+                return errors
+            })
+        }
 
     };
 
     useEffect(() => {
       if (name.length <= 0) {
         setDisabled(true)
-        errors.name = "Don’t forget to name your channel."
+        setErrors(errors => {
+            errors.name = "Don’t forget to name your channel."
+            return errors
+        })
       } else if (name.length > 80) {
         setDisabled(true)
-        errors.name = "Channel names can’t be longer than 80 characters."
+        setErrors(errors => {
+            errors.name = "Channel names can’t be longer than 80 characters."
+            return errors
+        })
       } else {
-        delete errors.name
+        setErrors(errors => {
+            delete errors.name
+            return errors
+        })
       }
 
         if (description.length <= 0) {
             setDisabled(true)
-            errors.description = "This field can’t be more than 250 characters."
+            setErrors(errors => {
+                errors.description = "This field can’t be more than 250 characters."
+                return errors
+            })      
         } else {
-            delete errors.description
+            setErrors(errors => {
+                delete errors.description
+                return errors
+            })
         }
     
-        if (Object.keys(errors).length === 0) {
+        if (!Object.keys(errors).length) {
             setDisabled(false)
         }
 
@@ -59,6 +88,11 @@ export default function AddChannel({ setShowModal }) {
         </div>
 
         <form className='channel-create-form'>
+            <div>
+                {errors.backend?.map((error, ind) => (
+                    <div key={ind}>{error}</div>
+                ))}
+            </div>
             <div className='create-channel-inputs-div'>
                 <div>
                     <label>Name</label>
@@ -90,7 +124,7 @@ export default function AddChannel({ setShowModal }) {
                 <input
                     type='checkbox'
                     name='is_public'
-                    onChange={e => setDescription(e.target.value)}
+                    onChange={e => setIsPublic(e.target.value)}
                     value={is_public}
                 ></input>
             </div>

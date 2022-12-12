@@ -32,7 +32,7 @@ export default function ChannelIndex({user}) {
         </div>
         {showModal &&
             <Modal onClose={() => setShowModal(false)}>
-                  <AddChannel onClose={() => setShowModal(true)} setShowModal={setShowModal}/>
+                <AddChannel onClose={() => setShowModal(true)} setShowModal={setShowModal}/>
             </Modal>
         }
     </div>
