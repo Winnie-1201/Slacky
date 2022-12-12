@@ -1,4 +1,5 @@
 // constants
+const SET_USER_CHANNELS = "channels/SET_USER_CHANNELS";
 const SET_CHANNEL = "channels/SET_CHANNEL";
 // const REMOVE_USER = "session/REMOVE_USER";
 
@@ -66,8 +67,10 @@ const setChannel = (channel) => ({
 //     }
 // };
 
+// export const getUserChannels = (userId)
+
 export const createChannel = (channel) => async (dispatch) => {
-    console.log('&&&&&&&&&&&', channel)
+    console.log('---------------- create a channel thunk', channel, '----------------')
     const response = await fetch("/api/channels", {
         method: "POST",
         headers: {
@@ -78,7 +81,6 @@ export const createChannel = (channel) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('&&&&&&&&&&&', data)
         dispatch(setChannel(data));
         return null;
     } else if (response.status < 500) {
@@ -91,8 +93,8 @@ export const createChannel = (channel) => async (dispatch) => {
     }
 };
 
-const initialState = { channel: null };
-export default function channelReducer(state = initialState, action) {
+const initialState = { channel: null, userChannels: [] };
+export default function channelsReducer(state = initialState, action) {
     switch (action.type) {
         case SET_CHANNEL:
             return { channel: action.payload };

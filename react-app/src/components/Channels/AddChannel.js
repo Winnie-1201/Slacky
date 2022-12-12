@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import './AddChannel.css';
-import { createChannel } from '../../store/channel';
+import { createChannel } from '../../store/channels';
+import { getUser } from '../../store/session';
 
 export default function AddChannel({ setShowModal }) {
     const user = useSelector((state) => state.session.user);
+    const new_channel = useSelector((state) => state.channels.channel);
 
     const dispatch = useDispatch();
     const [name, setName] = useState('');
@@ -15,20 +18,25 @@ export default function AddChannel({ setShowModal }) {
     const [disabled, setDisabled] = useState(true);
     const [errors, setErrors] = useState({});
 
-    const createChannel = async (e) => {
+    const onCreateChannel = async (e) => {
         e.preventDefault();
         setOnSubmit(true)
         if (Object.keys(errors).length) {
-            console.log('has errors', errors)
+            // console.log('has errors', errors)
             return
         }
 
+        // console.log('sending dispatch')
         const data = await dispatch(createChannel({
             name,
             description,
             is_public,
-            organizer: user
-        }));
+            organizer: user,
+            users:`${user.id}`
+        })).then(() => {
+            setShowModal(false)
+            dispatch(getUser(user.id))
+        })
 
         if (data) {
             setErrors(errors => {
@@ -39,46 +47,29 @@ export default function AddChannel({ setShowModal }) {
 
     };
 
-    console.log('error:', errors)
-    console.log('name', name)
-
     useEffect(() => {
-      if (name.length <= 0) {
-        setErrors(errors => {
-            errors.name = "Don’t forget to name your channel."
-            return errors
-        })
-      } else if (name.length > 80) {
-        setErrors(errors => {
-            errors.name = "Channel names can’t be longer than 80 characters."
-            return errors
-        })
-      } else {
-        setErrors(errors => {
-            delete errors.name
-            return errors
-        })
-      }
+        const validationErros = {}
 
-        // if (description.length > 250) {
-        //     setErrors(errors => {
-        //         errors.description = "This field can’t be more than 250 characters."
-        //         return errors
-        //     })      
-        // } else {
-        //     setErrors(errors => {
-        //         delete errors.description
-        //         return errors
-        //     })
-        // }
+        if (name.length <= 0) validationErros.name = "Don’t forget to name your channel.";
+        else if (name.length > 80) validationErros.name = "Channel names can’t be longer than 80 characters.";
+        else delete errors.name
+
+        if (description.length > 250) validationErros.description = "This field can’t be more than 250 characters.";
+        else delete errors.description  
     
-        console.log(Object.keys(errors).length, errors)
-        if (!Object.keys(errors).length) {
-            console.log('set disabled to false')
+        // console.log('useEffect, validation error length', Object.keys(validationErros).length, validationErros)
+        if (!Object.keys(validationErros).length) {
+            // console.log('set disabled to false')
             setDisabled(false)
+        } else {
+            setDisabled(true)
         }
-        console.log('&&&&&&&&&', disabled)
+        // console.log('&&&&&&&&&', disabled)
     }, [name, description])
+
+    if (new_channel) return (
+        <Redirect push to={`/channels/${new_channel.id}`}/>
+    )
 
   return (
     <div className='channel-create-div'>
@@ -88,7 +79,7 @@ export default function AddChannel({ setShowModal }) {
             <span>Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.</span>
         </div>
 
-        <form className='channel-create-form'>
+        <form className='channel-create-form' onSubmit={onCreateChannel}>
             <div>
                 {errors.backend?.map((error, ind) => (
                     <div key={ind}>{error}</div>
