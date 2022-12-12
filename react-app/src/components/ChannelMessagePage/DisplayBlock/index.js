@@ -1,10 +1,8 @@
-import { useEffect } from "react";
+import "./index.css";
 
 const ChannelMessageBlock = ({ cm }) => {
-  console.log(cm.user.username);
   return (
-    <div>
-      <div>{`user:      ${cm.user.username}`}</div>
+    <div className="cm-block">
       <div>{`cm content:       ${cm.content}`}</div>
     </div>
   );
