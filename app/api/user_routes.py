@@ -8,7 +8,7 @@ user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('/')
-@login_required
+# @login_required
 def users():
     """
     Query for all users and returns them in a list of user dictionaries
@@ -18,7 +18,7 @@ def users():
 
 
 @user_routes.route('/<int:id>')
-@login_required
+# @login_required
 def user(id):
     """
     Query for a user by id and returns that user in a dictionary
@@ -27,19 +27,21 @@ def user(id):
     return user.to_dict()
 
 @user_routes.route('/<int:id>', methods=["PUT"])
-@login_required
+# @login_required
 def edit_userProfile(id):
     print('userProfil route works')
 
     user_profile = User.query.get(id)
-    print("current_user_id",current_user.id)
+    print("current_user_id",current_user)
+    curr = current_user
+    print("+++++++++",curr)
     print("*******id",id)
     if current_user.id == id:
         form = UserProfileForm()
         form['csrf_token'].data = request.cookies['csrf_token']
 
         if form.validate_on_submit():
-            # user_profile.content = form.data['content']
+        # user_profile.content = form.data['content']
             user_profile.username = form.data['username'] if form.data['username'] else user_profile.username
             user_profile.password = form.data['password'] if form.data['password'] else user_profile.password
             user_profile.image_url = form.data['image_url'] if form.data["image_url"] else user_profile.image_url
