@@ -27,12 +27,18 @@ def seed_channel_messages():
         user_id = 1,
         content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat pretium nibh."
     )
+    channel_message6 = ChannelMessage(
+        channel_id = 1,
+        user_id = 2,
+        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat pretium nibh."
+    )
 
     db.session.add(channel_message1)
     db.session.add(channel_message2)
     db.session.add(channel_message3)
     db.session.add(channel_message4)
     db.session.add(channel_message5)
+    db.session.add(channel_message6)
     db.session.commit()
 
 

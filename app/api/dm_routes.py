@@ -43,7 +43,7 @@ def create_dm(group_id):
                 groupId=group_id,
                 userId=current_user.id
             )
-
+            print("------new msg in backend", new_message)
             db.session.add(new_message)
             db.session.commit()
             return {"direct_message": new_message.to_dict()}

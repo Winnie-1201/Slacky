@@ -1,5 +1,5 @@
 .landing-grid {
-    height: 100vh;
+    height: calc(100% - 41px);
     width: 100vw;
     display: grid;
     grid-template-columns: 260px auto;

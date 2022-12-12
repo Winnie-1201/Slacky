@@ -2,10 +2,10 @@ from flask import Blueprint
 from app.models import db, Channel, Group, ChannelMessage, GroupMessage
 from flask_login import login_required, current_user
 
-
 search_routes = Blueprint('search', __name__)
 
 @search_routes.route('/<string:keyword>')
+
 # @login_required
 def search_channel_message(keyword):
     # print("search works++++++++++++")
@@ -43,3 +43,4 @@ def search_channel_message(keyword):
     result_group.append(obj_group)
 
     return {"Channel Message":result_channel,"Group Message":result_group}
+

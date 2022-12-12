@@ -10,8 +10,8 @@ class ChannelMessage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
-        "users.id"), nullable=False)
-    channel_id = db.Column(db.Integer,db.ForeignKey("channels.id"), nullable=False)
+        add_prefix_for_prod("users.id")), nullable=False)
+    channel_id = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod("channels.id")), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.current_timestamp())
@@ -28,5 +28,6 @@ class ChannelMessage(db.Model):
             'channel_id': self.channel_id,
             'content': self.content,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'user': self.user.to_dict()
         }

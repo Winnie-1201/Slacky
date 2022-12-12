@@ -1,0 +1,9 @@
+.channel-create-div {
+    margin: 28px;
+    padding-top: 20px;
+    width: 520px;
+    max-width: 520px;
+    height: min(85vh, 518px);
+    background-color: white;
+    border-radius: 8px;
+}

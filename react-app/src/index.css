@@ -2,5 +2,9 @@ body {
     font-family: "Noto Sans";
     margin: 0;
     position: relative;
+    height: 100vh;
 }
 
+#root {
+    height: 100%;
+}
