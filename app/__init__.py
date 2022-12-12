@@ -7,8 +7,14 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.channels_routes import channel_routes
+from .api.channel_message_routes import channel_message_routes
+from .api.dm_routes import dm_routes
+from .api.groups_routes import group_routes
+from .api.search_routes import search_routes
 from .seeds import seed_commands
 from .config import Config
+from .mysocket import socketio
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -28,9 +34,14 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(channel_routes, url_prefix='/api/channels')
+app.register_blueprint(channel_message_routes, url_prefix='/api/message/channels')
+app.register_blueprint(dm_routes, url_prefix="/api/messages/groups")
+app.register_blueprint(group_routes, url_prefix="/api/groups")
+app.register_blueprint(search_routes, url_prefix="/api/search")
 db.init_app(app)
 Migrate(app, db)
-
+socketio.init_app(app)
 # Application Security
 CORS(app)
 
@@ -73,6 +84,9 @@ def api_help():
     return route_list
 
 
+if __name__ == '__main__':
+    socketio.run(app)
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
@@ -88,4 +102,5 @@ def react_root(path):
 
 @app.errorhandler(404)
 def not_found(e):
+    print("****************** BACKEND NOT FOUND")
     return app.send_static_file('index.html')
