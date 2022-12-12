@@ -22,9 +22,9 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_users()
         undo_channels()
-        seed_groups()
-        seed_dms()
-        seed_channel_messages()
+        undo_groups()
+        undo_dms()
+        undo_seed_channel_messages()
 
     seed_users()
     seed_channels()

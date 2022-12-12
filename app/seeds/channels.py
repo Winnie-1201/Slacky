@@ -43,5 +43,6 @@ def undo_channels():
     else:
         db.session.execute("DELETE FROM channels")
         db.session.execute("DELETE FROM users_channels")
+        db.session.execute("DELETE FROM user_groups")
 
     db.session.commit()
