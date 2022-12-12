@@ -3,7 +3,7 @@ import NavBarLoggedIn from "./NavBarLoggedIn";
 import SideBar from "./SideBar/SideBar";
 import ChannelBanner from "./Channels/ChannelBanner";
 import "./LandingLoggedIn.css";
-import DirectMessage from "./DerectMessage";
+// import DirectMessage from "./DMs/DerectMessage";
 
 export default function LandingLoggedIn({ user }) {
   return (
@@ -17,7 +17,7 @@ export default function LandingLoggedIn({ user }) {
       </div>
       <div className="grid-main-view">
         <ChannelBanner user={user} />
-        <DirectMessage />
+        {/* <DirectMessage /> */}
       </div>
       {/* <div className="grid-main-view"></div> */}
     </div>
