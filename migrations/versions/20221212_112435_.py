@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<< HEAD:migrations/versions/20221211_093012_.py
-Revision ID: 8d6a47ddb09f
-Revises:
-Create Date: 2022-12-11 09:30:12.967527
-=======
 Revision ID: 2582f0410806
 Revises: 
 Create Date: 2022-12-12 11:24:35.569823
->>>>>>> wl-frontend:migrations/versions/20221212_112435_.py
 
 """
 from alembic import op
@@ -18,11 +12,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-<<<<<<< HEAD:migrations/versions/20221211_093012_.py
-revision = '9955857c107e'
-=======
 revision = '2582f0410806'
->>>>>>> wl-frontend:migrations/versions/20221212_112435_.py
 down_revision = None
 branch_labels = None
 depends_on = None
