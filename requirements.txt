@@ -28,4 +28,4 @@ sqlalchemy==1.4.44
 werkzeug==2.2.2
 wtforms==3.0.1
 zipp==3.11.0; python_version >= '3.7'
-flask-socketio = "*"
+flask-socketio == 5.3.1
