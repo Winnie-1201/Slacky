@@ -1,6 +1,6 @@
 body {
-    font-family: "Noto Sans";
-    margin: 0;
-    position: relative;
+  font-family: "Noto Sans";
+  margin: 0;
+  position: relative;
+  box-sizing: border-box;
 }
-

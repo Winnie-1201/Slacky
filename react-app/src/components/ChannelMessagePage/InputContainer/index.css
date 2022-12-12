@@ -1,0 +1,52 @@
+.cm-input-container {
+  width: 95%;
+  margin: auto;
+  border: 2px solid red;
+  display: flex;
+  border-radius: 0.5rem;
+}
+
+.cm-input-block {
+  width: 100%;
+}
+
+.cm-form {
+  display: flex;
+  flex-direction: column;
+
+  color: red;
+}
+
+.cm-input-box {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.cm-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0 1rem;
+}
+
+.cm-submit-box {
+  width: fit-content;
+  border: 2px solid orange;
+  padding: 0.5rem 0.5rem;
+}
+
+.cm-submit-box button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border-color: transparent;
+}
+
+.cm-submit-button-highlight-false {
+  color: rgb(221, 221, 221);
+  background-color: transparent;
+}
+.cm-submit-button-highlight-true {
+  color: #ffffff;
+  background-color: #2bac76;
+}

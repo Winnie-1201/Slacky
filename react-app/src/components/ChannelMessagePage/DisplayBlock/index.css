@@ -1,3 +1,15 @@
 .cm-block {
+  width: 100%;
+  display: flex;
   border: 2px solid green;
+}
+
+.cm-avatar-box {
+  width: 64px;
+  height: 64px;
+}
+
+.cm-avatar-box img {
+  width: 100%;
+  height: 100%;
 }
