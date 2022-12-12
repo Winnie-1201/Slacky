@@ -8,11 +8,10 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
-import SocketTest from "./components/SocketTest";
 import LandingLoggedIn from "./components/LandingLoggedIn";
 import HomeMain from "./components/HomeMain/HomeMain";
 import Footer from "./components/Footer/Footer";
-import DirectMessage from "./components/DerectMessage";
+import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
 
@@ -55,7 +54,7 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/dm/:groupId">
+        <Route path="/groups/:groupId">
           {/* <LandingLoggedIn user={user} /> */}
           <DirectMessage />
           {/* <SocketTest /> */}
