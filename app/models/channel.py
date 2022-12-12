@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
 
 
@@ -6,9 +6,9 @@ users_channels = db.Table(
     'users_channels',
     db.Model.metadata,
     db.Column('user_id', db.Integer, db.ForeignKey(
-        'users.id', ondelete='cascade'), primary_key=True),
+        add_prefix_for_prod('users.id'), ondelete='cascade'), primary_key=True),
     db.Column('channel_id', db.Integer, db.ForeignKey(
-        'channels.id', ondelete='cascade'), primary_key=True)
+        add_prefix_for_prod('channels.id'), ondelete='cascade'), primary_key=True)
 )
 
 if environment == "production":
@@ -23,7 +23,7 @@ class Channel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     organizer_id = db.Column(
-        db.Integer, db.ForeignKey('users.id'), nullable=False)
+        db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     name = db.Column(db.String(80), nullable=False, unique=True)
     description = db.Column(db.String(250))
     topic = db.Column(db.String(250))

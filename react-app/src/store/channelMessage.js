@@ -18,18 +18,18 @@ const deleteChannelMessage = (id) => {
 
 export const fetchChannelMessages = (channelId) => async (dispatch) => {
   const response = await fetch(`/api/message/channels/${channelId}`);
-  console.log("**************** GET ****************", response);
   if (response.ok) {
     const data = await response.json();
-    console.log("**************** GET DATA ****************", data);
     dispatch(getChannelMessages(data.channel_messages));
     return data;
   }
   return response;
 };
 export const fetchCreateChannelMessage =
-  (channelMessage) => async (dispatch) => {
-    const response = await fetch(`/api/message/channels`, {
+  (channelId, channelMessage) => async (dispatch) => {
+    console.log("**************** THUNK channelId", channelId);
+    console.log("**************** THUNK cm", channelMessage);
+    const response = await fetch(`/api/message/channels/${channelId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

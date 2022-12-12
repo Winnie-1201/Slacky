@@ -8,13 +8,13 @@ from app.api.auth_routes import validation_errors_to_error_messages
 group_routes = Blueprint('groups', __name__)
 
 @group_routes.route("")
-@login_required
+# @login_required
 def all_groups():
     groups = Group.query.all()
     return {"groups": [group.to_dict() for group in groups]}
 
 @group_routes.route("", methods=["POST"])
-@login_required
+# @login_required
 def add_group():
     form = GroupForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -32,6 +32,6 @@ def add_group():
         db.session.add(new_group)
         db.session.commit()
         return new_group.to_dict()
-    
+
     if form.errors:
         return form.errors
