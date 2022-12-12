@@ -15,6 +15,8 @@ export default function AddChannel({ setShowModal }) {
     const [disabled, setDisabled] = useState(true);
     const [errors, setErrors] = useState({});
 
+    console.log(errors)
+
     const createChannel = async (e) => {
         e.preventDefault();
         setOnSubmit(true)
@@ -59,7 +61,7 @@ export default function AddChannel({ setShowModal }) {
         })
       }
 
-        if (description.length <= 0) {
+        if (description.length > 250) {
             setDisabled(true)
             setErrors(errors => {
                 errors.description = "This field can’t be more than 250 characters."
@@ -72,11 +74,14 @@ export default function AddChannel({ setShowModal }) {
             })
         }
     
+        console.log(Object.keys(errors).length, errors)
         if (!Object.keys(errors).length) {
+            console.log('set disabled to false')
             setDisabled(false)
         }
+        console.log('&&&&&&&&&', disabled)
 
-    }, [name, description])
+    }, [name, description, is_public, disabled, errors])
     
 
   return (
