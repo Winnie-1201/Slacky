@@ -20,7 +20,14 @@ class Group(db.Model):
     )
 
     def to_dict(self):
+        # name = []
+        # for group_user in self.group_user_groups:
+        #     name.append(group_user.to_dict()["username"])
+        # name = (', ').join(name)
         return {
             "id": self.id,
-            "topic": self.topic
+            # "name": name,
+            "topic": self.topic,
+            "group_messages": [group_message.to_dict() for group_message in self.group_messages],
+            # "group_user": [group_user.to_dict() for group_user in self.group_user_groups]
         }
