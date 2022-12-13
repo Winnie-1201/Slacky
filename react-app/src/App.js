@@ -15,6 +15,7 @@ import Footer from "./components/Footer/Footer";
 import DirectMessage from "./components/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
+import SearchMessages from "./components/SearchMessageModal/SearchFrom";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -62,6 +63,9 @@ function App() {
         </Route>
         <ProtectedRoute path="/channels/:channelId">
           <ChannelMessagePage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/search/:keyword">
+          <SearchMessages />
         </ProtectedRoute>
       </Switch>
       <Footer />
