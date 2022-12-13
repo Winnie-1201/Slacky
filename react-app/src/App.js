@@ -76,7 +76,7 @@ function App() {
           <SearchMessages />
         </ProtectedRoute>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
