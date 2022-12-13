@@ -43,3 +43,20 @@
     justify-content: center;
     align-items: center;
 }
+
+.sidebar-icon-span-navlink {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 15px;
+    font-weight: 300;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: -5px;
+    column-gap: 6px;
+}
+
+.plus-div svg {
+    color: white;
+    height: 18px;
+    width: 18px;
+}

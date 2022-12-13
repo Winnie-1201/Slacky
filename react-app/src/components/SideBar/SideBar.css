@@ -2,12 +2,23 @@
   color: white;
 }
 
+.sidebar-index {
+    height: calc(100vh - 84px - 50px);
+    overflow-y: auto;
+}
+
+.sidebar-index::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
 .sidebar-header {
-  padding: 8px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgb(255 255 255 / 10%);
+    min-height: 51px;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
 }
 
 .sidebar-header > button {
