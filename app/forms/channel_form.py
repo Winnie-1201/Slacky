@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectMultipleField, SelectField
+from wtforms import StringField, IntegerField, SelectMultipleField, SelectField
 # from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Channel, User
@@ -10,11 +10,17 @@ def get_users():
 
 def name_exists(form, field):
     # Checking if duplicate channel or username
+    # print('&&&&&&&&', form.id, form.id.data, dir(form.id), type(form.id), field)
+
     name = field.data
     channel = Channel.query.filter(Channel.name == name).first()
     user = User.query.filter(User.username == name).first()
 
-    if channel or user:
+    if channel and channel.id != form.id.data:
+        raise ValidationError(
+            'That name is already taken by a channel or username.')
+
+    if user:
         raise ValidationError(
             'That name is already taken by a channel or username.')
 
@@ -46,9 +52,10 @@ def users_exist(form, field):
 
 
 class ChannelForm(FlaskForm):
+    id = IntegerField('id')
     name = StringField(
         'name', validators=[DataRequired(), name_exists])
     description = StringField('description', validators=[description_length])
     topic = StringField('topic', validators=[topic_length])
-    is_public = StringField('is_public', validators=[DataRequired()])
+    is_public = StringField('is_public')
     users = StringField('users', validators=[users_exist])
