@@ -14,13 +14,11 @@ import Footer from "./components/Footer/Footer";
 import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
-import AddDm from "./components/DMs/AddDmPage";
+
 import AddDmPage from "./components/DMs/AddDmPage";
 import DmDraftPage from "./components/DMs/DmDraftPage";
-import SearchMessages from "./components/SearchMessageModal/SearchFrom";
+import SearchFormModal from "./components/SearchMessageModal/index";
 import AddDm from "./components/DMs/AddDm";
-
-
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -76,7 +74,7 @@ function App() {
           <ChannelMessagePage />
         </ProtectedRoute>
         <ProtectedRoute path="/search/:keyword">
-          <SearchMessages />
+          <SearchFormModal />
         </ProtectedRoute>
       </Switch>
       <Footer />

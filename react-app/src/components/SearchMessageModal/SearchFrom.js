@@ -5,19 +5,22 @@ import { getSearch } from '../../store/search';
 import './search.css'
 
 
-const SearchMessages = () => {
+const SearchMessages = ({ setShowModal }) => {
     const dispatch = useDispatch();
     const { keyword } = useParams();
     const channel_message = useSelector(state => state.search.channelMessages)
     const group_message = useSelector(state => state.search.groupMessages)
-    console.log("message in component",channel_message,group_message)
+    console.log("message in component",channel_message)
 
     useEffect(() => {
         dispatch(getSearch(keyword))
     }, [dispatch, keyword])
 
+    setShowModal(false)
+
     return (
         <div className='search-container'>
+            
 
             {channel_message.length ?
                 `{channel_message.length} results for ${keyword}`
