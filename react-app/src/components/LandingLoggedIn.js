@@ -2,6 +2,7 @@ import React from "react";
 import NavBarLoggedIn from "./NavBarLoggedIn";
 import SideBar from "./SideBar/SideBar";
 import ChannelBanner from "./Channels/ChannelBanner";
+import NavBarSearch from './NavBarSearch'
 import "./LandingLoggedIn.css";
 // import DirectMessage from "./DMs/DerectMessage";
 
@@ -18,6 +19,10 @@ export default function LandingLoggedIn({ user }) {
       <div className="grid-main-view">
         <ChannelBanner user={user} />
         {/* <DirectMessage /> */}
+      </div>
+      <div>
+        <NavBarSearch />
+
       </div>
     </div>
   );

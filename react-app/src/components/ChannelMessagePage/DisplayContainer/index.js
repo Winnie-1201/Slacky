@@ -1,5 +1,5 @@
 import ChannelMessageBlock from "../DisplayBlock";
-import ChannelMessageBlockWithAvatar from "../DisplayBlockWithAvatar";
+import "./index.css";
 
 const ChannelMessageContainer = ({ channelMessages }) => {
   const cmKeys = Object.keys(channelMessages);
@@ -17,13 +17,15 @@ const ChannelMessageContainer = ({ channelMessages }) => {
               <ChannelMessageBlock
                 key={`cmId: ${cm}`}
                 cm={channelMessages[cm]}
+                avatar={false}
               />
             );
           else {
             return (
-              <ChannelMessageBlockWithAvatar
+              <ChannelMessageBlock
                 key={`cmId: ${cm}`}
                 cm={channelMessages[cm]}
+                avatar={true}
               />
             );
           }
