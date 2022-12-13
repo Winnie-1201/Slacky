@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import BannerName from './BannerName';
 import BannerTopic from './BannerTopic';
 import BannerMembers from './BannerMembers';
 import ChannelDetails from './ChannelDetails';
 import { Modal } from '../../context/Modal';
 import './ChannelBanner.css';
+import { getOneChannel } from '../../store/channels';
 
 
 export default function ChannelBanner() {
     // console.log(user)
-    const user = useSelector(state => state.session.user);
-    const allChannels = useSelector((state) => state.channels.allChannels);
-    const [channel, setChannel] = useState(null)
+    // const user = useSelector(state => state.session.user);
+    // const allChannels = useSelector((state) => state.channels.allChannels);
+    const channel = useSelector((state) => state.channels.channel)
     const [members, setMembers] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [active, setActive] = useState('About')
     const match = useRouteMatch('/channels/:id')
     
+    const dispatch = useDispatch();
     useEffect(() => {
-        const channels = user.user_channels_dict
-        const channelId = match ? match.params.id: null
-        const channel = allChannels[channelId]
-
-        setChannel(channel)
-    }, [user, match])
+      dispatch(getOneChannel(match))
+    }, [])
 
     useEffect(() => {
         const members = channel ? channel.channel_members: []
