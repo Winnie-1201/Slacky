@@ -18,6 +18,7 @@ import AddDmPage from "./components/DMs/AddDmPage";
 import DmDraftPage from "./components/DMs/DmDraftPage";
 import SearchMessages from "./components/SearchMessageModal/SearchFrom";
 import AddDm from "./components/DMs/AddDm";
+import AllChannels from "./components/Channels/AllChannels";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -74,6 +75,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/search/:keyword">
           <SearchMessages />
+        </ProtectedRoute>
+        <ProtectedRoute path="/browse-channels">
+          <AllChannels />
         </ProtectedRoute>
       </Switch>
       {/* <Footer /> */}

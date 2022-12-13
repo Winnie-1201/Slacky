@@ -1,5 +1,7 @@
 .sidebar-div {
     color: white;
+    height: calc(100vh - 84px);
+    overflow-y: auto;
 }
 
 .sidebar-header {

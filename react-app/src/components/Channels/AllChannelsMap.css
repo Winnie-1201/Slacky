@@ -1,0 +1,4 @@
+.all-channels-div {
+    overflow-y: auto;
+    height: calc(100vh - 84px - 50px)
+}
