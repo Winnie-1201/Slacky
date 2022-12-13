@@ -14,7 +14,6 @@ import Footer from "./components/Footer/Footer";
 import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
-import AddDm from "./components/DMs/AddDmPage";
 import AddDmPage from "./components/DMs/AddDmPage";
 import DmDraftPage from "./components/DMs/DmDraftPage";
 import SearchMessages from "./components/SearchMessageModal/SearchFrom";
