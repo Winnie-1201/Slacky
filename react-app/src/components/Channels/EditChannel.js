@@ -6,7 +6,7 @@ import { editChannel } from '../../store/channels';
 import { getUser } from '../../store/session';
 import ChannelModalHeader from './ChannelModalHeader';
 
-export default function EditChannel({setShowModal, channel}) {
+export default function EditChannel({ setShowEditModal, channel}) {
   const user = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
@@ -19,8 +19,8 @@ export default function EditChannel({setShowModal, channel}) {
 
   useEffect(() => {
     setName(channel.name)
-    setTopic(channel.topic)
-    setDescription(channel.description)
+    setTopic(channel.topic || '')
+    setDescription(channel.description || '')
 
   }, [channel])
 
@@ -46,7 +46,7 @@ export default function EditChannel({setShowModal, channel}) {
       topic,
       users: memberIds.join(',')
     })).then(() => {
-      setShowModal(false)
+      setShowEditModal(false)
       dispatch(getUser(user.id))
     })
 
@@ -82,9 +82,11 @@ export default function EditChannel({setShowModal, channel}) {
     // console.log('&&&&&&&&&', disabled)
   }, [name, description, topic])
 
+  // console.log('Edit channel component, ', showMo)
+
   return (
     <div className='channel-create-div'>
-      <ChannelModalHeader setShowModal={setShowModal} headerName='Edit a channel' headerContent='' />
+      <ChannelModalHeader setShowModal={setShowEditModal} headerName='Edit a channel' headerContent='' />
 
       <form className='channel-create-form' onSubmit={onCreateChannel}>
         <div>
@@ -132,7 +134,7 @@ export default function EditChannel({setShowModal, channel}) {
         </div>
 
         <div className='create-channel-button-div'>
-          <button type='submit' disabled={disabled}>Create</button>
+          <button type='submit' disabled={disabled}>Update</button>
         </div>
       </form>
     </div>
