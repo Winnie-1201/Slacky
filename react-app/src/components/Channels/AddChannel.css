@@ -1,28 +1,33 @@
 .channel-create-div {
-    padding-top: 20px;
+    padding: 20px 0px;
     width: 520px;
     max-width: 520px;
     height: min(85vh, 518px);
     background-color: white;
     border-radius: 8px;
+    overflow-y: auto;
 }
 
 .channel-create-form {
-    outline: 1px solid salmon;
+    /* outline: 1px solid salmon; */
     padding: 16px 24px;
     display: flex;
     flex-direction: column;
     row-gap: 24px;
     color: rgb(29,28,29);
     font-weight: 500;
-    height: 100%;
     box-sizing: border-box;
 }
 
 .create-channel-labels-div {
-    display: flex;
-    flex-wrap: wrap;
     margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.create-channel-labels-div label {
+    display: flex;
+    align-items: baseline;
+    column-gap: 6px;
 }
 
 .channel-create-form input[type=text] {
@@ -45,4 +50,98 @@
 .optional-note-span {
     color: rgba(29, 28, 29, 0.7);
     font-size: 13px;
+}
+
+.create-channel-privacy-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.create-channel-privacy-div > span {
+    color: rgba(29, 28, 29, 0.7);
+    width: 70%;
+    font-size: 15px;
+}
+
+.privacy-slider-switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 30px;    
+}
+
+.privacy-slider-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.privacy-slider {
+  border: 1px solid rgba(29, 28, 29, 0.5);
+  border-radius: 18px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;    
+}
+
+.privacy-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 5px;
+    bottom: 4px;
+    background-color: rgba(29, 28, 29, 0.7);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input[type=checkbox]:checked+.privacy-slider {
+    background-color: rgb(0, 122, 90);
+    border: 1px solid rgb(0, 122, 90);
+}
+
+input[type=checkbox]:focus+.privacy-slider {
+    box-shadow: 0 0 1px rgb(0, 122, 90);
+}
+
+input[type=checkbox]:checked+.privacy-slider:before {
+    -webkit-transform: translateX(21px);
+    -ms-transform: translateX(21px);
+    transform: translateX(21px);
+    background-color: white;
+}
+
+.create-channel-button-div {
+    padding-top: 24px;
+    display: flex;
+    justify-content: end;
+}
+
+.modal-submit-button {
+    padding: 6px 12px;
+    border: rgb(211,211,211);
+    border-radius: 4px;
+    background-color: rgb(0, 122, 90);
+    width: 80px;
+    height: 35px;
+    color: white;
+}
+
+.modal-submit-button:disabled {
+    background-color: rgb(211, 211, 211);
+    color: rgb(29, 28, 29);
+}
+
+.channel-form-error-span {
+    font-size: 14px;
+    color: rgb(232, 145, 45);
 }
