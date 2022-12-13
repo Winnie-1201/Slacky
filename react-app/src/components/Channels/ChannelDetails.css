@@ -2,7 +2,7 @@
     padding-top: 20px;
     width: 580px;
     max-width: 580px;
-    height: min(85vh, 820px);
+    height: min(85vh, 560px);
     background-color: white;
     border-radius: 8px;
 }
@@ -51,11 +51,9 @@
 }
 
 .channel-details-body-about {
-        height: calc(100% - 81px);
+    height: calc(100% - 81px);
     background-color: rgba(29, 28, 29, 0.04);
-    overflow-y: scroll;height: calc(100% - 81px);
-    background-color: rgba(29, 28, 29, 0.04);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .channel-details-body-about::-webkit-scrollbar,
@@ -66,7 +64,7 @@
 
 .channel-details-body-members {
     height: calc(100% - 81px);
-    overflow-y: scroll;    
+    overflow-y: auto;    
 }
 
 .channel-detail-about {
