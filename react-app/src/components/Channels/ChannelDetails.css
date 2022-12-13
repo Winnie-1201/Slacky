@@ -1,0 +1,134 @@
+.channel-details-div {
+    margin: 28px;
+    padding-top: 20px;
+    width: 580px;
+    max-width: 580px;
+    height: min(85vh, 820px);
+    background-color: white;
+    border-radius: 8px;
+}
+
+.channel-details-header {
+    margin: 0px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.channel-details-header > button {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    background-color: white
+}
+
+.channel-details-header > button:hover {
+    background-color: rgba(29, 28, 29, 0.04);
+}
+
+.channel-name-inmodal {
+    color: rgb(29, 28, 29);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.channel-details-nav {
+    height: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #616061;
+    border-bottom: 1px solid rgba(29, 28, 29, 0.13);
+}
+
+.channel-details-nav > span {
+    cursor: pointer;
+    margin-left: 28px;
+}
+
+.channel-details-body-about {
+        height: calc(100% - 81px);
+    background-color: rgba(29, 28, 29, 0.04);
+    overflow-y: scroll;height: calc(100% - 81px);
+    background-color: rgba(29, 28, 29, 0.04);
+    overflow-y: scroll;
+}
+
+.channel-details-body-about::-webkit-scrollbar,
+.channel-details-body-members::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.channel-details-body-members {
+    height: calc(100% - 81px);
+    overflow-y: scroll;    
+}
+
+.channel-detail-about {
+    margin: 16px 28px;
+    background-color: white;
+    border: 1px solid rgba(29, 28, 29, 0.13);
+    border-radius: 12px;
+}
+
+.channel-detail-sections {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(29, 28, 29, 0.13);
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-detail-sections.last {
+    border-bottom: unset;
+    color: rgb(224, 30, 90);
+    font-weight: 500;
+}
+
+.channel-detail-content {
+    color: rgba(29, 28, 29, 0.7);
+    font-size: 15px;
+}
+
+.channel-delete-leave {
+    cursor: pointer;
+}
+
+.channel-detail-members {
+    margin: 16px 28px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+
+.channel-detail-member-div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 12px;
+    color: rgb(29, 28, 29);
+    font-size: 15px;
+}
+
+.channel-detail-member-add {
+    height: 36px;
+    width: 36px;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(18, 100, 163);
+    background-color: #1d9bd11a;
+}
+
+.channel-detail-edit {
+    font-size: 13px;
+    color: rgb(18, 100, 163);
+    font-weight: 600;
+}

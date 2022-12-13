@@ -1,8 +1,9 @@
 .landing-grid {
+  height: calc(100% - 41px);
   width: 100vw;
   display: grid;
-  grid-template-columns: 20vw auto;
-  grid-template-rows: 4vw auto;
+  grid-template-columns: 260px auto;
+  grid-template-rows: 44px auto;
   grid-template-areas:
     "grid-nav-top grid-nav-top"
     "grid-sidebar grid-main-view";

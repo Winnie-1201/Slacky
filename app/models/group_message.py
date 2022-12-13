@@ -28,5 +28,7 @@ class GroupMessage(db.Model):
             "groupId": self.groupId,
             "userId": self.userId,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            # "user": self.user,
+            # "group": self.group
         }

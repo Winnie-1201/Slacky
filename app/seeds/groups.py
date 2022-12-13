@@ -28,8 +28,9 @@ def seed_groups():
 def undo_groups():
     if environment == "production":
         db.session.execute(
-            f"TRUNCATE table {SCHEMA}.groups RESTART IDENTITY CASCADE;")
+            f"TRUNCATE table {SCHEMA}.groups RESTART IDENTITY CASCADE; TRUNCATE table {SCHEMA}.user_groups RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM groups")
+        db.session.execute("DELETE FROM user_groups")
 
     db.session.commit()

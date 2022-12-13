@@ -1,7 +1,9 @@
 .cm-input-container {
   width: 95%;
   margin: auto;
-  border: 2px solid red;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(221, 221, 221, 1);
   display: flex;
   border-radius: 0.5rem;
 }
@@ -10,34 +12,51 @@
   width: 100%;
 }
 
-.cm-form {
-  display: flex;
-  flex-direction: column;
-
-  color: red;
-}
-
 .cm-input-box {
   width: 100%;
   display: flex;
   justify-content: end;
 }
 
+.cm-input-top {
+  display: flex;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(221, 221, 221, 1);
+}
+
+.cm-input-top-box {
+  padding-right: 1rem;
+  color: rgba(221, 221, 221, 1);
+}
+
+.cm-input-box {
+  padding: 1rem 1rem;
+}
+
 .cm-input {
   width: 100%;
   border: none;
   outline: none;
-  padding: 0 1rem;
+
+  resize: none;
+  font-family: "Noto Sans";
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.cm-input-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .cm-submit-box {
   width: fit-content;
-  border: 2px solid orange;
   padding: 0.5rem 0.5rem;
 }
 
 .cm-submit-box button {
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
   border-color: transparent;
 }

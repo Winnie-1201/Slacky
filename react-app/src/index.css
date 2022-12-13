@@ -1,6 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Noto Sans";
   margin: 0;
+  height: 100vh;
   position: relative;
-  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
 }

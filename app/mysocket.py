@@ -5,10 +5,10 @@ from flask import request
 if os.environ.get("FLASK_ENV") == "production":
     # change it to the actual url later
     origins = [
-        "*"
+        "https://slack-clone-2k4m.onrender.com", "http://slack-clone-2k4m.onrender.com"
     ]
 else:
-    origins = ["*"]
+    origins = "*"
     
 # create the SocketIO instance
 socketio = SocketIO(

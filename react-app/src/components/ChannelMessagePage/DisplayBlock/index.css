@@ -1,15 +1,65 @@
 .cm-block {
   width: 100%;
   display: flex;
-  border: 2px solid green;
+  padding: 0.5rem 2rem;
 }
 
-.cm-avatar-box {
-  width: 64px;
-  height: 64px;
+.cm-block:hover {
+  background-color: rgba(221, 221, 221, 0.3);
 }
 
-.cm-avatar-box img {
-  width: 100%;
-  height: 100%;
+.cm-with-avatar {
+  align-items: flex-start;
+}
+
+.cm-without-avatar {
+  align-items: baseline;
+}
+
+.cm-block-left {
+  min-width: 32px;
+
+  text-align: center;
+}
+
+.cm-avatar {
+  width: 2rem;
+  aspect-ratio: 1/1;
+  /* object-fit: cover; */
+}
+
+.cm-user-block {
+  display: flex;
+  align-items: baseline;
+}
+
+.cm-name-box {
+  padding-right: 1rem;
+  vertical-align: text-top;
+}
+.cm-name-box p {
+  font-weight: bolder;
+}
+
+.cm-time-box p,
+.cm-block-left P,
+.cm-content-box p {
+  font-size: 0.8rem;
+}
+
+.cm-block p {
+  margin: 0;
+}
+
+.cm-block-right {
+  width: fit-content;
+  padding-left: 1rem;
+}
+
+.cm-block-left p {
+  display: none;
+}
+
+.cm-without-avatar:hover .cm-block-left p {
+  display: block;
 }
