@@ -1,96 +1,73 @@
-.dm-header-flex {
-  display: flex;
-  box-shadow: 0 1px 0 0 rgb(226, 226, 226);
-  align-items: center;
-  padding: 0 16px 0 20px;
-  height: 49px;
-}
-
-.header-detail-flex {
-  display: flex;
-  font-size: 20px;
-  font-weight: 700;
-  align-items: center;
-}
-
-.dm-body-container-flex {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.dm-to {
-  width: 100%;
-}
-
-.dm-to-flex {
-  display: flex;
-  height: 52px;
-  padding: 0 20px;
-  position: relative;
-  box-shadow: 0 1px 0 0 rgb(226, 226, 226);
-  align-items: center;
-}
-
-.dm-to-flex span {
-  color: rgb(120, 118, 118);
-}
-
-.dm-to-body {
-  padding: 0 38px 0 12px;
-  font-size: 15px;
-  min-height: 36px;
-  border-radius: 4px;
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.dm-to-input::placeholder {
-  font-size: 15px;
-  color: rgb(120, 118, 118);
-  letter-spacing: 0.5px;
+ul,
+li {
+  margin: 0;
+  padding: 0;
 }
 
 .dm-to-input {
-  border: none;
-  width: 100%;
+  position: relative;
 }
 
-.dm-to-input:focus {
-  outline: none;
-}
-
-.dm-history {
+.user-list {
+  position: absolute;
+  top: 85%;
+  left: -1%;
+  padding: 18px 0;
+  overflow: hidden auto;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgb(192, 190, 190);
   background-color: rgb(248, 248, 248);
-  height: 100%;
-}
-
-.dm-history-scroll {
-  /* position: absolute; */
-  /* bottom: 0; */
-  /* left: 0; */
-  outline: none;
-  height: 100%;
   width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  /* margin: 30px; */
 }
 
-.flex-column {
+.list-items {
+  list-style: none;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.flex-row {
-  display: flex;
-  flex-direction: row;
+.item-detail {
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 0 5px 30px;
 }
 
-.dm-block-date {
-  font-size: 14px;
+.item-detail:hover,
+.item-detail:hover .user-list-name,
+.item-detail:hover .user-active {
+  background-color: #1264a3;
+  color: white;
+}
+
+.item-detail:hover .is-active {
+  background-color: white;
+  border: 1px solid #1264a3;
+}
+
+.user-list-icon {
+  margin-right: 10px;
+  border-color: none;
+}
+
+.user-list-name {
+  color: #1d1c1d;
   font-weight: 600;
-  margin: 0 16px;
-  padding: 24px 0 12px 16px;
+  font-size: 15px;
+  margin-right: 15px;
+}
+
+.user-active {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid rgb(120, 118, 118);
+  margin-right: 15px;
+}
+
+.is-active {
+  background-color: green;
+  border-radius: 50%;
+  border: 1px solid white;
 }
