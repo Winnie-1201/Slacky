@@ -1,6 +1,7 @@
 // constants
 const SET_USER_CHANNELS = "channels/SET_USER_CHANNELS";
 const SET_CHANNEL = "channels/SET_CHANNEL";
+const SET_ALL_CHANNELS = 'channels/SET_ALL_CHANNELS';
 // const REMOVE_USER = "session/REMOVE_USER";
 
 const setChannel = (channel) => ({
@@ -8,66 +9,38 @@ const setChannel = (channel) => ({
     payload: channel,
 });
 
+const setAllChannels = (channels) => ({
+    type: SET_ALL_CHANNELS,
+    payload: channels
+})
+
 // const removeUser = () => ({
 //     type: REMOVE_USER,
 // });
 
-// export const authenticate = () => async (dispatch) => {
-//     const response = await fetch("/api/auth/", {
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//     });
-//     if (response.ok) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return;
-//         }
+export const getAllChannel = () => async (dispatch) => {
+    console.log('---------------- get all channels thunk', '----------------')
+    const response = await fetch("/api/channels");
 
-//         dispatch(setUser(data));
-//     }
-// };
+    if (response.ok) {
+        const data = await response.json();
+        const channelObj = {}
+        if (data.channels) data.channels.forEach(channel => {
+            channelObj[channel.id] = channel
+        });
 
-// export const login = (email, password) => async (dispatch) => {
-//     const response = await fetch("/api/auth/login", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             email,
-//             password,
-//         }),
-//     });
-//     console.log("***************** USER LOGIN", response);
+        dispatch(setAllChannels(channelObj));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
 
-//     if (response.ok) {
-//         const data = await response.json();
-//         dispatch(setUser(data));
-//         return null;
-//     } else if (response.status < 500) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return data.errors;
-//         }
-//     } else {
-//         return ["An error occurred. Please try again."];
-//     }
-// };
-
-// export const logout = () => async (dispatch) => {
-//     const response = await fetch("/api/auth/logout", {
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//     });
-
-//     if (response.ok) {
-//         dispatch(removeUser());
-//     }
-// };
-
-// export const getUserChannels = (userId)
 
 export const createChannel = (channel) => async (dispatch) => {
     // console.log('---------------- create a channel thunk', channel, '----------------')
@@ -119,11 +92,13 @@ export const editChannel = (channel) => async (dispatch) => {
 };
 
 
-const initialState = { channel: null, userChannels: [] };
+const initialState = { channel: null, userChannels: [], allChannels: {} };
 export default function channelsReducer(state = initialState, action) {
     switch (action.type) {
         case SET_CHANNEL:
             return { channel: action.payload };
+        case SET_ALL_CHANNELS:
+            return { allChannels: action.payload };            
         // case REMOVE_USER:
         //     return { user: null };
         default:

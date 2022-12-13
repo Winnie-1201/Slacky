@@ -7,21 +7,7 @@ import "./AddDmPage.css";
 import DmHistory from "./DmHistory";
 
 const AddDmPage = () => {
-  // route: groups/all-dms
-  // with Direct messages selected
-  // const [users, setUsers] = useState([]);
-
   const user = useSelector((state) => state.session.user);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await fetch("/api/users/");
-  //     const responseData = await response.json();
-  //     setUsers(responseData.users);
-  //   }
-  //   fetchData();
-  // }, []);
-  // const groups = user.groups;
 
   return (
     user && (
@@ -42,14 +28,8 @@ const AddDmPage = () => {
           <div className="dm-body-container-flex">
             <div className="dm-to">
               <div className="dm-to-flex">
-                <span>To:</span>
+                <span className="dm-to-text">To:</span>
                 <AddDm />
-                {/* <div className="dm-to-body">
-                  <input
-                    className="dm-to-input"
-                    placeholder="@somebody in the current workplace"
-                  />
-                </div> */}
               </div>
             </div>
             <DmHistory />

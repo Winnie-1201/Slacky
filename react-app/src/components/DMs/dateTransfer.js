@@ -38,3 +38,8 @@ export function sameDay(d1, d2) {
     d1.getDate() === d2.getDate()
   );
 }
+
+export function formateDate(date) {
+  date = new Date(date);
+  return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+}
