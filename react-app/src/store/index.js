@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   dm: dmReducer,
   channelMessages: channelMessageReducer,
 
-  search: searchReducer
+  search: searchReducer,
 
   channels: channelsReducer,
 
