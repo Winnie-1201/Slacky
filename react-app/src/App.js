@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
+import AddDm from "./components/DMs/AddDm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,7 +40,7 @@ function App() {
           <HomeMain></HomeMain>
         </Route>
       )}
-      {user && <LandingLoggedIn user={user}></LandingLoggedIn>}
+      {/* {user && <LandingLoggedIn user={user}></LandingLoggedIn>} */}
 
       <Switch>
         <Route path="/login" exact={true}>
@@ -54,6 +55,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
+        <Route path="/groups/all-dms" exact={true}>
+          <AddDm />
+        </Route>
         <Route path="/groups/:groupId">
           {/* <LandingLoggedIn user={user} /> */}
           <DirectMessage />

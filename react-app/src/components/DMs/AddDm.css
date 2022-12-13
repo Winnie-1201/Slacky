@@ -1,0 +1,96 @@
+.dm-header-flex {
+  display: flex;
+  box-shadow: 0 1px 0 0 rgb(226, 226, 226);
+  align-items: center;
+  padding: 0 16px 0 20px;
+  height: 49px;
+}
+
+.header-detail-flex {
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+}
+
+.dm-body-container-flex {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dm-to {
+  width: 100%;
+}
+
+.dm-to-flex {
+  display: flex;
+  height: 52px;
+  padding: 0 20px;
+  position: relative;
+  box-shadow: 0 1px 0 0 rgb(226, 226, 226);
+  align-items: center;
+}
+
+.dm-to-flex span {
+  color: rgb(120, 118, 118);
+}
+
+.dm-to-body {
+  padding: 0 38px 0 12px;
+  font-size: 15px;
+  min-height: 36px;
+  border-radius: 4px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dm-to-input::placeholder {
+  font-size: 15px;
+  color: rgb(120, 118, 118);
+  letter-spacing: 0.5px;
+}
+
+.dm-to-input {
+  border: none;
+  width: 100%;
+}
+
+.dm-to-input:focus {
+  outline: none;
+}
+
+.dm-history {
+  background-color: rgb(248, 248, 248);
+  height: 100%;
+}
+
+.dm-history-scroll {
+  /* position: absolute; */
+  /* bottom: 0; */
+  /* left: 0; */
+  outline: none;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.dm-block-date {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 16px;
+  padding: 24px 0 12px 16px;
+}
