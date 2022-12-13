@@ -17,6 +17,24 @@ const setAllChannels = (channels) => ({
 // const removeUser = () => ({
 //     type: REMOVE_USER,
 // });
+export const getOneChannel = (channelId) => async (dispatch) => {
+    console.log('---------------- get one channels thunk', '----------------')
+    const response = await fetch(`/api/channels/${channelId}`);
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setChannel(data));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+}
+
 
 export const getAllChannel = () => async (dispatch) => {
     console.log('---------------- get all channels thunk', '----------------')
