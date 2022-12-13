@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import './AddMember.css';
+import './EditChannel.css';
 import { editChannel } from '../../store/channels';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../../store/session';
@@ -35,7 +35,6 @@ export default function AddMember({ setShowModal, channel }) {
             name: channel.name,
             description: channel.description,
             topic: channel.topic,
-            is_public: channel.is_public,
             users: memberIds.join(',')
         }
         console.log('edit channel sending to backend', edit_channel, channel)
