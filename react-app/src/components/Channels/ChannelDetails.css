@@ -16,7 +16,7 @@
     margin-bottom: 8px;
 }
 
-.channel-details-header > button {
+.modal-exit-button {
     width: 36px;
     height: 36px;
     border-radius: 4px;
@@ -24,7 +24,7 @@
     background-color: white
 }
 
-.channel-details-header > button:hover {
+.modal-exit-button:hover {
     background-color: rgba(29, 28, 29, 0.04);
 }
 

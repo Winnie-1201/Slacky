@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import DetailsAbout from './DetailsAbout';
 import DetailsMembers from './DetailsMembers';
 
-export default function DetailsContent({ channel }) {
-    const [active, setActive] = useState('About')
+export default function DetailsContent({ channel, active, setActive }) {
+    // const [active, setActive] = useState('About')
 
   return (
     <>

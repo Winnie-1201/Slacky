@@ -95,7 +95,7 @@ export const createChannel = (channel) => async (dispatch) => {
 
 
 export const editChannel = (channel) => async (dispatch) => {
-    console.log('---------------- edit a channel thunk', channel, '----------------')
+    // console.log('---------------- edit a channel thunk', channel, '----------------')
     const response = await fetch(`/api/channels/${channel.id}`, {
         method: "PUT",
         headers: {

@@ -4,6 +4,7 @@ import './EditChannel.css';
 import { editChannel } from '../../store/channels';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../../store/session';
+import ChannelModalHeader from './ChannelModalHeader';
 
 export default function AddMember({ setShowModal, channel }) {
     const user = useSelector((state) => state.session.user);
@@ -78,10 +79,7 @@ export default function AddMember({ setShowModal, channel }) {
 
   return (
     <div className='add-member-div'>
-        <div className='add-member-header'>
-            <span>Add people to {`${channel.name}`}</span>
-            <span>X</span>
-        </div>
+        <ChannelModalHeader setShowModal={setShowModal} headerName={`Add people to ${channel.name}`} headerContent='' />
         {nonMembers.length === 0 &&
             <div>All users are part of this channel.</div>
         }

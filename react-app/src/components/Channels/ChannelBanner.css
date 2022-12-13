@@ -28,7 +28,9 @@
     font-size: 13px;
     color: rgb(29, 28, 29);
     font-weight: 400;
-    flex: 1 1 auto; 
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;    
 }
 
 .channel-members {

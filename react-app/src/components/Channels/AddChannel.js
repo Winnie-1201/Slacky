@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom';
 import './AddChannel.css';
 import { createChannel } from '../../store/channels';
 import { getUser } from '../../store/session';
+import ChannelModalHeader from './ChannelModalHeader';
 
 export default function AddChannel({ setShowModal }) {
     const user = useSelector((state) => state.session.user);
@@ -73,33 +74,27 @@ export default function AddChannel({ setShowModal }) {
 
   return (
     <div className='channel-create-div'>
-        <div className='channel-create-header'>
-            <span>Create a channel</span>
-            <span>X</span>
-            <span>Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.</span>
-        </div>
+          <ChannelModalHeader setShowModal={setShowModal} headerName='Create a channel' headerContent='Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.' />
 
         <form className='channel-create-form' onSubmit={onCreateChannel}>
-            <div>
-                {errors.backend?.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
             <div className='create-channel-inputs-div'>
-                <div>
+                <div className="create-channel-labels-div">
                     <label>Name</label>
                     {onSubmit && errors.name && <span>{errors.name}</span>}
                 </div>
+
                 <input
                     type='text'
                     name='name'
                     onChange={e => setName(e.target.value)}
                     value={name}
+                    placeholder='e.g. plan-budget'
                 ></input>
+
             </div>
             <div className='create-channel-inputs-div'>
-                <div>
-                    <label>Description</label>
+                <div className="create-channel-labels-div">
+                    <label>Description <span className='optional-note-span'>(optional)</span></label>
                     {onSubmit && errors.description && <span>{errors.description}</span>}
                 </div>
                 <input
@@ -110,7 +105,7 @@ export default function AddChannel({ setShowModal }) {
                 ></input>
             </div>
             <div className='create-channel-inputs-div'>
-                <div>
+                <div className="create-channel-labels-div">
                     <label>Make private</label>
                 </div>
                 <input
@@ -122,6 +117,11 @@ export default function AddChannel({ setShowModal }) {
             </div>
             <div className='create-channel-button-div'>
                 <button type='submit' disabled={disabled}>Create</button>
+                <div>
+                    {errors.backend?.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
             </div>            
         </form>
     </div>

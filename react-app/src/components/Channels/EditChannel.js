@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import './AddChannel.css';
 import { editChannel } from '../../store/channels';
 import { getUser } from '../../store/session';
+import ChannelModalHeader from './ChannelModalHeader';
 
 export default function EditChannel({setShowModal, channel}) {
   const user = useSelector((state) => state.session.user);
@@ -84,11 +84,7 @@ export default function EditChannel({setShowModal, channel}) {
 
   return (
     <div className='channel-create-div'>
-      <div className='channel-create-header'>
-        <span>Create a channel</span>
-        <span>X</span>
-        <span>Channels are where your team communicates. They’re best when organized around a topic — #marketing, for example.</span>
-      </div>
+      <ChannelModalHeader setShowModal={setShowModal} headerName='Edit a channel' headerContent='' />
 
       <form className='channel-create-form' onSubmit={onCreateChannel}>
         <div>
