@@ -63,3 +63,14 @@
 .cm-without-avatar:hover .cm-block-left p {
   display: block;
 }
+
+.cm-block-menu {
+  display: flex;
+}
+
+.cm-block-menu button {
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.5rem;
+  background-color: transparent;
+}

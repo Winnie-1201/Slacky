@@ -24,6 +24,7 @@
 
 .grid-main-view {
   width: 100%;
+  height: 95vh;
   grid-area: "grid-main-view";
   background-color: white;
 }

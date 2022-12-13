@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDeleteChannelMessage } from "../../../store/channelMessage";
 import { useState } from "react";
+import { fetchDeleteChannelMessage } from "../../../store/channelMessage";
+import ChannelMessageInputContainer from "../InputContainer";
 import "./index.css";
 
 const ChannelMessageBlock = ({ cm, avatar }) => {
@@ -8,10 +9,12 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
   const user = useSelector((state) => state.session.user);
   const [errors, setErrors] = useState([]);
 
+  const [edit, setEdit] = useState(false);
+
   const createdAt = new Date(cm.created_at);
   const hour = createdAt.getHours() % 12;
   const minute = createdAt.getMinutes();
-  const time = `${hour > 10 ? hour : hour ? "0" + hour : 12}:${
+  const time = `${hour >= 10 ? hour : hour ? "0" + hour : 12}:${
     minute < 10 ? "0" + minute : minute
   }`;
 
@@ -22,6 +25,10 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
     });
+  };
+  const handleEditToggle = (e) => {
+    e.preventDefault();
+    setEdit(true);
   };
   return (
     <div
@@ -35,7 +42,9 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
         )}
       </div>
       <div className="cm-block-right">
-        {avatar ? (
+        {edit ? (
+          <ChannelMessageInputContainer />
+        ) : avatar ? (
           <div>
             <div className="cm-user-block">
               <div className="cm-name-box">
@@ -56,10 +65,17 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
         )}
       </div>
       {user.id === cm.user_id && (
-        <div>
-          <button onClick={handleDelete}>
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
+        <div className="cm-block-menu">
+          <div>
+            <button onClick={handleEditToggle}>
+              <i class="fa-solid fa-pen-to-square fa-xl"></i>
+            </button>
+          </div>
+          <div>
+            <button onClick={handleDelete}>
+              <i class="fa-solid fa-trash-can fa-xl"></i>
+            </button>
+          </div>
         </div>
       )}
     </div>
