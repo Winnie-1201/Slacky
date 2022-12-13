@@ -4,7 +4,7 @@ import SideBar from "./SideBar/SideBar";
 import ChannelBanner from "./Channels/ChannelBanner";
 import NavBarSearch from './NavBarSearch'
 import "./LandingLoggedIn.css";
-import DirectMessage from "./DerectMessage";
+// import DirectMessage from "./DMs/DerectMessage";
 
 export default function LandingLoggedIn({ user }) {
   return (

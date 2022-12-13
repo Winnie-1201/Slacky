@@ -1,6 +1,6 @@
 .landing-grid {
     height: calc(100% - 41px);
-    width: 100vw;
+    /* width: 100vw; */
     display: grid;
     grid-template-columns: 260px auto;
     grid-template-rows: 44px auto;
@@ -10,19 +10,21 @@
 }
 
 .grid-nav-top {
-    grid-area: 'grid-nav-top';
-    background-color: #350d36;
-    border-bottom: 1px solid rgb(255 255 255 / 10%);
-    display: flex;
-    align-items: center;
+  grid-area: "grid-nav-top";
+  background-color: #350d36;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  display: flex;
+  align-items: center;
 }
 
 .grid-sidebar {
-    grid-area: 'grid-sidebar';
-    background-color: #4a154b;
+  grid-area: "grid-sidebar";
+  background-color: #4a154b;
 }
 
 .grid-main-view {
-    grid-area: 'grid-main-view';
-    background-color: white;
+  grid-area: "grid-main-view";
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }

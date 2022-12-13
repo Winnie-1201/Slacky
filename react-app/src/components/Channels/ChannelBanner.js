@@ -4,13 +4,18 @@ import { useSelector } from "react-redux";
 import BannerName from './BannerName';
 import BannerTopic from './BannerTopic';
 import BannerMembers from './BannerMembers';
+import ChannelDetails from './ChannelDetails';
+import { Modal } from '../../context/Modal';
 import './ChannelBanner.css';
+
 
 export default function ChannelBanner() {
     // console.log(user)
     const user = useSelector(state => state.session.user);
     const [channel, setChannel] = useState(null)
     const [members, setMembers] = useState([])
+    const [showModal, setShowModal] = useState(false);
+    const [active, setActive] = useState('About')
     const match = useRouteMatch('/channels/:id')
     
     useEffect(() => {
@@ -28,13 +33,18 @@ export default function ChannelBanner() {
 
   return (
     <div className='channel-banner-div'>
-        {channel &&
-            <>
-              <BannerName channel={channel}/>
-              <BannerTopic channel={channel} />
-              <BannerMembers channel={channel} members={members} totalMembers={channel.number_of_members}/>
-            </>
-        }
+      {channel &&
+          <>
+            <BannerName channel={channel} setShowModal={setShowModal} setActive={setActive}/>
+            <BannerTopic channel={channel} />
+        <BannerMembers setShowModal={setShowModal} channel={channel} members={members} totalMembers={channel.number_of_members} setActive={setActive} />
+          </>
+      }
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <ChannelDetails setShowModal={setShowModal} channel={channel} active={active} setActive={setActive}/>
+        </Modal>
+      )}
     </div>
   )
 }

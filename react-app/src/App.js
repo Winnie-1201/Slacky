@@ -8,14 +8,17 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
-import SocketTest from "./components/SocketTest";
 import LandingLoggedIn from "./components/LandingLoggedIn";
 import HomeMain from "./components/HomeMain/HomeMain";
 import Footer from "./components/Footer/Footer";
-import DirectMessage from "./components/DerectMessage";
+import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
+
 import SearchMessages from "./components/SearchMessageModal/SearchFrom";
+
+import AddDm from "./components/DMs/AddDm";
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,7 +44,7 @@ function App() {
           <HomeMain></HomeMain>
         </Route>
       )}
-      {user && <LandingLoggedIn user={user}></LandingLoggedIn>}
+      {/* {user && <LandingLoggedIn user={user}></LandingLoggedIn>} */}
 
       <Switch>
         <Route path="/login" exact={true}>
@@ -56,7 +59,10 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/dm/:groupId">
+        <Route path="/groups/all-dms" exact={true}>
+          <AddDm />
+        </Route>
+        <Route path="/groups/:groupId">
           {/* <LandingLoggedIn user={user} /> */}
           <DirectMessage />
           {/* <SocketTest /> */}

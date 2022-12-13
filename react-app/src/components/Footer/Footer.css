@@ -2,6 +2,7 @@
     color: white;
     background-color: #4a154b;
     height: 40px;
+    /* width: 100vw; */
     border-top: 1px solid rgb(255 255 255 / 10%);
     position: sticky;
     bottom: 0px;
