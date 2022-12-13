@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   padding: 0.5rem 2rem;
+  position: relative;
 }
 
 .cm-block:hover {
@@ -18,7 +19,6 @@
 
 .cm-block-left {
   min-width: 32px;
-
   text-align: center;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .cm-block-right {
-  width: fit-content;
+  width: 70vw;
   padding-left: 1rem;
 }
 
@@ -65,12 +65,30 @@
 }
 
 .cm-block-menu {
-  display: flex;
+  display: none;
 }
 
 .cm-block-menu button {
   border: none;
   outline: none;
-  padding: 0.5rem 0.5rem;
+  padding: 0.7rem 0.7rem;
   background-color: transparent;
+}
+
+.cm-block-menu button:hover {
+  background-color: rgba(221, 221, 221, 0.3);
+}
+
+.cm-block:hover .cm-block-menu {
+  display: flex;
+  position: absolute;
+  right: 2rem;
+  top: -2rem;
+  border: 1px solid rgba(221, 221, 221, 1);
+  border-radius: 0.4rem;
+  background-color: #ffffff;
+}
+
+.cm-block .cm-input-container {
+  width: 100%;
 }

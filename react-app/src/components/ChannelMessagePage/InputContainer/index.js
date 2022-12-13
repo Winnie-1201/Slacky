@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchCreateChannelMessage } from "../../../store/channelMessage";
+import {
+  fetchCreateChannelMessage,
+  fetchEditChannelMessage,
+} from "../../../store/channelMessage";
 import "./index.css";
-const ChannelMessageInputContainer = () => {
+const ChannelMessageInputContainer = ({ cmId, edit, setEdit }) => {
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState("");
@@ -12,17 +15,32 @@ const ChannelMessageInputContainer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(fetchCreateChannelMessage(channelId, { content }))
+    return dispatch(
+      edit
+        ? fetchEditChannelMessage(cmId, { content })
+        : fetchCreateChannelMessage(channelId, { content })
+    )
       .then(() => setContent(""))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
   };
+
+  const handleCancel = () => {
+    setEdit(false);
+  };
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
   return (
     <div className="cm-input-container">
       <div className="cm-input-block">
-        <form onSubmit={handleSubmit} className="cm-form">
+        <form onSubmit={handleSubmit} className="cm-form" onKeyUp={handleEnter}>
           {/* <div className="cm-error-box">
             <ul>
               {errors.map((error, idx) => (
@@ -35,10 +53,10 @@ const ChannelMessageInputContainer = () => {
               <i className="fa-solid fa-bold"></i>
             </div>
             <div className="cm-input-top-box">
-              <i class="fa-solid fa-italic"></i>
+              <i className="fa-solid fa-italic"></i>
             </div>
             <div className="cm-input-top-box">
-              <i class="fa-solid fa-strikethrough"></i>
+              <i className="fa-solid fa-strikethrough"></i>
             </div>
           </div>
           <div className="cm-input-box">
@@ -53,12 +71,28 @@ const ChannelMessageInputContainer = () => {
           <div className="cm-input-bottom">
             <div className="cm-input-botton-left"></div>
             <div className="cm-submit-box">
-              <button
-                type="submit"
-                className={`cm-submit-button-highlight-${content != ""}`}
-              >
-                <i className="fa-solid fa-paper-plane fa-lg"></i>
-              </button>
+              {edit && (
+                <button className={`cm-cancel-button`} onClick={handleCancel}>
+                  Cancel
+                </button>
+              )}
+              {edit ? (
+                <button
+                  type="submit"
+                  className={`cm-submit-button cm-submit-button-highlight-true`}
+                >
+                  Send
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className={`cm-submit-button cm-submit-button-highlight-${
+                    content != ""
+                  }`}
+                >
+                  <i className="fa-solid fa-paper-plane fa-lg"></i>
+                </button>
+              )}
             </div>
           </div>
         </form>

@@ -40,11 +40,15 @@ def create_channel_message(channel_id):
 @channel_message_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
 def edit_channel_message(id):
+    print("------------ route------------", request.data)
+    print("------------ route cookie------------", request.cookies)
     channel_message = ChannelMessage.query.get(id)
     form = ChannelMessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("------------ content ----------",form.data)
     if channel_message.user_id==current_user.id:
         if form.validate_on_submit():
+            print("------------ content validated ----------",form.data["content"])
             channel_message.content = form.data["content"]
             db.session.commit()
             return channel_message.to_dict()
@@ -65,6 +69,3 @@ def delete_channel_message(id):
     else:
         return {"Errors": "Only sender can delete the message"}
     return {"Errors": "The channel_message could not be found"}, 404
-
-
-

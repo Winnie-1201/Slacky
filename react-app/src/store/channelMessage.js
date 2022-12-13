@@ -27,8 +27,6 @@ export const fetchChannelMessages = (channelId) => async (dispatch) => {
 };
 export const fetchCreateChannelMessage =
   (channelId, channelMessage) => async (dispatch) => {
-    console.log("**************** THUNK channelId", channelId);
-    console.log("**************** THUNK cm", channelMessage);
     const response = await fetch(`/api/message/channels/${channelId}`, {
       method: "POST",
       headers: {
@@ -36,16 +34,15 @@ export const fetchCreateChannelMessage =
       },
       body: JSON.stringify(channelMessage),
     });
-    console.log("**************** CREATE ****************", response);
     if (response.ok) {
       const data = await response.json();
-      console.log("**************** CREATE DATA ****************", data);
       dispatch(createChannelMessage(data));
       return data;
     }
     return response;
   };
 export const fetchEditChannelMessage = (id, content) => async (dispatch) => {
+  console.log("**************** EDIT content****************", content);
   const response = await fetch(`/api/message/channels/${id}`, {
     method: "PUT",
     body: JSON.stringify(content),
@@ -63,7 +60,6 @@ export const fetchDeleteChannelMessage = (id) => async (dispatch) => {
   const response = await fetch(`/api/message/channels/${id}`, {
     method: "DELETE",
   });
-  console.log("**************** DELETE ****************", response);
   dispatch(deleteChannelMessage(id));
   return response;
 };
