@@ -15,15 +15,18 @@ export default function ChannelBanner() {
     // const user = useSelector(state => state.session.user);
     // const allChannels = useSelector((state) => state.channels.allChannels);
     const channel = useSelector((state) => state.channels.channel)
+    // console.log('--------------- channel -----------------')
+    // console.log(channel)
     const [members, setMembers] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [active, setActive] = useState('About')
-    const match = useRouteMatch('/channels/:id')
+    const match = useRouteMatch('/channels/:id').params.id
+    // console.log(match)
     
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(getOneChannel(match))
-    }, [])
+    }, [match])
 
     useEffect(() => {
         const members = channel ? channel.channel_members: []

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
@@ -5,7 +7,12 @@ import './AllChannelsMap.css'
 
 export default function AllChannelsMap() {
     const user = useSelector((state) => state.session.user);
-    const allChannels = Object.values(useSelector((state) => state.channels.allChannels));
+    const allChannelsObj = useSelector((state) => state.channels.allChannels);
+    const [allChannels, setAllChannels] = useState([])
+
+    useEffect(() => {
+        if (allChannelsObj) setAllChannels(Object.values(allChannelsObj))
+    }, [allChannelsObj])
 
   return (
     <div className="all-channels-div">
