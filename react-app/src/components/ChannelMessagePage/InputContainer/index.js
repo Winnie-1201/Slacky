@@ -15,10 +15,13 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
+    const message = { content };
+    console.log("****** message*********", message);
     return dispatch(
-      edit
-        ? fetchEditChannelMessage(cmId, { content })
-        : fetchCreateChannelMessage(channelId, { content })
+      // edit
+      //   ? fetchEditChannelMessage(cmId, message)
+      //   :
+      fetchCreateChannelMessage(channelId, { content })
     )
       .then(() => setContent(""))
       .catch(async (res) => {
