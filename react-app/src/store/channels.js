@@ -70,7 +70,7 @@ const setChannel = (channel) => ({
 // export const getUserChannels = (userId)
 
 export const createChannel = (channel) => async (dispatch) => {
-    console.log('---------------- create a channel thunk', channel, '----------------')
+    // console.log('---------------- create a channel thunk', channel, '----------------')
     const response = await fetch("/api/channels", {
         method: "POST",
         headers: {
@@ -92,6 +92,32 @@ export const createChannel = (channel) => async (dispatch) => {
         return ["An error occurred. Please try again."];
     }
 };
+
+
+export const editChannel = (channel) => async (dispatch) => {
+    console.log('---------------- edit a channel thunk', channel, '----------------')
+    const response = await fetch(`/api/channels/${channel.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(channel),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setChannel(data));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
 
 const initialState = { channel: null, userChannels: [] };
 export default function channelsReducer(state = initialState, action) {

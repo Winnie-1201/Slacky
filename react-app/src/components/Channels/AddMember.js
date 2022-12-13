@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './AddMember.css';
+import { editChannel } from '../../store/channels';
+import { useDispatch } from 'react-redux';
+import { getUser } from '../../store/session';
 
 export default function AddMember({ setShowModal, channel }) {
+    const user = useSelector((state) => state.session.user);
     const [users, setUsers] = useState([]);
-    const [memberIds, setMembersIds] = useState('')
     const [nonMembers, setNonMembers] = useState([]);
+    const [errors, setErrors] = useState({});
 
     async function fetchAllUsers() {
         const response = await fetch('/api/users/');
@@ -12,20 +17,48 @@ export default function AddMember({ setShowModal, channel }) {
         setUsers(responseData.users);
     }
 
-    const onAddMember = (e) => {
+    const dispatch = useDispatch()
+    const onAddMember = async (e) => {
         e.preventDefault()
         // console.log(e.currentTarget.value)
         const memberId = parseInt(e.currentTarget.value)
-        setMembersIds(prev => [...prev, memberId])
+        const members = channel.channel_members;
+        const memberIds = []
+        for (const member of members) {
+            memberIds.push(member.id)
+        }
+        memberIds.push(memberId)
 
-        
+        console.log('users string sending to backend:', memberIds)
+        const edit_channel = {
+            id: channel.id,
+            name: channel.name,
+            description: channel.description,
+            topic: channel.topic,
+            is_public: channel.is_public,
+            users: memberIds.join(',')
+        }
+        console.log('edit channel sending to backend', edit_channel, channel)
+
+
+        const data = await dispatch(editChannel(edit_channel)).then(() => {
+            // setShowModal(false)
+            dispatch(getUser(user.id))
+        })
+
+        if (data) {
+            setErrors(errors => {
+                errors.backend = data
+                return errors
+            })
+        }
     }
 
     useEffect(() => {
         fetchAllUsers();
     }, []);
 
-    console.log(memberIds)
+    // console.log(memberIds)
 
     useEffect(() => {
         const members = channel.channel_members;
@@ -34,8 +67,6 @@ export default function AddMember({ setShowModal, channel }) {
             member_ids.push(member.id)
         }
         
-        setMembersIds([...member_ids])
-
         const diff = []
         for (const user of users) {
             if (!(member_ids.includes(user.id))) {
@@ -44,7 +75,7 @@ export default function AddMember({ setShowModal, channel }) {
         }
 
         setNonMembers([...diff])
-    }, [channel, users]);
+    }, [channel, users, user]);
 
   return (
     <div className='add-member-div'>
