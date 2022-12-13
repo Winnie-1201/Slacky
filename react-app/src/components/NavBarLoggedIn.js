@@ -8,7 +8,7 @@ const NavBarLoggedIn = ({ user }) => {
     const [showMenu, setShowMenu] = useState(false);
     const openMenu = () => {
         if (showMenu) return;
-        setShowMenu(true);        
+        setShowMenu(true);
     }
 
     const showMenuRef = useRef(null);
@@ -28,7 +28,7 @@ const NavBarLoggedIn = ({ user }) => {
     return (
         <nav className='logged-in-navbar'>
             <div>
-                <input placeholder='search placeholder'/>
+                {/* <input placeholder='search placeholder'/> */}
             </div>
             <div style={{'position':'relative', 'display':'flex', 'alignItems':'center'}}>
                 <span className='profile-icon-span' onClick={openMenu}>
