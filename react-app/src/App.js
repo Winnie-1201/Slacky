@@ -19,7 +19,6 @@ import SearchMessages from "./components/SearchMessageModal/SearchFrom";
 
 import AddDm from "./components/DMs/AddDm";
 
-
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -74,7 +73,7 @@ function App() {
           <SearchMessages />
         </ProtectedRoute>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

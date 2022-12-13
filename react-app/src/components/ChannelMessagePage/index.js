@@ -10,6 +10,7 @@ import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 
 import "./index.css";
+import Footer from "../Footer/Footer";
 
 const ChannelMessagePage = () => {
   const { channelId } = useParams();
@@ -23,7 +24,6 @@ const ChannelMessagePage = () => {
 
   return (
     <div className="landing-grid">
-      <div className="grid-nav-top"></div>
       <div className="grid-nav-top">
         <NavBarLoggedIn user={user} />
       </div>
@@ -35,6 +35,9 @@ const ChannelMessagePage = () => {
           <ChannelMessageContainer channelMessages={channelMessages} />
           <ChannelMessageInputContainer />
         </div>
+      </div>
+      <div className="grid-footer">
+        <Footer />
       </div>
     </div>
   );
