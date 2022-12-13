@@ -1,12 +1,12 @@
 .landing-grid {
-    height: calc(100% - 41px);
-    /* width: 100vw; */
-    display: grid;
-    grid-template-columns: 260px auto;
-    grid-template-rows: 44px auto;
-    grid-template-areas:
-        "grid-nav-top grid-nav-top"
-        "grid-sidebar grid-main-view"
+  height: calc(100% - 41px);
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 260px auto;
+  grid-template-rows: 44px auto;
+  grid-template-areas:
+    "grid-nav-top grid-nav-top"
+    "grid-sidebar grid-main-view";
 }
 
 .grid-nav-top {
@@ -23,8 +23,8 @@
 }
 
 .grid-main-view {
+  width: 100%;
+  height: 95vh;
   grid-area: "grid-main-view";
   background-color: white;
-  display: flex;
-  flex-direction: column;
 }

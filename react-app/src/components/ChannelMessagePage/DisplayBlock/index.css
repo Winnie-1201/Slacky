@@ -1,3 +1,76 @@
 .cm-block {
-  border: 2px solid green;
+  width: 100%;
+  display: flex;
+  padding: 0.5rem 2rem;
+}
+
+.cm-block:hover {
+  background-color: rgba(221, 221, 221, 0.3);
+}
+
+.cm-with-avatar {
+  align-items: flex-start;
+}
+
+.cm-without-avatar {
+  align-items: baseline;
+}
+
+.cm-block-left {
+  min-width: 32px;
+
+  text-align: center;
+}
+
+.cm-avatar {
+  width: 2rem;
+  aspect-ratio: 1/1;
+  /* object-fit: cover; */
+}
+
+.cm-user-block {
+  display: flex;
+  align-items: baseline;
+}
+
+.cm-name-box {
+  padding-right: 1rem;
+  vertical-align: text-top;
+}
+.cm-name-box p {
+  font-weight: bolder;
+}
+
+.cm-time-box p,
+.cm-block-left P,
+.cm-content-box p {
+  font-size: 0.8rem;
+}
+
+.cm-block p {
+  margin: 0;
+}
+
+.cm-block-right {
+  width: fit-content;
+  padding-left: 1rem;
+}
+
+.cm-block-left p {
+  display: none;
+}
+
+.cm-without-avatar:hover .cm-block-left p {
+  display: block;
+}
+
+.cm-block-menu {
+  display: flex;
+}
+
+.cm-block-menu button {
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.5rem;
+  background-color: transparent;
 }
