@@ -149,8 +149,54 @@ const DirectMessage = () => {
                 {/* <div key={ind}>{`${message.user}: ${message.msg}`}</div> */}
               </div>
             </ScrollToBottom>
+            <div className="cm-input-container">
+              <div className="cm-input-block">
+                <form onSubmit={sendChat} className="cm-form">
+                  {/* <div className="cm-error-box">
+            <ul>
+              {errors.map((error, idx) => (
+                <li key={`cmError-${idx + 1}`}>{error}</li>
+              ))}
+            </ul>
+          </div> */}
+                  <div className="cm-input-top">
+                    <div className="cm-input-top-box">
+                      <i className="fa-solid fa-bold"></i>
+                    </div>
+                    <div className="cm-input-top-box">
+                      <i class="fa-solid fa-italic"></i>
+                    </div>
+                    <div className="cm-input-top-box">
+                      <i class="fa-solid fa-strikethrough"></i>
+                    </div>
+                  </div>
+                  <div className="cm-input-box">
+                    <textarea
+                      rows={3}
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      required
+                      className="cm-input"
+                    />
+                  </div>
+                  <div className="cm-input-bottom">
+                    <div className="cm-input-botton-left"></div>
+                    <div className="cm-submit-box">
+                      <button
+                        type="submit"
+                        className={`cm-submit-button-highlight-${
+                          chatInput != ""
+                        }`}
+                      >
+                        <i className="fa-solid fa-paper-plane fa-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
 
-            <div className="chat-footer-container">
+            {/* <div className="chat-footer-container">
               <div className="chat-footer">
                 <div className="form-top-flex"></div>
                 <div className="form-middle">
@@ -167,13 +213,11 @@ const DirectMessage = () => {
                 </div>
                 <div className="form-bottom">
                   <i className="fa-solid fa-paper-plane" onClick={sendChat} />
-                  {/* <button onSubmit={sendChat}>Send</button> */}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
-        {/* </div> */}
       </div>
     )
   );

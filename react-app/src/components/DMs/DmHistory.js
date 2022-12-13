@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./DmHistory.css";
-import { dateTransfer, sameDay } from "./dateTransfer";
+import { dateTransfer, sameDay, formateDate } from "./dateTransfer";
 
 function DmHistory() {
   const user = useSelector((state) => state.session.user);
@@ -24,10 +24,11 @@ function DmHistory() {
       date,
     };
 
-    if (obj[date]) {
-      obj[date].push(obj_value);
+    const theDate = formateDate(date);
+    if (obj[theDate]) {
+      obj[theDate].push(obj_value);
     } else {
-      obj[date] = [obj_value];
+      obj[theDate] = [obj_value];
     }
   }
 
