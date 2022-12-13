@@ -14,8 +14,10 @@ export default function SideBar({user}) {
                 <i className="fa-regular fa-pen-to-square"></i>
             </button>
         </div>
-        <ChannelIndex user={user} />
-        <GroupIndex user={user} />
+        <div className='sidebar-index'>
+          <ChannelIndex user={user} />
+          <GroupIndex user={user} />
+        </div>
     </div>
   )
 }
