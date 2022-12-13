@@ -24,7 +24,12 @@ export const getAllChannel = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(setAllChannels(data.channels));
+        const channelObj = {}
+        if (data.channels) data.channels.forEach(channel => {
+            channelObj[channel.id] = channel
+        });
+
+        dispatch(setAllChannels(channelObj));
         return null;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -87,7 +92,7 @@ export const editChannel = (channel) => async (dispatch) => {
 };
 
 
-const initialState = { channel: null, userChannels: [], allChannels: [] };
+const initialState = { channel: null, userChannels: [], allChannels: {} };
 export default function channelsReducer(state = initialState, action) {
     switch (action.type) {
         case SET_CHANNEL:

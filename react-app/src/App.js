@@ -19,6 +19,7 @@ import DmDraftPage from "./components/DMs/DmDraftPage";
 import SearchMessages from "./components/SearchMessageModal/SearchFrom";
 import AddDm from "./components/DMs/AddDm";
 import AllChannels from "./components/Channels/AllChannels";
+import { getAllChannel } from "./store/channels";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,6 +32,10 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllChannel())
+  }, [])
 
   if (!loaded) {
     return null;

@@ -13,7 +13,11 @@ export default function DetailsAbout({channel}) {
   return (
     <div className='channel-detail-about'>
       <div className='channel-detail-sections'>
-        <span style={{ 'display': 'flex', 'justifyContent': 'space-between' }}>Channel name<span className='channel-detail-edit' onClick={() => {setShowModal(true)}}>Edit channel</span></span>
+        <span style={{ 'display': 'flex', 'justifyContent': 'space-between' }}>Channel name
+          <span className='channel-detail-edit' onClick={() => {setShowModal(true)}}>
+            {user.id === organizer_id ? 'Edit channel': ""}
+          </span>
+        </span>
         <span className='channel-detail-content'>{channel.name}</span>
       </div>      
       <div className='channel-detail-sections'>

@@ -3,10 +3,12 @@
     column-gap: 16px;
     min-height: 50px;
     border-bottom: 1px solid rgb(221, 221, 221);
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
+    align-items: center; */
+    display: grid;
+    grid-template-columns: fit-content(100%) auto fit-content(100%);
     align-items: center;
-    
 }
 
 .channel-name {
@@ -20,7 +22,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    flex: 0 0 fit-content;
+    /* flex: 0 0 fit-content; */
 }
 
 .channel-topic {
@@ -28,13 +30,14 @@
     font-size: 13px;
     color: rgb(29, 28, 29);
     font-weight: 400;
-    flex: 1 1 auto;
+    /* flex: 1 1 auto; */
     overflow: hidden;
-    text-overflow: ellipsis;    
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .channel-members {
-    flex: 0 0 fit-content;
+    /* flex: 0 0 fit-content; */
     border: 1px solid rgb(221, 221, 221);
     border-radius: 5px;
     font-size: 15px;
