@@ -8,16 +8,14 @@ import searchReducer from "./search";
 
 import channelsReducer from "./channels";
 
-
 const rootReducer = combineReducers({
   session,
   dm: dmReducer,
   channelMessages: channelMessageReducer,
 
-  search: searchReducer
+  search: searchReducer,
 
   channels: channelsReducer,
-
 });
 
 let enhancer;
