@@ -40,7 +40,7 @@ app.register_blueprint(channel_message_routes, url_prefix='/api/message/channels
 app.register_blueprint(dm_routes, url_prefix="/api/messages/groups")
 app.register_blueprint(group_routes, url_prefix="/api/groups")
 app.register_blueprint(search_routes, url_prefix="/api/search")
-app.register_blueprint(user_channel_routes, url_prefix="/api/users_channels")
+app.register_blueprint(user_channel_routes, url_prefix="/api/users-channels")
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)

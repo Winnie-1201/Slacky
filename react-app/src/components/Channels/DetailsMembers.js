@@ -31,7 +31,7 @@ export default function DetailsMembers({channel}) {
                 <img style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden','objectFit':'cover' }} src={`${member.image_url}`} alt={`${member.name}`}></img>
               </span>
               :
-              <span>{member.name.slice(0)}</span>
+              <span>{member.name?.slice(0)}</span>
             }
             <span>{member.username}</span>
             
