@@ -83,7 +83,7 @@ const DirectMessage = () => {
           <SideBar user={user} />
         </div>
         <div className="grid-main-view">
-          <ChannelBanner user={user} />
+          {/* <ChannelBanner user={user} /> */}
           <div className="all-msg-container">
             {/* <div className="chat-body"> */}
             <ScrollToBottom className="chat-body">
