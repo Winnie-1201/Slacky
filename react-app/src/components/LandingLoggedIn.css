@@ -51,3 +51,11 @@
     "foot foot";
   align-items: stretch;
 }
+
+.grid-nav-top {
+  grid-area: "grid-nav-top";
+  background-color: #350d36;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  display: flex;
+  align-items: center;
+}

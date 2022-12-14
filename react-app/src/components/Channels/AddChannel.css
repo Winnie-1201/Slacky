@@ -5,7 +5,6 @@
     height: min(85vh, 518px);
     background-color: white;
     border-radius: 8px;
-    overflow-y: auto;
 }
 
 .channel-create-form {
@@ -16,7 +15,9 @@
     row-gap: 24px;
     color: rgb(29,28,29);
     font-weight: 500;
+    height: min(55vh, 360px);
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .create-channel-labels-div {

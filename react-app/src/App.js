@@ -52,7 +52,6 @@ function App() {
           <HomeMain></HomeMain>
         </Route>
       )}
-      {/* {user && <LandingLoggedIn user={user}></LandingLoggedIn>} */}
 
       <Switch>
         <Route path="/login" exact={true}>

@@ -7,10 +7,10 @@
     overflow-y: auto;
 }
 
-.sidebar-index::-webkit-scrollbar {
+/* .sidebar-index::-webkit-scrollbar {
     width: 0px;
     background: transparent;
-}
+} */
 
 .sidebar-header {
     min-height: 51px;

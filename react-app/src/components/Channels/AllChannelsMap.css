@@ -1,14 +1,14 @@
 .all-channels-div {
     overflow-y: auto;
     height: calc(100vh - 84px - 50px);
-    padding: 20px;
+    padding: 16px;
     font-size: 15px;
 }
 
-.all-channels-div::-webkit-scrollbar {
+/* .all-channels-div::-webkit-scrollbar {
     width: 0px;
     background: transparent;
-}
+} */
 
 .all-channles-single-div {
     padding: 16px 12px;
