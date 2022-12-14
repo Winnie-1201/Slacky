@@ -17,7 +17,7 @@ import NavBarLoggedIn from "./components/NavBarLoggedIn";
 
 import AddDmPage from "./components/DMs/AddDmPage";
 import DmDraftPage from "./components/DMs/DmDraftPage";
-import SearchFormModal from "./components/SearchMessageModal/index";
+import SearchMessages from "./components/SearchMessageModal/SearchFrom";
 import AddDm from "./components/DMs/AddDm";
 
 function App() {
@@ -73,8 +73,8 @@ function App() {
         <ProtectedRoute path="/channels/:channelId">
           <ChannelMessagePage />
         </ProtectedRoute>
-        <ProtectedRoute path="/search/:keyword">
-          <SearchFormModal />
+        <ProtectedRoute path={['/search/:keyword', '/search']}>
+          <SearchMessages />
         </ProtectedRoute>
       </Switch>
       <Footer />

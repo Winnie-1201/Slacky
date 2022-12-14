@@ -2,7 +2,7 @@ import React from "react";
 import NavBarLoggedIn from "./NavBarLoggedIn";
 import SideBar from "./SideBar/SideBar";
 import ChannelBanner from "./Channels/ChannelBanner";
-import SearchFormModal from "./NavBarSearch";
+import SearchMessages from "./NavBarSearch";
 import "./LandingLoggedIn.css";
 // import DirectMessage from "./DMs/DerectMessage";
 
@@ -21,7 +21,7 @@ export default function LandingLoggedIn({ user }) {
         {/* <DirectMessage /> */}
       </div>
       <div>
-        <SearchFormModal />
+        <SearchMessages />
       </div>
     </div>
   );

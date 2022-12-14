@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import ProfileMenu from "./ProfileMenu/ProfileMenu";
-import SearchFormModal from './SearchMessageModal/index'
+import SearchMessages from './SearchMessageModal/SearchFrom'
 
 import "./NavBarLoggedIn.css";
+import NavBarSearch from "./NavBarSearch";
 
 const NavBarLoggedIn = ({ user }) => {
   // console.log('is user', user)
@@ -29,7 +30,7 @@ const NavBarLoggedIn = ({ user }) => {
   return (
     <nav className="logged-in-navbar">
       <div>
-        <SearchFormModal />
+       <NavBarSearch />
       </div>
       <div
         style={{ position: "relative", display: "flex", alignItems: "center" }}

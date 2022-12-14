@@ -12,10 +12,10 @@ const NavBarSearch = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await dispatch(getSearch(keyword));
-    if (res) {
+    // const res = await dispatch(getSearch(keyword));
+    // if (res) {
       history.push(`/search/${keyword}`);
-    }
+   //}
     setKeyword("");
   };
 
@@ -31,7 +31,7 @@ const NavBarSearch = () => {
          <button type='submit' className='searchBar-button'>
         <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
         </button>
-      
+
 
       </div>
     </form>
