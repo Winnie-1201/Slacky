@@ -132,6 +132,31 @@ export const deleteOneChannel = (channelId) => async (dispatch) => {
 };
 
 
+export const deleteUserChannel = (pair) => async (dispatch) => {
+    console.log('---------------- leave a channel thunk', pair, '----------------')
+    const response = await fetch('/api/users_channels', {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+    });
+
+    if (response.ok) {
+        dispatch(removeChannel());
+        dispatch(getOneChannel(1));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+
 const initialState = { channel: null, userChannels: [], allChannels: {} };
 export default function channelsReducer(state = initialState, action) {
     switch (action.type) {
