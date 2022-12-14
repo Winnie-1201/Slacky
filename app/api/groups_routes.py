@@ -34,7 +34,7 @@ def add_group():
             topic=topic,
             group_user_groups=group_users
         )
-        
+
         db.session.add(new_group)
         db.session.commit()
         return new_group.to_dict()
