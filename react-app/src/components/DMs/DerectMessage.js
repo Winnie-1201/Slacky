@@ -37,6 +37,9 @@ const DirectMessage = () => {
     dispatch(getAllGroupsThunk());
     socket = io();
 
+    socket.emit("join_room", group?.id);
+
+
     socket.on("dm", (chat) => {
       setMessages((messages) => [...messages, chat]);
     });

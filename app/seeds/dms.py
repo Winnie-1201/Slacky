@@ -13,7 +13,7 @@ def seed_dms():
     )
 
     msg_2 = GroupMessage(
-        content=f"Hi,I am {user2.username}",
+        content=f"Hi, I am {user2.username}",
         groupId=1,
         user=user2
     )
@@ -45,7 +45,7 @@ def seed_dms():
         user=user2
     )
     msg_8 = GroupMessage(
-        content=f"Hi,I am {user3.username}",
+        content=f"Hi, I am {user3.username}",
         groupId=3,
         user=user3
     )

@@ -1,0 +1,18 @@
+.search-navbar {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+   margin-left: 60px;
+
+
+}
+
+input {
+    width:300px;
+}
+
+.searchBar-button {
+    cursor:pointer
+
+}
