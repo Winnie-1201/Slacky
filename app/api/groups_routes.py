@@ -11,7 +11,13 @@ group_routes = Blueprint('groups', __name__)
 # @login_required
 def all_groups():
     groups = Group.query.all()
-    return {"groups": [group.to_dict() for group in groups]}
+    user_groups = []
+    for group in groups:
+        for user in group.group_user_groups:
+            if user.id == current_user.id:
+                user_groups.append(group)
+    
+    return {"groups": [group.to_dict() for group in user_groups]}
 
 @group_routes.route("", methods=["POST"])
 # @login_required
@@ -28,7 +34,7 @@ def add_group():
             topic=topic,
             group_user_groups=group_users
         )
-
+        
         db.session.add(new_group)
         db.session.commit()
         return new_group.to_dict()

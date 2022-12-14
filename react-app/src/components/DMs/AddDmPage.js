@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUser } from "../../store/session";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 import AddDm from "./AddDm";
@@ -8,6 +9,11 @@ import DmHistory from "./DmHistory";
 
 const AddDmPage = () => {
   const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, [dispatch]);
 
   return (
     user && (

@@ -10,8 +10,10 @@ function AddDm() {
   const [users, setUsers] = useState([]);
   const [selectFlag, setSelectFlag] = useState(false);
   const [sendTo, setSendTo] = useState("");
+  const [dmGroup, setDmGroup] = useState("");
 
   const currUser = useSelector((state) => state.session.user);
+  const userGroups = currUser.groups;
 
   useEffect(() => {
     async function fetchData() {
@@ -30,9 +32,23 @@ function AddDm() {
   const handleClick = (user) => {
     setSelectFlag(true);
     setSendTo(user);
+
+    userGroups.forEach((group) => {
+      // console.log("group users", group.users, user, group.users.includes(user));
+      group.users.forEach((u) => {
+        // console.log(u.username, user.username)
+        if (u.username === user.username) {
+          setDmGroup(group);
+        }
+      });
+    });
   };
 
-  console.log("user", users);
+  // console.log("user groups", userGroups);
+  // console.log("user", dmGroup);
+  // console.log("sendto,", sendTo);
+
+  // if (!sendTo) return null;
 
   return (
     <div className="dm-to-body">
@@ -76,7 +92,18 @@ function AddDm() {
           </ul>
         </div>
       )}
-      {selectFlag && <Redirect user={sendTo} to="/groups/draft" />}
+      {selectFlag && !dmGroup && sendTo && (
+        <Redirect to={`/groups/draft/${sendTo.id}`} />
+        // <Redirect
+        //   to={{
+        //     pathname: "/groups/draft",
+        //     state: { receiver: sendTo },
+        //   }}
+        // />
+      )}
+      {selectFlag && dmGroup && (
+        <Redirect to={`/groups/${dmGroup.id}`} receiver={sendTo} />
+      )}
     </div>
   );
 }
