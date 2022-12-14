@@ -76,24 +76,6 @@ const DirectMessage = () => {
         </div>
         <div className="grid-main-view">
           <DmBanner receiver={receiver} />
-          {/* <div className="channel-banner-div">
-            <div className="dm-header flex-row">
-              <div className="dm-header-icon flex-row">
-                <span>
-                  <img
-                    src={receiver.image_url}
-                    className="dm-header-icon-detail"
-                  />
-                </span>
-                <div
-                  className={`user-active-circle ${
-                    receiver.is_active ? "is_active" : ""
-                  }`}
-                ></div>
-              </div>
-              <div className="dm-header-name">{receiver.username}</div>
-            </div>
-          </div> */}
           <div className="all-msg-container">
             {/* <div className="chat-body"> */}
             <ScrollToBottom className="chat-body">

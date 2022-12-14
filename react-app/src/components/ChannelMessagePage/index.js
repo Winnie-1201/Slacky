@@ -11,8 +11,10 @@ import SideBar from "../SideBar/SideBar";
 
 import "./index.css";
 import Footer from "../Footer/Footer";
+import ChannelBanner from "../Channels/ChannelBanner";
 
 const ChannelMessagePage = () => {
+  console.log('------Channel Message Page------')
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const channelMessages = useSelector((state) => state.channelMessages);
@@ -32,6 +34,7 @@ const ChannelMessagePage = () => {
       </div>
       <div className="grid-main-view">
         <div className="channel-message-page">
+          <ChannelBanner user={user} />
           <ChannelMessageContainer channelMessages={channelMessages} />
           <ChannelMessageInputContainer />
         </div>

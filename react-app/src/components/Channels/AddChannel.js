@@ -8,6 +8,7 @@ import { getUser } from '../../store/session';
 import ChannelModalHeader from './ChannelModalHeader';
 
 export default function AddChannel({ setShowModal }) {
+    console.log('---------- Add Channel Component -----------')
     const user = useSelector((state) => state.session.user);
     const new_channel = useSelector((state) => state.channels.channel);
     

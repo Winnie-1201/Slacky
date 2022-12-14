@@ -13,6 +13,8 @@ const rootReducer = combineReducers({
   channelMessages: channelMessageReducer,
   search: searchReducer,
   channels: channelsReducer,
+  search: searchReducer,
+  channels: channelsReducer,
   group: groupReducer,
 });
 

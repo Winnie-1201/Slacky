@@ -35,3 +35,16 @@ class GroupMessage(db.Model):
             # "user": self.user.to_dict(),
             # "group": self.group.to_dict()
         }
+
+    def to_dict_basics(self):
+        return {
+            "id": self.id,
+            "content": self.content,
+            "groupId": self.groupId,
+            "userId": self.userId,
+            'user_name':self.user.username,
+            'user_img':self.user.image_url,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+
+        }
