@@ -9,7 +9,7 @@ from app.api.auth_routes import validation_errors_to_error_messages
 channel_message_routes = Blueprint('channel_messages', __name__)
 
 @channel_message_routes.route('/<int:channel_id>')
-# @login_required
+@login_required
 def get_channel_message(channel_id):
     channel = Channel.query.get(channel_id)
     if current_user in channel.channel_members:
@@ -20,7 +20,7 @@ def get_channel_message(channel_id):
 
 
 @channel_message_routes.route('/<int:channel_id>', methods=["POST"])
-# @login_required
+@login_required
 def create_channel_message(channel_id):
     channel = Channel.query.get(channel_id)
     if current_user in channel.channel_members:
@@ -38,7 +38,7 @@ def create_channel_message(channel_id):
     return {"Errors": "The channel could not be found"}, 404
 
 @channel_message_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def edit_channel_message(id):
     print("------------ route------------", request.data)
 
@@ -60,7 +60,7 @@ def edit_channel_message(id):
     return {"Errors": "The channel_message could not be found"}, 404
 
 @channel_message_routes.route('/<int:id>', methods=["DELETE"])
-# @login_required
+@login_required
 def delete_channel_message(id):
     channel_message = ChannelMessage.query.get(id)
     if channel_message.user_id==current_user.id:

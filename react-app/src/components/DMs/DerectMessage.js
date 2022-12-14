@@ -26,10 +26,7 @@ const DirectMessage = () => {
 
   // const newGroup = useSelector((state) => state.group.group);
   const user_groups = useSelector((state) => state.group.userGroups);
-  const group = user_groups.filter((group) => group.id == groupId)[0];
-
-  const all_msgs = group.group_messages;
-
+ 
   const receiver =
     group?.users[0].username === user.username
       ? group?.users[1]

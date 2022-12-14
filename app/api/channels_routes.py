@@ -9,7 +9,7 @@ from app.api.auth_routes import validation_errors_to_error_messages
 channel_routes = Blueprint('channels', __name__)
 
 @channel_routes.route('')
-# @login_required
+@login_required
 def all_channels():
     params = request.args # [('is_public', 'False')]
 
@@ -34,7 +34,7 @@ def all_channels():
 
 
 @channel_routes.route('/<int:id>')
-# @login_required
+@login_required
 def one_channel(id):
     channel = Channel.query.get(id)
     if channel:
