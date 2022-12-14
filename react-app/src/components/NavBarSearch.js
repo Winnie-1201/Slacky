@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getSearch } from "../store/search";
-import "./NavBarLoggedIn.css";
+import "./NavBarSearch.css";
 
 const NavBarSearch = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,8 @@ const NavBarSearch = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="logged-in-navbar">
+      <div className="search-navbar">
+        <div className="serach_input_contanier">
         <input placeholder="search for messages"
           className="nav_bar_search"
           onChange={e => setKeyword(e.target.value)}
@@ -30,7 +31,8 @@ const NavBarSearch = () => {
         />
          <button type='submit' className='searchBar-button'>
         <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
-        </button>
+          </button>
+          </div>
 
 
       </div>

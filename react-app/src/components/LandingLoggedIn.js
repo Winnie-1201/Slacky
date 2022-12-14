@@ -24,7 +24,7 @@ export default function LandingLoggedIn({ user }) {
         {/* <DirectMessage /> */}
       </div>
 
-        <SearchMessages />
+        {/* <SearchMessages /> */}
 
       <div className="grid-footer">
         <Footer />

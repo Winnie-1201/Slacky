@@ -26,7 +26,7 @@ const DirectMessage = () => {
 
   // const newGroup = useSelector((state) => state.group.group);
   const user_groups = useSelector((state) => state.group.userGroups);
- 
+
   const receiver =
     group?.users[0].username === user.username
       ? group?.users[1]
@@ -39,7 +39,7 @@ const DirectMessage = () => {
     // open socket connection
     // create websocket
     socket = io();
-    socket.emit("join_room", group.id);
+    socket.emit("join_room", group?.id);
 
     socket.on("dm", (chat) => {
       setMessages((msg) => [...msg, chat]);
