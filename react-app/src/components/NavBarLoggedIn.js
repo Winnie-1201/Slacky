@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ProfileMenu from "./ProfileMenu/ProfileMenu";
-
-import SearchMessages from "./SearchMessageModal/SearchFrom";
+import SearchMessages from "./SearchMessage/SearchMessage";
 import "./NavBarLoggedIn.css";
 import NavBarSearch from "./NavBarSearch";
 import "./NavBarLoggedIn.css";
@@ -33,23 +32,18 @@ const NavBarLoggedIn = ({ user }) => {
       <div>
         <NavBarSearch />
       </div>
-      <div
-        style={{ position: "relative", display: "flex", alignItems: "center" }}
-      >
-        <div>{/* <input placeholder='search placeholder'/> */}</div>
-        <div>
-          <span className="profile-icon-span" onClick={openMenu}>
-            <img
-              src="https://ca.slack-edge.com/T04E7LXJV7B-U04DXFNDNDS-g7c68be6ff59-32"
-              alt="profile-icon"
-            ></img>
-          </span>
-          {showMenu && (
-            <div ref={showMenuRef}>
-              <ProfileMenu user={user} />
-            </div>
-          )}
-        </div>
+      <div className="profile-icon-div">
+        <span className="profile-icon-span" onClick={openMenu}>
+          <img
+            src="https://ca.slack-edge.com/T04E7LXJV7B-U04DXFNDNDS-g7c68be6ff59-32"
+            alt="profile-icon"
+          ></img>
+        </span>
+        {showMenu && (
+          <div ref={showMenuRef}>
+            <ProfileMenu user={user} />
+          </div>
+        )}
       </div>
     </nav>
   );

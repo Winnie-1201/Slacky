@@ -17,7 +17,7 @@ import NavBarLoggedIn from "./components/NavBarLoggedIn";
 
 import AddDmPage from "./components/DMs/AddDmPage";
 import DmDraftPage from "./components/DMs/DmDraftPage";
-import SearchMessages from "./components/SearchMessageModal/SearchFrom";
+import SearchMessages from "./components/SearchMessage/SearchMessage";
 import AddDm from "./components/DMs/AddDm";
 
 import AllChannels from "./components/Channels/AllChannels";
@@ -52,7 +52,6 @@ function App() {
           <HomeMain></HomeMain>
         </Route>
       )}
-      {/* {user && <LandingLoggedIn user={user}></LandingLoggedIn>} */}
 
       <Switch>
         <Route path="/login" exact={true}>
@@ -81,7 +80,7 @@ function App() {
         <ProtectedRoute path="/channels/:channelId">
           <ChannelMessagePage />
         </ProtectedRoute>
-        <ProtectedRoute path={['/search/:keyword', '/search']}>
+        <ProtectedRoute path={["/search/:keyword", "/search"]}>
           <SearchMessages />
         </ProtectedRoute>
         <ProtectedRoute path="/browse-channels">

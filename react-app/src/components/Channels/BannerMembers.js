@@ -1,25 +1,42 @@
-import React from 'react'
+import { useEffect, useState } from 'react';
 
 export default function BannerMembers({ channels, members, totalMembers, setShowModal, setActive }) {
     // console.log(members)
+    const [firstThree, setFirstThree] = useState([]);
 
     const viewAllMembers = () => {
         setShowModal(true)
         setActive('Members')
     }
 
+    useEffect(() => {
+        setFirstThree([...members?.slice(0,3)])
+    }, [members])
+
   return (
       <div className='channel-members' onClick={viewAllMembers}>
           <div className='channel-members-pics' >
-              {members?.map((member, i) => {
-                return (
-                    <div key={member.id} className={`member-pics-div-outer position-${i}`}>
-                        <div className='member-pics-div'>
-                            <img src={`${member.image_url}`} alt={`${member.name}`}></img>
-                        </div>
-                    </div>
-                )})}
-              <span className='member-total'>{totalMembers}</span>
+            {console.log(members)}
+            {console.log(members?.slice(0,3))}
+              {console.log(firstThree)}
+              {firstThree?.map((user, i) => {
+                  return (
+                      <div key={user.id} className={`member-pics-div-outer position-${i}`}>
+                          {user.image_url ?
+                              <span style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden' }}>
+                                  <img style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'objectFit': 'cover' }} src={`${user.image_url}`} alt={`${user.name}`}></img>
+                              </span>
+                              :
+                              <span>
+                                  <button style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'border': 'none' }}>
+                                      <i className="fa-solid fa-user"></i>
+                                  </button>
+                              </span>
+                          }
+                      </div>
+                  )
+                })}
+              <span className='member-total'>{members?.length}</span>
           </div>
           <div className='channel-members-add' >
               <svg viewBox='0 0 20 20' style={{ 'width': '20px' }}>

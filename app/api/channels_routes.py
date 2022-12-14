@@ -9,7 +9,7 @@ from app.api.auth_routes import validation_errors_to_error_messages
 channel_routes = Blueprint('channels', __name__)
 
 @channel_routes.route('')
-# @login_required
+@login_required
 def all_channels():
     params = request.args # [('is_public', 'False')]
 
@@ -34,7 +34,7 @@ def all_channels():
 
 
 @channel_routes.route('/<int:id>')
-# @login_required
+@login_required
 def one_channel(id):
     channel = Channel.query.get(id)
     if channel:
@@ -101,8 +101,8 @@ def edit_channel(id):
         channel.description = form.data['description'] if form.data['description'] else None
         channel.topic = form.data['topic'] if form.data['topic'] else None
         # channel.is_public = form.data['is_public'] == 'True'
-        user_ids = form.data['users']
-        channel.channel_members = [User.query.get(id) for id in user_ids.split(',')]
+        # user_ids = form.data['users']
+        # channel.channel_members = [User.query.get(id) for id in user_ids.split(',')]
 
         db.session.commit()
         return channel.to_dict()

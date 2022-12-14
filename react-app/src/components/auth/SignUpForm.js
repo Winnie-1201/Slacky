@@ -44,13 +44,15 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/channels/1" />;
+
   }
 
   return (
     <>
       <LoginGeneral />
-      <form onSubmit={onSignUp} className="signup-form">
+
+      <form onSubmit={onSignUp} className="user-form">
         <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
@@ -58,20 +60,24 @@ const SignUpForm = () => {
         </div>
         <div className="signup-form-inputs-div">
           <label>User Name</label>
+        <div className="user-form-inputs-div">
           <input
             type="text"
             name="username"
             onChange={updateUsername}
             value={username}
+            placeholder="Username"
           ></input>
         </div>
         <div className="signup-form-inputs-div">
           <label>Email</label>
+        <div className="user-form-inputs-div">
           <input
             type="text"
             name="email"
             onChange={updateEmail}
             value={email}
+            placeholder="Email"
           ></input>
         </div>
         <div className="signup-form-inputs-div">
@@ -79,6 +85,11 @@ const SignUpForm = () => {
           <input
             type="password"
             name="password"
+        <div className="user-form-inputs-div">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
             onChange={updatePassword}
             value={password}
           ></input>
@@ -88,12 +99,18 @@ const SignUpForm = () => {
           <input
             type="password"
             name="repeat_password"
+        <div className="user-form-inputs-div">
+          <input
+            type="password"
+            name="repeat_password"
+            placeholder="Confirm Password"
             onChange={updateRepeatPassword}
             value={repeatPassword}
             required={true}
           ></input>
         </div>
         <div className="singup-form-button-div">
+        <div className="user-form-button-div">
           <button type="submit">Sign Up</button>
         </div>
       </form>

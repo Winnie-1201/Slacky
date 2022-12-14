@@ -1,3 +1,5 @@
+import { getUser } from "./session";
+
 // constants
 const SET_CHANNEL = "channels/SET_CHANNEL";
 const SET_ALL_CHANNELS = 'channels/SET_ALL_CHANNELS';
@@ -134,7 +136,7 @@ export const deleteOneChannel = (channelId) => async (dispatch) => {
 
 export const deleteUserChannel = (pair) => async (dispatch) => {
     console.log('---------------- leave a channel thunk', pair, '----------------')
-    const response = await fetch('/api/users_channels', {
+    const response = await fetch('/api/users-channels', {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -145,6 +147,30 @@ export const deleteUserChannel = (pair) => async (dispatch) => {
     if (response.ok) {
         dispatch(removeChannel());
         dispatch(getOneChannel(1));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const addUserChannel = (pair) => async (dispatch) => {
+    console.log('---------------- add a channel thunk', pair, '----------------')
+    const response = await fetch('/api/users-channels', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+    });
+
+    if (response.ok) {
+        // dispatch(getAllChannel());
+        // dispatch(getUser(pair.user_id));
         return null;
     } else if (response.status < 500) {
         const data = await response.json();

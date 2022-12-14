@@ -8,7 +8,7 @@ from app.api.auth_routes import validation_errors_to_error_messages
 group_routes = Blueprint('groups', __name__)
 
 @group_routes.route("")
-# @login_required
+@login_required
 def all_groups():
     groups = Group.query.all()
     user_groups = []
@@ -16,11 +16,11 @@ def all_groups():
         for user in group.group_user_groups:
             if user.id == current_user.id:
                 user_groups.append(group)
-    
+
     return {"groups": [group.to_dict() for group in user_groups]}
 
 @group_routes.route("", methods=["POST"])
-# @login_required
+@login_required
 def add_group():
     form = GroupForm()
     form['csrf_token'].data = request.cookies['csrf_token']
