@@ -46,14 +46,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      {!user && (
+      {/* {!user && (
         <Route path="/" exact={true}>
           <NavBar />
           <HomeMain></HomeMain>
+          <Footer />
         </Route>
-      )}
+      )} */}
 
       <Switch>
+        <Route path="/" exact={true}>
+          <NavBar />
+          <HomeMain></HomeMain>
+          <Footer />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -90,7 +96,6 @@ function App() {
           <Redirect to='/channels/1'></Redirect>
         </ProtectedRoute>
       </Switch>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
