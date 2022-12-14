@@ -14,12 +14,15 @@ import Footer from "./components/Footer/Footer";
 import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
+
 import AddDmPage from "./components/DMs/AddDmPage";
 import DmDraftPage from "./components/DMs/DmDraftPage";
 import SearchMessages from "./components/SearchMessageModal/SearchFrom";
 import AddDm from "./components/DMs/AddDm";
+
 import AllChannels from "./components/Channels/AllChannels";
 import { getAllChannel } from "./store/channels";
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -78,7 +81,7 @@ function App() {
         <ProtectedRoute path="/channels/:channelId">
           <ChannelMessagePage />
         </ProtectedRoute>
-        <ProtectedRoute path="/search/:keyword">
+        <ProtectedRoute path={['/search/:keyword', '/search']}>
           <SearchMessages />
         </ProtectedRoute>
         <ProtectedRoute path="/browse-channels">

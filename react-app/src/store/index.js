@@ -10,8 +10,16 @@ const rootReducer = combineReducers({
   session,
   dm: dmReducer,
   channelMessages: channelMessageReducer,
+
+
+  search: searchReducer,
+
+  channels: channelsReducer,
+
+
   search: searchReducer,
   channels: channelsReducer,
+
 });
 
 let enhancer;

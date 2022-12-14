@@ -5,7 +5,7 @@ import './NavBar.css';
 
 const NavBar = () => {
   return (
-    <nav className='log-in-navbar'>
+    <nav className='log-in-navbar'> 
       <div>
         <NavLink to='/' exact={true} activeClassName='active'>
           <svg height='25px' width="100px" viewBox='0 0 240 60'>

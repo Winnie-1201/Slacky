@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import SearchForm from './SearchFrom';
-import './LoginForm.css'
+import SearchMessages from './SearchFrom';
+import './search.css'
 
 
 function SearchFormModal() {
@@ -9,10 +9,19 @@ function SearchFormModal() {
 
   return (
       <>
-        <div id = "search">
+          <div id="search">
+              <input onClick={() => setShowModal(true)} placeholder='Search for messages' />
+              {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <SearchMessages setShowModal={setShowModal} />
+        </Modal>
+      )}
 
         </div>
 
     </>
   )
 }
+
+
+// export default SearchFormModal;

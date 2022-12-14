@@ -21,6 +21,8 @@ class ChannelMessage(db.Model):
     user = db.relationship('User', back_populates="channel_messages")
     channel = db.relationship('Channel', back_populates="channel_messages")
 
+
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -30,4 +32,17 @@ class ChannelMessage(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'user': self.user.to_dict()
+        }
+
+    def to_dict_basics(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'user_name':self.user.username,
+            'user_img':self.user.image_url,
+            'channel_id': self.channel_id,
+            'content': self.content,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'channel_name':self.channel.name
         }
