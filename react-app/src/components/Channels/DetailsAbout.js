@@ -19,16 +19,17 @@ export default function DetailsAbout({ channel, setShowModal}) {
     dispatch(deleteOneChannel(channel?.id))
     .then(() => {
       console.log('success delete')
-      setShowModal(false)
       dispatch(getUser(user.id))
       setChannelDeleted(true)
+      setShowModal(false)
     })
   }
 
   const handleLeaveChannel = () => {
     dispatch(deleteUserChannel({'channel_id': channel?.id, 'user_id': user.id}))
       .then(() => {
-        // console.log('success leave')
+        dispatch(getUser(user.id))
+        setChannelDeleted(true)
         setShowModal(false)
         dispatch(getUser(user.id))
       })    
