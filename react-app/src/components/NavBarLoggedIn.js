@@ -1,10 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ProfileMenu from "./ProfileMenu/ProfileMenu";
-
 import SearchMessages from "./SearchMessage/SearchMessage";
-
-
-import SearchMessages from './SearchMessageModal/SearchFrom'
 import "./NavBarLoggedIn.css";
 import NavBarSearch from "./NavBarSearch";
 import "./NavBarLoggedIn.css";
