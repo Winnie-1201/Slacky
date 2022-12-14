@@ -7,7 +7,6 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import "./DirectMessage.css";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
-import ChannelBanner from "../Channels/ChannelBanner";
 import DmBanner from "./DmBanner";
 import { getAllGroupsThunk } from "../../store/groups";
 let socket;
@@ -36,13 +35,10 @@ const DirectMessage = () => {
   useEffect(() => {
     dispatch(getAllMessageThunk(groupId));
     dispatch(getAllGroupsThunk());
-    // open socket connection
-    // create websocket
     socket = io();
-    socket.emit("join_room", group.id);
 
     socket.on("dm", (chat) => {
-      setMessages((msg) => [...msg, chat]);
+      setMessages((messages) => [...messages, chat]);
     });
 
     // when component unmounts, disconnect
@@ -50,6 +46,12 @@ const DirectMessage = () => {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(getAllMessageThunk(groupId));
+    dispatch(getAllGroupsThunk());
+    setMessages([]);
+  }, [groupId]);
 
   const sendChat = async (e) => {
     e.preventDefault();
@@ -59,13 +61,32 @@ const DirectMessage = () => {
         groupId: groupId,
       };
 
+      const inputUser = {
+        image_url: user.image_url,
+        username: user.username,
+      };
+
       const newDm = await dispatch(createDmThunk(msgData));
-      socket.emit("dm", { user: user, msg: newDm.direct_message });
+
+      const msg = {
+        content: newDm.direct_message.content,
+        created_at: newDm.direct_message.created_at,
+        updated_at: newDm.direct_message.updated_at,
+        user: inputUser,
+      };
+
+      socket.emit("dm", {
+        msg: msg,
+        // user: inputUser,
+        room: groupId,
+      });
+
       setChatInput("");
     }
   };
 
   if (!group) return null;
+
   return (
     user && (
       <div className="landing-grid">
@@ -128,14 +149,14 @@ const DirectMessage = () => {
                       </span>
                       &nbsp;&nbsp;
                       <span className="msg-sendtime">
-                        {new Date(message.msg.created_at).getHours()}:
-                        {new Date(message.msg.created_at).getMinutes()}{" "}
-                        {new Date(message.msg.created_at).getHours() > 12
+                        {new Date(message.created_at).getHours()}:
+                        {new Date(message.created_at).getMinutes()}{" "}
+                        {new Date(message.created_at).getHours() > 12
                           ? "PM"
                           : "AM"}
                       </span>
                       <div className="msg-detail-container">
-                        <div className="msg-detail">{message.msg.content}</div>
+                        <div className="msg-detail">{message.content}</div>
                       </div>
                     </div>
                   </div>
