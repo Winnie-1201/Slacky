@@ -13,7 +13,6 @@ export default function EditChannel({ setShowEditModal, channel}) {
   const [name, setName] = useState('');
   const [topic, setTopic] = useState('');
   const [description, setDescription] = useState('');
-  // const [onSubmit, setOnSubmit] = useState(false);
   const [onFocus, setOnFocus] = useState(false)
   const [disabled, setDisabled] = useState(true);
   const [errors, setErrors] = useState({});
@@ -28,37 +27,24 @@ export default function EditChannel({ setShowEditModal, channel}) {
 
   }, [channel])
 
-  const onCreateChannel = async (e) => {
+  const onEditChannel = async (e) => {
     e.preventDefault();
-    // setOnSubmit(true)
     if (Object.keys(errors).length) {
-      // console.log('has errors', errors)
       return
     }
 
-    // const memberIds = channel.channel_members_ids;
-    // const memberIds = []
-    // for (const member of members) {
-    //   memberIds.push(member.id)
-    // }
-
-    // console.log('sending dispatch')
     const data = await dispatch(editChannel({
       id: channel.id,
       name,
       description,
       topic,
-      // users: memberIds.join(',')
-    })).then(() => {
-      setShowEditModal(false)
-      dispatch(getUser(user.id))
-    })
+    }))
 
     if (data) {
-      setErrors(errors => {
-        errors.backend = data
-        return errors
-      })
+      setErrors(data)
+    } else {
+      setShowEditModal(false)
+      dispatch(getUser(user.id))
     }
 
   };
@@ -114,11 +100,12 @@ export default function EditChannel({ setShowEditModal, channel}) {
     <div className='channel-create-div'>
       <ChannelModalHeader setShowModal={setShowEditModal} headerName='Edit a channel' headerContent='' />
 
-      <form className='channel-create-form' onSubmit={onCreateChannel}>
+      <form className='channel-create-form' onSubmit={onEditChannel}>
         <div className='create-channel-inputs-div'>
           <div className="create-channel-labels-div">
             <label htmlFor='name'>Name
               {onFocus && nameError.length > 0 && <span className='channel-form-error-span'>{nameError}</span>}
+              {errors.name && <span className='channel-form-error-span'>{errors.name}</span>}
             </label>
           </div>
 
@@ -164,11 +151,6 @@ export default function EditChannel({ setShowEditModal, channel}) {
         
         <div className='create-channel-button-div'>
           <button className='modal-submit-button' type='submit' disabled={disabled}>Save</button>
-          <div>
-            {errors.backend?.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
         </div>
       </form>
     </div>
