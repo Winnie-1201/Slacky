@@ -32,6 +32,7 @@ li {
   justify-content: flex-start;
   align-items: center;
   padding: 5px 0 5px 30px;
+  cursor: pointer;
 }
 
 .item-detail:hover,

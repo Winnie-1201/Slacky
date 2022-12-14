@@ -5,6 +5,7 @@ import dmReducer from "./dm";
 import channelMessageReducer from "./channelMessage";
 import searchReducer from "./search";
 import channelsReducer from "./channels";
+import groupReducer from "./groups";
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   channelMessages: channelMessageReducer,
   search: searchReducer,
   channels: channelsReducer,
+  group: groupReducer,
 });
 
 let enhancer;

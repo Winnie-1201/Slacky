@@ -61,7 +61,7 @@ function App() {
         <Route path="/groups/all-dms" exact={true}>
           <AddDmPage />
         </Route>
-        <Route path="/groups/draft" exact={true}>
+        <Route path="/groups/draft/:receiverId" exact={true}>
           <DmDraftPage />
         </Route>
         <Route path="/groups/:groupId">

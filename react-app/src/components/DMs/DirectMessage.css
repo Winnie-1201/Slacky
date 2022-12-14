@@ -1,3 +1,33 @@
+.dm-header {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.dm-header-icon {
+  height: 24px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.dm-header-icon-detail {
+  width: 26px;
+  height: 26px;
+}
+
+.user-active-circle {
+  width: 12px;
+  height: 12px;
+  border: 2px white solid;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -15%;
+  left: 80%;
+}
+
+.is_active {
+  background-color: green;
+}
+
 .all-msg-container {
   position: relative;
   height: 65vh;
