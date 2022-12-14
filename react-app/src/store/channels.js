@@ -1,73 +1,66 @@
+import { getUser } from "./session";
+
 // constants
-const SET_USER_CHANNELS = "channels/SET_USER_CHANNELS";
 const SET_CHANNEL = "channels/SET_CHANNEL";
-// const REMOVE_USER = "session/REMOVE_USER";
+const SET_ALL_CHANNELS = 'channels/SET_ALL_CHANNELS';
+const REMOVE_CHANNEL = "channels/REMOVE_CHANNEL";
 
 const setChannel = (channel) => ({
     type: SET_CHANNEL,
     payload: channel,
 });
 
-// const removeUser = () => ({
-//     type: REMOVE_USER,
-// });
+const setAllChannels = (channels) => ({
+    type: SET_ALL_CHANNELS,
+    payload: channels
+})
 
-// export const authenticate = () => async (dispatch) => {
-//     const response = await fetch("/api/auth/", {
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//     });
-//     if (response.ok) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return;
-//         }
+const removeChannel = () => ({
+    type: REMOVE_CHANNEL,
+});
 
-//         dispatch(setUser(data));
-//     }
-// };
+export const getOneChannel = (channelId) => async (dispatch) => {
+    console.log('---------------- get one channels thunk', '----------------')
+    const response = await fetch(`/api/channels/${channelId}`);
 
-// export const login = (email, password) => async (dispatch) => {
-//     const response = await fetch("/api/auth/login", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//             email,
-//             password,
-//         }),
-//     });
-//     console.log("***************** USER LOGIN", response);
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setChannel(data));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+}
 
-//     if (response.ok) {
-//         const data = await response.json();
-//         dispatch(setUser(data));
-//         return null;
-//     } else if (response.status < 500) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return data.errors;
-//         }
-//     } else {
-//         return ["An error occurred. Please try again."];
-//     }
-// };
 
-// export const logout = () => async (dispatch) => {
-//     const response = await fetch("/api/auth/logout", {
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//     });
+export const getAllChannel = () => async (dispatch) => {
+    console.log('---------------- get all channels thunk', '----------------')
+    const response = await fetch("/api/channels");
 
-//     if (response.ok) {
-//         dispatch(removeUser());
-//     }
-// };
+    if (response.ok) {
+        const data = await response.json();
+        const channelObj = {}
+        if (data.channels) data.channels.forEach(channel => {
+            channelObj[channel.id] = channel
+        });
 
-// export const getUserChannels = (userId)
+        dispatch(setAllChannels(channelObj));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
 
 export const createChannel = (channel) => async (dispatch) => {
     // console.log('---------------- create a channel thunk', channel, '----------------')
@@ -119,13 +112,86 @@ export const editChannel = (channel) => async (dispatch) => {
 };
 
 
-const initialState = { channel: null, userChannels: [] };
+export const deleteOneChannel = (channelId) => async (dispatch) => {
+    console.log('---------------- remove a channel thunk', channelId, '----------------')
+    const response = await fetch(`/api/channels/${channelId}`, {
+        method: "DELETE"
+    });
+
+    if (response.ok) {
+        // const data = await response.json();
+        dispatch(removeChannel());
+        dispatch(getOneChannel(1));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+
+export const deleteUserChannel = (pair) => async (dispatch) => {
+    console.log('---------------- leave a channel thunk', pair, '----------------')
+    const response = await fetch('/api/users-channels', {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+    });
+
+    if (response.ok) {
+        dispatch(removeChannel());
+        dispatch(getOneChannel(1));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const addUserChannel = (pair) => async (dispatch) => {
+    console.log('---------------- add a channel thunk', pair, '----------------')
+    const response = await fetch('/api/users-channels', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pair),
+    });
+
+    if (response.ok) {
+        // dispatch(getAllChannel());
+        // dispatch(getUser(pair.user_id));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+
+const initialState = { channel: null, userChannels: [], allChannels: {} };
 export default function channelsReducer(state = initialState, action) {
     switch (action.type) {
         case SET_CHANNEL:
             return { channel: action.payload };
-        // case REMOVE_USER:
-        //     return { user: null };
+        case SET_ALL_CHANNELS:
+            return { allChannels: action.payload };
+        case REMOVE_CHANNEL:
+            return { channel: null };            
         default:
             return state;
     }

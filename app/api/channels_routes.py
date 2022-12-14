@@ -15,7 +15,7 @@ def all_channels():
 
     if not len(params):
         channels = Channel.query.all()
-        return {'channels': [c.to_dict() for c in channels]}
+        return {'channels': [c.to_dict_name_only() for c in channels]}
     else:
         filters = []
         if params.get('is_public'):
@@ -30,7 +30,7 @@ def all_channels():
         print(filters)
         channels = db.session.query(Channel).filter(*filters)
 
-        return {'channels': [c.to_dict() for c in channels]}
+        return {'channels': [c.to_dict_name_only() for c in channels]}
 
 
 @channel_routes.route('/<int:id>')
@@ -101,8 +101,8 @@ def edit_channel(id):
         channel.description = form.data['description'] if form.data['description'] else None
         channel.topic = form.data['topic'] if form.data['topic'] else None
         # channel.is_public = form.data['is_public'] == 'True'
-        user_ids = form.data['users']
-        channel.channel_members = [User.query.get(id) for id in user_ids.split(',')]
+        # user_ids = form.data['users']
+        # channel.channel_members = [User.query.get(id) for id in user_ids.split(',')]
 
         db.session.commit()
         return channel.to_dict()

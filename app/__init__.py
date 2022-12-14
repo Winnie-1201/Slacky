@@ -12,6 +12,7 @@ from .api.channel_message_routes import channel_message_routes
 from .api.dm_routes import dm_routes
 from .api.groups_routes import group_routes
 from .api.search_routes import search_routes
+from .api.users_channels_routes import user_channel_routes
 from .seeds import seed_commands
 from .config import Config
 from .mysocket import socketio
@@ -39,6 +40,7 @@ app.register_blueprint(channel_message_routes, url_prefix='/api/message/channels
 app.register_blueprint(dm_routes, url_prefix="/api/messages/groups")
 app.register_blueprint(group_routes, url_prefix="/api/groups")
 app.register_blueprint(search_routes, url_prefix="/api/search")
+app.register_blueprint(user_channel_routes, url_prefix="/api/users-channels")
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)

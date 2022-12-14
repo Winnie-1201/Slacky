@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { getAllGroupsThunk } from "../../store/groups";
 import "./GroupIndex.css";
 
 export default function GroupIndex({ user }) {
-  const userGroups = user.groups;
+  const dispatch = useDispatch();
+  const userGroups = useSelector((state) => state.group.userGroups);
 
   const [showDms, setShowDms] = useState(true);
 
+  useEffect(() => {
+    dispatch(getAllGroupsThunk());
+  }, [dispatch]);
   return (
     <div className="groups-index-div">
       <div className="sidebar-wrapper">

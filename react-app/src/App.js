@@ -20,6 +20,10 @@ import DmDraftPage from "./components/DMs/DmDraftPage";
 import SearchMessages from "./components/SearchMessage/SearchMessage";
 import AddDm from "./components/DMs/AddDm";
 
+import AllChannels from "./components/Channels/AllChannels";
+import { getAllChannel } from "./store/channels";
+
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -31,6 +35,10 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllChannel())
+  }, [])
 
   if (!loaded) {
     return null;
@@ -44,7 +52,6 @@ function App() {
           <HomeMain></HomeMain>
         </Route>
       )}
-      {/* {user && <LandingLoggedIn user={user}></LandingLoggedIn>} */}
 
       <Switch>
         <Route path="/login" exact={true}>
@@ -62,7 +69,7 @@ function App() {
         <Route path="/groups/all-dms" exact={true}>
           <AddDmPage />
         </Route>
-        <Route path="/groups/draft" exact={true}>
+        <Route path="/groups/draft/:receiverId" exact={true}>
           <DmDraftPage />
         </Route>
         <Route path="/groups/:groupId">
@@ -76,8 +83,11 @@ function App() {
         <ProtectedRoute path={["/search/:keyword", "/search"]}>
           <SearchMessages />
         </ProtectedRoute>
+        <ProtectedRoute path="/browse-channels">
+          <AllChannels />
+        </ProtectedRoute>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

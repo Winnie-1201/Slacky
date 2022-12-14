@@ -8,6 +8,8 @@ import "./DirectMessage.css";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 import ChannelBanner from "../Channels/ChannelBanner";
+import DmBanner from "./DmBanner";
+import { getAllGroupsThunk } from "../../store/groups";
 let socket;
 
 const DirectMessage = () => {
@@ -18,15 +20,29 @@ const DirectMessage = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
+
   const group = user.groups.filter((group) => group.id == groupId)[0];
   const all_msgs = group?.group_messages;
 
+  // const newGroup = useSelector((state) => state.group.group);
+  const user_groups = useSelector((state) => state.group.userGroups);
+  const group = user_groups.filter((group) => group.id == groupId)[0];
+
+  const all_msgs = group.group_messages;
+
+  const receiver =
+    group?.users[0].username === user.username
+      ? group?.users[1]
+      : group?.users[0];
+
+
   useEffect(() => {
     dispatch(getAllMessageThunk(groupId));
+    dispatch(getAllGroupsThunk());
     // open socket connection
     // create websocket
     socket = io();
-    socket.emit("join_room", group);
+    socket.emit("join_room", group.id);
 
     socket.on("dm", (chat) => {
       setMessages((msg) => [...msg, chat]);
@@ -38,23 +54,6 @@ const DirectMessage = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (socket) {
-  //     socket.on("dm", (chat) => {
-  //       setMessages((messages) => [...messages, chat]);
-  //     });
-  //   }
-  //   return () => {
-  //     socket.off("dm", (data) => {
-  //       console.log("data event was remove");
-  //     });
-  //   };
-  // }, [socket, messages]);
-
-  const updateChatInput = (e) => {
-    setChatInput(e.target.value);
-  };
-
   const sendChat = async (e) => {
     e.preventDefault();
     if (chatInput !== "") {
@@ -64,15 +63,13 @@ const DirectMessage = () => {
       };
 
       const newDm = await dispatch(createDmThunk(msgData));
-      // console.log("newDm", newDm);
       socket.emit("dm", { user: user, msg: newDm.direct_message });
       setChatInput("");
     }
   };
 
+  if (!group) return null;
   return (
-    // define the size of the show message area
-    // set scroll hidden properties
     user && (
       <div className="landing-grid">
         <div className="grid-nav-top"></div>
@@ -83,7 +80,7 @@ const DirectMessage = () => {
           <SideBar user={user} />
         </div>
         <div className="grid-main-view">
-          <ChannelBanner user={user} />
+          <DmBanner receiver={receiver} />
           <div className="all-msg-container">
             {/* <div className="chat-body"> */}
             <ScrollToBottom className="chat-body">
@@ -149,8 +146,54 @@ const DirectMessage = () => {
                 {/* <div key={ind}>{`${message.user}: ${message.msg}`}</div> */}
               </div>
             </ScrollToBottom>
+            <div className="cm-input-container">
+              <div className="cm-input-block">
+                <form onSubmit={sendChat} className="cm-form">
+                  {/* <div className="cm-error-box">
+            <ul>
+              {errors.map((error, idx) => (
+                <li key={`cmError-${idx + 1}`}>{error}</li>
+              ))}
+            </ul>
+          </div> */}
+                  <div className="cm-input-top">
+                    <div className="cm-input-top-box">
+                      <i className="fa-solid fa-bold"></i>
+                    </div>
+                    <div className="cm-input-top-box">
+                      <i className="fa-solid fa-italic" />
+                    </div>
+                    <div className="cm-input-top-box">
+                      <i className="fa-solid fa-strikethrough" />
+                    </div>
+                  </div>
+                  <div className="cm-input-box">
+                    <textarea
+                      rows={3}
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      required
+                      className="cm-input"
+                    />
+                  </div>
+                  <div className="cm-input-bottom">
+                    <div className="cm-input-botton-left"></div>
+                    <div className="cm-submit-box">
+                      <button
+                        type="submit"
+                        className={`cm-submit-button-highlight-${
+                          chatInput != ""
+                        }`}
+                      >
+                        <i className="fa-solid fa-paper-plane fa-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
 
-            <div className="chat-footer-container">
+            {/* <div className="chat-footer-container">
               <div className="chat-footer">
                 <div className="form-top-flex"></div>
                 <div className="form-middle">
@@ -167,13 +210,11 @@ const DirectMessage = () => {
                 </div>
                 <div className="form-bottom">
                   <i className="fa-solid fa-paper-plane" onClick={sendChat} />
-                  {/* <button onSubmit={sendChat}>Send</button> */}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
-        {/* </div> */}
       </div>
     )
   );
