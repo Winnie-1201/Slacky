@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, emit, send
+from flask_socketio import SocketIO, emit, send, join_room, leave_room
 import os
 from flask import request
 
@@ -25,13 +25,13 @@ def user_connect():
 @socketio.on("dm")
 def handle_dm(data):
     print("data from the front end: ", data)
-    # use broadcase=True will emit the message to all connected users
-    emit("dm", data, broadcast=True)
+    print('-----------')
+    # join_room(data)
+    msg = data["msg"]
+    room = data["room"]
+    join_room(room)
+    emit("dm", msg, room=room)
 
-
-@socketio.on("join_room")
-def handle_join_room(room, socket):
-    socket.join(room)
 
 
 @socketio.on("disconnect")
@@ -39,6 +39,3 @@ def diconnected():
     """event listener when client disconnects to the server"""
     print("user disconnected")
     emit("disconnect",f"user {request.sid} disconnected",broadcast=True)  
-# @socketio.on("receive_msg")
-# def handle_message(message):
-#     emit("receive_msg", message, broadcase=True)

@@ -46,14 +46,16 @@ def one_channel(id):
 @channel_routes.route('', methods=["POST"])
 @login_required
 def add_channel():
-    # print('create channel route')
+    print('------------------create channel route------------------')
 
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('--------create channel form--------')
+    print(form.data)
 
     if form.validate_on_submit():
-        # print('****** submitting ******')
-        # print(form.data)
+        print('****** submitting ******')
+        print(form.data)
         name = form.data['name']
         description = form.data['description'] if form.data['description'] else None
         topic = form.data['topic'] if form.data['topic'] else None
@@ -75,7 +77,9 @@ def add_channel():
         return new_channel.to_dict()
         # return '1'
 
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    print("form.erros -----------------", form.errors)
+    # {'name': ['That name is already taken by a channel or username.']}
+    return {'errors': form.errors}, 401
 
 
 @channel_routes.route('/<int:id>', methods=["PUT"])
@@ -107,7 +111,7 @@ def edit_channel(id):
         db.session.commit()
         return channel.to_dict()
         # return '1'
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': form.errors}, 401
 
 
 @channel_routes.route('/<int:id>', methods=["DELETE"])

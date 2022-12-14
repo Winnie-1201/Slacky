@@ -61,6 +61,7 @@ function AddDm() {
       {selectedUser && (
         <div className="user-list">
           <ul className="list-items">
+            {!users && <span>Loading...</span>}
             {users &&
               users
                 .filter((user) =>
@@ -84,7 +85,7 @@ function AddDm() {
                     </span>
                     <span
                       className={`user-active ${
-                        user.is_active ? "is-active" : ""
+                        user.is_online ? "is-active" : ""
                       }`}
                     ></span>
                   </li>

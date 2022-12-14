@@ -5,7 +5,6 @@ import "./NavBarLoggedIn.css";
 import NavBarSearch from "./NavBarSearch";
 import "./NavBarLoggedIn.css";
 
-
 const NavBarLoggedIn = ({ user }) => {
   // console.log('is user', user)
   const [showMenu, setShowMenu] = useState(false);
@@ -31,10 +30,11 @@ const NavBarLoggedIn = ({ user }) => {
   return (
     <nav className="logged-in-navbar">
 
+
       <div className="nav_bar_search_login">
+
         <NavBarSearch />
       </div>
-
       <div className="profile-icon-div">
         <span className="profile-icon-span" onClick={openMenu}>
           <img
