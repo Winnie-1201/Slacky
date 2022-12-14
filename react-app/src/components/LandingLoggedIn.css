@@ -44,7 +44,7 @@
   /* width: 100vw; */
   display: grid;
   grid-template-columns: 260px 1fr;
-  grid-template-rows: 4vh 92vh 4vh;
+  grid-template-rows: 40px calc(100vh - 84px) 44px;
   grid-template-areas:
     "nav nav"
     "sidebar main"

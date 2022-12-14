@@ -9,6 +9,7 @@ import { getAllChannel } from "../../store/channels";
 import AllChannelsMap from "./AllChannelsMap";
 
 export default function AllChannels() {
+    console.log('--------All Channels Page--------')
     const user = useSelector((state) => state.session.user);
 
     const dispatch = useDispatch()
@@ -25,14 +26,12 @@ export default function AllChannels() {
                 <SideBar user={user} />
             </div>
             <div className="grid-main-view">
-
                     <div className='channel-banner-div'>
                         <div className='channel-name'>
                             All channels
                         </div>
                     </div>
                     <AllChannelsMap />
-
             </div>
             <div className="grid-footer">
                 <Footer />

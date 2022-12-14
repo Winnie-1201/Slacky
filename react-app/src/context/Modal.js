@@ -5,6 +5,8 @@ import './Modal.css';
 const ModalContext = createContext();
 
 export function ModalProvider({ children }) {
+    // console.log('-------model provider component-------')
+    // console.log(children)
     const modalRef = useRef(null);
     const [value, setValue] = useState(null);
 
