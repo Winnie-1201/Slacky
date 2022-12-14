@@ -61,6 +61,7 @@ function AddDm() {
       {selectedUser && (
         <div className="user-list">
           <ul className="list-items">
+            {!users && <span>Loading...</span>}
             {users &&
               users
                 .filter((user) =>

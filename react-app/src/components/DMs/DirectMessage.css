@@ -144,3 +144,14 @@
   rotate: 60deg;
   cursor: pointer;
 }
+
+.loading-dm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-dm p {
+  font-size: 18px;
+  font-weight: 600;
+}

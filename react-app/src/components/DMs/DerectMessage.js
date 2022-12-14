@@ -9,6 +9,7 @@ import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 import DmBanner from "./DmBanner";
 import { getAllGroupsThunk } from "../../store/groups";
+import { getUser } from "../../store/session";
 let socket;
 
 const DirectMessage = () => {
@@ -25,12 +26,11 @@ const DirectMessage = () => {
 
   // const newGroup = useSelector((state) => state.group.group);
   const user_groups = useSelector((state) => state.group.userGroups);
- 
+
   const receiver =
     group?.users[0].username === user.username
       ? group?.users[1]
       : group?.users[0];
-
 
   useEffect(() => {
     dispatch(getAllMessageThunk(groupId));
@@ -50,6 +50,7 @@ const DirectMessage = () => {
   useEffect(() => {
     dispatch(getAllMessageThunk(groupId));
     dispatch(getAllGroupsThunk());
+    dispatch(getUser(user.id));
     setMessages([]);
   }, [groupId]);
 
@@ -85,7 +86,12 @@ const DirectMessage = () => {
     }
   };
 
-  if (!group) return null;
+  if (!group)
+    return (
+      <div className="loading-dm">
+        <p>Loading...</p>
+      </div>
+    );
 
   return (
     user && (
