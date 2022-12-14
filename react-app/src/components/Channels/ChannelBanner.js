@@ -7,28 +7,13 @@ import BannerMembers from './BannerMembers';
 import ChannelDetails from './ChannelDetails';
 import { Modal } from '../../context/Modal';
 import './ChannelBanner.css';
-import { getOneChannel } from '../../store/channels';
 
 
-export default function ChannelBanner() {
-  console.log('-------- 2. ChannelBanner component --------')
-  const channel = useSelector((state) => state.channels.channel)
-  // const [members, setMembers] = useState([])
+export default function ChannelBanner({ channel }) {
+  // console.log('-------- 2. ChannelBanner component --------')
+  // console.log(channel)
   const [showModal, setShowModal] = useState(false);
   const [active, setActive] = useState('About')
-  const { channelId } = useParams()
-  
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getOneChannel(channelId))
-  }, [channelId])
-
-  console.log('channel', channel)
-  console.log('showModal', showModal)
-  console.log('active', active)
-  console.log('channelId', channelId)
-  console.log('------------------before ChannelBanner returns ------------------')
-
 
   return (
     <div className='channel-banner-div'>

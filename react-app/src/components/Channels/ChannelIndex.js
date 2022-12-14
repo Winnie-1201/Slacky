@@ -11,6 +11,12 @@ export default function ChannelIndex({user}) {
     const [showChannels, setShowChannels] = useState(true);
     const [showModal, setShowModal] = useState(false);
 
+    const handleAddChannelButton = (e) => {
+        console.log(e.target)
+        console.log(e.currentTarget)
+        setShowModal(true)
+    }
+
   return (
     <div className='channels-index-div'>
         <div className='sidebar-wrapper'>
@@ -27,11 +33,11 @@ export default function ChannelIndex({user}) {
                 </div>
             )
         })}
-        <div className='sidebar-wrapper' onClick={() => setShowModal(true)}>
+        <div className='sidebar-wrapper' onClick={handleAddChannelButton} >
             <div className='sidebar-icon-span'>
                 <div className='plus-div'><span>+</span></div>
             </div>
-            <span className='sidebar-text'>Add channels</span>
+            <span className='sidebar-text add-channels'>Add channels</span>
         </div>
         <div className='sidebar-wrapper'>
             <NavLink to='/browse-channels' className='sidebar-icon-span-navlink' >
@@ -40,7 +46,7 @@ export default function ChannelIndex({user}) {
                         <BrowseChannelIcon />
                     </div>
                 {/* </div> */}
-                <span className='sidebar-text'>All channels</span>
+                <span className='sidebar-text all-channels'>All channels</span>
             </NavLink>
         </div>        
         {showModal &&

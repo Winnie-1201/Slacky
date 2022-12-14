@@ -1,9 +1,7 @@
 import React from 'react';
-// import { Modal } from '../../context/Modal';
-// import ChannelDetails from './ChannelDetails';
 
 export default function BannerName({ channel, setShowModal, setActive }) {
-  console.log('-------- 3.1 BannerMembers component --------')
+  // console.log('-------- 3.1 BannerMembers component --------')
   const viewChannelDetail = () => {
     setShowModal(true)
     setActive('About')

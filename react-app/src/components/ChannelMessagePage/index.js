@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChannelMessages } from "../../store/channelMessage";
+import { getOneChannel } from "../../store/channels";
 
 import ChannelMessageContainer from "./DisplayContainer";
 import ChannelMessageInputContainer from "./InputContainer";
@@ -14,14 +15,19 @@ import Footer from "../Footer/Footer";
 import ChannelBanner from "../Channels/ChannelBanner";
 
 const ChannelMessagePage = () => {
-  console.log('------1. Channel Message Page------')
+  // console.log('------1. Channel Message Page------')
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const channelMessages = useSelector((state) => state.channelMessages);
   const user = useSelector((state) => state.session.user);
+  const channel = useSelector((state) => state.channels.channel);
+
   useEffect(() => {
     dispatch(fetchChannelMessages(channelId));
+    dispatch(getOneChannel(channelId));
+
   }, [dispatch, channelId]);
+
   if (!channelId) return null;
 
   return (
@@ -34,7 +40,7 @@ const ChannelMessagePage = () => {
       </div>
       <div className="grid-main-view">
         <div className="channel-message-page">
-          <ChannelBanner user={user} />
+          <ChannelBanner channel={channel}/>
           <ChannelMessageContainer channelMessages={channelMessages} />
           <ChannelMessageInputContainer />
         </div>

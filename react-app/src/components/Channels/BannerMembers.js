@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function BannerMembers({ channel, setShowModal, setActive }) {
-    console.log('-------- 3.3 BannerMembers component --------')
+    // console.log('-------- 3.3 BannerMembers component --------')
     const [firstThree, setFirstThree] = useState([]);
 
     const viewAllMembers = () => {
