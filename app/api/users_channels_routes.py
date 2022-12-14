@@ -27,7 +27,7 @@ def add_user_channel():
         channel = Channel.query.get(channel_id)
 
         if user in channel.channel_members:
-            return {'errors': 'This user is already in this channel.'}   
+            return {'errors': 'This user is already in this channel.'}
 
         channel.channel_members.append(user)
 
@@ -60,7 +60,7 @@ def delete_user_channel():
         channel = Channel.query.get(channel_id)
 
         if user not in channel.channel_members:
-            return {'errors': 'This user is not in this channel.'}         
+            return {'errors': 'This user is not in this channel.'}
 
         channel.channel_members.remove(user)
 

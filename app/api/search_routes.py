@@ -6,7 +6,7 @@ search_routes = Blueprint('search', __name__)
 
 @search_routes.route('/<string:keyword>')
 
-# @login_required
+@login_required
 def search_channel_message(keyword):
     # print("search works++++++++++++")
     all_channels = Channel.query.all()

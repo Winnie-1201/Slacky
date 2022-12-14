@@ -50,6 +50,7 @@ def login():
     # on brower: IjI1ZmViYjU1YmU1OTNmNmZhMjRjMThhNzRhN2NkOTIyYWMxNWM1YWQi.Y5kvIw.SsEDynYUMPPo18jiUIrmNcAzXe8
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
+        print("******************AUTH LOGIN", current_user.is_authenticated)
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
         return user.to_dict()
@@ -61,6 +62,7 @@ def logout():
     """
     Logs a user out
     """
+    print("******************AUTH LOGOUT", current_user.is_authenticated)
     logout_user()
     return {'message': 'User logged out'}
 
@@ -79,13 +81,15 @@ def sign_up():
             password=form.data['password']
         )
 
-        channel = Channel.query.get(1)
-        channel.channel_members.append(user)
+        # channel = Channel.query.get(1)
+        # channel.channel_members.append(user)
 
-        db.session.add(channel)
+        # db.session.add(channel)
         db.session.add(user)
         db.session.commit()
+        print("******************AUTH SIGNUP before login:", current_user.is_authenticated)
         login_user(user)
+        print("******************AUTH SIGNUP after login:", current_user.is_authenticated)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

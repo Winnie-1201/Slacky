@@ -9,7 +9,7 @@ dm_routes = Blueprint("messages", __name__)
 # Get direct messages
 # Return all messages from a group
 @dm_routes.route("/<int:group_id>")
-# @login_required
+@login_required
 def dms_by_groupId(group_id):
     """
     Query for all the messages from a group and returns
@@ -27,7 +27,7 @@ def dms_by_groupId(group_id):
 # Create a message from a group
 # Return a new direct message in a group
 @dm_routes.route("<int:group_id>", methods=["POST"])
-# @login_required
+@login_required
 def create_dm(group_id):
     group = Group.query.get(group_id)
     if not group: return {"error": "The group is not found"}
@@ -51,8 +51,8 @@ def create_dm(group_id):
             # print("------------")
             # print("------------")
             if group.group_messages:
-                group.group_messages.append(new_message) 
-            else: 
+                group.group_messages.append(new_message)
+            else:
                 group.group_messages = [new_message]
             current_user.user_user_groups.append(group)
             # print("-------group message after", group.group_messages)
@@ -115,9 +115,8 @@ def delete_dm(group_id, id):
 
 
 @dm_routes.route('/<string:keyword>')
-# @login_required
+@login_required
 def search_dm_message(keyword):
     all_groups = Group.query.all()
     for group in all_groups:
         dm_messages = group.group_messages
-        
