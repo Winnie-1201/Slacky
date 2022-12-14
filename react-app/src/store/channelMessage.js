@@ -42,15 +42,15 @@ export const fetchCreateChannelMessage =
     return response;
   };
 export const fetchEditChannelMessage = (id, message) => async (dispatch) => {
-  console.log("**************** EDIT content****************", message);
   const response = await fetch(`/api/message/channels/${id}`, {
     method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(message),
   });
-  console.log("**************** EDIT Response ****************", response);
   if (response.ok) {
     const data = await response.json();
-    console.log("**************** EDIT DATA ****************", data);
     dispatch(editChannelMessage(data));
     return data;
   }

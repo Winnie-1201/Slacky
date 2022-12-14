@@ -18,10 +18,9 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit }) => {
     const message = { content };
     console.log("****** message*********", message);
     return dispatch(
-      // edit
-      //   ? fetchEditChannelMessage(cmId, message)
-      //   :
-      fetchCreateChannelMessage(channelId, { content })
+      edit
+        ? fetchEditChannelMessage(cmId, message)
+        : fetchCreateChannelMessage(channelId, { content })
     )
       .then(() => setContent(""))
       .catch(async (res) => {

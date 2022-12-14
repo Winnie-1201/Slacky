@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import EditChannel from './EditChannel';
 import {Modal} from '../../context/Modal';
-import { deleteOneChannel } from '../../store/channels';
+import { deleteOneChannel, deleteUserChannel } from '../../store/channels';
 import { getUser } from '../../store/session';
 
 export default function DetailsAbout({ channel, setShowModal}) {
@@ -21,6 +21,15 @@ export default function DetailsAbout({ channel, setShowModal}) {
       setShowModal(false)
       dispatch(getUser(user.id))
     })
+  }
+
+  const handleLeaveChannel = () => {
+    dispatch(deleteUserChannel({'channel_id': channel.id, 'user_id': user.id}))
+      .then(() => {
+        console.log('success leave')
+        setShowModal(false)
+        dispatch(getUser(user.id))
+      })    
   }
 
   if (!channel) {
@@ -55,7 +64,7 @@ export default function DetailsAbout({ channel, setShowModal}) {
         <div className='channel-detail-sections last'><span className='channel-delete-leave' onClick={handleDeleteChannel}>Delete channel</span></div>
       }
       {(user.id !== organizer_id && channel.id !== 1) &&
-        <div className='channel-detail-sections last'><span className='channel-delete-leave'>Leave channel</span></div>
+        <div className='channel-detail-sections last'><span className='channel-delete-leave' onClick={handleLeaveChannel}>Leave channel</span></div>
       }
       {showEditModal &&
         <Modal onClose={() => setShowEditModal(false)}>
