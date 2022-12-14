@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import BannerName from './BannerName';
 import BannerTopic from './BannerTopic';
@@ -11,27 +11,24 @@ import { getOneChannel } from '../../store/channels';
 
 
 export default function ChannelBanner() {
-    // console.log(user)
-    // const user = useSelector(state => state.session.user);
-    // const allChannels = useSelector((state) => state.channels.allChannels);
-    const channel = useSelector((state) => state.channels.channel)
-    // console.log('--------------- channel -----------------')
-    // console.log(channel)
-    const [members, setMembers] = useState([])
-    const [showModal, setShowModal] = useState(false);
-    const [active, setActive] = useState('About')
-    const match = useRouteMatch('/channels/:id').params.id
-    // console.log(match)
-    
-    const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch(getOneChannel(match))
-    }, [match])
+  console.log('-------- 2. ChannelBanner component --------')
+  const channel = useSelector((state) => state.channels.channel)
+  // const [members, setMembers] = useState([])
+  const [showModal, setShowModal] = useState(false);
+  const [active, setActive] = useState('About')
+  const { channelId } = useParams()
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOneChannel(channelId))
+  }, [channelId])
 
-    useEffect(() => {
-        const members = channel ? channel.channel_members: []
-        setMembers(members.slice(3))
-    }, [channel])
+  console.log('channel', channel)
+  console.log('showModal', showModal)
+  console.log('active', active)
+  console.log('channelId', channelId)
+  console.log('------------------before ChannelBanner returns ------------------')
+
 
   return (
     <div className='channel-banner-div'>
@@ -39,7 +36,7 @@ export default function ChannelBanner() {
           <>
             <BannerName channel={channel} setShowModal={setShowModal} setActive={setActive}/>
             <BannerTopic channel={channel} />
-            <BannerMembers setShowModal={setShowModal} channel={channel} members={members} totalMembers={channel.number_of_members} setActive={setActive} />
+            <BannerMembers setShowModal={setShowModal} channel={channel} setActive={setActive} />
           </>
       }
       {showModal && (

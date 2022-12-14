@@ -70,6 +70,11 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
+
+    print('------------- signup route ----------------')
+    print('------------csrf token-----------', request.cookies['csrf_token'])
+    print(dir(current_user), current_user.is_authenticated)
+
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -79,10 +84,10 @@ def sign_up():
             password=form.data['password']
         )
 
-        channel = Channel.query.get(1)
-        channel.channel_members.append(user)
+        # channel = Channel.query.get(1)
+        # channel.channel_members.append(user)
 
-        db.session.add(channel)
+        # db.session.add(channel)
         db.session.add(user)
         db.session.commit()
         login_user(user)

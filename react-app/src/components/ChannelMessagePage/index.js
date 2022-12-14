@@ -14,7 +14,7 @@ import Footer from "../Footer/Footer";
 import ChannelBanner from "../Channels/ChannelBanner";
 
 const ChannelMessagePage = () => {
-  console.log('------Channel Message Page------')
+  console.log('------1. Channel Message Page------')
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const channelMessages = useSelector((state) => state.channelMessages);
