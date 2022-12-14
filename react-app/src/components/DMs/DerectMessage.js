@@ -19,7 +19,7 @@ const DirectMessage = () => {
 
   const user = useSelector((state) => state.session.user);
   const group = user.groups.filter((group) => group.id == groupId)[0];
-  const all_msgs = group.group_messages;
+  const all_msgs = group?.group_messages;
 
   useEffect(() => {
     dispatch(getAllMessageThunk(groupId));
@@ -88,7 +88,7 @@ const DirectMessage = () => {
             {/* <div className="chat-body"> */}
             <ScrollToBottom className="chat-body">
               <div className="history-msg">
-                {all_msgs.map((message, ind) => (
+                {all_msgs?.map((message, ind) => (
                   <div key={ind} className="flex-msg-container">
                     <div className="user-icon-container">
                       <img

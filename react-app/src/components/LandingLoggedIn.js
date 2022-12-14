@@ -2,7 +2,7 @@ import React from "react";
 import NavBarLoggedIn from "./NavBarLoggedIn";
 import SideBar from "./SideBar/SideBar";
 import ChannelBanner from "./Channels/ChannelBanner";
-import SearchMessages from "./NavBarSearch";
+import SearchMessages from "./SearchMessage/SearchMessage";
 import "./LandingLoggedIn.css";
 // import DirectMessage from "./DMs/DerectMessage";
 
