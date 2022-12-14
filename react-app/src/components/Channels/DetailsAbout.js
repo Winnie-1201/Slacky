@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import EditChannel from './EditChannel';
 import {Modal} from '../../context/Modal';
 import { deleteOneChannel, deleteUserChannel } from '../../store/channels';
@@ -10,8 +10,10 @@ export default function DetailsAbout({ channel, setShowModal}) {
   const user = useSelector(state => state.session.user);
   const member_ids = channel?.channel_members_ids;
   const organizer_id = channel?.organizer_id;
+  const history = useHistory()
   // console.log(channel.organizer, channel.organizer_id)
-  console.log(channel)
+  // console.log(channel)
+  const [channelDeleted, setChannelDeleted] = useState(false);
   
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -22,19 +24,20 @@ export default function DetailsAbout({ channel, setShowModal}) {
       console.log('success delete')
       setShowModal(false)
       dispatch(getUser(user.id))
+      setChannelDeleted(true)
     })
   }
 
   const handleLeaveChannel = () => {
     dispatch(deleteUserChannel({'channel_id': channel.id, 'user_id': user.id}))
       .then(() => {
-        console.log('success leave')
+        // console.log('success leave')
         setShowModal(false)
         dispatch(getUser(user.id))
       })    
   }
 
-  if (!channel) {
+  if (channelDeleted) {
     return <Redirect to='/channels/1'></Redirect>
   }
 
@@ -43,7 +46,7 @@ export default function DetailsAbout({ channel, setShowModal}) {
       <div className='channel-detail-sections'>
         <span style={{ 'display': 'flex', 'justifyContent': 'space-between' }}>Channel name
           <span className='channel-detail-edit' onClick={() => { setShowEditModal(true)}}>
-            {(member_ids.includes(user.id)) ? 'Edit channel': ""}
+            {(member_ids?.includes(user.id)) ? 'Edit channel': ""}
           </span>
         </span>
         <span className='channel-detail-content'>{channel.name}</span>

@@ -8,9 +8,10 @@ import { getUser } from '../../store/session';
 import ChannelModalHeader from './ChannelModalHeader';
 
 export default function AddChannel({ setShowModal }) {
-    console.log('---------- Add Channel Component -----------')
+    console.log('---------- AddChannel Component -----------')
     const user = useSelector((state) => state.session.user);
     const new_channel = useSelector((state) => state.channels.channel);
+    const [successCreate, setSuccessCreate] = useState(false);
     
     const dispatch = useDispatch();
     const [name, setName] = useState('');
@@ -40,6 +41,7 @@ export default function AddChannel({ setShowModal }) {
         })).then(() => {
             setShowModal(false)
             dispatch(getUser(user.id))
+            setSuccessCreate(true)
         })
 
         if (data) {
@@ -74,18 +76,18 @@ export default function AddChannel({ setShowModal }) {
             delete validationError.description 
         }
     
-        console.log(validationError)
+        // console.log(validationError)
         if (Object.keys(validationError).length) {
-            console.log('set disabled to true')
+            // console.log('set disabled to true')
             setDisabled(true)
         } else {
-            console.log('set disabled to false')
+            // console.log('set disabled to false')
             setDisabled(false)
         }
 
     }, [name, description])
 
-    if (new_channel) return (
+    if (successCreate) return (
         <Redirect push to={`/channels/${new_channel.id}`}/>
     )
 

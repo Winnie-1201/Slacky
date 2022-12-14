@@ -6,7 +6,6 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 
 export default function SideBar({ user }) {
-  // console.log("--------- SideBar component ---------");
   const [click, setClick] = useState(false);
   const handleClick = () => {
     setClick(true);
