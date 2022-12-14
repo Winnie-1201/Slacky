@@ -43,7 +43,11 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
       </div>
       <div className="cm-block-right">
         {edit ? (
-          <ChannelMessageInputContainer />
+          <ChannelMessageInputContainer
+            edit={edit}
+            setEdit={setEdit}
+            cmId={cm.id}
+          />
         ) : avatar ? (
           <div>
             <div className="cm-user-block">
@@ -68,12 +72,12 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
         <div className="cm-block-menu">
           <div>
             <button onClick={handleEditToggle}>
-              <i class="fa-solid fa-pen-to-square fa-xl"></i>
+              <i className="fa-solid fa-pen-to-square fa-xl"></i>
             </button>
           </div>
           <div>
             <button onClick={handleDelete}>
-              <i class="fa-solid fa-trash-can fa-xl"></i>
+              <i className="fa-solid fa-trash-can fa-xl"></i>
             </button>
           </div>
         </div>

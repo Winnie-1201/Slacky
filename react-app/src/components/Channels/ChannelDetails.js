@@ -8,7 +8,7 @@ export default function ChannelDetails({ setShowModal, channel, active, setActiv
     const [name, setName] = useState('')
 
     useEffect(() => {
-      setName(channel.name)
+      if (channel) setName(channel.name)
     
     }, [channel])
     
@@ -16,7 +16,7 @@ export default function ChannelDetails({ setShowModal, channel, active, setActiv
   return (
     <div className='channel-details-div'>
         <DetailsName setShowModal={setShowModal} name={name} />
-        <DetailsContent channel={channel} active={active} setActive={setActive}/>
+        <DetailsContent setShowModal={setShowModal} channel={channel} active={active} setActive={setActive}/>
     </div>
   )
 }

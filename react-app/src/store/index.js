@@ -3,20 +3,22 @@ import thunk from "redux-thunk";
 import session from "./session";
 import dmReducer from "./dm";
 import channelMessageReducer from "./channelMessage";
-
 import searchReducer from "./search";
-
 import channelsReducer from "./channels";
-
 
 const rootReducer = combineReducers({
   session,
   dm: dmReducer,
   channelMessages: channelMessageReducer,
 
+
   search: searchReducer,
 
-  channels: channelsReducer
+  channels: channelsReducer,
+
+
+  search: searchReducer,
+  channels: channelsReducer,
 
 });
 

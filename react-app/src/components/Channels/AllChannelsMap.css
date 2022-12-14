@@ -1,0 +1,46 @@
+.all-channels-div {
+    overflow-y: auto;
+    height: calc(100vh - 84px - 50px);
+    padding: 20px;
+    font-size: 15px;
+}
+
+.all-channels-div::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.all-channles-single-div {
+    padding: 16px 12px;
+    border-bottom: 1px solid rgba(29, 28, 29, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.all-channels-single-child-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 6px;
+    padding-bottom: 6px;
+    font-size: 15px;
+}
+
+.all-channels-single-child-top a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.all-channels-single-child-bottom {
+    display: grid;
+    grid-template-columns: repeat(5, fit-content(100%)) auto;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.all-channels-description-span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-height: 20px;
+}

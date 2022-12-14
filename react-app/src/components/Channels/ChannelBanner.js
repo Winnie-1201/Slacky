@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import BannerName from './BannerName';
 import BannerTopic from './BannerTopic';
 import BannerMembers from './BannerMembers';
 import ChannelDetails from './ChannelDetails';
 import { Modal } from '../../context/Modal';
 import './ChannelBanner.css';
+import { getOneChannel } from '../../store/channels';
 
 
 export default function ChannelBanner() {
     // console.log(user)
-    const user = useSelector(state => state.session.user);
-    const [channel, setChannel] = useState(null)
+    // const user = useSelector(state => state.session.user);
+    // const allChannels = useSelector((state) => state.channels.allChannels);
+    const channel = useSelector((state) => state.channels.channel)
+    // console.log('--------------- channel -----------------')
+    // console.log(channel)
     const [members, setMembers] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [active, setActive] = useState('About')
-    const match = useRouteMatch('/channels/:id')
+    const match = useRouteMatch('/channels/:id').params.id
+    // console.log(match)
     
+    const dispatch = useDispatch();
     useEffect(() => {
-        const channels = user.user_channels_dict
-        const channelId = match ? match.params.id: null
-        const channel = channels[channelId]
-
-        setChannel(channel)
-    }, [user, match])
+      dispatch(getOneChannel(match))
+    }, [match])
 
     useEffect(() => {
         const members = channel ? channel.channel_members: []
-        setMembers(members.slice(3))        
+        setMembers(members.slice(3))
     }, [channel])
 
   return (
@@ -37,7 +39,7 @@ export default function ChannelBanner() {
           <>
             <BannerName channel={channel} setShowModal={setShowModal} setActive={setActive}/>
             <BannerTopic channel={channel} />
-        <BannerMembers setShowModal={setShowModal} channel={channel} members={members} totalMembers={channel.number_of_members} setActive={setActive} />
+            <BannerMembers setShowModal={setShowModal} channel={channel} members={members} totalMembers={channel.number_of_members} setActive={setActive} />
           </>
       }
       {showModal && (

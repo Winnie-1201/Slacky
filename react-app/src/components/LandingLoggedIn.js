@@ -2,14 +2,14 @@ import React from "react";
 import NavBarLoggedIn from "./NavBarLoggedIn";
 import SideBar from "./SideBar/SideBar";
 import ChannelBanner from "./Channels/ChannelBanner";
-import SearchMessages from "./NavBarSearch";
+import SearchMessages from "./SearchMessageModal/SearchFrom";
 import "./LandingLoggedIn.css";
+import Footer from "./Footer/Footer";
 // import DirectMessage from "./DMs/DerectMessage";
 
 export default function LandingLoggedIn({ user }) {
   return (
     <div className="landing-grid">
-      <div className="grid-nav-top"></div>
       <div className="grid-nav-top">
         <NavBarLoggedIn user={user} />
       </div>
@@ -20,9 +20,16 @@ export default function LandingLoggedIn({ user }) {
         <ChannelBanner user={user} />
         {/* <DirectMessage /> */}
       </div>
-      <div>
+
         <SearchMessages />
+
+      <div className="grid-footer">
+        <Footer />
+
       </div>
+      {/* <div>
+        <NavBarSearch />
+      </div> */}
     </div>
   );
 }

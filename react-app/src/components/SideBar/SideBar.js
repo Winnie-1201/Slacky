@@ -1,10 +1,16 @@
-import React from 'react';
-import './SideBar.css'
-import ChannelIndex from '../Channels/ChannelIndex';
-import GroupIndex from '../DMs/GroupIndex';
-import { useState } from 'react';
+import React from "react";
+import "./SideBar.css";
+import ChannelIndex from "../Channels/ChannelIndex";
+import GroupIndex from "../DMs/GroupIndex";
+import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
-export default function SideBar({user}) {
+export default function SideBar({ user }) {
+  console.log('--------- SideBar component ---------')
+  const [click, setClick] = useState(false);
+  const handleClick = () => {
+    setClick(true);
+  };
 
   return (
     <div className='sidebar-div'>
@@ -14,8 +20,10 @@ export default function SideBar({user}) {
                 <i className="fa-regular fa-pen-to-square"></i>
             </button>
         </div>
-        <ChannelIndex user={user} />
-        <GroupIndex user={user} />
+        <div className='sidebar-index'>
+          <ChannelIndex user={user} />
+          <GroupIndex user={user} />
+        </div>
     </div>
-  )
+  );
 }

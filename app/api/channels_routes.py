@@ -15,7 +15,7 @@ def all_channels():
 
     if not len(params):
         channels = Channel.query.all()
-        return {'channels': [c.to_dict() for c in channels]}
+        return {'channels': [c.to_dict_name_only() for c in channels]}
     else:
         filters = []
         if params.get('is_public'):
@@ -30,7 +30,7 @@ def all_channels():
         print(filters)
         channels = db.session.query(Channel).filter(*filters)
 
-        return {'channels': [c.to_dict() for c in channels]}
+        return {'channels': [c.to_dict_name_only() for c in channels]}
 
 
 @channel_routes.route('/<int:id>')
