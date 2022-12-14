@@ -8,8 +8,10 @@ import { getUser } from '../../store/session';
 
 export default function DetailsAbout({ channel, setShowModal}) {
   const user = useSelector(state => state.session.user);
-  const organizer_id = channel?.organizer_id
+  const member_ids = channel?.channel_members_ids;
+  const organizer_id = channel?.organizer_id;
   // console.log(channel.organizer, channel.organizer_id)
+  console.log(channel)
   
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -41,7 +43,7 @@ export default function DetailsAbout({ channel, setShowModal}) {
       <div className='channel-detail-sections'>
         <span style={{ 'display': 'flex', 'justifyContent': 'space-between' }}>Channel name
           <span className='channel-detail-edit' onClick={() => { setShowEditModal(true)}}>
-            {(user.id === organizer_id) ? 'Edit channel': ""}
+            {(member_ids.includes(user.id)) ? 'Edit channel': ""}
           </span>
         </span>
         <span className='channel-detail-content'>{channel.name}</span>
@@ -63,7 +65,7 @@ export default function DetailsAbout({ channel, setShowModal}) {
       {(user.id === organizer_id && channel.id !== 1) &&
         <div className='channel-detail-sections last'><span className='channel-delete-leave' onClick={handleDeleteChannel}>Delete channel</span></div>
       }
-      {(user.id !== organizer_id && channel.id !== 1) &&
+      {((member_ids.includes(user.id)) && channel.id !== 1) &&
         <div className='channel-detail-sections last'><span className='channel-delete-leave' onClick={handleLeaveChannel}>Leave channel</span></div>
       }
       {showEditModal &&

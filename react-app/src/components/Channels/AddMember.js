@@ -91,7 +91,7 @@ export default function AddMember({ setShowModal, channel }) {
                             <img style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'objectFit': 'cover' }} src={`${user.image_url}`} alt={`${user.name}`}></img>
                         </span>
                         :
-                        <span>{user.name.slice(0)}</span>
+                        <span>{user.name?.slice(0)}</span>
                     }
                     <span>{user.username}</span>
 

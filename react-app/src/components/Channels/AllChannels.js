@@ -26,12 +26,12 @@ export default function AllChannels() {
                 <SideBar user={user} />
             </div>
             <div className="grid-main-view">
-                    <div className='channel-banner-div'>
-                        <div className='channel-name'>
-                            All channels
-                        </div>
+                <div className='channel-banner-div'>
+                    <div className='channel-name'>
+                        All channels
                     </div>
-                    <AllChannelsMap />
+                </div>
+                <AllChannelsMap />
             </div>
             <div className="grid-footer">
                 <Footer />

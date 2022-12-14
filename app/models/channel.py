@@ -79,6 +79,7 @@ class Channel(db.Model):
             'is_public': self.is_public,
             'organizer': self.organizer.to_dict(),
             'channel_members': self.sort_by_name(),
+            'channel_members_ids': self.member_ids(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
