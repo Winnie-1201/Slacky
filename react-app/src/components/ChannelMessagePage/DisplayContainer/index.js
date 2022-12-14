@@ -7,11 +7,11 @@ const ChannelMessageContainer = ({ channelMessages }) => {
   return (
     <div className="channel-message-container">
       {channelMessages &&
-        cmKeys.map((cm, idx) => {
+        cmKeys.reverse().map((cm, idx) => {
           if (
-            idx > 0 &&
+            idx < cmKeys.length - 1 &&
             channelMessages[cmKeys[idx]].user_id ===
-              channelMessages[cmKeys[idx - 1]].user_id
+              channelMessages[cmKeys[idx + 1]].user_id
           )
             return (
               <ChannelMessageBlock

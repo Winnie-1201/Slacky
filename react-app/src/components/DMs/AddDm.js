@@ -84,7 +84,7 @@ function AddDm() {
                     </span>
                     <span
                       className={`user-active ${
-                        user.is_active ? "is-active" : ""
+                        user.is_online ? "is-active" : ""
                       }`}
                     ></span>
                   </li>

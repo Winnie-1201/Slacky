@@ -9,7 +9,7 @@ def seed_users():
         demo = User(
             username=fake_name, email=fake_email, password='password',
             image_url ='https://www.w3schools.com/howto/img_avatar.png',
-            is_active = True,
+            is_online = True,
             status = 'Lorem ipsum dolor sit amet'
             )
         db.session.add(demo)
