@@ -73,14 +73,14 @@ export const createChannel = (channel) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(setChannel(data));
-        return null;
+        return { 'newChannel': data };
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
             return data.errors;
         }
     } else {
-        return { 'error': "An error occurred. Please try again." };
+        return { 'errors': "An error occurred. Please try again." };
     }
 };
 
@@ -105,7 +105,7 @@ export const editChannel = (channel) => async (dispatch) => {
             return data.errors;
         }
     } else {
-        return { 'error': "An error occurred. Please try again." };
+        return { 'errors': "An error occurred. Please try again." };
     }
 };
 

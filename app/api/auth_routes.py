@@ -23,16 +23,9 @@ def authenticate():
     """
     Authenticates a user.
     """
-    print('------------- authentication route ----------------')
-    print('------------csrf token-----------', request.cookies['csrf_token'])
-    print(dir(current_user), current_user.is_authenticated)
-    # print(dir(current_user.get_id))
-
-    # ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'get_id', 'is_active', 'is_anonymous', 'is_authenticated']
     if current_user.is_authenticated:
-        print(' ****************user authenticated ****************')
         return current_user.to_dict()
-    print('------------- authentication route end ----------------')
+
     return {'errors': ['Unauthorized']}
 
 
@@ -42,12 +35,8 @@ def login():
     Logs a user in
     """
     form = LoginForm()
-    # Get the csrf_token from the request cookie and put it into the
-    # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('------------csrf token-----------', request.cookies['csrf_token'])
-    # print here:IjI1ZmViYjU1YmU1OTNmNmZhMjRjMThhNzRhN2NkOTIyYWMxNWM1YWQi.Y5kujA.tEAx6YgyQ0PUDHfqFf6sp3PFimk
-    # on brower: IjI1ZmViYjU1YmU1OTNmNmZhMjRjMThhNzRhN2NkOTIyYWMxNWM1YWQi.Y5kvIw.SsEDynYUMPPo18jiUIrmNcAzXe8
+
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
@@ -71,10 +60,6 @@ def sign_up():
     Creates a new user and logs them in
     """
 
-    print('------------- signup route ----------------')
-    print('------------csrf token-----------', request.cookies['csrf_token'])
-    print(dir(current_user), current_user.is_authenticated)
-
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -84,10 +69,10 @@ def sign_up():
             password=form.data['password']
         )
 
-        # channel = Channel.query.get(1)
-        # channel.channel_members.append(user)
+        channel = Channel.query.get(1)
+        channel.channel_members.append(user)
 
-        # db.session.add(channel)
+        db.session.add(channel)
         db.session.add(user)
         db.session.commit()
         login_user(user)

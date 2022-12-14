@@ -10,8 +10,7 @@ import ChannelModalHeader from './ChannelModalHeader';
 export default function AddChannel({ setShowModal }) {
     console.log('---------- AddChannel Component -----------')
     const user = useSelector((state) => state.session.user);
-    const new_channel = useSelector((state) => state.channels.channel);
-    const [successCreate, setSuccessCreate] = useState(false);
+    const [newChannel, setNewChannel] = useState({});
     
     const dispatch = useDispatch();
     const [name, setName] = useState('');
@@ -22,7 +21,7 @@ export default function AddChannel({ setShowModal }) {
     const [errors, setErrors] = useState({});
     const [nameError, setNameError] = useState("Don’t forget to name your channel.");
     const [descriptionError, setDescriptionError] = useState('');
-    console.log('create form errors from backend', errors)
+    
 
     const onCreateChannel = async (e) => {
         e.preventDefault();
@@ -38,12 +37,12 @@ export default function AddChannel({ setShowModal }) {
             users:`${user.id}`
         }))
         
-        if (data) {
-            setErrors(data)
-        } else {
-            setShowModal(false)
+        if (data.newChannel) {
+            setNewChannel(data.newChannel)
             dispatch(getUser(user.id))
-            setSuccessCreate(true)
+            setShowModal(false)
+        } else {
+            setErrors(data)
         }
     };
 
@@ -52,6 +51,10 @@ export default function AddChannel({ setShowModal }) {
 
         if (name.length <= 0) {
             setNameError("Don’t forget to name your channel.");
+            setErrors(prev => {
+                delete prev.name
+                return prev
+            })
             validationError.name = "Don’t forget to name your channel."
         } else if (name.length > 80) {
             setNameError("Channel names can’t be longer than 80 characters.");
@@ -79,15 +82,23 @@ export default function AddChannel({ setShowModal }) {
             setDisabled(false)
         }
 
+        return () => {
+            setNameError('')
+            setDescriptionError('')
+        }
+
     }, [name, description])
 
-    if (successCreate) return (
-        <Redirect push to={`/channels/${new_channel.id}`}/>
-    )
-
+    
     const handleNameChange = (e) => {
         setName(e.target.value)
         setOnFocus(true)
+    }
+
+    if (newChannel.id) {
+        return (
+            <Redirect push to={`/channels/${newChannel.id}`} />
+        )
     }
 
   return (
@@ -99,7 +110,7 @@ export default function AddChannel({ setShowModal }) {
                 <div className="create-channel-labels-div">
                     <label htmlFor='name'>Name
                         {onFocus && nameError.length > 0 && <span className='channel-form-error-span'>{nameError}</span>}
-                        {errors.name && <span className='channel-form-error-span'>{errors.name}</span> }
+                        {nameError.length === 0 && errors.name && <span className='channel-form-error-span'>{errors.name}</span> }
                     </label>
                 </div>
 
