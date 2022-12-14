@@ -57,3 +57,22 @@
   display: flex;
   align-items: center;
 }
+
+/* @media (max-width:600px) {
+  .grid-sidebar {
+    display: none;
+  }
+
+  .landing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "nav nav"
+        "main main"
+        "foot foot";
+    }
+
+  .channel-message-page {
+    width: 100vw;
+  }
+} */

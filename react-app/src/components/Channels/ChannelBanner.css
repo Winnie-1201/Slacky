@@ -43,7 +43,7 @@
     font-size: 15px;
     font-weight: 400;
     color: rgb(29, 28, 29);
-    height: 31px;
+    height: 32px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -77,10 +77,12 @@
 
 .member-pics-div-outer.position-0 {
     z-index: 3;
+    box-shadow: 0 0 0 2px white;
 }
 
 .member-pics-div-outer.position-1 {
     z-index: 2;
+    box-shadow: 0 0 0 2px white;
 }
 
 .member-pics-div-outer.position-2 {
@@ -110,4 +112,26 @@
     justify-content: center;
     font-size: 13px;
     color: rgba(29, 28, 29, 0.7);   
+}
+
+@media (max-width: 900px) {
+    .channel-topic {
+        display: none;
+    }
+
+    .channel-banner-div {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 600px) {
+    .member-pics-div-outer {
+        display: none;
+    }
+
+    .channel-banner-div {
+        display: flex;
+        justify-content: space-between;
+    }
 }
