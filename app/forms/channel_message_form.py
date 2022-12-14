@@ -11,5 +11,4 @@ from app.models import channel_message
 
 
 class ChannelMessageForm(FlaskForm):
-    content = TextAreaField('content', validators=[DataRequired()])
-    submit = SubmitField('send')
+    content = TextAreaField('message', validators=[DataRequired()])
