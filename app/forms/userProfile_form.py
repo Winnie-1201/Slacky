@@ -25,5 +25,5 @@ class UserProfileForm(FlaskForm):
     # email = StringField('email', validators=[DataRequired(), user_exists])
     # password = StringField('password')
     image_url = StringField('image_url')
-    is_active = BooleanField('is_active')
+    is_online = BooleanField('is_online')
     status = StringField('status')

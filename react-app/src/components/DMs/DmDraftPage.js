@@ -72,7 +72,7 @@ function DmDraftPage() {
                   <span className="user-name">{receiver.username}</span>
                   <span
                     className={`user-active ${
-                      receiver.is_active ? "is-active" : ""
+                      receiver.is_online ? "is-active" : ""
                     }`}
                   ></span>
                 </div>

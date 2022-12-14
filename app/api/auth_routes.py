@@ -28,7 +28,7 @@ def authenticate():
     print(dir(current_user), current_user.is_authenticated)
     print(dir(current_user.get_id))
 
-    # ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'get_id', 'is_active', 'is_anonymous', 'is_authenticated']
+    # ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'get_id', 'is_online', 'is_anonymous', 'is_authenticated']
     if current_user.is_authenticated:
         print(' ****************user authenticated ****************')
         return current_user.to_dict()
