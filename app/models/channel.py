@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
 
-
 users_channels = db.Table(
     'users_channels',
     db.Model.metadata,
@@ -51,6 +50,10 @@ class Channel(db.Model):
 
     def member_ids(self):
         arr = [member.id for member in self.channel_members]
+        return arr
+
+    def non_member_ids(self):
+        arr = []
         return arr
 
     def to_dict_name_only(self):

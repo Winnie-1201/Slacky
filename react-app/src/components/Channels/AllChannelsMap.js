@@ -23,7 +23,10 @@ export default function AllChannelsMap() {
         dispatch(addUserChannel({
             'user_id': user.id,
             'channel_id': e.currentTarget.value
-        }))
+        })).then(() => {
+            dispatch(getAllChannel());
+            dispatch(getUser(user.id));
+        })
     }
 
     const handleLeaveChannel = (e) => {

@@ -65,7 +65,7 @@ export default function DetailsAbout({ channel, setShowModal}) {
       {(user.id === organizer_id && channel.id !== 1) &&
         <div className='channel-detail-sections last'><span className='channel-delete-leave' onClick={handleDeleteChannel}>Delete channel</span></div>
       }
-      {((member_ids.includes(user.id)) && channel.id !== 1) &&
+      {(user.id !== organizer_id && member_ids.includes(user.id) && channel.id !== 1) &&
         <div className='channel-detail-sections last'><span className='channel-delete-leave' onClick={handleLeaveChannel}>Leave channel</span></div>
       }
       {showEditModal &&

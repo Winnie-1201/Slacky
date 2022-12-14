@@ -169,8 +169,8 @@ export const addUserChannel = (pair) => async (dispatch) => {
     });
 
     if (response.ok) {
-        dispatch(getAllChannel());
-        dispatch(getUser(pair.user_id));
+        // dispatch(getAllChannel());
+        // dispatch(getUser(pair.user_id));
         return null;
     } else if (response.status < 500) {
         const data = await response.json();

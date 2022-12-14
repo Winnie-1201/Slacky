@@ -2,7 +2,7 @@
     padding: 20px 0px;
     width: 520px;
     max-width: 520px;
-    height: min(85vh, 518px);
+    height: min(85vh, 90%);
     background-color: white;
     border-radius: 8px;
 }
@@ -15,7 +15,7 @@
     row-gap: 24px;
     color: rgb(29,28,29);
     font-weight: 500;
-    height: min(55vh, 360px);
+    height: min(65vh, 80%);
     box-sizing: border-box;
     overflow-y: scroll;
 }

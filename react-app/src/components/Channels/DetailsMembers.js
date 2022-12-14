@@ -7,7 +7,6 @@ import {Modal} from '../../context/Modal';
 export default function DetailsMembers({channel}) {
   const user = useSelector(state => state.session.user);
   const [members, setMembers] = useState([])
-  const [nonMembers, setNonMembers] = useState([]);
   const [showModal, setShowModal] = useState(false)
   const member_ids = channel?.channel_members_ids;
 
@@ -16,10 +15,11 @@ export default function DetailsMembers({channel}) {
   
   }, [channel])
   
+
   // console.log(members)
   return (
     <div className='channel-detail-members'>
-      {(member_ids.includes(user.id)) && nonMembers.length > 0 &&
+      {(member_ids?.includes(user.id)) && 
         <div className='channel-detail-member-div' onClick={() => setShowModal(true)}>
           <span className="channel-detail-member-add">
             <svg viewBox="0 0 20 20" style={{ 'height': '20px', 'width': '20px' }}>
@@ -41,7 +41,6 @@ export default function DetailsMembers({channel}) {
                 <button style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'border':'none' }}>
                   <i className="fa-solid fa-user"></i>
                 </button>
-                <span>{member.name?.slice(0)}</span>
               </span>
             }
             <span>{member.username}</span>

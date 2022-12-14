@@ -101,8 +101,8 @@ def edit_channel(id):
         channel.description = form.data['description'] if form.data['description'] else None
         channel.topic = form.data['topic'] if form.data['topic'] else None
         # channel.is_public = form.data['is_public'] == 'True'
-        user_ids = form.data['users']
-        channel.channel_members = [User.query.get(id) for id in user_ids.split(',')]
+        # user_ids = form.data['users']
+        # channel.channel_members = [User.query.get(id) for id in user_ids.split(',')]
 
         db.session.commit()
         return channel.to_dict()
