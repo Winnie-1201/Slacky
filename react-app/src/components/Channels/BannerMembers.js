@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-export default function BannerMembers({ channels, members, totalMembers, setShowModal, setActive }) {
-    // console.log(members)
+export default function BannerMembers({ channel, setShowModal, setActive }) {
+    // console.log('-------- 3.3 BannerMembers component --------')
     const [firstThree, setFirstThree] = useState([]);
 
     const viewAllMembers = () => {
@@ -10,33 +10,32 @@ export default function BannerMembers({ channels, members, totalMembers, setShow
     }
 
     useEffect(() => {
-        setFirstThree([...members?.slice(0,3)])
-    }, [members])
+        setFirstThree([...channel.channel_members?.slice(0,3)])
+    }, [channel])
 
   return (
       <div className='channel-members' onClick={viewAllMembers}>
           <div className='channel-members-pics' >
-            {console.log(members)}
-            {console.log(members?.slice(0,3))}
-              {console.log(firstThree)}
-              {firstThree?.map((user, i) => {
-                  return (
-                      <div key={user.id} className={`member-pics-div-outer position-${i}`}>
-                          {user.image_url ?
-                              <span style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden' }}>
-                                  <img style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'objectFit': 'cover' }} src={`${user.image_url}`} alt={`${user.name}`}></img>
-                              </span>
-                              :
-                              <span>
-                                  <button style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'border': 'none' }}>
-                                      <i className="fa-solid fa-user"></i>
-                                  </button>
-                              </span>
-                          }
-                      </div>
-                  )
-                })}
-              <span className='member-total'>{members?.length}</span>
+            {/* {console.log(channel.channel_members)}
+            {console.log(firstThree)} */}
+            {firstThree?.map((user, i) => {
+                return (
+                    <div key={user.id} className={`member-pics-div-outer position-${i}`}>
+                        {user.image_url ?
+                            <span style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden' }}>
+                                <img style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'objectFit': 'cover' }} src={`${user.image_url}`} alt={`${user.name}`}></img>
+                            </span>
+                            :
+                            <span>
+                                <button style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'border': 'none' }}>
+                                    <i className="fa-solid fa-user"></i>
+                                </button>
+                            </span>
+                        }
+                    </div>
+                )
+            })}
+            <span className='member-total'>{channel?.channel_members?.length}</span>
           </div>
           <div className='channel-members-add' >
               <svg viewBox='0 0 20 20' style={{ 'width': '20px' }}>

@@ -8,6 +8,7 @@ import { getUser } from "../../store/session";
 import './AllChannelsMap.css'
 
 export default function AllChannelsMap() {
+    console.log('-------------AllChannelsMap Component-------------')
     const user = useSelector((state) => state.session.user);
     const allChannelsObj = useSelector((state) => state.channels.allChannels);
     const [allChannels, setAllChannels] = useState([])
