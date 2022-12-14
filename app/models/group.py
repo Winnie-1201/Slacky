@@ -30,3 +30,5 @@ class Group(db.Model):
             "group_messages": [group_message.to_dict() for group_message in self.group_messages],
             # "group_user": [group_user.to_dict() for group_user in self.group_user_groups]
         }
+
+    

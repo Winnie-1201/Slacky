@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import ProfileMenu from "./ProfileMenu/ProfileMenu";
 
+import SearchMessages from "./SearchMessage/SearchMessage";
+
+
 import SearchMessages from './SearchMessageModal/SearchFrom'
 import "./NavBarLoggedIn.css";
 import NavBarSearch from "./NavBarSearch";
@@ -33,7 +36,7 @@ const NavBarLoggedIn = ({ user }) => {
     <nav className="logged-in-navbar">
 
       <div>
-       <NavBarSearch />
+        <NavBarSearch />
       </div>
 
       <div className="profile-icon-div">
