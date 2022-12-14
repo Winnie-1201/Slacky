@@ -22,35 +22,29 @@ export default function AddChannel({ setShowModal }) {
     const [errors, setErrors] = useState({});
     const [nameError, setNameError] = useState("Don’t forget to name your channel.");
     const [descriptionError, setDescriptionError] = useState('');
-
+    console.log('create form errors from backend', errors)
 
     const onCreateChannel = async (e) => {
         e.preventDefault();
         if (nameError || descriptionError) {
-            // console.log('has errors', nameError, descriptionError)
             return
         }
 
-        // console.log('sending dispatch')
         const data = await dispatch(createChannel({
             name,
             description,
             isPublic,
             organizer: user,
             users:`${user.id}`
-        })).then(() => {
+        }))
+        
+        if (data) {
+            setErrors(data)
+        } else {
             setShowModal(false)
             dispatch(getUser(user.id))
             setSuccessCreate(true)
-        })
-
-        if (data) {
-            setErrors(errors => {
-                errors.backend = data
-                return errors
-            })
         }
-
     };
 
     useEffect(() => {
@@ -105,6 +99,7 @@ export default function AddChannel({ setShowModal }) {
                 <div className="create-channel-labels-div">
                     <label htmlFor='name'>Name
                         {onFocus && nameError.length > 0 && <span className='channel-form-error-span'>{nameError}</span>}
+                        {errors.name && <span className='channel-form-error-span'>{errors.name}</span> }
                     </label>
                 </div>
 
@@ -157,11 +152,6 @@ export default function AddChannel({ setShowModal }) {
             </div>
             <div className='create-channel-button-div'>
                 <button className='modal-submit-button' type='submit' disabled={disabled}>Create</button>
-                <div>
-                    {errors.backend?.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))}
-                </div>
             </div>            
         </form>
     </div>

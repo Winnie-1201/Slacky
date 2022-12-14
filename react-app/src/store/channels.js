@@ -80,7 +80,7 @@ export const createChannel = (channel) => async (dispatch) => {
             return data.errors;
         }
     } else {
-        return ["An error occurred. Please try again."];
+        return { 'error': "An error occurred. Please try again." };
     }
 };
 
@@ -105,7 +105,7 @@ export const editChannel = (channel) => async (dispatch) => {
             return data.errors;
         }
     } else {
-        return ["An error occurred. Please try again."];
+        return { 'error': "An error occurred. Please try again." };
     }
 };
 

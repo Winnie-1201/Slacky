@@ -10,9 +10,6 @@ export default function DetailsAbout({ channel, setShowModal}) {
   const user = useSelector(state => state.session.user);
   const member_ids = channel?.channel_members_ids;
   const organizer_id = channel?.organizer_id;
-  const history = useHistory()
-  // console.log(channel.organizer, channel.organizer_id)
-  // console.log(channel)
   const [channelDeleted, setChannelDeleted] = useState(false);
   
   const [showEditModal, setShowEditModal] = useState(false);
