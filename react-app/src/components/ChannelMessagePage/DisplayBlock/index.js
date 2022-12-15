@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchDeleteChannelMessage } from "../../../store/channelMessage";
 import ChannelMessageInputContainer from "../InputContainer";
 import "./index.css";
@@ -17,6 +17,12 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
   const time = `${hour >= 10 ? hour : hour ? "0" + hour : 12}:${
     minute < 10 ? "0" + minute : minute
   }`;
+
+  // useEffect(() => {
+  //   return () => {
+  //     setEdit(false);
+  //   };
+  // }, []);
 
   const handleDelete = (e) => {
     e.preventDefault();

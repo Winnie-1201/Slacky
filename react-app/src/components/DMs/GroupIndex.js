@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getAllGroupsThunk } from "../../store/groups";
+import {
+  getAllGroupsThunk,
+  getCurrentUserGroupsThunk,
+} from "../../store/groups";
 import "./GroupIndex.css";
 
 export default function GroupIndex({ user }) {
@@ -13,6 +16,7 @@ export default function GroupIndex({ user }) {
 
   useEffect(() => {
     dispatch(getAllGroupsThunk());
+    dispatch(getCurrentUserGroupsThunk(user.id));
   }, [dispatch]);
 
   return (
