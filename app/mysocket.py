@@ -1,6 +1,7 @@
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
 import os
 from flask import request
+from .models import db, Group, User
 
 if os.environ.get("FLASK_ENV") == "production":
     # change it to the actual url later
@@ -41,6 +42,19 @@ def handle_join(data):
     join_room(room)
     print(f"{user} has entered room {room}")
     # emit('dm', to=room)
+
+@socketio.on("invite")
+def handle_invite(data):
+    print("--------enter invite")
+    # msg = data['msg']
+    room = data['room']
+    invited_user = data['user']
+    # group = Group.query.get(room)
+    # user = User.query.get(invited_user)
+    # user.user_user_groups.append(group)
+    # db.session.commit()
+    join_room(room)
+    emit('invite', invited_user, to=room, broadcast=True)
 
 @socketio.on('leave')
 def handle_leave(data):
