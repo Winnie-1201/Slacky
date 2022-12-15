@@ -16,6 +16,8 @@ const NavBarSearch = () => {
     // if (res) {
     history.push(`/search/${keyword}`);
     //}
+    history.push(`/search/${keyword}`);
+    //}
     setKeyword("");
   };
 
@@ -24,7 +26,7 @@ const NavBarSearch = () => {
       <div className="search-navbar">
         <div className="serach_input_contanier">
           <input
-            placeholder="search for messages"
+            placeholder="Search for messages"
             className="nav_bar_search"
             onChange={(e) => setKeyword(e.target.value)}
             value={keyword}

@@ -1,15 +1,35 @@
 .search-navbar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  margin-left: 60px;
+  margin-left: 260px;
 }
 
-.serach_input_contanier input {
+.serach_input_contanier {
+  width: 55vw;
+  border: 1px solid transparent;
+  border-radius: 4px;
   background-color: #634964;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav_bar_search {
+  width: 45vw;
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+  padding: 0.2rem 1.5rem;
+  color: white;
+}
+
+.nav_bar_search::placeholder {
+  color: rgba(255, 255, 255, 1);
 }
 
 .searchBar-button {
   cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 1);
 }
