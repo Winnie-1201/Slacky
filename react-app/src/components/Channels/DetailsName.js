@@ -6,8 +6,8 @@ export default function DetailsName({ setShowModal, channel}) {
   return (
     <div className='channel-details-header'>
         <div className='channel-name-inmodal'>
-          {channel.is_public ? <span>#</span> : <span style={{ 'display': 'flex', 'justifyContent': 'center', 'marginLeft': '5px' }}><i style={{ 'width': '20px' }} className="fa-solid fa-lock"></i></span>}
-          {channel.name}
+          {channel?.is_public ? <span>#</span> : <span style={{ 'display': 'flex', 'justifyContent': 'center', 'marginLeft': '5px' }}><i style={{ 'width': '20px' }} className="fa-solid fa-lock"></i></span>}
+          {channel?.name}
         </div>
         <button className='modal-exit-button' onClick={() => setShowModal(false)}>
           <svg viewBox="0 0 20 20" style={{'width':'20px'}}>
