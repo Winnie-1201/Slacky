@@ -1,18 +1,15 @@
 .search-navbar {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-   margin-left: 60px;
-
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-left: 60px;
 }
 
-input {
-    width:300px;
+.serach_input_contanier input {
+  background-color: #634964;
 }
 
 .searchBar-button {
-    cursor:pointer
-
+  cursor: pointer;
 }
