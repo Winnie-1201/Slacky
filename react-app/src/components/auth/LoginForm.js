@@ -38,9 +38,11 @@ const LoginForm = () => {
     <>
       <LoginGeneral />
       <form onSubmit={onLogin} className="user-form ">
-        <div>
+        <div className="form-error-container">
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div key={ind} className="form-error-block">
+              {error}
+            </div>
           ))}
         </div>
         <div className="user-form-inputs-div">
@@ -68,17 +70,17 @@ const LoginForm = () => {
         </div>
 
         <div className="user-form-button-div">
-        <button
-            id='demoUser'
-            type='submit'
+          <button
+            id="demoUser"
+            type="submit"
             onClick={() => {
-              setCredential('demo1@aa.io')
-              setPassword('password')
+              setCredential("demo1@aa.io");
+              setPassword("password");
             }}
           >
             Demo Login
           </button>
-          </div>
+        </div>
       </form>
     </>
   );
