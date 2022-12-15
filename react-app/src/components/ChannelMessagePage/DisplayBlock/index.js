@@ -47,6 +47,7 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
             edit={edit}
             setEdit={setEdit}
             cmId={cm.id}
+            cm={cm}
           />
         ) : avatar ? (
           <div>

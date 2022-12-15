@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
@@ -6,11 +6,15 @@ import {
   fetchEditChannelMessage,
 } from "../../../store/channelMessage";
 import "./index.css";
-const ChannelMessageInputContainer = ({ cmId, edit, setEdit }) => {
+const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    if (cm) setContent(cm.content);
+  }, [cm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,7 +96,7 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit }) => {
                     content != ""
                   }`}
                 >
-                  <i className="fa-solid fa-paper-plane fa-lg"></i>
+                  <i className="fa-solid fa-paper-plane"></i>
                 </button>
               )}
             </div>
