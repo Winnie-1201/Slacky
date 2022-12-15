@@ -14,6 +14,7 @@ export default function GroupIndex({ user }) {
   useEffect(() => {
     dispatch(getAllGroupsThunk());
   }, [dispatch]);
+
   return (
     <div className="groups-index-div">
       <div className="sidebar-wrapper">

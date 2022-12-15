@@ -75,8 +75,10 @@
 .cm-submit-button-highlight-false {
   color: rgb(221, 221, 221);
   background-color: white;
+  border: none;
 }
 .cm-submit-button-highlight-true {
   color: #ffffff;
   background-color: #2bac76;
+  border: none;
 }

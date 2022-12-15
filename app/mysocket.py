@@ -24,15 +24,30 @@ def user_connect():
 # Make sure using the same value when emit the events on the front end
 @socketio.on("dm")
 def handle_dm(data):
-    print("data from the front end: ", data)
+    # print("data from the front end: ", data)
     print('-----------')
-    # join_room(data)
     msg = data["msg"]
     room = data["room"]
+    # join_room(room)
+    emit("dm", msg, to=room)
+
+@socketio.on('join')
+def handle_join(data):
+    # print("data from front-end join", data)
+    print('-----------')
+    print('-----------')
+    user = data["user"]["username"]
+    room = data["room"]
     join_room(room)
-    emit("dm", msg, room=room)
+    print(f"{user} has entered room {room}")
+    # emit('dm', to=room)
 
-
+@socketio.on('leave')
+def handle_leave(data):
+    user = data['user']["username"]
+    room = data['room']
+    leave_room(room)
+    print(f'{user} has left room {room}')
 
 @socketio.on("disconnect")
 def diconnected():

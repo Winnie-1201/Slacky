@@ -10,7 +10,6 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import LandingLoggedIn from "./components/_DONOTUSE/LandingLoggedIn";
 import HomeMain from "./components/HomeMain/HomeMain";
-import Footer from "./components/Footer/Footer";
 import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
@@ -22,7 +21,6 @@ import AddDm from "./components/DMs/AddDm";
 
 import AllChannels from "./components/Channels/AllChannels";
 import { getAllChannel } from "./store/channels";
-
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -37,8 +35,8 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getAllChannel())
-  }, [])
+    dispatch(getAllChannel());
+  }, []);
 
   if (!loaded) {
     return null;
