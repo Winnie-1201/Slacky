@@ -3,4 +3,37 @@
   color: white;
   background-color: #4a154b;
   border-top: 1px solid rgb(255 255 255 / 10%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 15px;
+}
+
+.footer-individual-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 6px;
+}
+
+.footer-individual-div a {
+  color: #4a154b;
+  cursor: pointer;
+  width: 25px;
+}
+
+.fa-brands.fa-github:focus-visible {
+  outline: unset;
+  background-color: unset;
+}
+
+.fa-brands.fa-github {
+  cursor: pointer;
+}
+
+.footer-individual-div img {
+  cursor: pointer;
 }

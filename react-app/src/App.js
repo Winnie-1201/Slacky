@@ -45,14 +45,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {!user && (
-        <Route path="/" exact={true}>
-          <NavBar />
-          <HomeMain></HomeMain>
-          <Footer />
-        </Route>
-      )}
-
       <Switch>
         <Route path="/" exact={true}>
           <NavBar />
