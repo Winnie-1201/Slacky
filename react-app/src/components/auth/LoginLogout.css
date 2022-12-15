@@ -35,3 +35,7 @@
   box-sizing: border-box;
   color: white;
 }
+
+.logout-button {
+cursor: pointer;
+}
