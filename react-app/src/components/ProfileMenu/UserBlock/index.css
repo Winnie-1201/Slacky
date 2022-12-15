@@ -1,0 +1,30 @@
+.profile-user-block {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.profile-username-box {
+  font-weight: 700;
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.profile-online-box {
+  display: flex;
+  align-items: center;
+  column-gap: 0.3rem;
+}
+
+.profile-online-text p {
+  font-size: 0.8rem;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.fa-circle.fa-solid {
+  color: #2bac76;
+}

@@ -1,0 +1,29 @@
+.profile-status-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0.5rem 0;
+  column-gap: 1rem;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.profile-status-icon {
+  width: 36px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-status-text p {
+  font-size: 0.85rem;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.profile-status-box:hover {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.profile-status-box:hover .profile-status-text p {
+  color: rgba(0, 0, 0, 0.7);
+}
