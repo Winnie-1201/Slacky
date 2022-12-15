@@ -55,6 +55,8 @@ const DirectMessage = () => {
 
     // socket.on("join", groupId);
     // socket.emit("join", groupId);
+
+    // socket.emit("join_room", group?.id);
     socket.on("dm", (chat) => {
       setMessages((messages) => [...messages, chat]);
     });

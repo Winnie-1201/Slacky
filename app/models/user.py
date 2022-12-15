@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     image_url = db.Column(db.String(255))
-    is_active = db.Column(db.Boolean)
+    is_online = db.Column(db.Boolean)
     status = db.Column(db.String(255))
     created_at = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.current_timestamp())
@@ -67,11 +67,11 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'image_url': self.image_url,
-            'is_active': self.is_active,
+            'is_online': self.is_online,
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-        }        
+        }
 
     def to_dict(self):
         return {
@@ -79,7 +79,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'image_url': self.image_url,
-            'is_active': self.is_active,
+            'is_online': self.is_online,
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,

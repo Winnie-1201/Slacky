@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -84,6 +84,9 @@ function App() {
         <ProtectedRoute path="/browse-channels">
           <AllChannels />
         </ProtectedRoute>
+        {/* <ProtectedRoute >
+           <Redirect to='/channels/1'></Redirect>
+        </ProtectedRoute> */}
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>

@@ -10,6 +10,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [credential, setCredential] = useState("");
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -65,6 +66,19 @@ const LoginForm = () => {
         <div className="user-form-button-div">
           <button type="submit">Login</button>
         </div>
+
+        <div className="user-form-button-div">
+        <button
+            id='demoUser'
+            type='submit'
+            onClick={() => {
+              setCredential('demo1@aa.io')
+              setPassword('password')
+            }}
+          >
+            Demo Login
+          </button>
+          </div>
       </form>
     </>
   );

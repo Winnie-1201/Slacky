@@ -29,7 +29,10 @@ const NavBarLoggedIn = ({ user }) => {
 
   return (
     <nav className="logged-in-navbar">
-      <div>
+
+
+      <div className="nav_bar_search_login">
+
         <NavBarSearch />
       </div>
       <div className="profile-icon-div">

@@ -33,7 +33,7 @@ function DmBanner({ receiver, new_receiver }) {
               </span>
               <div
                 className={`user-active-circle ${
-                  receiver.is_active ? "is_active" : ""
+                  receiver.is_online ? "is_online" : ""
                 }`}
               ></div>
             </div>

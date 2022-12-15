@@ -53,38 +53,41 @@ const SearchMessages = () => {
                 {/* <input placeholder='Search for messages' /> */}
                 {channel_message.map(
                   (msg) => (
-                    // <div className='channel_message' key={msg.channel_id}>
 
                     <div>
-                      <div>{/* Channel: {msg[0]?.channel_id} */}</div>
-
-                      <ul>
                         {msg.map((el) => (
                           <div className="channel_msg_container">
-                            <div>
-                              <img
-                                className="user-icon"
-                                src={el.user_img}
-                                alt="user-icon"
-                              />
+                            <div className="channel_name_ls">
+                              <span id="channel_name">
+                                # Channel: {el.channel_name}
+                              </span>{" "}
+                              -- {el.created_at}{" "}
+                              <Link
+                                className="view_link"
+                                to={`/channels/${el.channel_id}`}
+                              >
+                                view in channel
+                              </Link>
                             </div>
+
                             <div className="channel_msg_ls">
-                              <div className="channel_name_ls">
-                                <span id="channel_name">
-                                  # Channel: {el.channel_name}
-                                </span>{" "}
-                                -- {el.created_at}{" "}
-                                <Link className="view_link" to={`/channels/${el.channel_id}`}>
-                                  view in channel
-                                </Link>
+                              <div>
+                                <img
+                                  className="user-icon"
+                                  src={el.user_img}
+                                  alt="user-icon"
+                                />
                               </div>
+                              <div className="samll_box">
+
                               <div id="user_name">{el.user_name}</div>
-                              <p id="search_content">{el.content}</p>
+                                <p id="search_content">{el.content}</p>
+                                </div>
                             </div>
                           </div>
                         ))}
-                      </ul>
-                    </div>
+                      </div>
+
                   )
 
                   // </div>
@@ -101,40 +104,43 @@ const SearchMessages = () => {
                 </div>
                 <div className="search-container">
                   {group_message.map((msg) => (
-                    // <div className='channel_message' key={msg.channel_id}>
-
-                    <div>
-                      <div>{msg[0]?.group_id}</div>
-
-                      <ul>
+                  <div>
+                      {/* <div>{msg[0]?.group_id}</div> */}
                         {msg.map((el) => (
                           <div className="channel_msg_container">
-                            <div>
-                              <img
-                                className="user-icon"
-                                src={el.user_img}
-                                alt="user-icon"
-                              />
-
-                            </div>
-
-                              <div className="channel_msg_ls">
                               <div className="channel_name_ls">
                                 <span id="channel_name">
                                   # Group: {el.groupId}
                                 </span>{" "}
                                 -- {el.created_at}{" "}
-                                <Link className="view_link" to={`/groups/${el.groupId}`}>
+                                <Link
+                                  className="view_link"
+                                  to={`/groups/${el.groupId}`}
+                                >
                                   view in group
-                                  </Link>
-                            </div>
-                            <div id="user_name">{el.user_name}</div>
+                                </Link>
+                              </div>
+
+
+
+                              <div className="channel_msg_ls">
+                              <div>
+                              <img
+                                className="user-icon"
+                                src={el.user_img}
+                                alt="user-icon"
+                              />
+                                </div>
+                                <div className="samll_box">
+                              <div id="user_name">{el.user_name}</div>
                               <p id="search_content">{el.content}</p>
                             </div>
-                          </div>
+                              </div>
+                              </div>
+                            
                         ))}
-                      </ul>
-                    </div>
+                      </div>
+
                   ))}
                 </div>
               </div>

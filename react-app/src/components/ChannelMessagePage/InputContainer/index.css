@@ -7,8 +7,8 @@
   display: flex;
   border-radius: 0.5rem;
   background-color: white;
-  height: 150px;
-  min-height: 150px;
+  height: 15vh;
+  min-height: 15vh;
 }
 
 .cm-input-block {
