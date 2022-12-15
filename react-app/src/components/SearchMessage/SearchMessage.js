@@ -56,7 +56,7 @@ const SearchMessages = () => {
 
                     <div>
                         {msg.map((el) => (
-                          <div className="channel_msg_container">
+                          <div className="channel_msg_container" key={el.id}>
                             <div className="channel_name_ls">
                               <span id="channel_name">
                                 # Channel: {el.channel_name}
@@ -107,7 +107,7 @@ const SearchMessages = () => {
                   <div>
                       {/* <div>{msg[0]?.group_id}</div> */}
                         {msg.map((el) => (
-                          <div className="channel_msg_container">
+                          <div className="channel_msg_container" key={el.id}>
                               <div className="channel_name_ls">
                                 <span id="channel_name">
                                   # Group: {el.groupId}
