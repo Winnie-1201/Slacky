@@ -86,9 +86,9 @@ function App() {
         <ProtectedRoute path="/browse-channels">
           <AllChannels />
         </ProtectedRoute>
-        <ProtectedRoute >
-          <Redirect to='/channels/1'></Redirect>
-        </ProtectedRoute>
+        {/* <ProtectedRoute >
+           <Redirect to='/channels/1'></Redirect>
+        </ProtectedRoute> */}
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>
