@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchDeleteChannelMessage } from "../../../store/channelMessage";
 import ChannelMessageInputContainer from "../InputContainer";
 import "./index.css";
@@ -10,6 +10,10 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
   const [errors, setErrors] = useState([]);
 
   const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    return () => setEdit(false);
+  }, []);
 
   const createdAt = new Date(cm.created_at);
   const hour = createdAt.getHours() % 12;
@@ -69,7 +73,7 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
           </div>
         )}
       </div>
-      {user.id === cm.user_id && (
+      {user.id === cm.user_id && edit === false && (
         <div className="cm-block-menu">
           <div>
             <button onClick={handleEditToggle}>
