@@ -5,18 +5,30 @@ import { addUserChannel, getOneChannel } from "../../store/channels";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../store/session";
 import ChannelModalHeader from "./ChannelModalHeader";
+import MemberSearchRow from "./MemberSearchRow";
+import './AddMember.css'
 
-export default function AddMember({ setShowModal, channel }) {
+export default function AddMember({ setShowModal, channel, users }) {
   const user = useSelector((state) => state.session.user);
-  const [users, setUsers] = useState([]);
-  const [nonMembers, setNonMembers] = useState([]);
+  // const [users, setUsers] = useState([]);
+  const [matchedUsers, setMatchedUsers] = useState([])
+  const [searchUsername, setSearchUsername] = useState("");
+  const [selectedUser, setSelectedUser] = useState({});
+  const [selected, setSelected] = useState(false);
+  // const [hasSearch, setHasSearch] = useState(false);
+  // const [nonMembers, setNonMembers] = useState([]);
+  // const [loadingNon, setLoandingNon] = useState(true);
   const [errors, setErrors] = useState({});
 
-  async function fetchAllUsers() {
-    const response = await fetch("/api/users/");
-    const responseData = await response.json();
-    setUsers(responseData.users);
-  }
+  // async function fetchAllUsers() {
+  //   const response = await fetch("/api/users/");
+  //   const responseData = await response.json();
+  //   setUsers(responseData.users);
+  // }
+
+  // useEffect(() => {
+  //   fetchAllUsers();
+  // }, []);
 
   const dispatch = useDispatch();
   const onAddMember = async (e) => {
@@ -27,56 +39,112 @@ export default function AddMember({ setShowModal, channel }) {
         user_id: e.currentTarget.value,
         channel_id: channel.id,
       })
-    ).then(() => {
-      // setShowModal(false)
-      dispatch(getUser(user.id));
-      dispatch(getOneChannel(channel.id));
-    });
+    );
 
     if (data) {
       setErrors((errors) => {
         errors.backend = data;
         return errors;
       });
+    } else {
+      setShowModal(false)
+      dispatch(getUser(user.id));
+      dispatch(getOneChannel(channel.id));
     }
   };
 
-  useEffect(() => {
-    fetchAllUsers();
-  }, []);
 
   // console.log(memberIds)
 
+  // useEffect(() => {
+  //   const members = channel?.channel_members || [];
+  //   const member_ids = [];
+  //   for (const member of members) {
+  //     member_ids.push(member.id);
+  //   }
+
+  //   const diff = [];
+  //   for (const user of users) {
+  //     if (!member_ids.includes(user.id)) {
+  //       diff.push(user);
+  //     }
+  //   }
+
+  //   setNonMembers([...diff]);
+  //   setLoandingNon(false);
+  // }, [channel, users, user]);
+  
   useEffect(() => {
-    const members = channel?.channel_members || [];
-    const member_ids = [];
-    for (const member of members) {
-      member_ids.push(member.id);
-    }
+    console.log('useEffect start')
 
-    const diff = [];
-    for (const user of users) {
-      if (!member_ids.includes(user.id)) {
-        diff.push(user);
+    if (!searchUsername.length) {
+      console.log('setting match back to empty')
+      setSelected(false)
+      setMatchedUsers([])
+    } else {
+      let matched = []
+      console.log('userinput', searchUsername)
+      console.log('all users', users)
+      if (users.length) {
+        matched = users.filter((user) => user.username.toLowerCase().startsWith(searchUsername.toLowerCase()))
       }
+      
+      console.log('setting matched users', matched)
+      setMatchedUsers([...matched])
     }
 
-    setNonMembers([...diff]);
-  }, [channel, users, user]);
+    console.log('useEffect end')
+
+  }, [searchUsername])
+
+  const handleClick = (user) => {
+    console.log('handle click----------', user)
+    setSearchUsername(user.username)
+    setSelectedUser(user)
+    setSelected(true)
+  };
 
   return (
     <div className="add-member-div">
-      <ChannelModalHeader
-        setShowModal={setShowModal}
-        headerName={`Add people to ${channel?.name}`}
-        headerContent=""
-      />
-      {nonMembers.length === 0 && (
+      <ChannelModalHeader setShowModal={setShowModal} headerName={`Add people to ${channel?.name}`} headerContent=""/>
+      <div className="add-member-div-sub">
+        <input
+          value={searchUsername}
+          onChange={(e) => setSearchUsername(e.target.value)}
+          className="member-search-input"
+          placeholder="@somebody in the current workplace"
+          />
+        {console.log(selected)}
+        {console.log(matchedUsers)}
+
+        {matchedUsers.length > 0 && !selected &&
+          <div className="search-result-div">
+            {matchedUsers?.length &&
+              matchedUsers.map((user) => {
+                return (
+                  channel?.channel_members_ids?.includes(user.id) ?
+                    <div key={`${user.username}`} className="member-search-row-div">
+                      <MemberSearchRow user={user} />
+                      <span>Already a member.</span>
+                    </div> : 
+                    <div key={`${user.username}`} onClick={() => handleClick(user)} className="member-search-row-div">
+                      <MemberSearchRow user={user} />
+                    </div>
+                )
+              })
+            }
+          </div>
+        }
+        <div className='create-channel-button-div'>
+          <button className='modal-submit-button' type='submit' onClick={onAddMember} value={`${selectedUser.id}`}>Add</button>
+        </div>
+      </div>
+      {/* {nonMembers.length === 0 && (
         <div style={{ paddingLeft: "24px" }}>
           All users are part of this channel.
         </div>
-      )}
-      <div className="channel-detail-members">
+      )} */}
+      {/* <div className="channel-detail-members">
         {nonMembers?.map((user) => {
           return (
             <div className="channel-detail-member-div" key={`${user.id}`}>
@@ -143,7 +211,7 @@ export default function AddMember({ setShowModal, channel }) {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }
