@@ -78,24 +78,26 @@ export default function AddMember({ setShowModal, channel, users }) {
     console.log('useEffect start')
 
     if (!searchUsername.length) {
-      console.log('setting match back to empty')
+      console.log('setting selected to false')
       setSelected(false)
-      setMatchedUsers([])
-    } else {
-      let matched = []
-      console.log('userinput', searchUsername)
-      console.log('all users', users)
-      if (users.length) {
-        matched = users.filter((user) => user.username.toLowerCase().startsWith(searchUsername.toLowerCase()))
-      }
-      
-      console.log('setting matched users', matched)
-      setMatchedUsers([...matched])
     }
+
+    let matched = []
+    console.log('userinput', searchUsername)
+    console.log('all users', users)
+    if (users?.length) {
+      matched = users.filter((user) => {
+        console.log('user.username.length', searchUsername.length)
+        return searchUsername.length && user.username.toLowerCase().startsWith(searchUsername.toLowerCase())
+      })
+    }
+    
+    console.log('setting matched users', matched)
+    setMatchedUsers([...matched])
 
     console.log('useEffect end')
 
-  }, [searchUsername])
+  }, [searchUsername, users])
 
   const handleClick = (user) => {
     console.log('handle click----------', user)
@@ -114,8 +116,9 @@ export default function AddMember({ setShowModal, channel, users }) {
           className="member-search-input"
           placeholder="@somebody in the current workplace"
           />
+        {/* {console.log(selected)}
+        {console.log(matchedUsers)} */}
         {console.log(selected)}
-        {console.log(matchedUsers)}
 
         {matchedUsers.length > 0 && !selected &&
           <div className="search-result-div">

@@ -23,6 +23,7 @@ def authenticate():
     """
     Authenticates a user.
     """
+    print('----------------authenticate user------------------', current_user.is_authenticated)
     if current_user.is_authenticated:
         return current_user.to_dict()
 
@@ -34,8 +35,10 @@ def login():
     """
     Logs a user in
     """
+    print('----------------login------------------', current_user.is_authenticated)
     form = LoginForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('----------------login form------------------', form.data)
 
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
@@ -51,6 +54,7 @@ def logout():
     Logs a user out
     """
     logout_user()
+    print('----------------logout------------------', current_user.is_authenticated)
     return {'message': 'User logged out'}
 
 
@@ -59,9 +63,11 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
-
+    print('----------------signup------------------', current_user.is_authenticated)
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('----------------signup form------------------', form.data)
+
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],

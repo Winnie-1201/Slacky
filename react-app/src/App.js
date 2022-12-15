@@ -45,13 +45,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* {!user && (
+      {!user && (
         <Route path="/" exact={true}>
           <NavBar />
           <HomeMain></HomeMain>
           <Footer />
         </Route>
-      )} */}
+      )}
 
       <Switch>
         <Route path="/" exact={true}>

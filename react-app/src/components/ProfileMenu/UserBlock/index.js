@@ -19,7 +19,7 @@ const UserBlock = ({ user }) => {
         <div className="profile-online-box">
           <div className="profile-online-circle">
             <i
-              class={`${"Active" ? "fa-solid" : "fa-regular"} fa-circle fa-2xs`}
+              className={`${"Active" ? "fa-solid" : "fa-regular"} fa-circle fa-2xs`}
             ></i>
           </div>
           <div className="profile-online-text">
