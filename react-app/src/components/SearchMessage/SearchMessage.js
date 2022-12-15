@@ -73,7 +73,7 @@ const SearchMessages = () => {
                             <div className="channel_msg_ls">
                               <div>
                                 <img
-                                  className="user-icon"
+                                  className="user_icon"
                                   src={el.user_img}
                                   alt="user-icon"
                                 />
@@ -126,7 +126,7 @@ const SearchMessages = () => {
                               <div className="channel_msg_ls">
                               <div>
                               <img
-                                className="user-icon"
+                                className="user_icon"
                                 src={el.user_img}
                                 alt="user-icon"
                               />
@@ -137,7 +137,7 @@ const SearchMessages = () => {
                             </div>
                               </div>
                               </div>
-                            
+
                         ))}
                       </div>
 
