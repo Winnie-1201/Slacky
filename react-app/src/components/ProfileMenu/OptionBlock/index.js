@@ -7,19 +7,19 @@ const OptionBlock = () => {
       <div className="profile-block-divider">
         <div className="profile-option-box">
           <p>
-            Set yourself as <span>away</span>
+            Set yourself as <span>away</span> - to come
           </p>
         </div>
         <div className="profile-option-box">
-          <p>Pause notifications</p>
+          <p>Pause notifications - to come</p>
         </div>
       </div>
       <div className="profile-block-divider">
         <div className="profile-option-box">
-          <p>Profile</p>
+          <p>Profile - to come</p>
         </div>
         <div className="profile-option-box">
-          <p>Preference</p>
+          <p>Preference - to come</p>
         </div>
       </div>
       <div className="profile-block-divider">
