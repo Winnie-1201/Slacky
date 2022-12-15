@@ -21,6 +21,7 @@ import AddDm from "./components/DMs/AddDm";
 
 import AllChannels from "./components/Channels/AllChannels";
 import { getAllChannel } from "./store/channels";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
