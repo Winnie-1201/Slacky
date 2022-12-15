@@ -30,7 +30,7 @@ export default function DetailsMembers({ channel }) {
     <div className="channel-detail-members">
       {member_ids?.includes(user.id) && (
         <div
-          className="channel-detail-member-div"
+          className="channel-detail-member-div add-people-icon-text"
           onClick={() => setShowModal(true)}
         >
           <span className="channel-detail-member-add">

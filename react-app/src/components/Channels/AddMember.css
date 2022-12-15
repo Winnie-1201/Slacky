@@ -1,5 +1,6 @@
 .member-search-row-div {
     /* outline: 1px solid salmon; */
+    cursor: pointer;
     padding: 6px 0px;
     display: flex;
     align-items: center;

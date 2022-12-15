@@ -10,25 +10,11 @@ import './AddMember.css'
 
 export default function AddMember({ setShowModal, channel, users }) {
   const user = useSelector((state) => state.session.user);
-  // const [users, setUsers] = useState([]);
   const [matchedUsers, setMatchedUsers] = useState([])
   const [searchUsername, setSearchUsername] = useState("");
   const [selectedUser, setSelectedUser] = useState({});
   const [selected, setSelected] = useState(false);
-  // const [hasSearch, setHasSearch] = useState(false);
-  // const [nonMembers, setNonMembers] = useState([]);
-  // const [loadingNon, setLoandingNon] = useState(true);
   const [errors, setErrors] = useState({});
-
-  // async function fetchAllUsers() {
-  //   const response = await fetch("/api/users/");
-  //   const responseData = await response.json();
-  //   setUsers(responseData.users);
-  // }
-
-  // useEffect(() => {
-  //   fetchAllUsers();
-  // }, []);
 
   const dispatch = useDispatch();
   const onAddMember = async (e) => {
@@ -54,53 +40,30 @@ export default function AddMember({ setShowModal, channel, users }) {
   };
 
 
-  // console.log(memberIds)
-
-  // useEffect(() => {
-  //   const members = channel?.channel_members || [];
-  //   const member_ids = [];
-  //   for (const member of members) {
-  //     member_ids.push(member.id);
-  //   }
-
-  //   const diff = [];
-  //   for (const user of users) {
-  //     if (!member_ids.includes(user.id)) {
-  //       diff.push(user);
-  //     }
-  //   }
-
-  //   setNonMembers([...diff]);
-  //   setLoandingNon(false);
-  // }, [channel, users, user]);
-  
   useEffect(() => {
-    console.log('useEffect start')
-
     if (!searchUsername.length) {
-      console.log('setting selected to false')
       setSelected(false)
     }
 
     let matched = []
-    console.log('userinput', searchUsername)
-    console.log('all users', users)
+    // console.log('userinput', searchUsername)
+    // console.log('all users', users)
     if (users?.length) {
       matched = users.filter((user) => {
-        console.log('user.username.length', searchUsername.length)
+        // console.log('user.username.length', searchUsername.length)
         return searchUsername.length && user.username.toLowerCase().startsWith(searchUsername.toLowerCase())
       })
     }
     
-    console.log('setting matched users', matched)
+    // console.log('setting matched users', matched)
     setMatchedUsers([...matched])
 
-    console.log('useEffect end')
+    // console.log('useEffect end')
 
   }, [searchUsername, users])
 
   const handleClick = (user) => {
-    console.log('handle click----------', user)
+    // console.log('handle click----------', user)
     setSearchUsername(user.username)
     setSelectedUser(user)
     setSelected(true)
@@ -118,7 +81,7 @@ export default function AddMember({ setShowModal, channel, users }) {
           />
         {/* {console.log(selected)}
         {console.log(matchedUsers)} */}
-        {console.log(selected)}
+        {/* {console.log(selected)} */}
 
         {matchedUsers.length > 0 && !selected &&
           <div className="search-result-div">
