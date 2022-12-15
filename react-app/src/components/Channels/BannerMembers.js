@@ -22,12 +22,12 @@ export default function BannerMembers({ channel, setShowModal, setActive }) {
                 return (
                     <div key={user.id} className={`member-pics-div-outer position-${i}`}>
                         {user.image_url ?
-                            <span style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden' }}>
-                                <img style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'objectFit': 'cover' }} src={`${user.image_url}`} alt={`${user.name}`}></img>
+                            <span style={{ 'height': '22px', 'width': '24px', 'borderRadius': '4px', 'overflow': 'hidden' }}>
+                                <img style={{ 'height': '22px', 'width': '22px', 'borderRadius': '4px', 'overflow': 'hidden', 'objectFit': 'cover' }} src={`${user.image_url}`} alt={`${user.name}`}></img>
                             </span>
                             :
                             <span>
-                                <button style={{ 'height': '36px', 'width': '36px', 'borderRadius': '4px', 'overflow': 'hidden', 'border': 'none' }}>
+                                <button style={{ 'height': '22px', 'width': '22px', 'borderRadius': '4px', 'overflow': 'hidden', 'border': 'none' }}>
                                     <i className="fa-solid fa-user"></i>
                                 </button>
                             </span>

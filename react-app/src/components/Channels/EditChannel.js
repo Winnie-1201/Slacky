@@ -54,6 +54,10 @@ export default function EditChannel({ setShowEditModal, channel}) {
 
     if (name.length <= 0) {
       setNameError("Don’t forget to name your channel.");
+      setErrors(prev => {
+        delete prev.name
+        return prev
+      })
       validationError.name = "Don’t forget to name your channel."
     } else if (name.length > 80) {
       setNameError("Channel names can’t be longer than 80 characters.");
@@ -105,7 +109,7 @@ export default function EditChannel({ setShowEditModal, channel}) {
           <div className="create-channel-labels-div">
             <label htmlFor='name'>Name
               {onFocus && nameError.length > 0 && <span className='channel-form-error-span'>{nameError}</span>}
-              {errors.name && <span className='channel-form-error-span'>{errors.name}</span>}
+              {nameError.length === 0 && errors.name && <span className='channel-form-error-span'>{errors.name}</span>}
             </label>
           </div>
 
