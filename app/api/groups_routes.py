@@ -4,6 +4,8 @@ from app.models import db, Group, User, GroupMessage
 from app.forms import GroupForm
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
+from ..mysocket import socketio
+
 
 group_routes = Blueprint('groups', __name__)
 
@@ -25,6 +27,17 @@ def all_groups():
     groups = Group.query.all()
     return {"groups": [group.to_dict() for group in groups]}
 
+
+@group_routes.route("/<int:groupId>")
+@login_required
+def one_group(groupId):
+    group = Group.query.get(groupId)
+
+    if not group: 
+        return {"error:": "Group Not Found"}
+
+    return {'group': group.to_dict()}
+
 @group_routes.route("", methods=["POST"])
 @login_required
 def add_group():
@@ -36,68 +49,21 @@ def add_group():
         user_ids = form.data["users"]
         group_users = [User.query.get(id) for id in user_ids.split(",")]
 
-        print("form data", form.data)
-        print("-------")
-        print("-------")
-        # group_message = form.data["group_msg"]
-
-        # print("group-message", group_message)
-
         new_group = Group(
             topic=topic,
             group_user_groups=group_users
         )
 
-        # new_msg = GroupMessage(
-        #     content=group_message,
-        #     groupId=new_group.id,
-        #     userId=current_user.id
-        # )
-        # new_group.group_messages = [group_message]
-        # print("-------")
-        # print("-------")
-        # print("new group in backend", new_group)
-        # print("-------")
-        # print("-------")
-        # print("-------")
-
-        # new_message = GroupMessage
-
-        # receiver = User.query.get(user_ids.split(",")[0])
-        # sender = User.query.get(user_ids.split(",")[1])
-
-        # receiver.user_user_groups.append(new_group)
-        # sender.user_user_groups.append(new_group)
-
         db.session.add(new_group)
         db.session.commit()
-        # groups = Group.query.all()
-        # group = groups[len(groups)-1]
 
-        # print('-----------')
-        # print('-----------')
-        # print("user with group len before", len(group_users[0].user_user_groups))
-        # print('-----------')
-        # print('-----------')
-        # group_users[0].user_user_groups.append(group)
-        # group_users[1].user_user_groups.append(group)
-        # db.session.add(group_users[0])
-        # db.session.add(group_users[1])
-        # db.session.commit()
+        # print("new_group", new_group)
+        # print("new)gorup to dic", dir(new_group))
+        # print("new)gorup to dic", new_group.to_dict())
+        # print("-------------")
 
-        # user_with_group1 = User.query.get(group_users[0].id)
-        # user_with_group2 = User.query.get(group_users[1].id)
-
-        # print('-----------')
-        # print('-----------')
-        # print("user with group len", len(user_with_group1.user_user_groups))
-        # print('-----------')
-        # print('-----------')
-
-        # db.session.add(group_users[0])
-        # db.session.add(group_users[1])
-        # db.session.add(new_msg)
-        
+        # room = new_group.to_dict()['id']
+        # socketio.emit('join', room)
         return new_group.to_dict()
 
     if form.errors:

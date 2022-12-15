@@ -49,9 +49,11 @@ const SignUpForm = () => {
     <>
       <LoginGeneral />
       <form onSubmit={onSignUp} className="user-form">
-        <div>
+        <div className="form-error-container">
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div key={ind} className="form-error-block">
+              {error}
+            </div>
           ))}
         </div>
         <div className="user-form-inputs-div">

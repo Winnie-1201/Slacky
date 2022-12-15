@@ -62,8 +62,14 @@ function AddDm() {
       />
       {selectedUser && (
         <div className="user-list">
+          {users.length > 0 &&
+            users.filter((user) => {
+              user.username
+                .toLowerCase()
+                .startsWith(selectedUser.toLowerCase());
+            }).length === 0 && <div className="no-user">No member found</div>}
           <ul className="list-items">
-            {users &&
+            {users.length > 0 &&
               users
                 .filter((user) =>
                   user.username

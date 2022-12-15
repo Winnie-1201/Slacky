@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+.channel-wrapper-cursor {
+    cursor: pointer;
+}
+
 .sidebar-icon-span {
     margin-left: -5px;
     margin-right: 6px;

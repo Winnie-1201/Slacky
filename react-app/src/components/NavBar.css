@@ -8,8 +8,24 @@
     background-color: #4a154b;
 }
 
-.slack-logo {
-    height: 26px;
+.landing-login-logo-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
+    text-decoration: none;
+}
+
+.slack-logo-svg {
+    height: 45px;
+    width: 45px;
+}
+
+.landing-page-logo-text {
+    font-weight: 800;
+    font-size: min(1.4rem, 24px);
+    color: white;
 }
 
 .nav-links-div {
