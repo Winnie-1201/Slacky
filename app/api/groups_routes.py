@@ -23,6 +23,11 @@ def current_user_groups():
 @login_required
 def all_groups():
     groups = Group.query.all()
+    print("--------")
+    print("--------")
+    print("--------len of groups", len(groups))
+    print("--------")
+    print("--------")
     return {"groups": [group.to_dict() for group in groups]}
 
 

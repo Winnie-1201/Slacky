@@ -38,6 +38,7 @@ export const getAllGroupsThunk = () => async (dispatch) => {
 
   if (response.ok) {
     const groups = await response.json();
+    console.log("all of the groups in thunk", groups.groups);
     dispatch(loadAll(groups.groups));
     return groups;
   }

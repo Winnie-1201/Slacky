@@ -27,6 +27,7 @@ function DmDraftPage() {
   let receiver = useSelector((state) => state.session.users);
   // const users = useSelector((state) => state.session.users);
   const [chatInput, setChatInput] = useState("");
+  const [newRoom, setNewRoom] = useState("");
 
   useEffect(() => {
     dispatch(getReceiver(receiverId));
@@ -35,23 +36,26 @@ function DmDraftPage() {
   // useEffect(() => {
   //   socket = io();
 
-  //   socket.on("dm", async () => {
-  //     await dispatch(getCurrentUserGroupsThunk(receiver.id));
-  //     // await dispatch(getOneGroupThunk)
-  //     // await dispatch(getCurrentUserGroupsThunk());
-  //     // await dispatch(getAllMessageThunk(groupId));
-  //     // setMessages((messages) => [...messages, chat]);
+  //   socket.on("invite", async (data) => {
+  //     await dispatch(getCurrentUserGroupsThunk(data.room));
   //   });
+  //   // socket.on("dm", async () => {
+  //   //   await dispatch(getAllGroupsThunk());
+  //   //   // await dispatch(getOneGroupThunk)
+  //   //   // await dispatch(getCurrentUserGroupsThunk());
+  //   //   // await dispatch(getAllMessageThunk(groupId));
+  //   //   // setMessages((messages) => [...messages, chat]);
+  //   // });
 
-  //   return () => {
-  //     socket.disconnect();
-  //   };
+  //   // return () => {
+  //   //   socket.disconnect();
+  //   // };
   // }, []);
 
   const sendChat = async (e) => {
     e.preventDefault();
     const groupInfo = {
-      users: `${user.id}` + "," + `${receiver.id}`,
+      users: `${user.id}` + "," + `${receiverId}`,
       // group_msg: chatInput,
     };
 
@@ -61,10 +65,12 @@ function DmDraftPage() {
         content: chatInput,
         groupId: data.id,
       };
+
+      // await dispatch(getAllGroupsThunk());
       dispatch(createDmThunk(msgData)).then(async (newDm) => {
-        dispatch(getAllGroupsThunk());
         await dispatch(getOneGroupThunk(data.id));
-        await dispatch(getCurrentUserGroupsThunk(user.id));
+        await dispatch(getReceiver(receiverId));
+        // await dispatch(getCurrentUserGroupsThunk(user.id));
         // const msg = {
         //   content: newDm.direct_message.content,
         //   created_at: newDm.direct_message.created_at,
@@ -72,8 +78,9 @@ function DmDraftPage() {
         //   user: user,
         // };
 
-        // socket.emit("dm", {
-        //   msg: msg,
+        // socket.emit("join", { user: user, room: data.id });
+        // socket.emit("invite", {
+        //   user: receiverId,
         //   room: data.id,
         // });
 

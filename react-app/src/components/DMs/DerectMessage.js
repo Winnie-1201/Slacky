@@ -33,26 +33,35 @@ const DirectMessage = () => {
 
   // const newGroup = useSelector((state) => state.group.group);
   const user_groups = useSelector((state) => state.group.userGroups);
-  // const all_groups = useSelector((state) => state.group.allGroups);
+
+  const all_groups = useSelector((state) => state.group.allGroups);
   // const group = user_groups.filter((group) => group.id == groupId)[0];
   // let all_msgs = group?.group_messages;
   const currGroup = useSelector((state) => state.group.currGroup);
 
   const all_msgs = currGroup?.group_messages;
   const receiver =
-    currGroup?.users[0].username === user.username
+    currGroup?.users[0]?.username === user?.username
       ? currGroup?.users[1]
       : currGroup?.users[0];
 
   useEffect(async () => {
     socket = io();
 
+    console.log("socket in dm", socket);
+
     socket.emit("join", { user: user, room: groupId });
     await dispatch(getOneGroupThunk(groupId));
+    // await dispatch(getCurrentUserGroupsThunk(user.id));
+    // await dispatch(getCurrentUserGroupsThunk(receiver?.id));
 
     socket.on("dm", async (chat) => {
       setMessages((messages) => [...messages, chat]);
     });
+
+    // socket.on("invite", async (data) => {
+    //   await dispatch(getCurrentUserGroupsThunk(data.room));
+    // });
 
     // when component unmounts, disconnect
     return () => {
@@ -110,7 +119,7 @@ const DirectMessage = () => {
     );
 
   if (!user) {
-    return history.push("/");
+    return null;
   }
 
   // console.log("messages", messages);
