@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { createDmThunk, getAllMessageThunk } from "../../store/dm";
 import ScrollToBottom from "react-scroll-to-bottom";
@@ -11,6 +11,7 @@ import DmBanner from "./DmBanner";
 import {
   getAllGroupsThunk,
   getCurrentUserGroupsThunk,
+  getOneGroupThunk,
 } from "../../store/groups";
 import { getUser } from "../../store/session";
 import Footer from "../Footer/Footer";
@@ -20,6 +21,7 @@ let socket;
 const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
+  const history = useHistory();
 
   const { groupId } = useParams();
   const dispatch = useDispatch();
@@ -31,40 +33,39 @@ const DirectMessage = () => {
 
   // const newGroup = useSelector((state) => state.group.group);
   const user_groups = useSelector((state) => state.group.userGroups);
-  const all_groups = useSelector((state) => state.group.allGroups);
-  const group = user_groups.filter((group) => group.id == groupId)[0];
+  // const all_groups = useSelector((state) => state.group.allGroups);
+  // const group = user_groups.filter((group) => group.id == groupId)[0];
   // let all_msgs = group?.group_messages;
-  const all_msgs = Object.values(useSelector((state) => state.dm));
-  // console.log("gorup", group);
+  const currGroup = useSelector((state) => state.group.currGroup);
 
-  // console.log("all_groups lengthdd----", all_groups.length);
+  const all_msgs = currGroup?.group_messages;
   const receiver =
-    group?.users[0].username === user.username
-      ? group?.users[1]
-      : group?.users[0];
+    currGroup?.users[0].username === user.username
+      ? currGroup?.users[1]
+      : currGroup?.users[0];
 
-  useEffect(() => {
+  useEffect(async () => {
     socket = io();
 
-    // socket.emit("join", { user: user, room: groupId });
+    socket.emit("join", { user: user, room: groupId });
+    await dispatch(getOneGroupThunk(groupId));
 
-    socket.on("dm", async () => {
-      await dispatch(getCurrentUserGroupsThunk());
-      await dispatch(getAllMessageThunk(groupId));
-      // setMessages((messages) => [...messages, chat]);
+    socket.on("dm", async (chat) => {
+      setMessages((messages) => [...messages, chat]);
     });
 
     // when component unmounts, disconnect
     return () => {
       socket.emit("leave", { room: groupId, user: user });
-      // socket.off("dm");
       socket.disconnect();
     };
-  }, [groupId]);
+  }, []);
 
   useEffect(async () => {
     socket.emit("join", { user: user, room: groupId });
-    await dispatch(getAllMessageThunk(groupId));
+    setMessages([]);
+    await dispatch(getOneGroupThunk(groupId));
+    await dispatch(getCurrentUserGroupsThunk(user.id));
   }, [groupId]);
 
   const sendChat = async (e) => {
@@ -81,9 +82,6 @@ const DirectMessage = () => {
       };
 
       const newDm = await dispatch(createDmThunk(msgData));
-      // dispatch(getAllMessageThunk(groupId));
-      // dispatch(getAllGroupsThunk());
-      // await dispatch(getCurrentUserGroupsThunk());
 
       const msg = {
         content: newDm.direct_message.content,
@@ -104,14 +102,17 @@ const DirectMessage = () => {
     }
   };
 
-  if (!group)
+  if (!currGroup)
     return (
       <div className="loading-dm">
         <p>Loading...</p>
       </div>
     );
 
-  console.log("room", newRoom);
+  if (!user) {
+    return history.push("/");
+  }
+
   // console.log("messages", messages);
   // console.log("all messages", all_msgs);
 
@@ -189,7 +190,7 @@ const DirectMessage = () => {
                   )}
                 </>
               ))}
-              {/* {messages.length > 0 &&
+              {messages.length > 0 &&
                 messages[0] &&
                 messages.map((message, ind) => (
                   <>
@@ -248,7 +249,7 @@ const DirectMessage = () => {
                       </>
                     )}
                   </>
-                ))} */}
+                ))}
             </div>
           </ScrollToBottom>
           <div className="cm-input-container">

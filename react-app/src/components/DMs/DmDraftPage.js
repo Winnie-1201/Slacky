@@ -6,14 +6,17 @@ import {
   CreateGroupThunk,
   getAllGroupsThunk,
   getCurrentUserGroupsThunk,
+  getOneGroupThunk,
 } from "../../store/groups";
 import { getAllUser, getReceiver, getUser } from "../../store/session";
 import Footer from "../Footer/Footer";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 import DmBanner from "./DmBanner";
+import { io } from "socket.io-client";
 import "./DmDraftPage.css";
 
+let socket;
 function DmDraftPage() {
   // const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
@@ -29,6 +32,22 @@ function DmDraftPage() {
     dispatch(getReceiver(receiverId));
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   socket = io();
+
+  //   socket.on("dm", async () => {
+  //     await dispatch(getCurrentUserGroupsThunk(receiver.id));
+  //     // await dispatch(getOneGroupThunk)
+  //     // await dispatch(getCurrentUserGroupsThunk());
+  //     // await dispatch(getAllMessageThunk(groupId));
+  //     // setMessages((messages) => [...messages, chat]);
+  //   });
+
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
+
   const sendChat = async (e) => {
     e.preventDefault();
     const groupInfo = {
@@ -42,10 +61,23 @@ function DmDraftPage() {
         content: chatInput,
         groupId: data.id,
       };
-
-      dispatch(createDmThunk(msgData)).then(() => {
+      dispatch(createDmThunk(msgData)).then(async (newDm) => {
         dispatch(getAllGroupsThunk());
-        dispatch(getCurrentUserGroupsThunk(user.id));
+        await dispatch(getOneGroupThunk(data.id));
+        await dispatch(getCurrentUserGroupsThunk(user.id));
+        // const msg = {
+        //   content: newDm.direct_message.content,
+        //   created_at: newDm.direct_message.created_at,
+        //   updated_at: newDm.direct_message.updated_at,
+        //   user: user,
+        // };
+
+        // socket.emit("dm", {
+        //   msg: msg,
+        //   room: data.id,
+        // });
+
+        // console.log("---------");
         history.push(`/groups/${data.id}`);
       });
     });
