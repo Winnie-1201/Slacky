@@ -14,13 +14,14 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
 
   useEffect(() => {
     if (cm) setContent(cm.content);
+    return () => setEdit(false);
   }, [cm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
     const message = { content };
-    console.log("****** message*********", message);
+
     return dispatch(
       edit
         ? fetchEditChannelMessage(cmId, message)
