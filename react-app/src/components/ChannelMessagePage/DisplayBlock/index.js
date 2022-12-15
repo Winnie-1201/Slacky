@@ -22,6 +22,12 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
     minute < 10 ? "0" + minute : minute
   }`;
 
+  // useEffect(() => {
+  //   return () => {
+  //     setEdit(false);
+  //   };
+  // }, []);
+
   const handleDelete = (e) => {
     e.preventDefault();
     setErrors([]);
