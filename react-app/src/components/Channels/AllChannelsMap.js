@@ -8,7 +8,7 @@ import { getUser } from "../../store/session";
 import './AllChannelsMap.css'
 
 export default function AllChannelsMap() {
-    console.log('-------------AllChannelsMap Component-------------')
+    // console.log('-------------AllChannelsMap Component-------------')
     const user = useSelector((state) => state.session.user);
     const allChannelsObj = useSelector((state) => state.channels.allChannels);
     const [allChannels, setAllChannels] = useState([])
@@ -77,6 +77,9 @@ export default function AllChannelsMap() {
                         }
                         {!c.channel_members_ids?.includes(user.id) && c.id !== 1 &&
                             <button className="join-channel-button" value={`${c.id}`} onClick={handleJoinChannel}>Join</button>
+                        }
+                        {user.id === c.organizer_id &&
+                            <span style={{ 'color': 'rgba(29,28,29,0.7)' }}>Owned by you</span>
                         }
                     </div>
                 </div>
