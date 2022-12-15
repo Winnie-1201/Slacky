@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { createDmThunk } from "../../store/dm";
-import { CreateGroupThunk, getAllGroupsThunk } from "../../store/groups";
+import {
+  CreateGroupThunk,
+  getAllGroupsThunk,
+  getCurrentUserGroupsThunk,
+} from "../../store/groups";
 import { getAllUser, getReceiver, getUser } from "../../store/session";
 import Footer from "../Footer/Footer";
 import NavBarLoggedIn from "../NavBarLoggedIn";
@@ -29,9 +33,11 @@ function DmDraftPage() {
     e.preventDefault();
     const groupInfo = {
       users: `${user.id}` + "," + `${receiver.id}`,
+      // group_msg: chatInput,
     };
 
     await dispatch(CreateGroupThunk(groupInfo)).then((data) => {
+      console.log(data, "-----------------");
       const msgData = {
         content: chatInput,
         groupId: data.id,
@@ -39,6 +45,7 @@ function DmDraftPage() {
 
       dispatch(createDmThunk(msgData)).then(() => {
         dispatch(getAllGroupsThunk());
+        dispatch(getCurrentUserGroupsThunk(user.id));
         history.push(`/groups/${data.id}`);
       });
     });

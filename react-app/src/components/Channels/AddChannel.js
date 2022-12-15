@@ -22,17 +22,17 @@ export default function AddChannel({ setShowModal }) {
     const [nameError, setNameError] = useState("Don’t forget to name your channel.");
     const [descriptionError, setDescriptionError] = useState('');
     
-
+    console.log('is public', isPublic)
     const onCreateChannel = async (e) => {
         e.preventDefault();
         if (nameError || descriptionError) {
             return
         }
-
+        
         const data = await dispatch(createChannel({
             name,
             description,
-            isPublic,
+            is_public: isPublic ? "True" : "False",
             organizer: user,
             users:`${user.id}`
         }))
@@ -147,7 +147,7 @@ export default function AddChannel({ setShowModal }) {
                     {isPublic ?
                         <span>When a channel is set to private, it can only be viewed or joined by invitation.</span>
                         :
-                        <span>This can’t be undone. A private channel cannot be made public later on.</span>
+                        <span><b>This can’t be undone.</b> A private channel cannot be made public later on.</span>
                     }
                     <label className='privacy-slider-switch'>
                         <input

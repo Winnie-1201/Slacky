@@ -21,6 +21,8 @@ import AddDm from "./components/DMs/AddDm";
 
 import AllChannels from "./components/Channels/AllChannels";
 import { getAllChannel } from "./store/channels";
+import Footer from "./components/Footer/Footer";
+import { getCurrentUserGroupsThunk } from "./store/groups";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +38,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllChannel());
+    dispatch(getCurrentUserGroupsThunk(user?.id));
   }, []);
 
   if (!loaded) {
@@ -48,10 +51,16 @@ function App() {
         <Route path="/" exact={true}>
           <NavBar />
           <HomeMain></HomeMain>
+          <Footer />
         </Route>
       )}
 
       <Switch>
+        <Route path="/" exact={true}>
+          <NavBar />
+          <HomeMain></HomeMain>
+          <Footer />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -88,7 +97,6 @@ function App() {
            <Redirect to='/channels/1'></Redirect>
         </ProtectedRoute> */}
       </Switch>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

@@ -3,16 +3,18 @@
 
 }
 
-.user-icon {
+.user_icon{
     margin-left: 0px;
 
 }
 
-img.user-icon {
+img.user_icon {
 
     border: 1px solid #c4c0c0;
     border-radius: 5px;
     margin:6px;
+    width:35px;
+    height:35px;
     /* margin-top:23px; */
 
 }
@@ -67,4 +69,10 @@ img.user-icon {
     margin-left: 150px;
     text-decoration: none;
     color: rgb(42, 40, 40);
+}
+
+.view_link:hover{
+    font-weight: bolder;
+    color:rgb(38, 38, 185);
+
 }

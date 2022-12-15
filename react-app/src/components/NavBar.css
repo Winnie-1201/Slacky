@@ -1,5 +1,5 @@
-/* .log-in-navbar {
-
+.landing-log-in-navbar {
+    padding: 0px 24px;
     height: 80px;
     display: flex;
     flex-wrap: wrap;
@@ -16,14 +16,15 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    column-gap: 20px;
 }
 
-.nav-links {
+.landing-nav-links {
     text-decoration: none;
-
-
+    padding: 8px 16px;
+    box-sizing: border-box;
     border: 1px solid white;
     border-radius: 4px;
     font-size: 0.875rem;
     color: white;
-} */
+}
