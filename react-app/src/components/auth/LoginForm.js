@@ -41,9 +41,11 @@ const LoginForm = () => {
     <>
       <LoginGeneral />
       <form onSubmit={onLogin} className="user-form ">
-        <div>
+        <div className="form-error-container">
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div key={ind} className="form-error-block">
+              {error}
+            </div>
           ))}
         </div>
         <div className="user-form-inputs-div">
@@ -69,12 +71,16 @@ const LoginForm = () => {
         <div className="user-form-button-div">
           <button type="submit">Login</button>
         </div>
+
       <div className="user-form-button-div">
           <DemoUser1 />
       </div>
       <div className="user-form-button-div">
       <DemoUser2 />
       </div>
+
+
+       
       </form>
     </>
   );

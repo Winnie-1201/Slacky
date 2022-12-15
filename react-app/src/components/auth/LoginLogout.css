@@ -35,3 +35,13 @@
   box-sizing: border-box;
   color: white;
 }
+
+.form-error-container {
+  width: 400px;
+  padding-bottom: 1rem;
+  color: red;
+}
+
+.form-error-block {
+  padding: 0.2rem 0;
+}
