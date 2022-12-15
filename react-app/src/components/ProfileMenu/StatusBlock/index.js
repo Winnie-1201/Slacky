@@ -17,7 +17,7 @@ const StatusBlock = ({ user }) => {
           ></i>
         </div>
         <div className="profile-status-text">
-          <p>Update your status</p>
+          <p>Update your status - to come</p>
         </div>
       </div>
     </div>
