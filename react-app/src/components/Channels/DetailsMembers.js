@@ -9,10 +9,21 @@ export default function DetailsMembers({ channel }) {
   const [members, setMembers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const member_ids = channel?.channel_members_ids;
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     setMembers(channel.channel_members);
   }, [channel]);
+
+  async function fetchAllUsers() {
+    const response = await fetch("/api/users/");
+    const responseData = await response.json();
+    setUsers(responseData.users);
+  }
+
+  useEffect(() => {
+    fetchAllUsers();
+  }, []);
 
   // console.log(members)
   return (
@@ -93,7 +104,7 @@ export default function DetailsMembers({ channel }) {
       })}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <AddMember setShowModal={setShowModal} channel={channel} />
+          <AddMember setShowModal={setShowModal} channel={channel} users={users} />
         </Modal>
       )}
     </div>

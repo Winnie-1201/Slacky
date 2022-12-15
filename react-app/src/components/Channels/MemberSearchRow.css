@@ -1,0 +1,22 @@
+.member-search-row-span {
+    height: 36px;
+    width: 36px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.member-search-row-span > img {
+    height: 36px;
+    width: 36px;
+    border-radius: 4px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.member-search-row-span>button {
+    height: 36px;
+    width: 36px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: none
+}
