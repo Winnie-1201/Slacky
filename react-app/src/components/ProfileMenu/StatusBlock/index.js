@@ -13,7 +13,7 @@ const StatusBlock = ({ user }) => {
       >
         <div className="profile-status-icon">
           <i
-            class={`fa-regular ${laugh ? "fa-face-laugh" : "fa-face-smile"}`}
+            className={`fa-regular ${laugh ? "fa-face-laugh" : "fa-face-smile"}`}
           ></i>
         </div>
         <div className="profile-status-text">

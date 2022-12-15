@@ -2,8 +2,8 @@ import React from 'react'
 import './MemberSearchRow.css'
 
 export default function MemberSearchRow({user}) {
-  console.log(user)
-  console.log(user.id)
+  // console.log(user)
+  // console.log(user.id)
   return (
     <>
     {user.image_url ? (
