@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import DetailsAbout from './DetailsAbout';
 import DetailsMembers from './DetailsMembers';
 
-export default function DetailsContent({ channel }) {
-    const [active, setActive] = useState('About')
+export default function DetailsContent({ channel, active, setActive, setShowModal }) {
+    // const [active, setActive] = useState('About')
 
   return (
     <>
@@ -13,12 +13,12 @@ export default function DetailsContent({ channel }) {
       </div>    
         {active === 'About' &&
             <div className='channel-details-body-about'>
-                <DetailsAbout channel={ channel } />
+              <DetailsAbout channel={ channel } setShowModal={setShowModal} />
             </div>
         }
         {active === 'Members' &&
             <div className='channel-details-body-members'>
-                <DetailsMembers channel={channel} />
+              <DetailsMembers channel={channel} />
             </div>
         }
            

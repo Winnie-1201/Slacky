@@ -4,19 +4,19 @@ import './ChannelDetails.css';
 import DetailsName from './DetailsName';
 import DetailsContent from './DetailsContent';
 
-export default function ChannelDetails({ setShowModal, channel }) {
-    const [name, setName] = useState('')
+export default function ChannelDetails({ setShowModal, channel, active, setActive }) {
+    // const [name, setName] = useState('')
 
-    useEffect(() => {
-      setName(channel.name)
+    // useEffect(() => {
+    //   if (channel) setName(channel.name)
     
-    }, [channel])
+    // }, [channel])
     
 
   return (
     <div className='channel-details-div'>
-        <DetailsName setShowModal={setShowModal} name={name} />
-        <DetailsContent channel={channel} />
+      <DetailsName setShowModal={setShowModal} channel={channel} />
+        <DetailsContent setShowModal={setShowModal} channel={channel} active={active} setActive={setActive}/>
     </div>
   )
 }

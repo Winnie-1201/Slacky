@@ -12,7 +12,7 @@ dm_routes = Blueprint("messages", __name__)
 @login_required
 def dms_by_groupId(group_id):
     """
-    Query for all the messages from a group and returns 
+    Query for all the messages from a group and returns
     them in a list of messages dictionaries
     """
     group = Group.query.get(group_id)
@@ -43,11 +43,25 @@ def create_dm(group_id):
                 groupId=group_id,
                 userId=current_user.id
             )
-            print("------new msg in backend", new_message)
+            # print("------------")
+            # print("------------")
+            # print("------new msg in backend", new_message)
+            # print("---------group ", group)
+            # print("------------group.group_msgs", group.group_messages)
+            # print("------------")
+            # print("------------")
+            if group.group_messages:
+                group.group_messages.append(new_message)
+            else:
+                group.group_messages = [new_message]
+            current_user.user_user_groups.append(group)
+            # print("-------group message after", group.group_messages)
+            db.session.add(group)
+            db.session.add(current_user)
             db.session.add(new_message)
             db.session.commit()
             return {"direct_message": new_message.to_dict()}
-        
+
         if form.errors:
             return form.errors
     else:
@@ -76,7 +90,7 @@ def edit_dm(group_id, id):
                 # db.session.add(group_message)
                 db.session.commit()
                 return {"direct_message": group_message.to_dict()}
-            
+
             if form.errors:
                 return form.errors
         else:
@@ -98,3 +112,11 @@ def delete_dm(group_id, id):
             return {'error': 'The current user does not have access'}
 
     else: return {'error': 'The group or the message is not found.'}
+
+
+@dm_routes.route('/<string:keyword>')
+@login_required
+def search_dm_message(keyword):
+    all_groups = Group.query.all()
+    for group in all_groups:
+        dm_messages = group.group_messages

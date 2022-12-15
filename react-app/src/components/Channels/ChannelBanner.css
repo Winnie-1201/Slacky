@@ -1,12 +1,14 @@
 .channel-banner-div {
     padding: 0px 16px 0px 20px;
     column-gap: 16px;
-    height: 50px;
+    min-height: 50px;
     border-bottom: 1px solid rgb(221, 221, 221);
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
+    align-items: center; */
+    display: grid;
+    grid-template-columns: fit-content(100%) auto fit-content(100%);
     align-items: center;
-    
 }
 
 .channel-name {
@@ -20,7 +22,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    flex: 0 0 fit-content;
+    /* flex: 0 0 fit-content; */
 }
 
 .channel-topic {
@@ -28,17 +30,20 @@
     font-size: 13px;
     color: rgb(29, 28, 29);
     font-weight: 400;
-    flex: 1 1 auto; 
+    /* flex: 1 1 auto; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .channel-members {
-    flex: 0 0 fit-content;
+    /* flex: 0 0 fit-content; */
     border: 1px solid rgb(221, 221, 221);
     border-radius: 5px;
     font-size: 15px;
     font-weight: 400;
     color: rgb(29, 28, 29);
-    height: 31px;
+    height: 32px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -72,10 +77,12 @@
 
 .member-pics-div-outer.position-0 {
     z-index: 3;
+    box-shadow: 0 0 0 2px white;
 }
 
 .member-pics-div-outer.position-1 {
     z-index: 2;
+    box-shadow: 0 0 0 2px white;
 }
 
 .member-pics-div-outer.position-2 {
@@ -105,4 +112,26 @@
     justify-content: center;
     font-size: 13px;
     color: rgba(29, 28, 29, 0.7);   
+}
+
+@media (max-width: 900px) {
+    .channel-topic {
+        display: none;
+    }
+
+    .channel-banner-div {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 600px) {
+    .member-pics-div-outer {
+        display: none;
+    }
+
+    .channel-banner-div {
+        display: flex;
+        justify-content: space-between;
+    }
 }

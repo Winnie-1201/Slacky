@@ -1,8 +1,19 @@
 .sidebar-div {
-    color: white;
+  color: white;
 }
 
+.sidebar-index {
+    height: calc(100vh - 84px - 50px);
+    overflow-y: auto;
+}
+
+/* .sidebar-index::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+} */
+
 .sidebar-header {
+    min-height: 51px;
     padding: 8px 16px;
     display: flex;
     justify-content: space-between;
@@ -11,8 +22,9 @@
 }
 
 .sidebar-header > button {
-    width: 34px;
-    height: 34px;
-    border: none;
-    border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }

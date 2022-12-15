@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
 
-
 users_channels = db.Table(
     'users_channels',
     db.Model.metadata,
@@ -49,6 +48,14 @@ class Channel(db.Model):
         sortedArr = sorted(arr, key=lambda user: user['username'].lower())
         return sortedArr
 
+    def member_ids(self):
+        arr = [member.id for member in self.channel_members]
+        return arr
+
+    def non_member_ids(self):
+        arr = []
+        return arr
+
     def to_dict_name_only(self):
         return {
             'id': self.id,
@@ -61,6 +68,7 @@ class Channel(db.Model):
             'updated_at': self.updated_at,
             'number_of_members': len(self.channel_members),
             'channel_members': self.sort_by_name(),
+            'channel_members_ids': self.member_ids(),
             'organizer': self.organizer.to_dict_basics()
         }
 
@@ -74,6 +82,7 @@ class Channel(db.Model):
             'is_public': self.is_public,
             'organizer': self.organizer.to_dict(),
             'channel_members': self.sort_by_name(),
+            'channel_members_ids': self.member_ids(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

@@ -1,28 +1,78 @@
-.landing-grid {
-    height: calc(100% - 41px);
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 260px auto;
-    grid-template-rows: 44px auto;
-    grid-template-areas:
-        "grid-nav-top grid-nav-top"
-        "grid-sidebar grid-main-view"
+/* .landing-grid {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 260px auto;
+  grid-template-rows: 4vh 92vh 4vh;
+  grid-template-areas:
+    "grid-nav-top grid-nav-top"
+    "grid-sidebar grid-main-view"
+    "grid-footer grid-footer";
+  align-items: stretch;
 }
 
 .grid-nav-top {
-    grid-area: 'grid-nav-top';
-    background-color: #350d36;
-    border-bottom: 1px solid rgb(255 255 255 / 10%);
-    display: flex;
-    align-items: center;
+  height: 4vh;
+  grid-area: "grid-nav-top";
+  background-color: #350d36;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  display: flex;
+  align-items: center;
 }
 
 .grid-sidebar {
-    grid-area: 'grid-sidebar';
-    background-color: #4a154b;
+  height: 92vh;
+  grid-area: "grid-sidebar";
+  background-color: #4a154b;
 }
 
 .grid-main-view {
-    grid-area: 'grid-main-view';
-    background-color: white;
+  width: 100%;
+  height: 92vh;
+  grid-area: "grid-main-view";
+  background-color: white;
 }
+
+.grid-footer {
+  height: 4vh;
+  grid-area: "grid-footer";
+  background-color: yellow;
+} */
+
+.landing-grid {
+  height: 100vh;
+  /* width: 100vw; */
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: 40px calc(100vh - 84px) 44px;
+  grid-template-areas:
+    "nav nav"
+    "sidebar main"
+    "foot foot";
+  align-items: stretch;
+}
+
+.grid-nav-top {
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  display: flex;
+  align-items: center;
+}
+
+/* @media (max-width:600px) {
+  .grid-sidebar {
+    display: none;
+  }
+
+  .landing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "nav nav"
+        "main main"
+        "foot foot";
+    }
+
+  .channel-message-page {
+    width: 100vw;
+  }
+} */

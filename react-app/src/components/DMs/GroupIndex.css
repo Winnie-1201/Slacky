@@ -1,0 +1,22 @@
+.sidebar-text a {
+  color: white;
+  text-decoration: none;
+}
+
+.user-icon-container-sidebar {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+.user-icon-sidebar {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cursor {
+  cursor: pointer;
+}

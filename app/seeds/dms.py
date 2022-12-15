@@ -7,13 +7,13 @@ def seed_dms():
 
 
     msg_1 = GroupMessage(
-        content="Hello, f{user1.username}",
+        content=f"Hello, I am {user1.username}",
         groupId=1,
         user=user1
     )
 
     msg_2 = GroupMessage(
-        content="Hi, f{user2.username}",
+        content=f"Hi, I am {user2.username}",
         groupId=1,
         user=user2
     )
@@ -29,23 +29,23 @@ def seed_dms():
         user=user2
     )
     msg_5 = GroupMessage(
-        content="Hi, f{user1.username}",
+        content=f"Hi, I am {user1.username}",
         groupId=2,
         user=user1
     )
     msg_6 = GroupMessage(
-        content="Hi, f{user3.username}",
+        content=f'Hi, I am {user3.username}',
         groupId=2,
         user=user3
     )
 
     msg_7 = GroupMessage(
-        content="Hi, f{user2.username}",
+        content=f"Hi, I am {user2.username}",
         groupId=3,
         user=user2
     )
     msg_8 = GroupMessage(
-        content="Hi, f{user3.username}",
+        content=f"Hi, I am {user3.username}",
         groupId=3,
         user=user3
     )
@@ -63,6 +63,3 @@ def undo_dms():
         db.session.execute("DELETE FROM group_messages")
 
     db.session.commit()
-    
-
-    

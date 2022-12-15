@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -8,13 +8,20 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
-import SocketTest from "./components/SocketTest";
-import LandingLoggedIn from "./components/LandingLoggedIn";
+import LandingLoggedIn from "./components/_DONOTUSE/LandingLoggedIn";
 import HomeMain from "./components/HomeMain/HomeMain";
-import Footer from "./components/Footer/Footer";
-import DirectMessage from "./components/DerectMessage";
+import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
 import NavBarLoggedIn from "./components/NavBarLoggedIn";
+
+import AddDmPage from "./components/DMs/AddDmPage";
+import DmDraftPage from "./components/DMs/DmDraftPage";
+import SearchMessages from "./components/SearchMessage/SearchMessage";
+import AddDm from "./components/DMs/AddDm";
+
+import AllChannels from "./components/Channels/AllChannels";
+import { getAllChannel } from "./store/channels";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,21 +35,30 @@ function App() {
     })();
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllChannel());
+  }, []);
+
   if (!loaded) {
     return null;
   }
 
   return (
     <BrowserRouter>
-      {!user && (
+      {/* {!user && (
         <Route path="/" exact={true}>
           <NavBar />
           <HomeMain></HomeMain>
+          <Footer />
         </Route>
-      )}
-      {user && <LandingLoggedIn user={user}></LandingLoggedIn>}
+      )} */}
 
       <Switch>
+        <Route path="/" exact={true}>
+          <NavBar />
+          <HomeMain></HomeMain>
+          <Footer />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -55,7 +71,13 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/dm/:groupId">
+        <Route path="/groups/all-dms" exact={true}>
+          <AddDmPage />
+        </Route>
+        <Route path="/groups/draft/:receiverId" exact={true}>
+          <DmDraftPage />
+        </Route>
+        <Route path="/groups/:groupId">
           {/* <LandingLoggedIn user={user} /> */}
           <DirectMessage />
           {/* <SocketTest /> */}
@@ -63,8 +85,16 @@ function App() {
         <ProtectedRoute path="/channels/:channelId">
           <ChannelMessagePage />
         </ProtectedRoute>
+        <ProtectedRoute path={["/search/:keyword", "/search"]}>
+          <SearchMessages />
+        </ProtectedRoute>
+        <ProtectedRoute path="/browse-channels">
+          <AllChannels />
+        </ProtectedRoute>
+        {/* <ProtectedRoute >
+           <Redirect to='/channels/1'></Redirect>
+        </ProtectedRoute> */}
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }

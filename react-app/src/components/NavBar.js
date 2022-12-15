@@ -5,7 +5,7 @@ import './NavBar.css';
 
 const NavBar = () => {
   return (
-    <nav className='log-in-navbar'>
+    <nav className='landing-log-in-navbar'> 
       <div>
         <NavLink to='/' exact={true} activeClassName='active'>
           <svg height='25px' width="100px" viewBox='0 0 240 60'>
@@ -21,13 +21,17 @@ const NavBar = () => {
       </div>
 
       <div className='nav-links-div'>
-        <div>
-          <NavLink to='/login' exact={true} activeClassName='active' className='nav-links'>
+        <div style={{
+          "width": "80px",
+          "minWidth": "80px",
+          "maxWidth": "80px",
+          "boxSizing": 'border-box'}}>
+          <NavLink to='/login' exact={true} activeClassName='active' className='landing-nav-links'>
             LOGIN
           </NavLink>
         </div>
         <div>
-          <NavLink to='/sign-up' exact={true} activeClassName='active' className='nav-links'>
+          <NavLink to='/sign-up' exact={true} activeClassName='active' className='landing-nav-links'>
             SIGN UP
           </NavLink>
         </div>

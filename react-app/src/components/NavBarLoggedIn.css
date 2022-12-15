@@ -1,21 +1,31 @@
 .logged-in-navbar {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.profile-icon-div {
+  padding: 0px 16px;
+  position: relative
 }
 
 .profile-icon-span {
-    width: 26px;
-    height: 26px;
-    border-radius: 4px;
-    overflow: hidden;
-    display: inline-block;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .profile-icon-span > img {
-    width: 26px;
-    background-size: 100%;
+  width: 26px;
+  background-size: 100%;
+}
+
+.nav_bar_search_login {
+  width: 90%;
+
 }

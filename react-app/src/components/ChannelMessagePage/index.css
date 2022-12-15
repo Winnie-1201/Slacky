@@ -1,0 +1,26 @@
+.channel-message-page {
+  width: calc(100vw - 260px);
+  height: calc(100vh - 84px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.grid-nav-top {
+  grid-area: nav;
+  background-color: #350d36;
+}
+
+.grid-sidebar {
+  grid-area: sidebar;
+  background-color: #4a154b;
+}
+
+.grid-main-view {
+  grid-area: main;
+}
+
+.grid-footer {
+  grid-area: foot;
+}

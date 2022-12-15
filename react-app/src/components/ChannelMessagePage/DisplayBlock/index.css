@@ -1,3 +1,94 @@
 .cm-block {
-  border: 2px solid green;
+  width: 100%;
+  display: flex;
+  padding: 0.5rem 2rem;
+  position: relative;
+}
+
+.cm-block:hover {
+  background-color: rgba(221, 221, 221, 0.3);
+}
+
+.cm-with-avatar {
+  align-items: flex-start;
+}
+
+.cm-without-avatar {
+  align-items: baseline;
+}
+
+.cm-block-left {
+  min-width: 32px;
+  text-align: center;
+}
+
+.cm-avatar {
+  width: 2rem;
+  aspect-ratio: 1/1;
+  /* object-fit: cover; */
+}
+
+.cm-user-block {
+  display: flex;
+  align-items: baseline;
+}
+
+.cm-name-box {
+  padding-right: 1rem;
+  vertical-align: text-top;
+}
+.cm-name-box p {
+  font-weight: bolder;
+}
+
+.cm-time-box p,
+.cm-block-left P,
+.cm-content-box p {
+  font-size: 0.8rem;
+}
+
+.cm-block p {
+  margin: 0;
+}
+
+.cm-block-right {
+  width: 70vw;
+  padding-left: 1rem;
+}
+
+.cm-block-left p {
+  display: none;
+}
+
+.cm-without-avatar:hover .cm-block-left p {
+  display: block;
+}
+
+.cm-block-menu {
+  display: none;
+}
+
+.cm-block-menu button {
+  border: none;
+  outline: none;
+  padding: 0.7rem 0.7rem;
+  background-color: transparent;
+}
+
+.cm-block-menu button:hover {
+  background-color: rgba(221, 221, 221, 0.3);
+}
+
+.cm-block:hover .cm-block-menu {
+  display: flex;
+  position: absolute;
+  right: 2rem;
+  top: -2rem;
+  border: 1px solid rgba(221, 221, 221, 1);
+  border-radius: 0.4rem;
+  background-color: #ffffff;
+}
+
+.cm-block .cm-input-container {
+  width: 100%;
 }

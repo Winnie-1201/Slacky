@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+# from .user import User
 
 class GroupMessage(db.Model):
     __tablename__ = "group_messages"
@@ -22,6 +23,7 @@ class GroupMessage(db.Model):
     user = db.relationship("User", back_populates="group_messages")
 
     def to_dict(self):
+        # user = User.query.get(self.userId)
         return {
             "id": self.id,
             "content": self.content,
@@ -29,6 +31,20 @@ class GroupMessage(db.Model):
             "userId": self.userId,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            # "user": self.user,
-            # "group": self.group
+            "user": self.user.to_dict_basics()
+            # "user": self.user.to_dict(),
+            # "group": self.group.to_dict()
+        }
+
+    def to_dict_basics(self):
+        return {
+            "id": self.id,
+            "content": self.content,
+            "groupId": self.groupId,
+            "userId": self.userId,
+            'user_name':self.user.username,
+            'user_img':self.user.image_url,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+
         }

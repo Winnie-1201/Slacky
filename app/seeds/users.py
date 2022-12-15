@@ -3,49 +3,16 @@ from app.models import db, User, environment, SCHEMA
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password',
-        image_url ='https://m.media-amazon.com/images/I/31sv5622scL._AC_.jpg',
-        is_active = True,
-        status = 'Lorem ipsum dolor sit amet'
-        )
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password',
-        image_url ='https://i.ebayimg.com/images/g/Ht8AAOSwywlhVCZT/s-l500.jpg',
-        is_active = True,
-        status = 'consectetur adipiscing elit'
-        )
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password',
-        image_url ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM14_ncX5-mf7emOikPDZRfznsKJigRU2RWwH9l0HvLIrRiebKpQz_rex70ZrPnRSz0bQ&usqp=CAU',
-        is_active = True,
-        status = 'sed do eiusmod tempor'
-        )
-    lucy = User(
-        username='lucy', email='lucy@aa.io', password='password',
-        image_url ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVfGbdrkOVpf6OYM4t4X2diQ8t7lCTI2Kp4aI7rE3JIErlFHhv4ndyqgkRSaxYsWb7PYE&usqp=CAU',
-        is_active = True,
-        status = 'incididunt ut labore et dolore'
-        )
-    jason = User(
-        username='jason', email='jason@aa.io', password='password',
-        image_url ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAg3YrTvORClxWkynmLcPWG4hQFvwY-Jaz6A&usqp=CAU',
-        is_active = True,
-        status = 'Ipsum a arcu cursus vitae congue'
-        )
-    ray = User(
-        username='ray', email='ray@aa.io', password='password',
-        image_url ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzwJ0SfzL4Q4MPmTVmsMLlEjcTF90_SkgHxQ&usqp=CAU',
-        is_active = True,
-        status = 'mauris rhoncus aenean vel'
-        )
-
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
-    db.session.add(lucy)
-    db.session.add(jason)
-    db.session.add(ray)
+    for x in range(50):
+        fake_name = f"Demo{x+1}"
+        fake_email = f"demo{x+1}@aa.io"
+        demo = User(
+            username=fake_name, email=fake_email, password='password',
+            image_url ='https://www.w3schools.com/howto/img_avatar.png',
+            is_online = True,
+            status = 'Lorem ipsum dolor sit amet'
+            )
+        db.session.add(demo)
     db.session.commit()
 
 

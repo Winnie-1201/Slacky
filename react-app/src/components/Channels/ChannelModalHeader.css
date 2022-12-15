@@ -1,0 +1,27 @@
+.channel-modal-header {
+    /* outline: 1px solid rebeccapurple; */
+    padding: 0px 24px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    padding-bottom: 16px;
+}
+
+.channel-modal-header-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel-modal-header-top h2 {
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.channel-modal-header-bottom {
+    color: rgba(29, 28, 29, 0.7);
+    font-size: 15px;
+}

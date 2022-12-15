@@ -1,8 +1,6 @@
 .footer-div {
-    color: white;
-    background-color: #4a154b;
-    height: 40px;
-    border-top: 1px solid rgb(255 255 255 / 10%);
-    position: sticky;
-    bottom: 0px;
+  height: 44px;
+  color: white;
+  background-color: #4a154b;
+  border-top: 1px solid rgb(255 255 255 / 10%);
 }
