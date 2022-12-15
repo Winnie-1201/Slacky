@@ -14,6 +14,7 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
 
   useEffect(() => {
     if (cm) setContent(cm.content);
+    if (setEdit) return () => setEdit(false);
   }, [cm]);
 
   const handleSubmit = (e) => {
