@@ -1,0 +1,32 @@
+.profile-block-divider:nth-of-type(1) {
+  padding-bottom: 0.5rem;
+}
+
+.profile-block-divider:nth-of-type(2) {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.profile-block-divider:nth-of-type(3) {
+  padding-top: 0.5rem;
+}
+
+.profile-option-box {
+  padding: 0.3rem 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+.profile-option-box p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.profile-option-box:hover {
+  background-color: #1164a3;
+  color: rgb(255, 255, 255);
+}
+.profile-option-box:hover button {
+  background-color: #1164a3;
+  color: rgb(255, 255, 255);
+}
