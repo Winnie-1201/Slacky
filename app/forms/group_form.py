@@ -11,3 +11,4 @@ class GroupForm(FlaskForm):
     topic = StringField("topic")
     # not sure if we need validation on users
     users = StringField("user")
+    group_msg = StringField("group_msg")

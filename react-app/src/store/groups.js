@@ -40,7 +40,7 @@ export const getCurrentUserGroupsThunk = () => async (dispatch) => {
 
   if (response.ok) {
     const groups = await response.json();
-    console.log("current user groups", groups);
+    // console.log("current user groups", groups);
     dispatch(LoadCurr(groups.groups));
     return groups;
   }
@@ -49,6 +49,7 @@ export const getCurrentUserGroupsThunk = () => async (dispatch) => {
 // export const getGroupThunk = () => async;
 
 export const CreateGroupThunk = (data) => async (dispatch) => {
+  console.log("data in create group thunk", data);
   const response = await fetch("/api/groups", {
     method: "POST",
     headers: {
@@ -66,7 +67,7 @@ export const CreateGroupThunk = (data) => async (dispatch) => {
 };
 
 // reducer
-const initialState = { group: {}, userGroups: [], allGroups: [] };
+const initialState = { userGroups: [], allGroups: [] };
 export default function groupReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_ALL:
@@ -74,7 +75,7 @@ export default function groupReducer(state = initialState, action) {
     case LOAD_CURR:
       return { ...state, userGroups: action.groups };
     case CREATE_GROUP:
-      return { ...state, group: action.group };
+      return { ...state };
     default:
       return state;
   }
