@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { createDmThunk } from "../../store/dm";
-import { CreateGroupThunk } from "../../store/groups";
-import { getAllUser } from "../../store/session";
+import { CreateGroupThunk, getAllGroupsThunk } from "../../store/groups";
+import { getAllUser, getReceiver, getUser } from "../../store/session";
+import Footer from "../Footer/Footer";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 import DmBanner from "./DmBanner";
@@ -13,14 +14,15 @@ function DmDraftPage() {
   // const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { receiverId } = useParams();
 
   const user = useSelector((state) => state.session.user);
-  const users = useSelector((state) => state.session.users);
-  const { receiverId } = useParams();
+  let receiver = useSelector((state) => state.session.users);
+  // const users = useSelector((state) => state.session.users);
   const [chatInput, setChatInput] = useState("");
 
   useEffect(() => {
-    dispatch(getAllUser());
+    dispatch(getReceiver(receiverId));
   }, [dispatch]);
 
   const sendChat = async (e) => {
@@ -29,23 +31,24 @@ function DmDraftPage() {
       users: `${user.id}` + "," + `${receiver.id}`,
     };
 
-    console.log("group info", groupInfo);
     await dispatch(CreateGroupThunk(groupInfo)).then((data) => {
       const msgData = {
         content: chatInput,
         groupId: data.id,
       };
 
-      dispatch(createDmThunk(msgData)).then((newMsg) => {
+      dispatch(createDmThunk(msgData)).then(() => {
+        dispatch(getAllGroupsThunk());
         history.push(`/groups/${data.id}`);
       });
     });
   };
 
-  let receiver;
-  if (users) {
-    receiver = users.filter((user) => user.id == receiverId)[0];
-  }
+  // let receiver;
+
+  // if (users) {
+  //   receiver = users.filter((user) => user.id == receiverId)[0];
+  // }
 
   if (!receiver) return null;
 
@@ -122,6 +125,9 @@ function DmDraftPage() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="grid-footer">
+          <Footer />
         </div>
       </div>
     )

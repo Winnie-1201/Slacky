@@ -1,6 +1,7 @@
 // constants
 const LOAD_ALL = "groups/getAllGroups";
 const CREATE_GROUP = "groups/createNewGroup";
+const LOAD_CURR = "groups/getCurrentUserGroups";
 
 export const loadAll = (groups) => {
   return {
@@ -16,6 +17,13 @@ export const createGroup = (group) => {
   };
 };
 
+export const LoadCurr = (groups) => {
+  return {
+    type: LOAD_CURR,
+    groups,
+  };
+};
+
 // thunk
 export const getAllGroupsThunk = () => async (dispatch) => {
   const response = await fetch("/api/groups");
@@ -23,6 +31,17 @@ export const getAllGroupsThunk = () => async (dispatch) => {
   if (response.ok) {
     const groups = await response.json();
     dispatch(loadAll(groups.groups));
+    return groups;
+  }
+};
+
+export const getCurrentUserGroupsThunk = () => async (dispatch) => {
+  const response = await fetch("/api/groups/current");
+
+  if (response.ok) {
+    const groups = await response.json();
+    console.log("current user groups", groups);
+    dispatch(LoadCurr(groups.groups));
     return groups;
   }
 };
@@ -47,10 +66,12 @@ export const CreateGroupThunk = (data) => async (dispatch) => {
 };
 
 // reducer
-const initialState = { group: {}, userGroups: [] };
+const initialState = { group: {}, userGroups: [], allGroups: [] };
 export default function groupReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_ALL:
+      return { ...state, allGroups: action.groups };
+    case LOAD_CURR:
       return { ...state, userGroups: action.groups };
     case CREATE_GROUP:
       return { ...state, group: action.group };

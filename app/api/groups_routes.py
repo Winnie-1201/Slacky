@@ -7,9 +7,9 @@ from app.api.auth_routes import validation_errors_to_error_messages
 
 group_routes = Blueprint('groups', __name__)
 
-@group_routes.route("")
+@group_routes.route("/current")
 @login_required
-def all_groups():
+def current_user_groups():
     groups = Group.query.all()
     user_groups = []
     for group in groups:
@@ -18,6 +18,12 @@ def all_groups():
                 user_groups.append(group)
 
     return {"groups": [group.to_dict() for group in user_groups]}
+
+@group_routes.route("")
+@login_required
+def all_groups():
+    groups = Group.query.all()
+    return {"groups": [group.to_dict() for group in groups]}
 
 @group_routes.route("", methods=["POST"])
 @login_required
@@ -35,6 +41,16 @@ def add_group():
             group_user_groups=group_users
         )
 
+        receiver = User.query.get(user_ids.split(",")[0])
+        sender = User.query.get(user_ids.split(",")[1])
+
+        receiver.user_user_groups.append(new_group)
+        sender.user_user_groups.append(new_group)
+
+        # group_users[0].user_user_groups.append(new_group)
+        # group_users[1].user_user_groups.append(new_group)
+        # db.session.add(group_users[0])
+        # db.session.add(group_users[1])
         db.session.add(new_group)
         db.session.commit()
         return new_group.to_dict()

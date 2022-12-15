@@ -30,41 +30,67 @@
 
 .all-msg-container {
   position: relative;
-  height: 65vh;
+  height: 100%;
+  margin-top: auto !important;
 }
 
 .chat-body {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 260px);
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column-reverse; */
+  flex-flow: column nowrap;
+  /* flex-direction: column; */
 }
+
+/* .history-msg {
+  justify-content: flex-end;
+} */
 
 .flex-msg-container {
   display: flex;
-  padding: 8px 20px;
+  padding: 8px 32px;
+  /* margin-bottom: 18px; */
 }
 
-.user-icon-container {
+.with-mb-24 {
+  margin-bottom: 20px;
+}
+
+.flex-msg-container-without-icon {
+  display: flex;
+  padding: 0px 32px;
+}
+
+.user-icon-container-dm {
   display: flex;
   margin-right: 8px;
   flex-shrink: 0;
 }
 
-.user-icon {
+.user-icon-dm {
   height: 36px;
   width: 36px;
+  border-radius: 4px;
+  /* object-fit: fill; */
 }
 
 .msg-text-container {
-  padding: 8px;
-  font-size: 15px;
+  /* padding: 8px; */
+  padding-left: 12px;
 }
 
 .msg-detail-container {
   margin-bottom: 4px;
+}
+
+.msg-detail-container-without-icon {
+  margin-left: 44px;
+  margin-bottom: 12px;
+  padding-left: 12px;
+  font-size: 15px;
 }
 
 .msg-username {
@@ -82,6 +108,7 @@
   font-size: 15px;
   text-align: left;
   color: #1d1c1d;
+  padding-top: 4px;
 }
 
 .chat-footer-container {

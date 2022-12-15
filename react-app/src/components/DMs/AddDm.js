@@ -1,28 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
+import { getAllUser } from "../../store/session";
 import "./AddDm.css";
 
 function AddDm() {
   const [selectedUser, setSelectedUser] = useState("");
   //   const history = useHistory();
   //   const [onFocus, setFocus] = useState(false);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
   const [selectFlag, setSelectFlag] = useState(false);
   const [sendTo, setSendTo] = useState("");
   const [dmGroup, setDmGroup] = useState("");
 
+  const users = useSelector((state) => state.session.users);
   const currUser = useSelector((state) => state.session.user);
   const userGroups = currUser.groups;
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/users/");
-      const responseData = await response.json();
-      setUsers(responseData.users);
-    }
-    fetchData();
-  }, []);
+    dispatch(getAllUser());
+  }, [dispatch]);
+
+  // useEffect(() => {
+
+  // async function fetchData() {
+  //   const response = await fetch("/api/users/");
+  //   const responseData = await response.json();
+  //   setUsers(responseData.users);
+  // }
+  // fetchData();
+  // }, []);
 
   const handleSelect = (e) => {
     // setFocus(true);
@@ -44,12 +52,6 @@ function AddDm() {
     });
   };
 
-  // console.log("user groups", userGroups);
-  // console.log("user", dmGroup);
-  // console.log("sendto,", sendTo);
-
-  // if (!sendTo) return null;
-
   return (
     <div className="dm-to-body">
       <input
@@ -61,7 +63,6 @@ function AddDm() {
       {selectedUser && (
         <div className="user-list">
           <ul className="list-items">
-            {!users && <span>Loading...</span>}
             {users &&
               users
                 .filter((user) =>
