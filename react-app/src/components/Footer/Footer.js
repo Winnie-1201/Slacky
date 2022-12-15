@@ -12,7 +12,7 @@ export default function Footer() {
         <span>Nan Guo</span>
         <a
           style={{ height: "25px" }}
-          href="/"
+          href="https://www.linkedin.com/in/nan-guo-a7762325a/"
           target="_blank"
           rel="noopener noreferrer"
         >
