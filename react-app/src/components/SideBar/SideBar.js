@@ -7,7 +7,8 @@ import { Redirect } from "react-router-dom";
 
 export default function SideBar({ user }) {
   const [click, setClick] = useState(false);
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setClick(true);
   };
 
