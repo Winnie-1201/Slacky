@@ -2,11 +2,19 @@
 const LOAD_ALL = "groups/getAllGroups";
 const CREATE_GROUP = "groups/createNewGroup";
 const LOAD_CURR = "groups/getCurrentUserGroups";
+const LOAD_ONE = "groups/getOneGroup";
 
 export const loadAll = (groups) => {
   return {
     type: LOAD_ALL,
     groups,
+  };
+};
+
+const loadOne = (group) => {
+  return {
+    type: LOAD_ONE,
+    group,
   };
 };
 
@@ -35,12 +43,22 @@ export const getAllGroupsThunk = () => async (dispatch) => {
   }
 };
 
+export const getOneGroupThunk = (groupId) => async (dispatch) => {
+  const response = await fetch(`/api/groups/${groupId}`);
+
+  if (response.ok) {
+    const group = await response.json();
+    await dispatch(loadOne(group.group));
+    return group.group;
+  }
+};
+
 export const getCurrentUserGroupsThunk = () => async (dispatch) => {
   const response = await fetch("/api/groups/current");
 
   if (response.ok) {
     const groups = await response.json();
-    console.log("current user groups", groups);
+    // console.log("current user groups", groups);
     dispatch(LoadCurr(groups.groups));
     return groups;
   }
@@ -49,6 +67,7 @@ export const getCurrentUserGroupsThunk = () => async (dispatch) => {
 // export const getGroupThunk = () => async;
 
 export const CreateGroupThunk = (data) => async (dispatch) => {
+  console.log("data in create group thunk", data);
   const response = await fetch("/api/groups", {
     method: "POST",
     headers: {
@@ -66,15 +85,24 @@ export const CreateGroupThunk = (data) => async (dispatch) => {
 };
 
 // reducer
-const initialState = { group: {}, userGroups: [], allGroups: [] };
+const initialState = { userGroups: [], allGroups: [], currGroup: null };
 export default function groupReducer(state = initialState, action) {
+  let newState = { ...state };
   switch (action.type) {
     case LOAD_ALL:
-      return { ...state, allGroups: action.groups };
+      newState.allGroups = action.groups;
+      return newState;
+    // return { ...state, allGroups: action.groups };
     case LOAD_CURR:
-      return { ...state, userGroups: action.groups };
+      newState.userGroups = action.groups;
+      // return { ...state, userGroups: action.groups };
+      return newState;
+    case LOAD_ONE:
+      newState.currGroup = action.group;
+      return newState;
+    // return { ...state, currGroup: action.group };
     case CREATE_GROUP:
-      return { ...state, group: action.group };
+      return { ...state, userGroups: [action.group] };
     default:
       return state;
   }

@@ -19,7 +19,7 @@ export default function ChannelIndex({user}) {
 
   return (
     <div className='channels-index-div'>
-        <div className='sidebar-wrapper'>
+        <div className='sidebar-wrapper channel-wrapper-cursor'>
             <div  onClick={() => {setShowChannels(prev => !prev)}} className='sidebar-icon-span'><i className="fa-solid fa-caret-down"></i></div>
             <span onClick={() => { setShowChannels(prev => !prev) }} className='sidebar-text'>Channels</span>
         </div>
@@ -35,13 +35,13 @@ export default function ChannelIndex({user}) {
                 </div>
             )
         })}
-        <div className='sidebar-wrapper' onClick={handleAddChannelButton} >
+        <div className='sidebar-wrapper channel-wrapper-cursor' onClick={handleAddChannelButton} >
             <div className='sidebar-icon-span'>
                 <div className='plus-div'><span>+</span></div>
             </div>
             <span className='sidebar-text add-channels'>Add channels</span>
         </div>
-        <div className='sidebar-wrapper'>
+        <div className='sidebar-wrapper channel-wrapper-cursor'>
             <NavLink to='/browse-channels' className='sidebar-icon-span-navlink' >
                 {/* <div className='sidebar-icon-span'> */}
                     <div className='plus-div'>

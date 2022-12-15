@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from sqlalchemy import or_, and_
-from app.models import db, Group, User
+from app.models import db, Group, User, GroupMessage
 from app.forms import GroupForm
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
@@ -25,6 +25,17 @@ def all_groups():
     groups = Group.query.all()
     return {"groups": [group.to_dict() for group in groups]}
 
+
+@group_routes.route("/<int:groupId>")
+@login_required
+def one_group(groupId):
+    group = Group.query.get(groupId)
+
+    if not group: 
+        return {"error:": "Group Not Found"}
+
+    return {'group': group.to_dict()}
+
 @group_routes.route("", methods=["POST"])
 @login_required
 def add_group():
@@ -41,18 +52,9 @@ def add_group():
             group_user_groups=group_users
         )
 
-        receiver = User.query.get(user_ids.split(",")[0])
-        sender = User.query.get(user_ids.split(",")[1])
-
-        receiver.user_user_groups.append(new_group)
-        sender.user_user_groups.append(new_group)
-
-        # group_users[0].user_user_groups.append(new_group)
-        # group_users[1].user_user_groups.append(new_group)
-        # db.session.add(group_users[0])
-        # db.session.add(group_users[1])
         db.session.add(new_group)
         db.session.commit()
+        
         return new_group.to_dict()
 
     if form.errors:

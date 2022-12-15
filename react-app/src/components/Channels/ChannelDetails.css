@@ -17,6 +17,7 @@
 }
 
 .modal-exit-button {
+    cursor: pointer;
     width: 36px;
     height: 36px;
     border-radius: 4px;
@@ -131,7 +132,12 @@
 }
 
 .channel-detail-edit {
+    cursor: pointer;
     font-size: 13px;
     color: rgb(18, 100, 163);
     font-weight: 600;
+}
+
+.add-people-icon-text {
+    cursor: pointer;
 }

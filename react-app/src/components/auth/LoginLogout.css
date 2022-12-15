@@ -12,6 +12,13 @@
   height: 64px;
 }
 
+.login-error-div {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+  margin: 15px 0px;
+}
+
 .user-form-inputs-div > input {
   width: 100%;
   padding: 11px 40px 13px 12px;
@@ -34,4 +41,14 @@
   background: #611f69;
   box-sizing: border-box;
   color: white;
+}
+
+.form-error-container {
+  width: 400px;
+  padding-bottom: 1rem;
+  color: red;
+}
+
+.form-error-block {
+  padding: 0.2rem 0;
 }

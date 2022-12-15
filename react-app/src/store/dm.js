@@ -97,7 +97,8 @@ const dmReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case GET_ALL:
-      newState = { ...state };
+      newState = {};
+      console.log("get all msg dm reducer", action.messages);
       action.messages?.forEach((msg) => {
         newState[msg.id] = msg;
       });
