@@ -39,7 +39,7 @@ const DirectMessage = () => {
   const all_groups = useSelector((state) => state.group.allGroups);
   const group = all_groups.filter((group) => group.id == groupId)[0];
   let all_msgs = group?.group_messages;
-  console.log("gorup", group);
+  // console.log("gorup", group);
 
   // console.log("all_groups lengthdd----", all_groups.length);
   const receiver =
@@ -52,6 +52,8 @@ const DirectMessage = () => {
     dispatch(getAllGroupsThunk());
     dispatch(getCurrentUserGroupsThunk());
     socket = io();
+
+    socket.emit("join", { user: user, room: groupId });
 
     // socket.on("join", groupId);
     // socket.emit("join", groupId);
@@ -67,24 +69,14 @@ const DirectMessage = () => {
       // socket.off("dm");
       socket.disconnect();
     };
-  }, [groupId]);
+  }, []);
 
   useEffect(() => {
     socket.emit("join", { user: user, room: groupId });
+    // socket.emit("dm", { msg: [], room: groupId });
+    setMessages([]);
+    dispatch(getAllMessageThunk(groupId));
   }, [groupId]);
-
-  // useEffect(() => {
-  //   // dispatch(getAllMessageThunk(groupId));
-  //   // dispatch(getAllGroupsThunk());
-  //   dispatch(getUser(user.id));
-  //   setMessages([]);
-  // }, [groupId]);
-
-  // useEffect(() => {
-  //   dispatch(getAllMessageThunk(groupId));
-  //   dispatch(getAllGroupsThunk());
-  //   dispatch(getUser(user.id));
-  // }, [all_groups.length]);
 
   const sendChat = async (e) => {
     e.preventDefault();
@@ -100,6 +92,7 @@ const DirectMessage = () => {
       };
 
       const newDm = await dispatch(createDmThunk(msgData));
+      // dispatch(getAllMessageThunk(groupId));
 
       const msg = {
         content: newDm.direct_message.content,
@@ -127,6 +120,7 @@ const DirectMessage = () => {
     );
 
   console.log("messages", messages);
+  console.log("all messages", all_msgs);
 
   return (
     user && (
