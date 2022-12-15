@@ -23,9 +23,11 @@ export default function ChannelIndex({user}) {
             <div  onClick={() => {setShowChannels(prev => !prev)}} className='sidebar-icon-span'><i className="fa-solid fa-caret-down"></i></div>
             <span onClick={() => { setShowChannels(prev => !prev) }} className='sidebar-text'>Channels</span>
         </div>
+        
           {showChannels && userChannels?.map(c => {
             return (
                 <div key={c.name} className='sidebar-wrapper'>
+                    {/* {console.log(c.name, c)} */}
                     <div className='sidebar-icon-span'>
                         {c.is_public ? '#' : <span style={{'display':'flex', 'justifyContent': 'center', 'marginLeft': '5px'}}><i style={{'width': '20px'}} className="fa-solid fa-lock"></i></span>}
                     </div>

@@ -61,7 +61,7 @@ export const getAllChannel = () => async (dispatch) => {
 
 
 export const createChannel = (channel) => async (dispatch) => {
-    // console.log('---------------- create a channel thunk', channel, '----------------')
+    console.log('---------------- create a channel thunk', channel, '----------------')
     const response = await fetch("/api/channels", {
         method: "POST",
         headers: {

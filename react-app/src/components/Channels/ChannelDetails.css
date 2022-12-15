@@ -32,6 +32,10 @@
     color: rgb(29, 28, 29);
     font-size: 22px;
     font-weight: 700;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 4px;
 }
 
 .channel-details-nav {
