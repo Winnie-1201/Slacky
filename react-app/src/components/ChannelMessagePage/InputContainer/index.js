@@ -14,7 +14,7 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
 
   useEffect(() => {
     if (cm) setContent(cm.content);
-    return () => setEdit(false);
+    // return () => setEdit(false);
   }, [cm]);
 
   const handleSubmit = (e) => {
@@ -27,6 +27,7 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
         ? fetchEditChannelMessage(cmId, message)
         : fetchCreateChannelMessage(channelId, { content })
     )
+      .then(() => setEdit(false))
       .then(() => setContent(""))
       .catch(async (res) => {
         const data = await res.json();
