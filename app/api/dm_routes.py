@@ -45,19 +45,16 @@ def create_dm(group_id):
             )
             # print("------------")
             # print("------------")
-            # print("------new msg in backend", new_message)
-            # print("---------group ", group)
-            # print("------------group.group_msgs", group.group_messages)
+            # # print("------new msg in backend", new_message)
+            # # print("---------group ", group)
+            # print("------------group.group_msgs before", group.group_messages)
             # print("------------")
             # print("------------")
-            if group.group_messages:
-                group.group_messages.append(new_message)
-            else:
-                group.group_messages = [new_message]
-            current_user.user_user_groups.append(group)
-            # print("-------group message after", group.group_messages)
-            db.session.add(group)
-            db.session.add(current_user)
+
+            # if group.group_messages:
+            #     group.group_messages.append(new_message)
+            # else:
+            #     group.group_messages = [new_message]
             db.session.add(new_message)
             db.session.commit()
             return {"direct_message": new_message.to_dict()}

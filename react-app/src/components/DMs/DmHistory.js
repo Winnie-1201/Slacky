@@ -2,10 +2,14 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./DmHistory.css";
 import { dateTransfer, sameDay, formateDate } from "./dateTransfer";
+import { useEffect } from "react";
 
 function DmHistory() {
   const user = useSelector((state) => state.session.user);
-  const groups = user.groups;
+  const groups = useSelector((state) => state.group.userGroups);
+
+  // useEffect(())
+  // console.log("group in history com", groups);
 
   let obj = {};
   for (let i = 0; i < groups.length; i++) {
@@ -14,6 +18,7 @@ function DmHistory() {
         ? groups[i].users[1]
         : groups[i].users[0];
     const msg = groups[i].group_messages[groups[i].group_messages.length - 1];
+    // console.log("mmmm", msg);
     const date = msg.updated_at;
     const senderId = msg.userId;
 
