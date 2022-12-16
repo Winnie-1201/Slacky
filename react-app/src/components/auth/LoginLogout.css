@@ -41,6 +41,7 @@
   background: #611f69;
   box-sizing: border-box;
   color: white;
+  cursor: pointer;
 }
 
 .logout-button {

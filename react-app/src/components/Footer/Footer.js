@@ -6,11 +6,15 @@ import linkedInLogo from "../../pictures/linkedIn_logo.png";
 export default function Footer() {
   return (
     <div className="footer-div grid-footer">
-      <span>Developers: </span>
+      <span id="developer_ls">Developers: </span>
 
       <div className="footer-individual-div">
-        <span>Nan Guo</span>
-        <a
+
+        <div className='left_box'>
+          <span>Nan Guo</span>
+        </div>
+        <div className='right_box'>
+        <a id="linkedin_icon"
           style={{ height: "25px" }}
           href="https://www.linkedin.com/in/nan-guo-a7762325a/"
           target="_blank"
@@ -19,28 +23,34 @@ export default function Footer() {
           <img
             src={linkedInLogo}
             alt="linkedin"
-            style={{ height: "25px" }}
+            style={{ height: "20px" }}
           ></img>
-        </a>
+          </a>
         <a
           style={{ height: "24px" }}
           href="https://github.com/Alicenanguo"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           <i
             className="fa-brands fa-github"
             style={{
-              fontSize: "24px",
+              fontSize: "20px",
               background: "white",
               borderRadius: "2px",
+
             }}
-          ></i>
-        </a>
+            ></i>
+          </a>
+          </div>
+
       </div>
 
       <div className="footer-individual-div">
-        <span>Wanting Lu</span>
+      <div className='left_box'>
+          <span>Wanting Lu</span>
+        </div>
+        <div className='right_box'>
         <a
           style={{ height: "25px" }}
           href="https://www.linkedin.com/in/wantinglu/"
@@ -50,7 +60,7 @@ export default function Footer() {
           <img
             src={linkedInLogo}
             alt="linkedin"
-            style={{ height: "25px" }}
+            style={{ height: "20px" }}
           ></img>
         </a>
         <a
@@ -62,16 +72,20 @@ export default function Footer() {
           <i
             className="fa-brands fa-github"
             style={{
-              fontSize: "24px",
+              fontSize: "20px",
               background: "white",
               borderRadius: "2px",
             }}
           ></i>
         </a>
-      </div>
+        </div>
+        </div>
 
       <div className="footer-individual-div">
-        <span>Xuelan Wu</span>
+      <div className='left_box'>
+          <span>Xuelan Wu</span>
+        </div>
+        <div className='right_box'>
         <a
           style={{ height: "25px" }}
           href="https://www.linkedin.com/in/xuelan-wu-ba354a1b0/"
@@ -81,7 +95,7 @@ export default function Footer() {
           <img
             src={linkedInLogo}
             alt="linkedin"
-            style={{ height: "25px" }}
+            style={{ height: "20px" }}
           ></img>
         </a>
         <a
@@ -93,16 +107,20 @@ export default function Footer() {
           <i
             className="fa-brands fa-github"
             style={{
-              fontSize: "24px",
+              fontSize: "20px",
               background: "white",
               borderRadius: "2px",
             }}
           ></i>
         </a>
-      </div>
+        </div>
+        </div>
 
       <div className="footer-individual-div">
-        <span>Yizhou Zhang</span>
+      <div className='left_box'>
+          <span>Yizhou Zhang</span>
+          </div>
+        <div className='right_box'>
         <a
           style={{ height: "25px" }}
           href="https://www.linkedin.com/in/yizhoucatherinezhang/"
@@ -112,7 +130,7 @@ export default function Footer() {
           <img
             src={linkedInLogo}
             alt="linkedin"
-            style={{ height: "25px" }}
+            style={{ height: "20px" }}
           ></img>
         </a>
         <a
@@ -124,13 +142,14 @@ export default function Footer() {
           <i
             className="fa-brands fa-github"
             style={{
-              fontSize: "24px",
+              fontSize: "20px",
               background: "white",
               borderRadius: "2px",
             }}
           ></i>
         </a>
-      </div>
+        </div>
+        </div>
     </div>
   );
 }
