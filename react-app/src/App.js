@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -63,13 +63,15 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        {!user && (
-          <Route path="/" exact={true}>
-            <NavBar />
-            <HomeMain></HomeMain>
-            <Footer />
+        {!user && 
+          <Route path="/" exact={true} >
+            <>
+              <NavBar />
+              <HomeMain></HomeMain>
+              <Footer />
+            </>
           </Route>
-        )}
+        }
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -102,9 +104,9 @@ function App() {
         <ProtectedRoute path="/browse-channels">
           <AllChannels />
         </ProtectedRoute>
-        {/* <ProtectedRoute >
+        <ProtectedRoute >
            <Redirect to='/channels/1'></Redirect>
-        </ProtectedRoute> */}
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
