@@ -98,28 +98,34 @@ On the top of the page, users can search for messages and click on the profile i
 ## Browse Channels
 
 ### Channel Sidebar
+
 Users can see a list of their joined channels on the left hand sidebar.
 
 <img src="./records/channel-sidebar.gif">
 
 ### All Channels
+
 Users can also see a list of all available channels by clicking on the 'All channels' button on the sidebar.
 
 <img src="./records/channel-all.gif">
 
 ### Add A Channel
+
 Users can add a channel by clicking on the 'Add channels' button.
 
 <img src="./records/channel-add.gif">
 
 ### Channel Banner
+
 To see the details of a channel, users can click on the name of the channel in the channel banner on the right. The banner also includes summary of channel description and number of members.
 <img src='./records/channel-banner.gif'>
 
 ### Channel Details
+
 Under the channel details page, a member can edit the channel by clicking on the 'Edit channel' button. A member can also leave the channel by clicking on the 'Leave channel' button. An organizer of the channel can choose to delete the channel by clicking on the 'Delete channel' button. Upon leaving or deleting a channel, the user will be redirected to the 'general' channel page.
 
 ### Edit Channel
+
 <img src="./records/channel-edit.gif">
 
 On the channel member tab, a user can see all members of the channel and all more members by clicking on the 'Add people' button.
@@ -127,7 +133,9 @@ On the channel member tab, a user can see all members of the channel and all mor
 ### Channel Details - Members
 
 A user can search for usernames and click on the person they'd like to add.
+
 ### Add Members
+
 <img src='./records/channel-add-member.gif'>
 
 ## Direct Messages
@@ -147,3 +155,21 @@ Receivers of the message will see the name of senders showing up on their page o
 ### Direct Message Index
 
 <img src="./records/dm-index.gif" height=400>
+
+## ChannelMessages
+
+### Read All Meesages
+
+Message list will appear ordered by date and time. The newest messages will appear at the bottom of the feed while the oldest will appear at top.
+<img src="./records/read-cm.gif">
+
+### Send Messages
+
+Users can send new messages in channels they are subscribed to.
+<img src="./records/send-cm.gif">
+
+### Edit/Delete Messages
+
+Edit button and delete button will appear when message authors stops or hover the mouse pointer above the message feed. Message authors can edit the message directly in the message feed.
+<img src="./records/edit-cm.gif">
+<img src="./records/delete-cm.gif">
