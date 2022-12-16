@@ -10,14 +10,14 @@ import AllChannelsMap from "./AllChannelsMap";
 import { getCurrentUserGroupsThunk } from "../../store/groups";
 
 export default function AllChannels() {
-  console.log("--------All Channels Page--------");
+  // console.log("--------All Channels Page--------");
   const user = useSelector((state) => state.session.user);
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllChannel());
-    // dispatch(getCurrentUserGroupsThunk(user.id));
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getAllChannel());
+  //   // dispatch(getCurrentUserGroupsThunk(user.id));
+  // }, []);
 
   return (
     <div className="landing-grid">
