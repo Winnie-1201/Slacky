@@ -52,6 +52,8 @@ function AddDm() {
     });
   };
 
+  if (!users) return null;
+
   return (
     <div className="dm-to-body">
       <input
