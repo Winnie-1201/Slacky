@@ -16,18 +16,20 @@ import {
 import { getUser } from "../../store/session";
 import Footer from "../Footer/Footer";
 import { dateTransfer } from "./dateTransfer";
-let socket;
+import { useSocket } from "../../context/SocketContext";
 
 const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
   const history = useHistory();
+  const socket = useSocket();
 
   const { groupId } = useParams();
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
   const [newRoom, setNewRoom] = useState("");
+  // const [r, setR] = useState("")
 
   // const group = user.groups.filter((group) => group.id == groupId)[0];
 
@@ -44,29 +46,45 @@ const DirectMessage = () => {
       ? currGroup?.users[1]
       : currGroup?.users[0];
 
-  useEffect(async () => {
-    socket = io();
+  useEffect(
+    () => async () => {
+      // socket = io();
 
-    socket.emit("join", { user: user, room: groupId });
-    await dispatch(getOneGroupThunk(groupId));
+      // socket.emit("join", { user: user, room: groupId });
+      await dispatch(getOneGroupThunk(groupId));
 
-    socket.on("dm", async (chat) => {
-      setMessages((messages) => [...messages, chat]);
-    });
+      socket.on("dm", (chat) => {
+        setMessages((messages) => [...messages, chat]);
+      });
 
-    // when component unmounts, disconnect
-    return () => {
-      socket.emit("leave", { room: groupId, user: user });
-      socket.disconnect();
-    };
-  }, []);
+      // socket.on("invite", async (chat) => {
+      //   console.log("chat-----", chat);
+      //   setNewRoom(chat);
+      // });
+      // when component unmounts, disconnect
+      return () => {
+        // socket.emit("leave", { room: groupId, user: user });
+        socket.disconnect();
+      };
+    },
+    []
+  );
 
-  useEffect(async () => {
-    socket.emit("join", { user: user, room: groupId });
-    setMessages([]);
-    await dispatch(getOneGroupThunk(groupId));
-    await dispatch(getCurrentUserGroupsThunk(user.id));
-  }, [groupId]);
+  useEffect(() => {
+    dispatch(getOneGroupThunk(newRoom));
+  }, [newRoom]);
+
+  console.log("new room", newRoom);
+
+  useEffect(
+    () => async () => {
+      socket.emit("join", { user: user, room: groupId });
+      setMessages([]);
+      await dispatch(getOneGroupThunk(groupId));
+      await dispatch(getCurrentUserGroupsThunk(user.id));
+    },
+    [groupId]
+  );
 
   const sendChat = async (e) => {
     e.preventDefault();
@@ -115,6 +133,8 @@ const DirectMessage = () => {
 
   // console.log("messages", messages);
   // console.log("all messages", all_msgs);
+
+  // console.log("socket in dm", socket);
 
   return (
     user && (

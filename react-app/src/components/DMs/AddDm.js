@@ -22,16 +22,6 @@ function AddDm() {
     dispatch(getAllUser());
   }, [dispatch]);
 
-  // useEffect(() => {
-
-  // async function fetchData() {
-  //   const response = await fetch("/api/users/");
-  //   const responseData = await response.json();
-  //   setUsers(responseData.users);
-  // }
-  // fetchData();
-  // }, []);
-
   const handleSelect = (e) => {
     // setFocus(true);
     setSelectedUser(e.target.value);
@@ -42,15 +32,18 @@ function AddDm() {
     setSendTo(user);
 
     userGroups.forEach((group) => {
-      // console.log("group users", group.users, user, group.users.includes(user));
       group.users.forEach((u) => {
-        // console.log(u.username, user.username)
         if (u.username === user.username) {
           setDmGroup(group);
         }
       });
     });
   };
+
+  const hasData =
+    users?.filter((user) =>
+      user.username.toLowerCase().startsWith(selectedUser.toLowerCase())
+    ).length > 0;
 
   return (
     <div className="dm-to-body">
@@ -60,17 +53,11 @@ function AddDm() {
         className="dm-to-input"
         placeholder="@somebody in the current workplace"
       />
-      {selectedUser && (
+      {selectedUser && users?.length > 0 && (
         <div className="user-list">
-          {users.length > 0 &&
-            users.filter((user) => {
-              user.username
-                .toLowerCase()
-                .startsWith(selectedUser.toLowerCase());
-            }).length === 0 && <div className="no-user">No member found</div>}
-          <ul className="list-items">
-            {users.length > 0 &&
-              users
+          {hasData ? (
+            <ul className="list-items">
+              {users
                 .filter((user) =>
                   user.username
                     .toLowerCase()
@@ -97,7 +84,10 @@ function AddDm() {
                     ></span>
                   </li>
                 ))}
-          </ul>
+            </ul>
+          ) : (
+            <div className="no-user">No member found</div>
+          )}
         </div>
       )}
       {selectFlag && !dmGroup && sendTo && (

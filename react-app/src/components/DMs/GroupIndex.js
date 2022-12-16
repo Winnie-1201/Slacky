@@ -6,18 +6,40 @@ import {
   getCurrentUserGroupsThunk,
 } from "../../store/groups";
 import "./GroupIndex.css";
+import { useSocket } from "../../context/SocketContext";
 
 export default function GroupIndex({ user }) {
+  // console.log("socket in gorup index", socket);
   const dispatch = useDispatch();
-
+  // const user = useSelector((state) => state.session.user);
   const userGroups = useSelector((state) => state.group.userGroups);
+  const socket = useSocket();
+  console.log("socket in groupindex", socket);
 
   const [showDms, setShowDms] = useState(true);
+  // const [newRoom, setNewRoom] = useState("");
+  const [groups, setGroups] = useState([]);
 
   useEffect(() => {
     dispatch(getAllGroupsThunk());
     dispatch(getCurrentUserGroupsThunk(user.id));
   }, [dispatch]);
+
+  useEffect(() => {
+    // setGroups(userGroups);
+    socket.on("invite", (chat) => {
+      console.log("chat-----", chat);
+      // setNewRoom(chat.room);
+      dispatch(getAllGroupsThunk());
+      // setGroups((groups) => [...groups, chat]);
+    });
+  }, []);
+
+  useEffect(() => {
+    setGroups(userGroups);
+  }, [userGroups]);
+
+  console.log("groups in group idex", groups);
 
   return (
     <div className="groups-index-div">

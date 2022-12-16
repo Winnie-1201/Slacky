@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { createDmThunk } from "../../store/dm";
 import {
@@ -15,14 +15,17 @@ import SideBar from "../SideBar/SideBar";
 import DmBanner from "./DmBanner";
 import { io } from "socket.io-client";
 import "./DmDraftPage.css";
+import { useSocket } from "../../context/SocketContext";
 
-let socket;
+// let socket;
 
 function DmDraftPage() {
   // const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const { receiverId } = useParams();
+  const socket = useSocket();
+  console.log("socket in dm draft page", socket);
 
   const user = useSelector((state) => state.session.user);
   let receiver = useSelector((state) => state.session.users);
@@ -34,25 +37,21 @@ function DmDraftPage() {
   }, [dispatch]);
 
   // useEffect(() => {
-  //   socket = io();
 
-  //   socket.on("dm", async () => {
-  //     await dispatch(getCurrentUserGroupsThunk(receiver.id));
-  //     // await dispatch(getOneGroupThunk)
-  //     // await dispatch(getCurrentUserGroupsThunk());
-  //     // await dispatch(getAllMessageThunk(groupId));
-  //     // setMessages((messages) => [...messages, chat]);
-  //   });
+  //   // socket.on("invite", async () => {
+  //   //   await dispatch(getCurrentUserGroupsThunk(receiver.id));
+  //   //   // await dispatch(getOneGroupThunk)
+  //   //   // await dispatch(getCurrentUserGroupsThunk());
+  //   //   // await dispatch(getAllMessageThunk(groupId));
+  //   //   // setMessages((messages) => [...messages, chat]);
+  //   // });
 
-  //   return () => {
-  //     socket.disconnect();
-  //   };
   // }, []);
 
   const sendChat = async (e) => {
     e.preventDefault();
     const groupInfo = {
-      users: `${user.id}` + "," + `${receiver.id}`,
+      users: `${user.id}` + "," + `${receiverId}`,
       // group_msg: chatInput,
     };
 
@@ -73,10 +72,15 @@ function DmDraftPage() {
         //   user: user,
         // };
 
-        // socket.emit("dm", {
-        //   msg: msg,
+        // socket.emit("join", {
+        //   user: receiver,
         //   room: data.id,
         // });
+
+        socket.emit("invite", {
+          user: receiver,
+          room: data,
+        });
 
         // console.log("---------");
         history.push(`/groups/${data.id}`);

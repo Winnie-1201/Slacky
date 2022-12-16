@@ -47,14 +47,15 @@ def handle_join(data):
 def handle_invite(data):
     print("--------enter invite")
     # msg = data['msg']
-    room = data['room']
+    room = data['room']["id"]
     invited_user = data['user']
-    # group = Group.query.get(room)
+    group = Group.query.get(room)
     # user = User.query.get(invited_user)
     # user.user_user_groups.append(group)
     # db.session.commit()
     join_room(room)
-    emit('invite', invited_user, to=room, broadcast=True)
+    print(f"{invited_user} has been invited to room {room}")
+    emit('invite', room, broadcast=True)
 
 @socketio.on('leave')
 def handle_leave(data):

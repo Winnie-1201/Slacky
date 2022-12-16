@@ -23,6 +23,11 @@ import AllChannels from "./components/Channels/AllChannels";
 import { getAllChannel } from "./store/channels";
 import Footer from "./components/Footer/Footer";
 import { getCurrentUserGroupsThunk } from "./store/groups";
+import { io } from "socket.io-client";
+
+// const socket = io();
+
+// console.log("----- socket in app", socket);
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,6 +44,10 @@ function App() {
   useEffect(() => {
     dispatch(getAllChannel());
     dispatch(getCurrentUserGroupsThunk(user?.id));
+
+    // return () => {
+    //   socket.disconnect();
+    // };
   }, []);
 
   if (!loaded) {

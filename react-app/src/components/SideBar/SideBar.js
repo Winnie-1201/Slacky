@@ -4,6 +4,7 @@ import ChannelIndex from "../Channels/ChannelIndex";
 import GroupIndex from "../DMs/GroupIndex";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function SideBar({ user }) {
   const [click, setClick] = useState(false);
@@ -11,7 +12,8 @@ export default function SideBar({ user }) {
     e.preventDefault();
     setClick(true);
   };
-
+  // console.log("test in sidebar", test);
+  // console.log("socket in sidebar", socket);
   return (
     <div className="sidebar-div">
       <div className="sidebar-header">
