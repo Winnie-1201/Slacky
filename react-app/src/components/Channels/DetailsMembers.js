@@ -15,15 +15,15 @@ export default function DetailsMembers({ channel }) {
     setMembers(channel.channel_members);
   }, [channel]);
 
-  async function fetchAllUsers() {
-    const response = await fetch("/api/users/");
-    const responseData = await response.json();
-    setUsers(responseData.users);
-  }
+  // async function fetchAllUsers() {
+  //   const response = await fetch("/api/users/");
+  //   const responseData = await response.json();
+  //   setUsers(responseData.users);
+  // }
 
-  useEffect(() => {
-    fetchAllUsers();
-  }, []);
+  // useEffect(() => {
+  //   fetchAllUsers();
+  // }, []);
 
   // console.log(members)
   return (
