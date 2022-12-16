@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -24,6 +24,32 @@ const SignUpForm = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const newErrors = [];
+
+    if (password !== repeatPassword) {
+      newErrors.push("Please enter the same password");
+    }
+
+    if (username === "") {
+      newErrors.push("Please enter your username.");
+    }
+
+    if (email === "") {
+      newErrors.push("Please enter your email.");
+    }
+
+    if (password === "") {
+      newErrors.push("Please enter the password.");
+    }
+
+    if (repeatPassword === "") {
+      newErrors.push("Please confirm your password.");
+    }
+
+    setErrors(newErrors);
+  }, [repeatPassword, username, email, password]);
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -93,6 +119,7 @@ const SignUpForm = () => {
             required={true}
           ></input>
         </div>
+        {/* {errors.samePv && <p>{errors.samePv}</p>} */}
         <div className="user-form-button-div">
           <button type="submit">Sign Up</button>
         </div>
