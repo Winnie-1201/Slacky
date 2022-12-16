@@ -14,16 +14,31 @@
 .footer-individual-div {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content:center ;
   align-items: center;
   column-gap: 6px;
+  font-size: 12px;
+
+
+
+}
+.right_box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items: center;
 }
 
 .footer-individual-div a {
   color: #4a154b;
   cursor: pointer;
   width: 25px;
+
 }
+.footer-individual-div a:hover {
+  color:blue
+}
+
 
 .fa-brands.fa-github:focus-visible {
   outline: unset;
@@ -36,4 +51,23 @@
 
 .footer-individual-div img {
   cursor: pointer;
+  padding-right: 0;
+}
+
+.footer-individual-div img:hover {
+    background-color: black
+
+}
+
+.fa-github {
+  padding-left: 0px;
+
+}
+
+#linkedin_icon {
+  padding-right:0
+}
+
+#developer_ls {
+  font-size:13px
 }
