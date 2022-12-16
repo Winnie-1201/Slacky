@@ -1,44 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-// import { io } from "socket.io-client";
-import { createDmThunk, getAllMessageThunk } from "../../store/dm";
+import { createDmThunk } from "../../store/dm";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./DirectMessage.css";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 import DmBanner from "./DmBanner";
 import {
-  getAllGroupsThunk,
   getCurrentUserGroupsThunk,
   getOneGroupThunk,
 } from "../../store/groups";
-import { getUser } from "../../store/session";
 import Footer from "../Footer/Footer";
 import { dateTransfer } from "./dateTransfer";
 import { useSocket } from "../../context/SocketContext";
-// let socket;
 
 const DirectMessage = () => {
-  const [messages, setMessages] = useState([]);
-  const [chatInput, setChatInput] = useState("");
   const history = useHistory();
-  const socket = useSocket();
-  console.log("socket in dm", socket);
-
-  const { groupId } = useParams();
   const dispatch = useDispatch();
 
+  const [messages, setMessages] = useState([]);
+  const [chatInput, setChatInput] = useState("");
+
+  const socket = useSocket();
+  const { groupId } = useParams();
+
   const user = useSelector((state) => state.session.user);
-  const [newRoom, setNewRoom] = useState("");
-
-  // const group = user.groups.filter((group) => group.id == groupId)[0];
-
-  // const newGroup = useSelector((state) => state.group.group);
-  const user_groups = useSelector((state) => state.group.userGroups);
-  // const all_groups = useSelector((state) => state.group.allGroups);
-  // const group = user_groups.filter((group) => group.id == groupId)[0];
-  // let all_msgs = group?.group_messages;
   const currGroup = useSelector((state) => state.group.currGroup);
 
   const all_msgs = currGroup?.group_messages;
@@ -48,9 +35,6 @@ const DirectMessage = () => {
       : currGroup?.users[0];
 
   useEffect(async () => {
-    // socket = io();
-
-    // socket.emit("join", { user: user, room: groupId });
     await dispatch(getOneGroupThunk(groupId));
 
     socket.on("dm", async (chat) => {
@@ -67,8 +51,9 @@ const DirectMessage = () => {
   useEffect(async () => {
     socket.emit("join", { user: user, room: groupId });
     setMessages([]);
+
     await dispatch(getOneGroupThunk(groupId));
-    await dispatch(getCurrentUserGroupsThunk(user.id));
+    // await dispatch(getCurrentUserGroupsThunk(user.id));
   }, [groupId]);
 
   const sendChat = async (e) => {
@@ -93,15 +78,12 @@ const DirectMessage = () => {
         user: inputUser,
       };
 
-      // socket.emit("join", ms);
-
       socket.emit("dm", {
         msg: msg,
         room: groupId,
       });
 
       setChatInput("");
-      // setNewRoom(false);
     }
   };
 
@@ -116,9 +98,6 @@ const DirectMessage = () => {
     history.push("/");
   }
 
-  // console.log("messages", messages);
-  // console.log("all messages", all_msgs);
-
   return (
     user && (
       <div className="landing-grid">
@@ -131,10 +110,8 @@ const DirectMessage = () => {
         </div>
         <div className="grid-main-view">
           <DmBanner receiver={receiver} />
-          {/* <div className="chat-body"> */}
           <ScrollToBottom className="chat-body">
             <div className="all-msg-container flex-column">
-              {/* <div className="history-msg"> */}
               {all_msgs?.map((message, ind) => (
                 <>
                   {ind === 0 ||
@@ -156,12 +133,10 @@ const DirectMessage = () => {
                         <div className="user-icon-container-dm">
                           <img
                             className="user-icon-dm"
-                            // src={message.user.image_url}
                             src={message.user.image_url}
                           />
                         </div>
                         <div className="msg-text-container">
-                          {/* change the username to button later */}
                           <span className="msg-username">
                             {message.user.username}
                           </span>
@@ -258,14 +233,6 @@ const DirectMessage = () => {
           <div className="cm-input-container">
             <div className="cm-input-block">
               <form onSubmit={sendChat} className="cm-form">
-                {/* <div className="cm-error-box">
-            <ul>
-      
-              {errors.map((error, idx) => (
-                <li key={`cmError-${idx + 1}`}>{error}</li>
-              ))}
-            </ul>
-          </div> */}
                 <div className="cm-input-top">
                   <div className="cm-input-top-box">
                     <i className="fa-solid fa-bold"></i>
