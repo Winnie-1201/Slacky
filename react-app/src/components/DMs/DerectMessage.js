@@ -43,7 +43,7 @@ const DirectMessage = () => {
 
   const all_msgs = currGroup?.group_messages;
   const receiver =
-    currGroup?.users[0].username === user?.username
+    currGroup?.users[0]?.username === user?.username
       ? currGroup?.users[1]
       : currGroup?.users[0];
 
@@ -100,9 +100,9 @@ const DirectMessage = () => {
         room: groupId,
       });
 
-      socket.emit('invite', {
-        
-      })
+      // socket.emit('invite', {
+
+      // })
 
       setChatInput("");
       // setNewRoom(false);

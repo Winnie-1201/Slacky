@@ -21,14 +21,15 @@ import SearchMessages from "./components/SearchMessage/SearchMessage";
 import AllChannels from "./components/Channels/AllChannels";
 import { getAllChannel } from "./store/channels";
 import Footer from "./components/Footer/Footer";
-import { getCurrentUserGroupsThunk } from "./store/groups";
+import { getCurrentUserGroupsThunk, getAllGroupsThunk } from "./store/groups";
 import { useSocket } from "./context/SocketContext";
 
 function App() {
+  console.log('--------------App -------------')
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const { socket } = useSocket();
+  const socket = useSocket();
 
   useEffect(() => {
     (async () => {
@@ -43,14 +44,22 @@ function App() {
       dispatch(getCurrentUserGroupsThunk(user?.id));
       dispatch(getAllUser());      
     }
-
-    // if (user && socket) {
-    //   socket.on(`receive-${user.id}`, () => {
-    //     console.log(`receive-${user.id} route set`)
-        
-    //   })
-    // }
   }, [user]);
+
+  useEffect(() => {
+    if (user && socket) {
+      console.log('joining room and setting up invite listener')
+      socket.emit('join-private', {
+        room: `invite-${user.id}`,
+        userId: user.id
+      })
+
+      socket.on(`invite-private`, (data) => {
+        console.log('listening on invite triggered', data)
+        dispatch(getCurrentUserGroupsThunk(user.id));
+      })
+    }
+  }, [socket, user])
 
   if (!loaded) {
     return null;
@@ -98,9 +107,9 @@ function App() {
         <ProtectedRoute path="/browse-channels">
           <AllChannels />
         </ProtectedRoute>
-        {/* <ProtectedRoute >
+        <ProtectedRoute >
            <Redirect to='/channels/1'></Redirect>
-        </ProtectedRoute> */}
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

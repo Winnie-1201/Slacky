@@ -58,7 +58,7 @@ function DmDraftPage() {
       users: `${user.id}` + "," + `${receiver.id}`,
       // group_msg: chatInput,
     };
-
+    console.log('sending receiverId', receiverId)
     socket.emit("invite", {
       receiverId: receiverId
     });
