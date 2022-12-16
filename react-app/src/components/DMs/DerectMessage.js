@@ -87,6 +87,13 @@ const DirectMessage = () => {
     }
   };
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendChat(e);
+    }
+  };
+
   if (!currGroup)
     return (
       <div className="loading-dm">
@@ -232,7 +239,11 @@ const DirectMessage = () => {
           </ScrollToBottom>
           <div className="cm-input-container">
             <div className="cm-input-block">
-              <form onSubmit={sendChat} className="cm-form">
+              <form
+                onSubmit={sendChat}
+                className="cm-form"
+                onKeyUp={handleEnter}
+              >
                 <div className="cm-input-top">
                   <div className="cm-input-top-box">
                     <i className="fa-solid fa-bold"></i>
@@ -251,6 +262,7 @@ const DirectMessage = () => {
                     onChange={(e) => setChatInput(e.target.value)}
                     required
                     className="cm-input"
+                    // onKeyPress={onkeyup}
                   />
                 </div>
                 <div className="cm-input-bottom">
