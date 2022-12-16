@@ -173,3 +173,23 @@ Users can send new messages in channels they are subscribed to.
 Edit button and delete button will appear when message authors stops or hover the mouse pointer above the message feed. Message authors can edit the message directly in the message feed.
 <img src="./records/edit-cm.gif">
 <img src="./records/delete-cm.gif">
+
+## Developers
+
+* Nan Guo
+  * https://github.com/Alicenanguo
+  * https://www.linkedin.com/in/nan-guo-a7762325a/
+
+* Wanting Lu
+  * https://github.com/Winnie-1201
+  * https://www.linkedin.com/in/wantinglu/
+  
+* Xuelan Wu
+  * https://www.linkedin.com/in/xuelan-wu-ba354a1b0/
+  * https://github.com/xuelanwu
+  
+* Yizhou Zhang
+  * https://www.linkedin.com/in/yizhoucatherinezhang/
+  * https://github.com/OneBoatFly
+
+
