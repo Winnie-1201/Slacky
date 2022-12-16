@@ -43,7 +43,7 @@ const DirectMessage = () => {
 
   const all_msgs = currGroup?.group_messages;
   const receiver =
-    currGroup?.users[0].username === user.username
+    currGroup?.users[0].username === user?.username
       ? currGroup?.users[1]
       : currGroup?.users[0];
 
@@ -60,7 +60,7 @@ const DirectMessage = () => {
     // when component unmounts, disconnect
     return () => {
       socket.emit("leave", { room: groupId, user: user });
-      socket.disconnect();
+      // socket.disconnect();
     };
   }, []);
 
@@ -113,7 +113,7 @@ const DirectMessage = () => {
     );
 
   if (!user) {
-    return history.push("/");
+    history.push("/");
   }
 
   // console.log("messages", messages);

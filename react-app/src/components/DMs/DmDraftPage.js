@@ -15,14 +15,17 @@ import SideBar from "../SideBar/SideBar";
 import DmBanner from "./DmBanner";
 import { io } from "socket.io-client";
 import "./DmDraftPage.css";
+import { useSocket } from "../../context/SocketContext";
 
-let socket;
+// let socket;
 
 function DmDraftPage() {
   // const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const { receiverId } = useParams();
+
+  const socket = useSocket();
 
   const user = useSelector((state) => state.session.user);
   let receiver = useSelector((state) => state.session.users);
@@ -73,10 +76,10 @@ function DmDraftPage() {
         //   user: user,
         // };
 
-        // socket.emit("dm", {
-        //   msg: msg,
-        //   room: data.id,
-        // });
+        socket.emit("invite", {
+          user: receiverId,
+          room: data.id,
+        });
 
         // console.log("---------");
         history.push(`/groups/${data.id}`);
