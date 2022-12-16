@@ -1,8 +1,11 @@
-# Flask React Project
+# Slacky
 
-This is the starter for the Flask React project.
+Live site here: https://slack-clone-2k4m.onrender.com
 
-## Getting started
+Slacky is a clone of slack.com. The site allows registered users to communicate with others through a channel or private messages. A registered user can create channels of their particular topic, add members, modify the created channel and delete as needed. Members can also choose to make modifications or leave the channel. Members of a channel can send messages and see everyone else messages in the channel. The instant direct message are private and user-to-user specific. When a sender messages the intended receiver, the receiver will get the message without having to refresh it's own page. On top of channel, channel messages and direct messages, users can also search their all messages available to them from search bar.
+
+
+# Getting started
 1. Clone this repository (only this branch)
 
 2. Install dependencies
@@ -41,108 +44,50 @@ This is the starter for the Flask React project.
 
 7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
+# Features
+## Home Page
+The home page provides a user sign in and sign up options. By clicking on the buttons, a user will be taken to the sign in or sign up pages. 
+### Sign In
 
-## Deployment through Render.com
+### Sign Up
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+Upon a successful sign in or sign up, a user will be taken to the logged in landing page. The app automatically sign the user up for the 'general' channel upon sign in.
+### After Log In
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+On the top of the page, users can search for messages and click on the profile icon to check their own status and logout.
+### Search Messages
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+### Logout
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+## Channels
+# Browse Channels
+Users can see a list of their joined channels on the left hand sidebar.
+### Channel Sidebar
 
-### Part A: Configure the Start and Build Commands
+Users can also see a list of all available channels by clicking on the 'All channels' button on the sidebar.
+### All Channels
 
-Start by giving your application a name.
+To see the details of a channel, users can click on the name of the channel in the channel banner on the right. The banner also includes summary of channel description and number of members.
+### Channel Banner
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+Under the channel details page, a member can edit the channel by clicking on the 'Edit channel' button. A member can also leave the channel by clicking on the 'Leave channel' button. An organizer of the channel can choose to delete the channel by clicking on the 'Delete channel' button. Upon leaving or deleting a channel, the user will be redirected to the 'general' channel page.
+### Channel Details - About
+### Edit Channel
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
+On the channel member tab, a user can see all members of the channel and all more members by clicking on the 'Add people' button.
+### Channel Details - Members
 
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
+A user can search for usernames and click on the person they'd like to add.
+### Search Users
+### Add Members
 
-For your Flask project, enter the following command into the Build field, all in
-one line:
 
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
+## Direct Messages
+Users can search for a username and start a direct message to the member.
+### Search Users
 
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
+### New Messages
 
-Now, add your start command in the Start field:
+Receivers of the message will see the name of senders showing up on their page once a message is sent from the sender.
+### Direct Message Index
 
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
