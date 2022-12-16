@@ -72,7 +72,6 @@ def diconnected():
 
 @socketio.on('join-private')
 def handle_join(data):
-    # print("data from front-end join", data)
     print('-----------', data, '---------backend join-private handler')
     room = data["room"]
     user_id = data['userId']

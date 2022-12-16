@@ -59,7 +59,7 @@ function DmDraftPage() {
       // group_msg: chatInput,
     };
     console.log('sending receiverId', receiverId)
-    socket.emit("invite", {
+    socket.emit("invite-private", {
       receiverId: receiverId
     });
 

@@ -54,7 +54,7 @@ function App() {
         userId: user.id
       })
 
-      socket.on(`invite-private`, (data) => {
+      socket.on('invite-private', (data) => {
         console.log('listening on invite triggered', data)
         dispatch(getCurrentUserGroupsThunk(user.id));
       })
