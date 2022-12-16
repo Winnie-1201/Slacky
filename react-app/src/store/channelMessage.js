@@ -9,8 +9,8 @@ const getChannelMessages = (channelMessages) => {
 const createChannelMessage = (channelMessage) => {
   return { type: CREATE_CHANNEL_MESSAGE, channelMessage };
 };
-const editChannelMessage = (content) => {
-  return { type: EDIT_CHANNEL_MESSAGE, content };
+const editChannelMessage = (id, content) => {
+  return { type: EDIT_CHANNEL_MESSAGE, id, content };
 };
 const deleteChannelMessage = (id) => {
   return { type: DELETE_CHANNEL_MESSAGE, id };
@@ -51,7 +51,7 @@ export const fetchEditChannelMessage = (id, message) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
-    dispatch(editChannelMessage(data));
+    dispatch(editChannelMessage(id, data));
     return data;
   }
   return response;
@@ -78,7 +78,7 @@ const channelMessageReducer = (state = initialState, action) => {
     case CREATE_CHANNEL_MESSAGE:
       return { ...state, [action.channelMessage.id]: action.channelMessage };
     case EDIT_CHANNEL_MESSAGE:
-      return { ...state, [action.channelMessage.id]: action.channelMessage };
+      return { ...state, [action.id]: action.content };
     case DELETE_CHANNEL_MESSAGE:
       delete newState[action.id];
       return newState;

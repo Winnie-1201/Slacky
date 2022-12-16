@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { createDmThunk } from "../../store/dm";
 import {
   CreateGroupThunk,
@@ -8,86 +8,54 @@ import {
   getCurrentUserGroupsThunk,
   getOneGroupThunk,
 } from "../../store/groups";
-import { getAllUser, getReceiver, getUser } from "../../store/session";
+import { getReceiver } from "../../store/session";
 import Footer from "../Footer/Footer";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
 import DmBanner from "./DmBanner";
-import { io } from "socket.io-client";
 import "./DmDraftPage.css";
+import { useSocket } from "../../context/SocketContext";
 
-let socket;
 function DmDraftPage() {
-  // const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
+
   const { receiverId } = useParams();
+  const socket = useSocket();
+
+  const [chatInput, setChatInput] = useState("");
 
   const user = useSelector((state) => state.session.user);
-  let receiver = useSelector((state) => state.session.users);
-  // const users = useSelector((state) => state.session.users);
-  const [chatInput, setChatInput] = useState("");
+  const receiver = useSelector((state) => state.session.receiver);
 
   useEffect(() => {
     dispatch(getReceiver(receiverId));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   socket = io();
-
-  //   socket.on("dm", async () => {
-  //     await dispatch(getCurrentUserGroupsThunk(receiver.id));
-  //     // await dispatch(getOneGroupThunk)
-  //     // await dispatch(getCurrentUserGroupsThunk());
-  //     // await dispatch(getAllMessageThunk(groupId));
-  //     // setMessages((messages) => [...messages, chat]);
-  //   });
-
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
-
   const sendChat = async (e) => {
     e.preventDefault();
     const groupInfo = {
       users: `${user.id}` + "," + `${receiver.id}`,
-      // group_msg: chatInput,
     };
 
+    socket.emit("invite-private", {
+      receiverId: receiverId,
+    });
+
     await dispatch(CreateGroupThunk(groupInfo)).then((data) => {
-      console.log(data, "-----------------");
       const msgData = {
         content: chatInput,
         groupId: data.id,
       };
-      dispatch(createDmThunk(msgData)).then(async (newDm) => {
+      dispatch(createDmThunk(msgData)).then(async () => {
         dispatch(getAllGroupsThunk());
         await dispatch(getOneGroupThunk(data.id));
         await dispatch(getCurrentUserGroupsThunk(user.id));
-        // const msg = {
-        //   content: newDm.direct_message.content,
-        //   created_at: newDm.direct_message.created_at,
-        //   updated_at: newDm.direct_message.updated_at,
-        //   user: user,
-        // };
 
-        // socket.emit("dm", {
-        //   msg: msg,
-        //   room: data.id,
-        // });
-
-        // console.log("---------");
         history.push(`/groups/${data.id}`);
       });
     });
   };
-
-  // let receiver;
-
-  // if (users) {
-  //   receiver = users.filter((user) => user.id == receiverId)[0];
-  // }
 
   if (!receiver) return null;
 

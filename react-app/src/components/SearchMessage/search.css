@@ -63,16 +63,28 @@ img.user_icon {
 .result_channel {
     font-size:15px;
     margin: 10px;
+    height: 50px;
 }
 
 .view_link {
-    margin-left: 150px;
+
     text-decoration: none;
     color: rgb(42, 40, 40);
+    margin-right:30px
 }
 
 .view_link:hover{
     font-weight: bolder;
     color:rgb(38, 38, 185);
 
+}
+
+.first_line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-container {
+    height:30vh;
+    overflow-y: scroll;
 }

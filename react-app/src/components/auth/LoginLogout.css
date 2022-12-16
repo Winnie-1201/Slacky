@@ -41,6 +41,11 @@
   background: #611f69;
   box-sizing: border-box;
   color: white;
+  cursor: pointer;
+}
+
+.logout-button {
+cursor: pointer;
 }
 
 .form-error-container {
@@ -51,4 +56,5 @@
 
 .form-error-block {
   padding: 0.2rem 0;
+
 }

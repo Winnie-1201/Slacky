@@ -38,7 +38,7 @@ export const getAllMessageThunk = (groupId) => async (dispatch) => {
 
   if (response.ok) {
     const messages = await response.json();
-    console.log("all dms in getAllMessageThunk: ", messages);
+    // console.log("all dms in getAllMessageThunk: ", messages);
     dispatch(getAll(messages.group_messages));
     return messages;
   }
@@ -56,7 +56,7 @@ export const createDmThunk = (data) => async (dispatch) => {
 
   if (response.ok) {
     const newMessage = await response.json();
-    console.log("Create a dm in createDmThunk: ", newMessage);
+    // console.log("Create a dm in createDmThunk: ", newMessage);
     dispatch(createDm(newMessage.direct_message));
     return newMessage;
   }
@@ -72,7 +72,7 @@ export const updateDmThunk = (data) => async (dispatch) => {
   });
   if (response.ok) {
     const message = await response.json();
-    console.log("update dm in updateDmThunk: ", message);
+    // console.log("update dm in updateDmThunk: ", message);
     dispatch(updateDm(message.direct_message));
     return message;
   }
@@ -87,7 +87,7 @@ export const deleteDmThunk = (data) => async (dispatch) => {
 
   if (response.ok) {
     const message = await response.json();
-    console.log("delete dm in deleteDmThunk: ", message);
+    // console.log("delete dm in deleteDmThunk: ", message);
     dispatch(deleteDm(messageId));
     return message;
   }
@@ -98,7 +98,7 @@ const dmReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_ALL:
       newState = {};
-      console.log("get all msg dm reducer", action.messages);
+      // console.log("get all msg dm reducer", action.messages);
       action.messages?.forEach((msg) => {
         newState[msg.id] = msg;
       });

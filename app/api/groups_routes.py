@@ -4,6 +4,8 @@ from app.models import db, Group, User, GroupMessage
 from app.forms import GroupForm
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
+from ..mysocket import socketio
+
 
 group_routes = Blueprint('groups', __name__)
 
@@ -54,7 +56,14 @@ def add_group():
 
         db.session.add(new_group)
         db.session.commit()
-        
+
+        # print("new_group", new_group)
+        # print("new)gorup to dic", dir(new_group))
+        # print("new)gorup to dic", new_group.to_dict())
+        # print("-------------")
+
+        # room = new_group.to_dict()['id']
+        # socketio.emit('join', room)
         return new_group.to_dict()
 
     if form.errors:

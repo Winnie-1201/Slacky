@@ -1,24 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { getAllGroupsThunk } from "../../store/groups";
+import { NavLink, useHistory } from "react-router-dom";
+import {
+  getAllGroupsThunk,
+  getCurrentUserGroupsThunk,
+} from "../../store/groups";
 import "./GroupIndex.css";
 
 export default function GroupIndex({ user }) {
   const dispatch = useDispatch();
-
-  const userGroups = useSelector((state) => state.group.userGroups);
+  const history = useHistory();
 
   const [showDms, setShowDms] = useState(true);
 
+  const userGroups = useSelector((state) => state.group.userGroups);
+
   useEffect(() => {
     dispatch(getAllGroupsThunk());
+    dispatch(getCurrentUserGroupsThunk(user.id));
   }, [dispatch]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    // setClick(true);
+    history.push("/groups/all-dms");
+  };
 
   return (
     <div className="groups-index-div">
       <div className="sidebar-wrapper">
-        <div className="sidebar-icon-span">
+        <div className="sidebar-icon-span" onClick={() => setShowDms(!showDms)}>
           <i
             className="fa-solid fa-caret-down cursor"
             onClick={() => setShowDms(!showDms)}
@@ -53,33 +64,21 @@ export default function GroupIndex({ user }) {
                     ? group.users[1].username
                     : group.users[0].username}
                 </NavLink>
-                {/* <div key={group.id} onClick={joinRoom(group.id)}>
-                  {group.users[0].username === user.username
-                    ? group.users[1].username
-                    : group.users[0].username}
-                </div> */}
-                {/* <Link key={group.id} to={{
-                  pathname: `/groups/${group.id}`,
-                  prop: {
-                    socket: socket,
-                    room: group.id
-                  }
-                  }}>
-                  {group.users[0].username === user.username
-                    ? group.users[1].username
-                    : group.users[0].username}
-                </Link> */}
               </span>
             </div>
           );
         })}
       <div className="sidebar-wrapper">
-        <div className="sidebar-icon-span">
-          <div className="plus-div">
-            <span>+</span>
+        <div className="sidebar-icon-span cursor" onClick={handleClick}>
+          <div className="plus-div cursor" onClick={handleClick}>
+            <span className="cursor" onClick={handleClick}>
+              +
+            </span>
           </div>
         </div>
-        <span className="sidebar-text">Add teammates</span>
+        <span className="sidebar-text cursor" onClick={handleClick}>
+          Add teammates
+        </span>
       </div>
     </div>
   );

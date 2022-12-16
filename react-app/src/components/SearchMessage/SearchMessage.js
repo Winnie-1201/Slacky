@@ -4,6 +4,7 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import { getSearch } from "../../store/search";
 import NavBarLoggedIn from "../NavBarLoggedIn";
 import SideBar from "../SideBar/SideBar";
+import Footer from "../Footer/Footer";
 import "./search.css";
 
 const SearchMessages = () => {
@@ -41,27 +42,29 @@ const SearchMessages = () => {
             <SideBar user={user} />
           </div>
 
-          <div>
-            <div>
-              <div className="result_channel">
-                {channel_message.length
-                  ? `${channel_message.length} channel(s) found for '${keyword}'`
-                  : `No Channel turned up for '${keyword}'`}
-              </div>
+          <div className="grid-main-view">
+            <div className="result_channel">
+              {channel_message.length
+                ? `${channel_message.length} channel(s) found for '${keyword}'`
+                : `No Channel turned up for '${keyword}'`}
+            </div>
 
-              <div className="search-container">
-                {/* <input placeholder='Search for messages' /> */}
-                {channel_message.map(
-                  (msg) => (
-
-                    <div>
-                        {msg.map((el) => (
-                          <div className="channel_msg_container">
-                            <div className="channel_name_ls">
+            <div className="search-container">
+              {/* <input placeholder='Search for messages' /> */}
+              {channel_message.map(
+                (msg) => (
+                  <div>
+                    {msg.map((el) => (
+                      <div className="channel_msg_container" key={el.id}>
+                        <div className="channel_name_ls">
+                          <div className="first_line">
+                            <div className="firsy_line_left">
                               <span id="channel_name">
                                 # Channel: {el.channel_name}
                               </span>{" "}
                               -- {el.created_at}{" "}
+                            </div>
+                            <div className="first_line_right">
                               <Link
                                 className="view_link"
                                 to={`/channels/${el.channel_id}`}
@@ -69,82 +72,81 @@ const SearchMessages = () => {
                                 view in channel
                               </Link>
                             </div>
-
-                            <div className="channel_msg_ls">
-                              <div>
-                                <img
-                                  className="user_icon"
-                                  src={el.user_img}
-                                  alt="user-icon"
-                                />
-                              </div>
-                              <div className="samll_box">
-
-                              <div id="user_name">{el.user_name}</div>
-                                <p id="search_content">{el.content}</p>
-                                </div>
-                            </div>
                           </div>
-                        ))}
+                        </div>
+
+                        <div className="channel_msg_ls">
+                          <div>
+                            <img
+                              className="user_icon"
+                              src={el.user_img}
+                              alt="user-icon"
+                            />
+                          </div>
+                          <div className="samll_box">
+                            <div id="user_name">{el.user_name}</div>
+                            <p id="search_content">{el.content}</p>
+                          </div>
+                        </div>
                       </div>
+                    ))}
+                  </div>
+                )
 
-                  )
-
-                  // </div>
-                )}
-              </div>
+                // </div>
+              )}
             </div>
 
-            <div>
-              <div>
-                <div className="result_channel">
-                  {group_message.length
-                    ? `${group_message.length} group(s) found for '${keyword}'`
-                    : `No Group turned up for '${keyword}'`}
-                </div>
-                <div className="search-container">
-                  {group_message.map((msg) => (
-                  <div>
-                      {/* <div>{msg[0]?.group_id}</div> */}
-                        {msg.map((el) => (
-                          <div className="channel_msg_container">
-                              <div className="channel_name_ls">
-                                <span id="channel_name">
-                                  # Group: {el.groupId}
-                                </span>{" "}
-                                -- {el.created_at}{" "}
-                                <Link
-                                  className="view_link"
-                                  to={`/groups/${el.groupId}`}
-                                >
-                                  view in group
-                                </Link>
+            <div className="result_channel">
+              {group_message.length
+                ? `${group_message.length} group(s) found for '${keyword}'`
+                : `No Group turned up for '${keyword}'`}
+            </div>
+            <div className="search-container">
+              {group_message.map((msg) => (
+                <div>
+                  {/* <div>{msg[0]?.group_id}</div> */}
+                  {msg.map((el) => (
+                    <div className="channel_msg_container" key={el.id}>
+                      <div className="channel_name_ls">
+                      <div className="first_line">
+                            <div className="firsy_line_left">
+                        <span id="channel_name"># Group: {el.groupId}</span> --{" "}
+                            {el.created_at}{" "}
                               </div>
-
-
-
-                              <div className="channel_msg_ls">
-                              <div>
-                              <img
-                                className="user_icon"
-                                src={el.user_img}
-                                alt="user-icon"
-                              />
-                                </div>
-                                <div className="samll_box">
-                              <div id="user_name">{el.user_name}</div>
-                              <p id="search_content">{el.content}</p>
-                            </div>
-                              </div>
-                              </div>
-
-                        ))}
+                            <div className="first_line_right">
+                        <Link
+                          className="view_link"
+                          to={`/groups/${el.groupId}`}
+                        >
+                          view in group
+                        </Link>
+                          </div>
+                          </div>
                       </div>
 
+                      <div className="channel_msg_ls">
+                        <div>
+                          <img
+                            className="user_icon"
+                            src={el.user_img}
+                            alt="user-icon"
+                          />
+                        </div>
+                        <div className="samll_box">
+                          <div id="user_name">{el.user_name}</div>
+                          <p id="search_content">{el.content}</p>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-              </div>
+              ))}
             </div>
+          </div>
+
+          <div className="grid-footer">
+            <Footer />
           </div>
         </div>
       </>

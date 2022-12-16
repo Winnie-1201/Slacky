@@ -1,15 +1,43 @@
-# Flask React Project
+# Slacky
 
-This is the starter for the Flask React project.
+Live site here: https://slack-clone-2k4m.onrender.com
 
-## Getting started
+Slacky is a clone of slack.com. The site allows registered users to communicate with others through a channel or private messages. A registered user can create channels of their particular topic, add members, modify the created channel and delete as needed. Members can also choose to make modifications or leave the channel. Members of a channel can send messages and see everyone else messages in the channel. The instant direct message are private and user-to-user specific. When a sender messages the intended receiver, the receiver will get the message without having to refresh it's own page. On top of channel, channel messages and direct messages, users can also search their all messages available to them from search bar.
+
+## TechStack
+
+### Languages
+
+![html5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![js](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
+
+### Frameworks and Libraries
+
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![socket](https://img.shields.io/badge/Socket.io-010101?&style=for-the-badge&logo=Socket.io&logoColor=white)
+
+### Database:
+
+![postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-100000?style=for-the-badge&logo=sql&logoColor=BA1212&labelColor=AD0000&color=A90000)
+
+### Hosting:
+
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
+
+# Getting started
+
 1. Clone this repository (only this branch)
 
 2. Install dependencies
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+   ```bash
+   pipenv install -r requirements.txt
+   ```
 
 3. Create a **.env** file based on the example with proper settings for your
    development environment
@@ -17,7 +45,7 @@ This is the starter for the Flask React project.
 4. Make sure the SQLite3 database connection URL is in the **.env** file
 
 5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
+   by the `SCHEMA` environment variable. Replace the value for
    `SCHEMA` with a unique name, **making sure you use the snake_case
    convention**.
 
@@ -41,108 +69,107 @@ This is the starter for the Flask React project.
 
 7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
+# Features
 
-## Deployment through Render.com
+## Home Page
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+The home page provides a user sign in and sign up options. By clicking on the buttons, a user will be taken to the sign in or sign up pages.
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+### Sign In
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+<img src="./records/login.gif" height=400>
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+### Sign Up
 
-### Part A: Configure the Start and Build Commands
+<img src="./records/signup.gif" height=400>
 
-Start by giving your application a name.
+Upon a successful sign in or sign up, a user will be taken to the logged in landing page. The app automatically sign the user up for the 'general' channel upon sign in.
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+### After Log In
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
+On the top of the page, users can search for messages and click on the profile icon to check their own status and logout.
 
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
+### Search Messages
 
-For your Flask project, enter the following command into the Build field, all in
-one line:
+<img src="./records/search.gif" height=400>
 
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
+### Logout
 
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
+## Browse Channels
 
-Now, add your start command in the Start field:
+### Channel Sidebar
 
-```shell
-# start script
-gunicorn app:app
-```
+Users can see a list of their joined channels on the left hand sidebar.
 
-_If you are using websockets, use the following start command instead for increased performance:_
+<img src="./records/channel-sidebar.gif">
 
-`gunicorn --worker-class eventlet -w 1 app:app`
+### All Channels
 
-### Part B: Add the Environment Variables
+Users can also see a list of all available channels by clicking on the 'All channels' button on the sidebar.
 
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
+<img src="./records/channel-all.gif">
 
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
+### Add A Channel
 
-Add the following keys and values in the Render GUI form:
+Users can add a channel by clicking on the 'Add channels' button.
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
+<img src="./records/channel-add.gif">
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+### Channel Banner
 
-Add the following keys and values:
+To see the details of a channel, users can click on the name of the channel in the channel banner on the right. The banner also includes summary of channel description and number of members.
+<img src='./records/channel-banner.gif'>
 
-- DATABASE_URL (copy value from Internal Database URL field)
+### Channel Details
 
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
+Under the channel details page, a member can edit the channel by clicking on the 'Edit channel' button. A member can also leave the channel by clicking on the 'Leave channel' button. An organizer of the channel can choose to delete the channel by clicking on the 'Delete channel' button. Upon leaving or deleting a channel, the user will be redirected to the 'general' channel page.
 
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
+### Edit Channel
 
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
+<img src="./records/channel-edit.gif">
 
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
+On the channel member tab, a user can see all members of the channel and all more members by clicking on the 'Add people' button.
 
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+### Channel Details - Members
+
+A user can search for usernames and click on the person they'd like to add.
+
+### Add Members
+
+<img src='./records/channel-add-member.gif'>
+
+## Direct Messages
+
+Users can search for a username and start a direct message to the member.
+
+### Search Users
+
+<img src="./records/search-user.gif" height=400>
+
+### New Messages
+
+<img src="./records/new-msg.gif" height=400>
+
+Receivers of the message will see the name of senders showing up on their page once a message is sent from the sender.
+
+### Direct Message Index
+
+<img src="./records/dm-index.gif" height=400>
+
+## ChannelMessages
+
+### Read All Meesages
+
+Message list will appear ordered by date and time. The newest messages will appear at the bottom of the feed while the oldest will appear at top.
+<img src="./records/read-cm.png">
+
+### Send Messages
+
+Users can send new messages in channels they are subscribed to.
+<img src="./records/send-cm.gif">
+
+### Edit/Delete Messages
+
+Edit button and delete button will appear when message authors stops or hover the mouse pointer above the message feed. Message authors can edit the message directly in the message feed.
+<img src="./records/edit-cm.gif">
+<img src="./records/delete-cm.gif">

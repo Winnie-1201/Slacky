@@ -8,8 +8,9 @@ import ChannelModalHeader from "./ChannelModalHeader";
 import MemberSearchRow from "./MemberSearchRow";
 import './AddMember.css'
 
-export default function AddMember({ setShowModal, channel, users }) {
+export default function AddMember({ setShowModal, channel }) {
   const user = useSelector((state) => state.session.user);
+  const users = useSelector((state) => state.session.users);
   const [matchedUsers, setMatchedUsers] = useState([])
   const [searchUsername, setSearchUsername] = useState("");
   const [selectedUser, setSelectedUser] = useState({});
@@ -48,10 +49,10 @@ export default function AddMember({ setShowModal, channel, users }) {
     let matched = []
     // console.log('userinput', searchUsername)
     // console.log('all users', users)
-    if (users?.length) {
+    if (users?.length && searchUsername.length) {
       matched = users.filter((user) => {
         // console.log('user.username.length', searchUsername.length)
-        return searchUsername.length && user.username.toLowerCase().startsWith(searchUsername.toLowerCase())
+        return user.username.toLowerCase().startsWith(searchUsername.toLowerCase())
       })
     }
     

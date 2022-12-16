@@ -1,39 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { getCurrentUserGroupsThunk } from "../../store/groups";
 import { getAllUser } from "../../store/session";
 import "./AddDm.css";
 
 function AddDm() {
-  const [selectedUser, setSelectedUser] = useState("");
-  //   const history = useHistory();
-  //   const [onFocus, setFocus] = useState(false);
-  // const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
+
+  const [selectedUser, setSelectedUser] = useState("");
   const [selectFlag, setSelectFlag] = useState(false);
   const [sendTo, setSendTo] = useState("");
   const [dmGroup, setDmGroup] = useState("");
 
   const users = useSelector((state) => state.session.users);
   const currUser = useSelector((state) => state.session.user);
-  const userGroups = currUser.groups;
+  const userGroups = useSelector((state) => state.group.userGroups);
 
-  useEffect(() => {
-    dispatch(getAllUser());
-  }, [dispatch]);
-
-  // useEffect(() => {
-
-  // async function fetchData() {
-  //   const response = await fetch("/api/users/");
-  //   const responseData = await response.json();
-  //   setUsers(responseData.users);
-  // }
-  // fetchData();
-  // }, []);
+  useEffect(
+    () => async () => {
+      await dispatch(getAllUser());
+      await dispatch(getCurrentUserGroupsThunk());
+    },
+    [dispatch]
+  );
 
   const handleSelect = (e) => {
-    // setFocus(true);
     setSelectedUser(e.target.value);
   };
 
@@ -42,15 +34,20 @@ function AddDm() {
     setSendTo(user);
 
     userGroups.forEach((group) => {
-      // console.log("group users", group.users, user, group.users.includes(user));
       group.users.forEach((u) => {
-        // console.log(u.username, user.username)
         if (u.username === user.username) {
           setDmGroup(group);
         }
       });
     });
   };
+
+  if (!users.length > 0) return null;
+
+  const flag =
+    users.filter((user) =>
+      user.username.toLowerCase().startsWith(selectedUser.toLowerCase())
+    ).length > 0;
 
   return (
     <div className="dm-to-body">
@@ -62,9 +59,9 @@ function AddDm() {
       />
       {selectedUser && (
         <div className="user-list">
-          <ul className="list-items">
-            {users &&
-              users
+          {flag ? (
+            <ul className="list-items">
+              {users
                 .filter((user) =>
                   user.username
                     .toLowerCase()
@@ -91,17 +88,16 @@ function AddDm() {
                     ></span>
                   </li>
                 ))}
-          </ul>
+            </ul>
+          ) : (
+            <>
+              <div className="no-user">No member found</div>
+            </>
+          )}
         </div>
       )}
       {selectFlag && !dmGroup && sendTo && (
         <Redirect to={`/groups/draft/${sendTo.id}`} />
-        // <Redirect
-        //   to={{
-        //     pathname: "/groups/draft",
-        //     state: { receiver: sendTo },
-        //   }}
-        // />
       )}
       {selectFlag && dmGroup && (
         <Redirect to={`/groups/${dmGroup.id}`} receiver={sendTo} />

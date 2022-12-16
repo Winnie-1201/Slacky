@@ -29,3 +29,6 @@
   width: 90%;
 
 }
+.profile-icon-span img{
+  cursor:pointer;
+}
