@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { createDmThunk, getAllMessageThunk } from "../../store/dm";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./DirectMessage.css";
@@ -16,12 +16,15 @@ import {
 import { getUser } from "../../store/session";
 import Footer from "../Footer/Footer";
 import { dateTransfer } from "./dateTransfer";
-let socket;
+import { useSocket } from "../../context/SocketContext";
+// let socket;
 
 const DirectMessage = () => {
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
   const history = useHistory();
+  const socket = useSocket();
+  console.log("socket in dm", socket);
 
   const { groupId } = useParams();
   const dispatch = useDispatch();
@@ -45,9 +48,9 @@ const DirectMessage = () => {
       : currGroup?.users[0];
 
   useEffect(async () => {
-    socket = io();
+    // socket = io();
 
-    socket.emit("join", { user: user, room: groupId });
+    // socket.emit("join", { user: user, room: groupId });
     await dispatch(getOneGroupThunk(groupId));
 
     socket.on("dm", async (chat) => {

@@ -6,15 +6,18 @@ import "./components/LandingLoggedIn.css";
 import App from "./App";
 import configureStore from "./store";
 import { ModalProvider } from "./context/Modal";
+import SocketProvider from "./context/SocketContext";
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ModalProvider>
-        <App />
-      </ModalProvider>
+      <SocketProvider>
+        <ModalProvider>
+          <App />
+        </ModalProvider>
+      </SocketProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
