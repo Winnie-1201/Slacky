@@ -42,7 +42,7 @@ function App() {
       dispatch(getCurrentUserGroupsThunk(user?.id));
       dispatch(getAllUser());
     }
-  }, []);
+  }, [user]);
 
   if (!loaded) {
     return null;
