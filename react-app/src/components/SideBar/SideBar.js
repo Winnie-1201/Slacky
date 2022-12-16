@@ -18,7 +18,7 @@ export default function SideBar({ user }) {
     <div className="sidebar-div">
       <div className="sidebar-header">
         <span style={{ fontWeight: "600", fontSize: "18px" }}>App Academy</span>
-        <button>
+        <button onClick={handleClick}>
           <i className="fa-regular fa-pen-to-square" onClick={handleClick}></i>
         </button>
       </div>
