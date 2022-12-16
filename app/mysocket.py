@@ -45,16 +45,16 @@ def handle_join(data):
 
 @socketio.on("invite")
 def handle_invite(data):
-    print("--------enter invite")
+    print("--------backend invite handler--------", data)
     # msg = data['msg']
-    room = data['room']
-    invited_user = data['user']
+    # room_id = data['room']
+    receiver_id = data['receiverId']
     # group = Group.query.get(room)
     # user = User.query.get(invited_user)
     # user.user_user_groups.append(group)
     # db.session.commit()
-    join_room(room)
-    emit('invite', invited_user, to=room, broadcast=True)
+    # join_room(room)
+    emit('invite', to=f'receive-{receiver_id}')
 
 @socketio.on('leave')
 def handle_leave(data):

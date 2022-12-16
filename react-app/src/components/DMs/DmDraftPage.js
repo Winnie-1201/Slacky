@@ -59,6 +59,10 @@ function DmDraftPage() {
       // group_msg: chatInput,
     };
 
+    socket.emit("invite", {
+      receiverId: receiverId
+    });
+
     await dispatch(CreateGroupThunk(groupInfo)).then((data) => {
       console.log(data, "-----------------");
       const msgData = {
@@ -76,22 +80,16 @@ function DmDraftPage() {
         //   user: user,
         // };
 
-        socket.emit("invite", {
-          user: receiverId,
-          room: data.id,
-        });
+        // socket.emit("invite", {
+        //   receiver: receiverId,
+        //   room: data.id,
+        // });
 
         // console.log("---------");
         history.push(`/groups/${data.id}`);
       });
     });
   };
-
-  // let receiver;
-
-  // if (users) {
-  //   receiver = users.filter((user) => user.id == receiverId)[0];
-  // }
 
   if (!receiver) return null;
 

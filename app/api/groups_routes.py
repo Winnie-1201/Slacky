@@ -12,14 +12,89 @@ group_routes = Blueprint('groups', __name__)
 @group_routes.route("/current")
 @login_required
 def current_user_groups():
-    groups = Group.query.all()
-    user_groups = []
-    for group in groups:
-        for user in group.group_user_groups:
-            if user.id == current_user.id:
-                user_groups.append(group)
+    # print('current user group route')
+    current_user_groups = current_user.user_user_groups
+    # print(current_user.to_dict())
+    # print(current_user_groups)
 
-    return {"groups": [group.to_dict() for group in user_groups]}
+    # groups = Group.query.all()
+    # user_groups = []
+    # for group in groups:
+    #     for user in group.group_user_groups:
+    #         if user.id == current_user.id:
+    #             user_groups.append(group)
+
+    # print(user_groups)
+# {
+#   "groups": [
+#     {
+#       "group_messages": [
+#         {
+#           "content": "Hi, I am Demo1",
+#           "created_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "groupId": 2,
+#           "id": 5,
+#           "updated_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "user": {
+#             "created_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#             "email": "demo1@aa.io",
+#             "id": 1,
+#             "image_url": "https://www.w3schools.com/howto/img_avatar.png",
+#             "is_online": true,
+#             "status": "Lorem ipsum dolor sit amet",
+#             "updated_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#             "username": "Demo1"
+#           },
+#           "userId": 1
+#         },
+#         {
+#           "content": "Hi, I am Demo3",
+#           "created_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "groupId": 2,
+#           "id": 6,
+#           "updated_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "user": {
+#             "created_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#             "email": "demo3@aa.io",
+#             "id": 3,
+#             "image_url": "https://www.w3schools.com/howto/img_avatar.png",
+#             "is_online": true,
+#             "status": "Lorem ipsum dolor sit amet",
+#             "updated_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#             "username": "Demo3"
+#           },
+#           "userId": 3
+#         }
+#       ],
+#       "id": 2,
+#       "topic": null,
+#       "users": [
+#         {
+#           "created_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "email": "demo1@aa.io",
+#           "id": 1,
+#           "image_url": "https://www.w3schools.com/howto/img_avatar.png",
+#           "is_online": true,
+#           "status": "Lorem ipsum dolor sit amet",
+#           "updated_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "username": "Demo1"
+#         },
+#         {
+#           "created_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "email": "demo3@aa.io",
+#           "id": 3,
+#           "image_url": "https://www.w3schools.com/howto/img_avatar.png",
+#           "is_online": true,
+#           "status": "Lorem ipsum dolor sit amet",
+#           "updated_at": "Fri, 16 Dec 2022 02:26:56 GMT",
+#           "username": "Demo3"
+#         }
+#       ]
+#     }
+#   ]
+# }
+
+    return {"groups": [group.to_dict() for group in current_user_groups]}
 
 @group_routes.route("")
 @login_required
@@ -68,3 +143,12 @@ def add_group():
 
     if form.errors:
         return form.errors
+
+
+@group_routes.route("", methods=["DELETE"])
+@login_required
+def delete_group():
+    db.session.execute("DELETE FROM user_groups")
+    db.session.commit()
+
+    return 'success'

@@ -11,7 +11,7 @@ def search_channel_message(keyword):
     # print("search works++++++++++++")
     all_channels = Channel.query.all()
     all_groups = Group.query.all()
-    print("all_groups*********",all_groups)
+    # print("all_groups*********",all_groups)
     # print("all_channels*********",all_channels)
     result_channel =[]
     result_group =[]
@@ -24,10 +24,10 @@ def search_channel_message(keyword):
         # print("channel_messages",channel_messages)
         # print("________________________")
         for message in channel_messages:
-            print("message____",message)
+            # print("message____",message)
 
             if keyword.lower() in message.content.lower():
-                print("message_content",message.content)
+                # print("message_content",message.content)
                 arr_cahnnels.append(message.to_dict_basics())
                 obj_channel["channelId"+ " " + str(channel.id)] = arr_cahnnels
 

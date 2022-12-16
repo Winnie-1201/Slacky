@@ -27,7 +27,7 @@ def all_channels():
             filters.append(or_(Channel.name.contains(keyword),
             Channel.description.contains(keyword)))
 
-        print(filters)
+        # print(filters)
         channels = db.session.query(Channel).filter(*filters)
 
         return {'channels': [c.to_dict_name_only() for c in channels]}
@@ -46,16 +46,16 @@ def one_channel(id):
 @channel_routes.route('', methods=["POST"])
 @login_required
 def add_channel():
-    print('------------------create channel route------------------')
+    # print('------------------create channel route------------------')
 
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('--------create channel form--------')
-    print(form.data)
+    # print('--------create channel form--------')
+    # print(form.data)
 
     if form.validate_on_submit():
-        print('****** submitting ******')
-        print(form.data)
+        # print('****** submitting ******')
+        # print(form.data)
         name = form.data['name']
         description = form.data['description'] if form.data['description'] else None
         topic = form.data['topic'] if form.data['topic'] else None
@@ -77,7 +77,7 @@ def add_channel():
         return new_channel.to_dict()
         # return '1'
 
-    print("form.erros -----------------", form.errors)
+    # print("form.erros -----------------", form.errors)
     # {'name': ['That name is already taken by a channel or username.']}
     return {'errors': form.errors}, 401
 
@@ -85,17 +85,17 @@ def add_channel():
 @channel_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_channel(id):
-    print('****************** create edit route')
+    # print('****************** create edit route')
 
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('*********** form created', form)
-    print('*****', form.errors)
-    print('**** on submit', form.validate_on_submit())
+    # print('*********** form created', form)
+    # print('*****', form.errors)
+    # print('**** on submit', form.validate_on_submit())
 
     if form.validate_on_submit():
-        print('****** edit submitting ******')
-        print(form.data)
+        # print('****** edit submitting ******')
+        # print(form.data)
 
         channel = Channel.query.get(id)
         # if current_user.id != channel.organizer_id:
@@ -120,7 +120,7 @@ def delete_channel(id):
     # print('create delete route')
 
     channel = Channel.query.get(id)
-    print('********************', channel)
+    # print('********************', channel)
 
     if current_user.id != channel.organizer_id:
         return {'errors': ['Unauthorized']}

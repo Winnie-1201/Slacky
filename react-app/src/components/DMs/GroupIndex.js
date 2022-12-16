@@ -48,6 +48,7 @@ export default function GroupIndex({ user }) {
                         ? group.users[1].image_url
                         : group.users[0].image_url
                     }
+                    alt='user-icon'
                   />
                 </span>
               </div>

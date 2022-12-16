@@ -8,26 +8,27 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate, getAllUser } from "./store/session";
-import LandingLoggedIn from "./components/_DONOTUSE/LandingLoggedIn";
 import HomeMain from "./components/HomeMain/HomeMain";
 import DirectMessage from "./components/DMs/DerectMessage";
 import ChannelMessagePage from "./components/ChannelMessagePage";
-import NavBarLoggedIn from "./components/NavBarLoggedIn";
+// import NavBarLoggedIn from "./components/NavBarLoggedIn";
 
 import AddDmPage from "./components/DMs/AddDmPage";
 import DmDraftPage from "./components/DMs/DmDraftPage";
 import SearchMessages from "./components/SearchMessage/SearchMessage";
-import AddDm from "./components/DMs/AddDm";
+// import AddDm from "./components/DMs/AddDm";
 
 import AllChannels from "./components/Channels/AllChannels";
 import { getAllChannel } from "./store/channels";
 import Footer from "./components/Footer/Footer";
 import { getCurrentUserGroupsThunk } from "./store/groups";
+import { useSocket } from "./context/SocketContext";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const { socket } = useSocket();
 
   useEffect(() => {
     (async () => {
@@ -40,8 +41,15 @@ function App() {
     if (user) {
       dispatch(getAllChannel());
       dispatch(getCurrentUserGroupsThunk(user?.id));
-      dispatch(getAllUser());
+      dispatch(getAllUser());      
     }
+
+    // if (user && socket) {
+    //   socket.on(`receive-${user.id}`, () => {
+    //     console.log(`receive-${user.id} route set`)
+        
+    //   })
+    // }
   }, [user]);
 
   if (!loaded) {

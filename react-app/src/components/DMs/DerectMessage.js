@@ -47,7 +47,7 @@ const DirectMessage = () => {
       ? currGroup?.users[1]
       : currGroup?.users[0];
 
-  useEffect(async () => {
+  useEffect(() => async () => {
     // socket = io();
 
     // socket.emit("join", { user: user, room: groupId });
@@ -64,7 +64,7 @@ const DirectMessage = () => {
     };
   }, []);
 
-  useEffect(async () => {
+  useEffect(() => async () => {
     socket.emit("join", { user: user, room: groupId });
     setMessages([]);
     await dispatch(getOneGroupThunk(groupId));
@@ -99,6 +99,10 @@ const DirectMessage = () => {
         msg: msg,
         room: groupId,
       });
+
+      socket.emit('invite', {
+        
+      })
 
       setChatInput("");
       // setNewRoom(false);
