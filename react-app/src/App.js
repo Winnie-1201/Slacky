@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import { authenticate } from "./store/session";
+import { authenticate, getAllUser } from "./store/session";
 import LandingLoggedIn from "./components/_DONOTUSE/LandingLoggedIn";
 import HomeMain from "./components/HomeMain/HomeMain";
 import DirectMessage from "./components/DMs/DerectMessage";
@@ -37,8 +37,11 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getAllChannel());
-    dispatch(getCurrentUserGroupsThunk(user?.id));
+    if (user) {
+      dispatch(getAllChannel());
+      dispatch(getCurrentUserGroupsThunk(user?.id));
+      dispatch(getAllUser());
+    }
   }, []);
 
   if (!loaded) {
@@ -48,11 +51,13 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact={true}>
-          <NavBar />
-          <HomeMain></HomeMain>
-          <Footer />
-        </Route>
+        {!user &&
+          <Route path="/" exact={true}>
+            <NavBar />
+            <HomeMain></HomeMain>
+            <Footer />
+          </Route>
+        }
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -65,17 +70,17 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/groups/all-dms" exact={true}>
+        <ProtectedRoute path="/groups/all-dms" exact={true}>
           <AddDmPage />
-        </Route>
-        <Route path="/groups/draft/:receiverId" exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path="/groups/draft/:receiverId" exact={true}>
           <DmDraftPage />
-        </Route>
-        <Route path="/groups/:groupId">
+        </ProtectedRoute>
+        <ProtectedRoute path="/groups/:groupId">
           {/* <LandingLoggedIn user={user} /> */}
           <DirectMessage />
           {/* <SocketTest /> */}
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path="/channels/:channelId">
           <ChannelMessagePage />
         </ProtectedRoute>
