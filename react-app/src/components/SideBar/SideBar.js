@@ -2,14 +2,16 @@ import React from "react";
 import "./SideBar.css";
 import ChannelIndex from "../Channels/ChannelIndex";
 import GroupIndex from "../DMs/GroupIndex";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function SideBar({ user }) {
-  const [click, setClick] = useState(false);
+  // const [click, setClick] = useState(false);
+
+  const history = useHistory();
   const handleClick = (e) => {
     e.preventDefault();
-    setClick(true);
+    // setClick(true);
+    history.push("/groups/all-dms");
   };
 
   return (
@@ -21,7 +23,7 @@ export default function SideBar({ user }) {
         </button>
       </div>
       <div className="sidebar-index">
-        {click && <Redirect to="/groups/all-dms" />}
+        {/* {click && <Redirect to="/groups/all-dms" />} */}
         <ChannelIndex user={user} />
         <GroupIndex user={user} />
       </div>

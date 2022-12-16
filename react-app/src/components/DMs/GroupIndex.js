@@ -10,9 +10,9 @@ import "./GroupIndex.css";
 export default function GroupIndex({ user }) {
   const dispatch = useDispatch();
 
-  const userGroups = useSelector((state) => state.group.userGroups);
-
   const [showDms, setShowDms] = useState(true);
+
+  const userGroups = useSelector((state) => state.group.userGroups);
 
   useEffect(() => {
     dispatch(getAllGroupsThunk());
@@ -57,22 +57,6 @@ export default function GroupIndex({ user }) {
                     ? group.users[1].username
                     : group.users[0].username}
                 </NavLink>
-                {/* <div key={group.id} onClick={joinRoom(group.id)}>
-                  {group.users[0].username === user.username
-                    ? group.users[1].username
-                    : group.users[0].username}
-                </div> */}
-                {/* <Link key={group.id} to={{
-                  pathname: `/groups/${group.id}`,
-                  prop: {
-                    socket: socket,
-                    room: group.id
-                  }
-                  }}>
-                  {group.users[0].username === user.username
-                    ? group.users[1].username
-                    : group.users[0].username}
-                </Link> */}
               </span>
             </div>
           );

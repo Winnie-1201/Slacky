@@ -2,6 +2,7 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const LOAD_USERS = "session/loadAllUsers";
+const LOAD_RECEIVER = "session/loadRecervier";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -15,11 +16,18 @@ const loadUsers = (users) => {
   };
 };
 
+const loadReceiver = (user) => {
+  return {
+    type: LOAD_RECEIVER,
+    user,
+  };
+};
+
 const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-const initialState = { user: null, users: [] };
+const initialState = { user: null, users: [], receiver: null };
 
 export const getUser = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}`);
@@ -43,7 +51,7 @@ export const getReceiver = (userId) => async (dispatch) => {
       return;
     }
 
-    dispatch(loadUsers(data));
+    dispatch(loadReceiver(data));
   }
 };
 
@@ -146,6 +154,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, users: action.users };
     case REMOVE_USER:
       return { user: null };
+    case LOAD_RECEIVER:
+      return { ...state, receiver: action.user };
     default:
       return state;
   }
