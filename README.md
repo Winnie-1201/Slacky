@@ -87,37 +87,40 @@ On the top of the page, users can search for messages and click on the profile i
 
 ### Logout
 
-## Channels
-
-# Browse Channels
-
-Users can see a list of their joined channels on the left hand sidebar.
+## Browse Channels
 
 ### Channel Sidebar
+Users can see a list of their joined channels on the left hand sidebar.
 
-Users can also see a list of all available channels by clicking on the 'All channels' button on the sidebar.
+<img src="./records/channel-sidebar.gif">
 
 ### All Channels
+Users can also see a list of all available channels by clicking on the 'All channels' button on the sidebar.
 
-To see the details of a channel, users can click on the name of the channel in the channel banner on the right. The banner also includes summary of channel description and number of members.
+<img src="./records/channel-all.gif">
+
+### Add A Channel
+Users can add a channel by clicking on the 'Add channels' button.
+
+<img src="./records/channel-add.gif">
 
 ### Channel Banner
+To see the details of a channel, users can click on the name of the channel in the channel banner on the right. The banner also includes summary of channel description and number of members.
+<img src='./records/channel-banner.gif'>
 
+### Channel Details
 Under the channel details page, a member can edit the channel by clicking on the 'Edit channel' button. A member can also leave the channel by clicking on the 'Leave channel' button. An organizer of the channel can choose to delete the channel by clicking on the 'Delete channel' button. Upon leaving or deleting a channel, the user will be redirected to the 'general' channel page.
 
-### Channel Details - About
-
 ### Edit Channel
+<img src="./records/channel-edit.gif">
 
 On the channel member tab, a user can see all members of the channel and all more members by clicking on the 'Add people' button.
 
 ### Channel Details - Members
 
 A user can search for usernames and click on the person they'd like to add.
-
-### Search Users
-
 ### Add Members
+<img src='./records/channel-add-member.gif'>
 
 ## Direct Messages
 
