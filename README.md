@@ -161,7 +161,7 @@ Receivers of the message will see the name of senders showing up on their page o
 ### Read All Meesages
 
 Message list will appear ordered by date and time. The newest messages will appear at the bottom of the feed while the oldest will appear at top.
-<img src="./records/read-cm.gif">
+<img src="./records/read-cm.png">
 
 ### Send Messages
 
