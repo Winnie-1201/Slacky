@@ -48,14 +48,25 @@ export default function GroupIndex({ user }) {
             <div key={group.id} className="sidebar-wrapper">
               <div className="sidebar-icon-span">
                 <span className="user-icon-container-sidebar">
-                  <img
+                  {group.users[0].username === user.username ?
+                    (group.users[1].image_url ?
+                      <img className="user-icon-sidebar" src={group.users[1].image_url} alt=''/>
+                      :
+                      <button className="user-con-sidebar-nourl"> <i className="fa-solid fa-user"></i></button>)
+                    :
+                    (group.users[0].image_url ?
+                      <img className="user-icon-sidebar" src={group.users[0].image_url} alt='' />
+                      :
+                      <button> <i className="fa-solid fa-user"></i></button>)                    
+                  }
+                  {/* <img
                     className="user-icon-sidebar"
                     src={
                       group.users[0].username === user.username
                         ? group.users[1].image_url
                         : group.users[0].image_url
-                    }
-                  />
+                    } alt=''
+                  /> */}
                 </span>
               </div>
               <span className="sidebar-text">

@@ -54,7 +54,7 @@ def logout():
     Logs a user out
     """
     logout_user()
-    print('----------------logout------------------', current_user.is_authenticated)
+    # print('----------------logout------------------', current_user.is_authenticated)
     return {'message': 'User logged out'}
 
 
@@ -63,16 +63,17 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
-    print('----------------signup------------------', current_user.is_authenticated)
+    # print('----------------signup------------------', current_user.is_authenticated)
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('----------------signup form------------------', form.data)
+    # print('----------------signup form------------------', form.data)
 
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            image_url='https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png'
         )
 
         channel = Channel.query.get(1)
