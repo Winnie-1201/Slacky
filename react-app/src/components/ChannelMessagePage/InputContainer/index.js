@@ -22,12 +22,13 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-
+  
   useEffect(() => {
     if (cm) setContent(cm.content);
     if (setEdit) return () => setEdit(false);
   }, [cm]);
 
+  console.log('-------- editorstate', convertToRaw(editorState.getCurrentContent()).blocks[0].text)
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
@@ -127,7 +128,8 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
                   Cancel
                 </button>
               )}
-              {edit ? (
+
+              {convertToRaw(editorState.getCurrentContent()).blocks[0].text ? (
                 <button
                   type="submit"
                   className={`cm-submit-button cm-submit-button-highlight-true`}
@@ -138,7 +140,7 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
                 <button
                   type="submit"
                   className={`cm-submit-button cm-submit-button-highlight-${
-                    content != ""
+                    content !== ""
                   }`}
                 >
                   <i className="fa-solid fa-paper-plane"></i>

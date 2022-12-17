@@ -58,7 +58,7 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
     >
       <div className="cm-block-left">
         {avatar ? (
-          <img src={cm.user.image_url} className="cm-avatar"></img>
+          <img src={cm.user.image_url} className="cm-avatar" alt=""></img>
         ) : (
           <p>{time}</p>
         )}

@@ -140,7 +140,7 @@ const DirectMessage = () => {
                         <div className="user-icon-container-dm">
                           <img
                             className="user-icon-dm"
-                            src={message.user.image_url}
+                            src={message.user.image_url} alt=''
                           />
                         </div>
                         <div className="msg-text-container">
