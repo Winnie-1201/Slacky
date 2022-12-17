@@ -6,6 +6,9 @@ def seed_groups():
     # user3 = User.query.get(3)
     users = User.query.filter(User.id > 2)
 
+    groupDemo = Group(group_user_groups=[user1, user2])
+    db.session.add(groupDemo)
+
     for user in users:
         group1 = Group(group_user_groups=[user1, user])
         group2 = Group(group_user_groups=[user2, user])
