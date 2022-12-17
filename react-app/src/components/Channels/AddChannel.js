@@ -8,7 +8,7 @@ import { getUser } from '../../store/session';
 import ChannelModalHeader from './ChannelModalHeader';
 
 export default function AddChannel({ setShowModal }) {
-    console.log('---------- AddChannel Component -----------')
+    // console.log('---------- AddChannel Component -----------')
     const user = useSelector((state) => state.session.user);
     const [newChannel, setNewChannel] = useState({});
     
@@ -22,7 +22,7 @@ export default function AddChannel({ setShowModal }) {
     const [nameError, setNameError] = useState("Don’t forget to name your channel.");
     const [descriptionError, setDescriptionError] = useState('');
     
-    console.log('is public', isPublic)
+    // console.log('is public', isPublic)
     const onCreateChannel = async (e) => {
         e.preventDefault();
         if (nameError || descriptionError) {

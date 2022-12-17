@@ -15,7 +15,7 @@ export const getSearch = (keyword) => async (dispatch) => {
   if (res.ok) {
       const messages = await res.json();
       dispatch(search_messages(messages));
-      console.log("get search in thunk%%%%%%%%%%: ", messages);
+      // console.log("get search in thunk%%%%%%%%%%: ", messages);
     return messages;
   }
 };
@@ -32,9 +32,9 @@ const searchReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case SEARCH_MESSAGES:
-            console.log("++++++++")
+            // console.log("++++++++")
             newState = { ...state };
-            console.log("action in searchReducer", action)
+            // console.log("action in searchReducer", action)
             action.message.Channel_Message.forEach(msg => {
                 newState["channelMessages"] = msg
             })

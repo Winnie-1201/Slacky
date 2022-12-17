@@ -17,7 +17,7 @@ const SearchMessages = () => {
   const group_message = Object.values(
     useSelector((state) => state.search.groupMessages)
   );
-  console.log("message in component", group_message);
+  // console.log("message in component", group_message);
   //console.log("message in component", channel_message);
   //   channel_message.map((el) =>
   //     // console.log("el+++++++",el)
