@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { fetchDeleteChannelMessage } from "../../../store/channelMessage";
 import ChannelMessageInputContainer from "../InputContainer";
 import "./index.css";
-import { convertFromRaw } from "draft-js";
+import {
+  convertToEditorState,
+  convertFromRaw,
+  Editor,
+  EditorState,
+} from "draft-js";
 
 const ChannelMessageBlock = ({ cm, avatar }) => {
   const dispatch = useDispatch();
@@ -41,9 +46,11 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
     e.preventDefault();
     setEdit(true);
   };
-
-  const contentBlock = convertFromRaw(JSON.parse(cm.content));
-  console.log("***************** contentBlock", contentBlock);
+  console.log("*****************cm.content", cm.content);
+  const contentFromRaw = convertFromRaw(JSON.parse(cm.content));
+  console.log("*****************contentFromRaw", contentFromRaw);
+  const contentBlock = EditorState.createWithContent(contentFromRaw);
+  console.log("*****************contentBlock", contentBlock);
 
   return (
     <div
@@ -75,12 +82,12 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
               </div>
             </div>
             <div className="cm-content-box">
-              <p>{contentBlock}</p>
+              <Editor editorState={contentBlock} readOnly />
             </div>
           </div>
         ) : (
           <div className="cm-content-box">
-            <p>{contentBlock}</p>
+            <Editor editorState={contentBlock} readOnly />
           </div>
         )}
       </div>
