@@ -95,7 +95,7 @@ function DmDraftPage() {
             <div className="cm-input-container">
               <div className="cm-input-block">
                 <form onSubmit={sendChat} className="cm-form">
-                  <div className="cm-input-top">
+                  {/* <div className="cm-input-top">
                     <div className="cm-input-top-box">
                       <i className="fa-solid fa-bold"></i>
                     </div>
@@ -105,7 +105,7 @@ function DmDraftPage() {
                     <div className="cm-input-top-box">
                       <i className="fa-solid fa-strikethrough" />
                     </div>
-                  </div>
+                  </div> */}
                   <div className="cm-input-box">
                     <textarea
                       rows={3}

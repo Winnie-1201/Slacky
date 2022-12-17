@@ -36,7 +36,7 @@ def handle_join(data):
     user = data["user"]["username"]
     room = data["room"]
     join_room(room)
-    print(f"{user} has entered room {room}")
+    # print(f"{user} has entered room {room}")
     # emit('dm', to=room)
 
 @socketio.on("invite")
@@ -49,28 +49,28 @@ def handle_leave(data):
     user = data['user']["username"]
     room = data['room']
     leave_room(room)
-    print(f'{user} has left room {room}')
+    # print(f'{user} has left room {room}')
 
 @socketio.on("disconnect")
 def diconnected():
     """event listener when client disconnects to the server"""
-    print("user disconnected")
+    # print("user disconnected")
     emit("disconnect",f"user {request.sid} disconnected",broadcast=True)  
 
 
 @socketio.on('join-private')
 def handle_join(data):
-    print('-----------', data, '---------backend join-private handler')
+    # print('-----------', data, '---------backend join-private handler')
     room = data["room"]
     user_id = data['userId']
 
     join_room(room)
-    print(f"{user_id} has entered room {room}")
+    # print(f"{user_id} has entered room {room}")
 
 @socketio.on("invite-private")
 def handle_invite(data):
-    print("--------backend invite-private handler--------", data)
+    # print("--------backend invite-private handler--------", data)
     receiver_id = data['receiverId']
 
-    print('-----------', f'invite-{receiver_id}')
+    # print('-----------', f'invite-{receiver_id}')
     emit('invite-private', to=f'invite-{receiver_id}')

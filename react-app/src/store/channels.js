@@ -61,7 +61,7 @@ export const getAllChannel = () => async (dispatch) => {
 
 
 export const createChannel = (channel) => async (dispatch) => {
-    console.log('---------------- create a channel thunk', channel, '----------------')
+    // console.log('---------------- create a channel thunk', channel, '----------------')
     const response = await fetch("/api/channels", {
         method: "POST",
         headers: {
@@ -133,7 +133,7 @@ export const deleteOneChannel = (channelId) => async (dispatch) => {
 
 
 export const deleteUserChannel = (pair) => async (dispatch) => {
-    console.log('---------------- leave a channel thunk', pair, '----------------')
+    // console.log('---------------- leave a channel thunk', pair, '----------------')
     const response = await fetch('/api/users-channels', {
         method: "DELETE",
         headers: {
@@ -157,7 +157,7 @@ export const deleteUserChannel = (pair) => async (dispatch) => {
 };
 
 export const addUserChannel = (pair) => async (dispatch) => {
-    console.log('---------------- add a channel thunk', pair, '----------------')
+    // console.log('---------------- add a channel thunk', pair, '----------------')
     const response = await fetch('/api/users-channels', {
         method: "POST",
         headers: {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -12,11 +12,16 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [hasSubmit, setHasSubmit] = useState(false);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    setHasSubmit(true);
+
+    if (errors.length) return;
+
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
@@ -24,6 +29,32 @@ const SignUpForm = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const newErrors = [];
+
+    if (password !== repeatPassword) {
+      newErrors.push("Please enter the same password");
+    }
+
+    if (username === "") {
+      newErrors.push("Please enter your username.");
+    }
+
+    if (email === "") {
+      newErrors.push("Please enter your email.");
+    }
+
+    if (password === "") {
+      newErrors.push("Please enter the password.");
+    }
+
+    if (repeatPassword === "") {
+      newErrors.push("Please confirm your password.");
+    }
+
+    setErrors(newErrors);
+  }, [repeatPassword, username, email, password]);
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -50,7 +81,7 @@ const SignUpForm = () => {
       <LoginGeneral />
       <form onSubmit={onSignUp} className="user-form">
         <div className="form-error-container">
-          {errors.map((error, ind) => (
+          {hasSubmit && errors.map((error, ind) => (
             <div key={ind} className="form-error-block">
               {error}
             </div>
@@ -90,9 +121,10 @@ const SignUpForm = () => {
             placeholder="Confirm Password"
             onChange={updateRepeatPassword}
             value={repeatPassword}
-            required={true}
+            // required={true}
           ></input>
         </div>
+        {/* {errors.samePv && <p>{errors.samePv}</p>} */}
         <div className="user-form-button-div">
           <button type="submit">Sign Up</button>
         </div>

@@ -42,17 +42,17 @@ def add_user_channel():
 @user_channel_routes.route('', methods=["DELETE"])
 @login_required
 def delete_user_channel():
-    print('--------------------- delete user channel pair route ---------------------')
-    print('request', dir(request))
-    print(request.data)
+    # print('--------------------- delete user channel pair route ---------------------')
+    # print('request', dir(request))
+    # print(request.data)
     form = UserChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('form.data', form.data)
+    # print('form.data', form.data)
 
     if form.validate_on_submit():
-        print('****** submitting ******')
-        print(form.data)
-        print('****** submitting ******')
+        # print('****** submitting ******')
+        # print(form.data)
+        # print('****** submitting ******')
         user_id = form.data['user_id']
         channel_id = form.data['channel_id']
 

@@ -58,7 +58,7 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
               ))}
             </ul>
           </div> */}
-          <div className="cm-input-top">
+          {/* <div className="cm-input-top">
             <div className="cm-input-top-box">
               <i className="fa-solid fa-bold"></i>
             </div>
@@ -68,7 +68,7 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
             <div className="cm-input-top-box">
               <i className="fa-solid fa-strikethrough"></i>
             </div>
-          </div>
+          </div> */}
           <div className="cm-input-box">
             <textarea
               rows={3}
