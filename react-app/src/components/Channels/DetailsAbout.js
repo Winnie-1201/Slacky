@@ -18,7 +18,7 @@ export default function DetailsAbout({ channel, setShowModal}) {
   const handleDeleteChannel = () => {
     dispatch(deleteOneChannel(channel?.id))
     .then(() => {
-      console.log('success delete')
+      // console.log('success delete')
       dispatch(getUser(user.id))
       setChannelDeleted(true)
       setShowModal(false)

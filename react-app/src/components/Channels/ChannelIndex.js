@@ -12,8 +12,8 @@ export default function ChannelIndex({user}) {
     const [showModal, setShowModal] = useState(false);
 
     const handleAddChannelButton = (e) => {
-        console.log(e.target)
-        console.log(e.currentTarget)
+        // console.log(e.target)
+        // console.log(e.currentTarget)
         setShowModal(true)
     }
 

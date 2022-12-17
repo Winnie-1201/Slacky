@@ -67,7 +67,7 @@ export const getCurrentUserGroupsThunk = () => async (dispatch) => {
 // export const getGroupThunk = () => async;
 
 export const CreateGroupThunk = (data) => async (dispatch) => {
-  console.log("data in create group thunk", data);
+  // console.log("data in create group thunk", data);
   const response = await fetch("/api/groups", {
     method: "POST",
     headers: {
