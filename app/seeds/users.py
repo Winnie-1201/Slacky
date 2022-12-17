@@ -3,14 +3,65 @@ from app.models import db, User, environment, SCHEMA
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    for x in range(50):
-        fake_name = f"Demo{x+1}"
-        fake_email = f"demo{x+1}@aa.io"
+    USERS = [
+        {
+            'username': 'Demo1',
+            'email': 'demo1@aa.io',
+            'password':'password',
+            'image_url':'https://www.nicepng.com/png/detail/96-967009_rubber-duck-icon.png',
+            'is_online':True,
+            'status': 'Lorem ipsum dolor sit amet!'
+        },
+        {
+            'username': 'Demo2',
+            'email': 'demo2@aa.io',
+            'password':'password',
+            'image_url':'https://store.playstation.com/store/api/chihiro/00_09_000/container/US/en/19/UP2538-CUSA05620_00-AV00000000000124/image?w=320&h=320&bg_color=000000&opacity=100&_version=00_09_000',
+            'is_online':True,
+            'status': 'Lorem amet ipsum dolor sit!!'
+        },             
+        {
+            'username': 'Yizhou',
+            'email': 'yizhou@aa.io',
+            'password':'password',
+            'image_url':'https://media.licdn.com/dms/image/C5603AQFk_0ySc7KuHA/profile-displayphoto-shrink_100_100/0/1516481604462?e=1676505600&v=beta&t=Mcy4taadYjrr5ntlJpBTwcjTF4VWw754dv7PskMEvQg',
+            'is_online':True,
+            'status': 'Hire me!'
+        },
+        {
+            'username': 'Xuelan',
+            'email': 'xuelan@aa.io',
+            'password':'password',
+            'image_url':'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png',
+            'is_online':True,
+            'status': 'Hire me!'
+        },
+        {
+            'username': 'Wanting',
+            'email': 'wanting@aa.io',
+            'password':'password',
+            'image_url':'https://media.licdn.com/dms/image/D4E03AQFSPC01Wvhn6A/profile-displayphoto-shrink_200_200/0/1671233764309?e=1676505600&v=beta&t=LIGCsZQNpwvsbWEeCfmRHWOoe_tIAxJ-62t8MlCBM8k',
+            'is_online':True,
+            'status': 'Hire me!'
+        },
+        {
+            'username': 'Nan',
+            'email': 'nan@aa.io',
+            'password':'password',
+            'image_url':'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png',
+            'is_online':True,
+            'status': 'Hire me!'
+        },           
+    ]
+
+    for user in USERS:
         demo = User(
-            username=fake_name, email=fake_email, password='password',
-            image_url ='https://www.w3schools.com/howto/img_avatar.png',
-            is_online = True,
-            status = 'Lorem ipsum dolor sit amet'
+            username=user['username'], 
+            email=user['email'], 
+            password=user['password'],
+            image_url =user['image_url'],
+            is_online = user['is_online'],
+            status = user['status']
             )
         db.session.add(demo)
     db.session.commit()
