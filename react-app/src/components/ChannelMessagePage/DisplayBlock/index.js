@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchDeleteChannelMessage } from "../../../store/channelMessage";
 import ChannelMessageInputContainer from "../InputContainer";
 import "./index.css";
+import { convertFromRaw } from "draft-js";
 
 const ChannelMessageBlock = ({ cm, avatar }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,10 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
     e.preventDefault();
     setEdit(true);
   };
+
+  const contentBlock = convertFromRaw(JSON.parse(cm.content));
+  console.log("***************** contentBlock", contentBlock);
+
   return (
     <div
       className={`cm-block ${avatar ? "cm-with-avatar" : "cm-without-avatar"}`}
@@ -70,12 +75,12 @@ const ChannelMessageBlock = ({ cm, avatar }) => {
               </div>
             </div>
             <div className="cm-content-box">
-              <p>{cm.content}</p>
+              <p>{contentBlock}</p>
             </div>
           </div>
         ) : (
           <div className="cm-content-box">
-            <p>{cm.content}</p>
+            <p>{contentBlock}</p>
           </div>
         )}
       </div>

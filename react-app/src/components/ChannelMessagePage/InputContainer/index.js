@@ -6,11 +6,22 @@ import {
   fetchEditChannelMessage,
 } from "../../../store/channelMessage";
 import "./index.css";
+
+// import { Editor, EditorState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import "draft-js/dist/Draft.css";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
 const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
   const { channelId } = useParams();
   const dispatch = useDispatch();
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState([]);
+
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
   useEffect(() => {
     if (cm) setContent(cm.content);
@@ -20,12 +31,20 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    const message = { content };
+    // setContent();
+    const contentRaw = JSON.stringify(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    console.log("********** content", content);
+    console.log("********** contentRaw", contentRaw);
+    let message;
 
     return dispatch(
       edit
-        ? fetchEditChannelMessage(cmId, message)
-        : fetchCreateChannelMessage(channelId, { content })
+        ? // ? fetchEditChannelMessage(cmId, message)
+          // : fetchCreateChannelMessage(channelId, { content })
+          fetchEditChannelMessage(cmId, { content: contentRaw })
+        : fetchCreateChannelMessage(channelId, { content: contentRaw })
     )
       .then(() => {
         if (setEdit) setEdit(false);
@@ -58,8 +77,8 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
               ))}
             </ul>
           </div> */}
-          <div className="cm-input-top">
-            <div className="cm-input-top-box">
+          {/* <div className="cm-input-top"> */}
+          {/* <div className="cm-input-top-box">
               <i className="fa-solid fa-bold"></i>
             </div>
             <div className="cm-input-top-box">
@@ -68,16 +87,38 @@ const ChannelMessageInputContainer = ({ cmId, edit, setEdit, cm }) => {
             <div className="cm-input-top-box">
               <i className="fa-solid fa-strikethrough"></i>
             </div>
-          </div>
-          <div className="cm-input-box">
-            <textarea
+          </div> */}
+
+          {/* <textarea
               rows={3}
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
               className="cm-input"
-            />
-          </div>
+            /> */}
+          <Editor
+            editorState={editorState}
+            onEditorStateChange={setEditorState}
+            toolbar={{
+              options: ["inline", "list"],
+              inline: {
+                className: undefined,
+                inDropdown: false,
+                options: ["bold", "italic", "strikethrough"],
+              },
+              list: {
+                inDropdown: false,
+                className: undefined,
+                options: ["unordered", "ordered"],
+                // unordered: { icon: unordered, className: undefined },
+                // ordered: { icon: ordered, className: undefined },
+              },
+            }}
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            toolbarClassName="toolbar-class"
+          />
+
           <div className="cm-input-bottom">
             <div className="cm-input-botton-left"></div>
             <div className="cm-submit-box">

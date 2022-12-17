@@ -4,22 +4,26 @@
   margin-top: 0;
   margin-bottom: 2rem;
   border: 1px solid rgba(221, 221, 221, 1);
-  display: flex;
+
   border-radius: 0.5rem;
   background-color: white;
-  height: 140px;
-  min-height: 140px;
+  height: 180px;
+  min-height: 180px;
 }
 
 .cm-input-block {
   width: 100%;
-  height: 140px;
-  min-height: 140px;
+  height: 180px;
+  min-height: 180px;
 }
 
 .cm-form {
-  height: 140px;
-  min-height: 140px;
+  height: 180px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 1rem;
 }
 
 .cm-input-box {
@@ -42,6 +46,8 @@
 }
 
 .cm-input-box {
+  display: flex;
+  justify-content: flex-start;
   padding: 0.5rem 1rem;
   height: 80px;
 }
@@ -96,4 +102,23 @@
   color: #ffffff;
   background-color: #2bac76;
   border: none;
+}
+
+.wrapper-class {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  /* max-height: 120px; */
+}
+.editor-class {
+  background-color: transparent;
+  border: none;
+  padding: 0 1rem;
+}
+.toolbar-class {
+  border: none;
+}
+.editor-class.rdw-editor-main {
+  overflow: unset;
 }
