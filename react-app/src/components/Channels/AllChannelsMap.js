@@ -20,7 +20,7 @@ export default function AllChannelsMap() {
     const dispatch = useDispatch()
     const handleJoinChannel = (e) => {
         // console.log('---------- join ------------')
-        console.log(e.currentTarget.value)
+        // console.log(e.currentTarget.value)
         dispatch(addUserChannel({
             'user_id': user.id,
             'channel_id': e.currentTarget.value
@@ -32,7 +32,7 @@ export default function AllChannelsMap() {
 
     const handleLeaveChannel = (e) => {
         // console.log('---------- leave ------------')
-        console.log(e.currentTarget.value)
+        // console.log(e.currentTarget.value)
         dispatch(deleteUserChannel({
             'user_id': user.id,
             'channel_id': e.currentTarget.value

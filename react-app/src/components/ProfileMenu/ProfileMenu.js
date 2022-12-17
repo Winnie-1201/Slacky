@@ -11,7 +11,7 @@ import OptionBlock from "./OptionBlock";
 
 export default function ProfileMenu() {
   const user = useSelector((state) => state.session.user);
-  console.log("*******************PROFILE USER", user);
+  // console.log("*******************PROFILE USER", user);
   return (
     <>
       {user && (

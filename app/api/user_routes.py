@@ -29,13 +29,13 @@ def user(id):
 @user_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_userProfile(id):
-    print('userProfil route works')
+    # print('userProfil route works')
 
     user_profile = User.query.get(id)
-    print("current_user_id",current_user)
+    # print("current_user_id",current_user)
     curr = current_user
-    print("+++++++++",curr)
-    print("*******id",id)
+    # print("+++++++++",curr)
+    # print("*******id",id)
     if current_user.id == id:
         form = UserProfileForm()
         form['csrf_token'].data = request.cookies['csrf_token']
@@ -49,7 +49,7 @@ def edit_userProfile(id):
             user_profile.status = form.data['status'] if form.data['status'] else user_profile.status
 
             db.session.commit()
-            print("-----------------",user_profile)
+            # print("-----------------",user_profile)
             return user_profile.to_dict()
         if form.errors:
             return form.errors
