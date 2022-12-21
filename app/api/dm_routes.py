@@ -12,7 +12,7 @@ dm_routes = Blueprint("messages", __name__)
 @login_required
 def dms_by_groupId(group_id):
     """
-    Query for all the messages from a group and returns 
+    Query for all the messages from a group and returns
     them in a list of messages dictionaries
     """
     group = Group.query.get(group_id)
@@ -47,7 +47,7 @@ def create_dm(group_id):
             db.session.add(new_message)
             db.session.commit()
             return {"direct_message": new_message.to_dict()}
-        
+
         if form.errors:
             return form.errors
     else:
@@ -76,7 +76,7 @@ def edit_dm(group_id, id):
                 # db.session.add(group_message)
                 db.session.commit()
                 return {"direct_message": group_message.to_dict()}
-            
+
             if form.errors:
                 return form.errors
         else:

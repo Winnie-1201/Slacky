@@ -3,3 +3,4 @@ from .signup_form import SignUpForm
 from .channel_form import ChannelForm
 from .channel_message_form import ChannelMessageForm
 from .dm_form import DirectMessageForm
+from .userProfile_form import UserProfileForm

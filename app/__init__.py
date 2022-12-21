@@ -10,6 +10,7 @@ from .api.auth_routes import auth_routes
 from .api.channels_routes import channel_routes
 from .api.channel_message_routes import channel_message_routes
 from .api.dm_routes import dm_routes
+from .api.search_routes import search_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -34,6 +35,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(channel_message_routes, url_prefix='/api/message/channels')
 app.register_blueprint(dm_routes, url_prefix="/api/messages/groups")
+app.register_blueprint(search_routes, url_prefix="/api/search")
 db.init_app(app)
 Migrate(app, db)
 
