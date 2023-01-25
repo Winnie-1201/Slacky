@@ -24,7 +24,7 @@ def seed_users():
             'username': 'Yizhou',
             'email': 'yizhou@aa.io',
             'password':'password',
-            'image_url':'https://media.licdn.com/dms/image/C5603AQFk_0ySc7KuHA/profile-displayphoto-shrink_100_100/0/1516481604462?e=1676505600&v=beta&t=Mcy4taadYjrr5ntlJpBTwcjTF4VWw754dv7PskMEvQg',
+            'image_url':'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png',
             'is_online':True,
             'status': 'Hire me!'
         },
@@ -40,7 +40,7 @@ def seed_users():
             'username': 'Wanting',
             'email': 'wanting@aa.io',
             'password':'password',
-            'image_url':'https://media.licdn.com/dms/image/D4E03AQFSPC01Wvhn6A/profile-displayphoto-shrink_200_200/0/1671233764309?e=1676505600&v=beta&t=LIGCsZQNpwvsbWEeCfmRHWOoe_tIAxJ-62t8MlCBM8k',
+            'image_url':'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png',
             'is_online':True,
             'status': 'Hire me!'
         },
