@@ -5,32 +5,32 @@ def seed_channel_messages():
     channel_message1 = ChannelMessage(
         channel_id = 1,
         user_id = 1,
-        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        content = "To everyone who might have missed it, it is group project sync time. Hop into a room with your group mates and coordinate how everyone is going to work on the project during sprint."
     )
     channel_message2 = ChannelMessage(
         channel_id = 1,
         user_id = 2,
-        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        content = "group project sync time is over. It is now project time, feel free to hop into your own room and work on your solo projects."
     )
     channel_message3 = ChannelMessage(
         channel_id = 1,
         user_id = 3,
-        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat pretium nibh. Metus aliquam eleifend mi in. Cras sed felis eget velit aliquet. Maecenas accumsan lacus vel facilisis volutpat."
+        content = " I will be hosting the IA Q&A session today in my breakout room at 9:30 PST / 12:30 EST."
     )
     channel_message4 = ChannelMessage(
         channel_id = 1,
         user_id = 2,
-        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat pretium nibh. Metus aliquam eleifend mi in."
+        content = "Will be closing down rooms for EOD in about 3 minutes."
     )
     channel_message5 = ChannelMessage(
         channel_id = 2,
         user_id = 1,
-        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat pretium nibh."
+        content = "I noticed on the calendar that we have this upcoming Monday off. Do we celebrate Martin Luther King Jr. Day?"
     )
     channel_message6 = ChannelMessage(
         channel_id = 1,
         user_id = 2,
-        content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat pretium nibh."
+        content = "A 15 minute break a day keeps the strike-bot away. Time for break!"
     )
 
     db.session.add(channel_message1)

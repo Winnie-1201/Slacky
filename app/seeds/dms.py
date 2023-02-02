@@ -19,13 +19,13 @@ def seed_dms():
             )
 
         msg_3 = GroupMessage(
-                content="Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                content="How are you doing today?",
                 groupId=group.id,
                 user=pairs[0]
             )
         
         msg_4 = GroupMessage(
-                content="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                content="I am doing great!",
                 groupId=group.id,
                 user=pairs[1]
             )

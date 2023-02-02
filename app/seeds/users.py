@@ -5,20 +5,20 @@ from app.models import db, User, environment, SCHEMA
 def seed_users():
     USERS = [
         {
-            'username': 'Demo1',
+            'username': 'James',
             'email': 'demo1@aa.io',
             'password':'password',
             'image_url':'https://www.nicepng.com/png/detail/96-967009_rubber-duck-icon.png',
             'is_online':True,
-            'status': 'Lorem ipsum dolor sit amet!'
+            'status': 'Happy'
         },
         {
-            'username': 'Demo2',
+            'username': 'Maria',
             'email': 'demo2@aa.io',
             'password':'password',
             'image_url':'https://store.playstation.com/store/api/chihiro/00_09_000/container/US/en/19/UP2538-CUSA05620_00-AV00000000000124/image?w=320&h=320&bg_color=000000&opacity=100&_version=00_09_000',
             'is_online':True,
-            'status': 'Lorem amet ipsum dolor sit!!'
+            'status': 'Study'
         },             
         {
             'username': 'Yizhou',
