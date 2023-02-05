@@ -3,13 +3,13 @@ import os
 from flask import request
 from .models import db, Group, User
 
-if os.environ.get("FLASK_ENV") == "production":
+# if os.environ.get("FLASK_ENV") == "production":
     # change it to the actual url later
-    origins = [
-        "https://slacky.onrender.com", "http://slacky.onrender.com"
+origins = [
+    "https://slacky.onrender.com", "http://slacky.onrender.com"
     ]
-else:
-    origins = "*"
+# else:
+#     origins = "*"
     
 # create the SocketIO instance
 socketio = SocketIO(
